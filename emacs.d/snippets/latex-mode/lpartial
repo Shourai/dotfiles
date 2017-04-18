@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# key: lpart
+# group: math
+# --
+\frac{\partial g_{${1:lower indices}}}{\partial x^{${2:upper index}}}$0

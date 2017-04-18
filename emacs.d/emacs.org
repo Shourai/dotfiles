@@ -1,0 +1,635 @@
+#+TITLE: Emacs Configuration File
+#+AUTHOR: Shourai
+
+This configuration is now using [[https://github.com/jwiegley/use-package][use-package]] package from John Wiegley, which is
+a fantastic way to manage package configurations.  The configuration is hugely
+inspired by [[https://github.com/howardabrams/dot-files/blob/master/emacs.org][Howard Abrams]] & [[https://github.com/danielmai/.emacs.d/blob/master/config.org][Daniel Mai]] a big thank you to them. \\
+An essential read on literative programming would be this [[http://howardism.org/Technical/Emacs/literate-programming-tutorial.html][tutorial]] by Howard
+Abrams.
+
+* Installing Emacs
+  
+  On OS X, [[http://brew.sh/][homebrew]] is an easy way to install emacs.
+  
+  Here's what the parameter means.
+   - ~--with-cocoa~ :: installs emacs with the OS X GUI version
+   - ~--with-imagemagick~ :: installs emacs with imagemagick support for image processing
+   - ~--with-gnutls~ :: installs emacs with GnuTLS to utilize encrypted SSL and TLS connections
+        
+   #+begin_src sh
+   brew install emacs --with-cocoa --with-imagemagick --with-gnutls
+   
+   brew linkapps emacs
+   #+end_src
+   
+   Not only does this install the latest version of Emacs in
+   =/usr/local/bin/emacs=, but it also links a GUI version in
+   =/Application/Emacs.app=.
+   
+   All Homebrew options for Emacs can be seen with the command:
+   
+   #+BEGIN_SRC sh
+     brew options emacs
+   #+END_SRC
+   
+** Loading this File
+   
+   To "load" the contents of this file, add the following to =$HOME/.emacs.d/init.el=:
+   
+   #+BEGIN_SRC emacs-lisp :tangle no
+      (org-babel-load-file "~/.emacs.d/emacs.org")
+   #+END_SRC
+   
+   It will automatically generate an =emacs.el= file and subsequently load it in.
+   
+* General Settings
+
+** Customization Section
+   
+   While I would rather program my configurations, sometimes the Emacs
+   menu system is "good enough", but I want it in its own file:
+   
+   #+BEGIN_SRC emacs-lisp :tangle no
+     (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+     (when (file-exists-p custom-file)
+       (load custom-file))
+   #+END_SRC
+   
+   While this ought to work, I found that you need to put this in the `init.el`
+   file instead.
+   
+** Setting up the Load Path
+   
+   Extra packages not available via the package manager go in my
+   personal stash at: =$HOME/.emacs.d/elisp=
+   
+   #+BEGIN_SRC emacs-lisp :tangle no
+     (add-to-list 'load-path (user-emacs-directory "elisp"))
+   #+END_SRC
+
+** Miscellaneous settings
+
+Change 'yes/no' to just 'y/n'
+
+   #+BEGIN_SRC emacs-lisp
+     (fset 'yes-or-no-p 'y-or-n-p)
+   #+END_SRC
+
+Save file when the frame loses focus.
+These hooks fire when any Emacs frame gains or loses focus. \\
+This means that if you Alt-Tab or Alt-` between Emacs frames, the focus-out-hook and
+focus-in-hook will run.
+
+#+BEGIN_SRC emacs-lisp
+    (defun save-all ()
+    (interactive)
+    (save-some-buffers t))
+
+    (add-hook 'focus-out-hook 'save-all)
+#+END_SRC
+
+* Package Initialization
+  
+** Package Managers
+   #+BEGIN_SRC emacs-lisp
+(require 'package)
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+			 ("marmalade" . "https://marmalade-repo.org/packages/")
+			 ("melpa" . "https://melpa.org/packages/")
+			 ("org" . "http://orgmode.org/elpa/")))
+;; (package-initialize)
+;; (package-refresh-contents)
+   #+END_SRC
+   
+** Use-Package
+   
+   Using [[https://github.com/jwiegley/use-package][use-package]] to automatically install certain packages, as
+   well as the ease of lazily loading them.
+   
+   #+BEGIN_SRC emacs-lisp
+    (unless (package-installed-p 'use-package)
+        (package-refresh-contents)
+        (package-install 'use-package))
+
+          ;;(require 'use-package)
+     (eval-when-compile
+       (require 'use-package))
+   #+END_SRC
+   
+* Variables
+  
+** Personal Information
+   
+   #+BEGIN_SRC emacs-lisp
+     (setq user-full-name "Shourai"
+     user-mail-address "mail@shourai.net")
+   #+END_SRC
+   
+** Tabs vs Spaces
+   
+   I have learned to distrust tabs in my source code, so let's make
+   sure that we only have spaces. \\ 
+   See [[http://ergoemacs.org/emacs/emacs_tabs_space_indentation_setup.html][this discussion]] for details.
+   
+   #+BEGIN_SRC emacs-lisp
+     (setq-default indent-tabs-mode nil)
+     (setq tab-width 4)
+   #+END_SRC
+   
+   Make tab key do indent first then completion.
+   
+   #+BEGIN_SRC emacs-lisp :tangle no
+     (setq-default tab-always-indent t)
+     (setq-default tab-always-indent 'complete)
+   #+END_SRC
+   
+* Org mode settings
+  
+The following is for syntax highlighting the code source blocks inside org mode.
+Furthermore it will load the languages that could be used.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq org-confirm-babel-evaluate nil
+          org-src-fontify-natively t
+          org-src-tab-acts-natively t)
+  #+END_SRC
+
+  #+BEGIN_SRC emacs-lisp :tangle no
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((sh         . t)
+       (emacs-lisp . t)
+       (python     . t)
+       (latex      . t)
+       (ruby       . t)
+       (dot        . t)
+       (css        . t)))
+  #+END_SRC
+  
+  Remove the HTML validate link that appears at the postamble of your exported HTML file.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq org-html-validation-link nil)
+  #+END_SRC
+* Display settings
+  
+  I like a minimal setup when working on code, therefore I disable the toolbar and scroll bar. \\
+  And if it detects I'm using a GUI I set the frame to be the size of 140x35 pixels.
+  
+  #+BEGIN_SRC emacs-lisp
+    (tool-bar-mode -1)
+    (scroll-bar-mode -1)
+    (if (window-system)
+    (set-frame-size (selected-frame) 140 35))
+  #+END_SRC
+  
+  To get started directly when opening emacs I inhibit the startup message.
+  
+  #+BEGIN_SRC emacs-lisp
+(setq inhibit-startup-message t)
+  #+END_SRC
+  
+** Which key
+   [[https://github.com/justbur/emacs-which-key][Which key]] allows for a contextualized completion of emacs commands
+   shown in the mini-buffer. \\
+   It's really helpful if you can't remember the next keypress.
+   
+   #+BEGIN_SRC emacs-lisp
+     (use-package which-key
+        :ensure t 
+        :defer 2 
+        :config
+        (which-key-mode))
+   #+END_SRC
+** Line numbering
+   
+*** Enable line numbers in all buffers
+    Turned off for now since I'm using relative file numbering
+    
+    #+BEGIN_SRC emacs-lisp :tangle no
+      (global-linum-mode t)
+    #+END_SRC
+    
+***  Relative line numbering
+     
+     For relative line numbering I use nlinum-relative. \\
+     nlinum-relative is faster than linum-relative because of its use of
+     jit-lock. \\
+     nlinum-relative only redisplays line numbers when idle which
+     is much more smoother especially with big files.
+     
+     #+BEGIN_SRC emacs-lisp
+       (use-package nlinum-relative
+       :ensure t
+       :config
+       (global-nlinum-relative-mode)
+       (setq nlinum-relative-redisplay-delay 0.5))
+     #+END_SRC
+     
+** Theme
+   A beautiful theme by [[https://github.com/purcell/color-theme-sanityinc-tomorrow][Steve Purcell]], you can check out screenshots over at [[https://emacsthemes.com/themes/sanityinc-tomorrow-themes.html][emacsthemes.com]].
+   
+   #+BEGIN_SRC emacs-lisp :tangle no
+    (use-package color-theme-sanityinc-tomorrow
+    :ensure t
+    :init
+    (load-theme 'sanityinc-tomorrow-night t))
+   #+END_SRC
+   
+   #+BEGIN_SRC emacs-lisp
+    (use-package solarized-theme 
+    :ensure t
+    :init
+    (load-theme 'solarized-light t))
+   #+END_SRC
+   
+   
+   [[https://github.com/TheBB/spaceline][This]] is the package that provides Spacemacs with its famous mode-line theme.
+   Disabled since it requires a third of a second during startup.
+   
+   #+BEGIN_SRC emacs-lisp :tangle no
+     (use-package spaceline
+     :ensure t
+     :config
+     (require 'spaceline-config)
+     (spaceline-spacemacs-theme))
+   #+END_SRC
+
+** Highlight current line
+   #+BEGIN_SRC emacs-lisp
+     (global-hl-line-mode 1) 
+;;     (set-face-background 'hl-line "#2b2f31")
+   #+END_SRC
+
+** Highlight background colour
+   Background color in visual select mode.
+
+   #+BEGIN_SRC emacs-lisp
+     (set-face-attribute 'region nil :background "#676767")
+   #+END_SRC
+** Word wrap
+The sacred 80 column rule that states “Thou shalt not cross 80 columns in thy
+file” originated from IBM 80 column punch cards, was reinforced by early
+terminal and printout restrictions, and is still common in coding standards
+today, including Google's Java standard and the Linux kernel standard.
+
+    #+BEGIN_SRC emacs-lisp
+      (setq-default fill-column 80)
+
+      (add-hook 'text-mode-hook '(lambda ()
+                                     (auto-fill-mode 1)))
+
+      (add-hook 'LaTeX-mode-hook '(lambda ()
+                                    (auto-fill-mode 1)))
+    #+END_SRC
+* Undo and Redo
+  The ultimate undo history visualizer.
+  #+BEGIN_SRC emacs-lisp
+    (use-package undo-tree
+    :ensure t
+    :defer t 
+    :config
+    (global-undo-tree-mode t))
+  #+END_SRC
+  
+* Loading and Finding Files
+** Helm
+   
+   Emacs incremental completion and selection narrowing framework.
+   #+BEGIN_SRC emacs-lisp
+    (use-package helm
+    :ensure t
+    :defer 1
+    :bind (("M-x" . helm-M-x)
+           ("C-x C-b" . helm-mini)
+           ("C-x C-f" . helm-find-files)
+           ("M-y" . helm-show-kill-ring))
+    :config
+    (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
+    (setq helm-buffers-fuzzy-matching t
+      helm-recentf-fuzzy-match    t))
+   #+END_SRC
+   
+** Ido
+   Interactively do things with buffers and files.
+   Helm replaced Ido mode for me, hence I didn't tangle this.
+   #+BEGIN_SRC emacs-lisp :tangle no
+     (use-package ido
+     :config
+     (ido-mode t)
+     (setq ido-separator "\n") ;; make ido display choices vertically
+     (setq ido-enable-flex-matching t) ;; display any item that contains the chars you typed
+     (setq max-mini-window-height 0.5))
+   #+END_SRC
+   
+* Autocompletion
+** Company Mode
+   Modular in-buffer completion framework for Emacs.
+   #+BEGIN_SRC emacs-lisp
+     (use-package company
+     :ensure t
+     :defer 10
+     :config
+     (add-hook 'after-init-hook 'global-company-mode))
+
+   #+END_SRC
+   
+   Add quickhelp for company mode
+   #+BEGIN_SRC emacs-lisp
+     (use-package company-quickhelp
+     :ensure t
+     :defer 10
+     :config
+     (company-quickhelp-mode 1))
+   #+END_SRC
+   
+Adding yasnippet to company mode (doubts about this code)
+   #+BEGIN_SRC emacs-lisp :tangle no
+     ;; Weight by frequency
+          (setq company-transformers '(company-sort-by-occurrence))
+
+          (defvar company-mode/enable-yas t "Enable yasnippet for all backends.")
+           (defun company-mode/backend-with-yas (backend)
+             (if (or (not company-mode/enable-yas) (and (listp backend)    (member 'company-yasnippet backend)))
+             backend
+           (append (if (consp backend) backend (list backend))
+                   '(:with company-yasnippet))))
+
+           (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+
+     ;; company delay until suggestions are shown
+     (setq company-idle-delay 0.5)
+   #+END_SRC
+** Snippets
+   A template system for Emacs.
+   #+BEGIN_SRC emacs-lisp
+     (use-package yasnippet
+     :ensure t
+     :defer 10
+     :config
+     (yas-global-mode 1))
+   #+END_SRC
+   
+** Smartparens
+   Minor mode for Emacs that deals with parens pairs and tries to be smart about it.
+   #+BEGIN_SRC emacs-lisp
+     (use-package smartparens
+     :ensure t
+     :defer 10
+     :bind (("TAB" . sp-up-sexp))
+     :init
+     (add-hook 'python-mode-hook #'smartparens-mode)
+     (add-hook 'LaTeX-mode-hook #'smartparens-mode)
+     :config
+     (require 'smartparens-latex))
+   #+END_SRC
+   
+* Evil mode
+  Evil is an extensible vi layer for Emacs. \\
+  It provides Vim features like Visual selection and text objects.
+  #+BEGIN_SRC emacs-lisp
+    (use-package evil
+    :ensure t
+    :bind (("C-z" . turn-on-evil-mode)
+    ("C-x C-z" . turn-off-evil-mode))
+    :init
+    (setq evil-want-C-u-scroll t)
+    :config
+    (evil-mode t))
+  #+END_SRC
+
+** Custom Keybindings 
+
+  Customizable key sequence to escape from insert state and everything else in Emacs. \\
+  The default keybinding is =fd=.
+  See [[https://github.com/syl20bnr/evil-escape][github]] for further details.
+  #+BEGIN_SRC emacs-lisp
+    (use-package evil-escape
+    :ensure t
+    :config
+    (evil-escape-mode t)) 
+#+END_SRC
+  
+  Increment and decrement numbers in Emacs.
+  #+BEGIN_SRC emacs-lisp
+    (use-package evil-numbers
+    :ensure t
+    :bind ("C-c +" . evil-numbers/inc-at-pt)
+    ("C-c -" . evil-numbers/dec-at-pt))
+  #+END_SRC
+  
+** Surround
+This package emulates [[https://github.com/tpope/vim-surround][surround.vim by Tim Pope]]. The functionality is wrapped into a minor mode.
+  #+BEGIN_SRC emacs-lisp
+    (use-package evil-surround
+    :ensure t
+    :defer 10
+    :config
+    (global-evil-surround-mode 1))
+  #+END_SRC
+
+** Multiple Cursors
+ Multiple cursors for evil mode. \\
+ Keybindings are in the [[https://github.com/gabesoft/evil-mc/blob/master/evil-mc.el][evil-mc.el]].
+  #+BEGIN_SRC emacs-lisp
+    (use-package evil-mc
+    :ensure t
+    :defer t)
+  #+END_SRC
+ 
+* Movement
+** Avy
+   Avy is a GNU Emacs package for jumping to visible text using a char-based decision tree. \\
+   See for more information [[https://github.com/abo-abo/avy][abo-abo]]'s github.
+   
+   #+BEGIN_SRC emacs-lisp
+     (use-package avy
+       :ensure t
+       :defer t
+       :bind (("C-:" . avy-goto-char)
+       ("C-'" . avy-goto-char-2)
+       ("M-g f" . avy-goto-line)
+       ("M-g w" . avy-goto-word-1)
+       ("M-g e" . avy-goto-word-0)))
+   #+END_SRC
+   
+** Windmove
+   Move around windows using cardinal directions (S-<left>, S-<right>, S-<up>,
+   S-<down>) \\
+   When using evil mode ~C-w h/j/k/l~ also work. \\
+   Which is actually faster because your fingers stay on the homerow. \\
+   To enable tangle this code block.
+   
+   #+BEGIN_SRC emacs-lisp :tangle no
+     (windmove-default-keybindings)
+   #+END_SRC
+   
+** Vim keys
+   
+   Go to next CHAR which is similar to =f= and =t= in vim
+   setting for iy-go-to-char.  \\
+   It's currently not in use since I'm using evil mode.
+   
+   #+BEGIN_SRC emacs-lisp :tangle no
+(use-package iy-go-to-char 
+  :ensure t
+  :bind
+  ("C-c f" . iy-go-to-char)
+  ("C-c F" . iy-go-to-char-backward)
+  ("C-c ;" . iy-go-to-or-up-to-continue)
+  ("C-c ," . iy-go-to-or-up-to-continue-backward))
+   #+END_SRC
+   
+** Expand region
+   Expand region increases the selected region by semantic units.
+   
+   #+BEGIN_SRC emacs-lisp
+(use-package expand-region
+  :ensure t
+  :defer t
+  :bind ("C-=" . er/expand-region))
+   #+END_SRC
+   
+** Delete selection mode
+   Delete Selection mode lets you treat an Emacs region much like a typical text selection outside of Emacs. \\
+   Not in use right now due to evil mode.
+   #+BEGIN_SRC emacs-lisp :tangle no
+     (delete-selection-mode 1)
+   #+END_SRC
+   
+** Multiple cursors
+   Multiple cursors for Emacs. \\
+   Using the evil version, so this is disabled for the time being.
+   #+BEGIN_SRC emacs-lisp :tangle no
+       (use-package multiple-cursors
+       :ensure t
+       :bind (
+         ("C-S-c C-S-c" . mc/edit-lines)
+         ("C-c C-. ."   . mc/mark-all-dwim)
+         ("C-c C-. C-." . mc/mark-all-like-this-dwim)
+         ("C->"         . mc/mark-next-like-this)
+         ("C-<"         . mc/mark-previous-like-this)
+         ("C-c C-. n"   . mc/mark-next-like-this)
+         ("C-c C-. p"   . mc/mark-previous-like-this)
+         ("C-c C-. a"   . mc/mark-all-like-this)
+         ("C-c C-. N"   . mc/mark-next-symbol-like-this)
+         ("C-c C-. P"   . mc/mark-previous-symbol-like-this)
+         ("C-c C-. A"   . mc/mark-all-symbols-like-this)
+         ("C-c C-. f"   . mc/mark-all-like-this-in-defun)
+         ("C-c C-. l"   . mc/edit-lines)
+         ("C-c C-. e"   . mc/edit-ends-of-lines) ))
+   #+END_SRC
+* Latex
+We will be using AUCTeX as our Emacs TeX environment, together with yasnippets it 
+works as well as any dedicated LaTeX program.
+
+#+BEGIN_SRC emacs-lisp
+    (use-package tex
+    :ensure auctex
+    :mode ("\\.tex\\'" . LaTeX-mode)
+    :interpreter ("LatexMk" . LaTeX-mode)
+    :config
+    ;; enable parse on load and save
+    (setq TeX-auto-save t)
+    (setq TeX-parse-self t)
+    ;; autosave before compiling
+    (setq TeX-save-query nil)
+    ;; let AUCTeX query for master file name
+    (setq-default TeX-master nil))
+#+END_SRC
+
+When a latex file is loaded, let it load visual-line, flyspell, math-mode and reftex.
+It's also necessary (at least on a mac) to add the path with the latex bin files.
+
+#+BEGIN_SRC emacs-lisp
+    (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+    (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+    (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+    (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+    (setq reftex-plug-into-AUCTeX t)
+    (setenv "PATH" (concat (getenv "PATH") ":/Library/TeX/texbin"))
+    (setq exec-path (append exec-path '("/Library/TeX/texbin")))
+#+END_SRC
+
+Add LatexMk support to AUCTeX
+    #+BEGIN_SRC emacs-lisp
+        (use-package auctex-latexmk
+        :ensure t
+        :defer 10
+        :init (add-hook 'LaTeX-mode-hook 'auctex-latexmk-setup)
+        :config
+        ;; Let LatexMk to pass the -pdf flag when TeX-PDF-mode is active 
+        (setq auctex-latexmk-inherit-TeX-PDF-mode t))
+    #+END_SRC
+
+Add company support to AUCTeX
+    #+BEGIN_SRC emacs-lisp
+      (use-package company-auctex
+        :ensure t
+        :defer 5
+        :init (add-hook 'LaTeX-mode-hook 'company-auctex-init))
+    #+END_SRC
+
+Add custom shortcuts to LaTeX-math-list
+Can be customized using "`M-x` customize-variable `RET` LaTeX-math-list `RET`"
+It needs to be saved into the init.el file before it can work (using customize-variable).
+#+BEGIN_SRC emacs-lisp
+(setq LaTeX-math-list())
+(add-to-list 'LaTeX-math-list '(?1 "partial" "Misc Symbol" 8706))
+#+END_SRC
+
+Insert braces after typing <^> and <_> in math mode.
+Autocomplete dollar sign.
+#+BEGIN_SRC emacs-lisp
+(setq TeX-electric-sub-and-superscript 1)
+;; (setq TeX-electric-math (cons "$" "$"))
+#+END_SRC
+
+* Python
+  Elpy is an Emacs package to bring powerful Python editing to Emacs. It
+  combines and configures a number of other packages, both written in Emacs Lisp
+  as well as Python.
+    #+BEGIN_SRC emacs-lisp
+      (use-package elpy
+      :ensure t
+      :after python
+      ;:mode ("\\.py\\'" . python-mode)
+      ;:interpreter ("python" . python-mode)
+      :config
+      (elpy-enable))
+    #+END_SRC
+
+  Set the shell interpreter to python 3 instead of python 2.
+  #+BEGIN_SRC emacs-lisp 
+    (setq python-shell-interpreter "python3")
+  #+END_SRC
+
+  Change elpy's RPC to python 3
+  #+BEGIN_SRC emacs-lisp 
+    (setq elpy-rpc-python-command "python3")
+  #+END_SRC
+
+  Company-mode completion back-end for Python JEDI.
+
+  #+BEGIN_SRC emacs-lisp :tangle no
+    (defun my/python-mode-hook ()
+      (add-to-list 'company-backends 'company-jedi))
+
+    (add-hook 'python-mode-hook 'my/python-mode-hook)
+  #+END_SRC
+  
+  Call jedi in python buffer.
+
+  #+BEGIN_SRC emacs-lisp :tangle no
+    (add-hook 'python-mode-hook 'jedi:setup)
+    (setq jedi:complete-on-dot t)                 ; optional
+  #+END_SRC
+
+* End notes
+
+   Before you can build this on a new system, make sure that you put
+   the cursor over any of these properties, and hit: =C-c C-c=
+
+#+DESCRIPTION: A literate programming version of my Emacs Initialization script, loaded by the .emacs file.
+#+PROPERTY:    header-args:sh  :tangle no
+#+PROPERTY:    header-args:emacs-lisp  :tangle yes
