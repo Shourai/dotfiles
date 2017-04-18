@@ -57,7 +57,8 @@ flycheck_*.el
 # projectiles files
 .projectile
 
-emacs.d/recentf*
+# recentf
+.recentf
 
 ### macOS ###
 *.DS_Store
