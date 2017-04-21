@@ -625,6 +625,15 @@ Autocomplete dollar sign.
     (setq jedi:complete-on-dot t)                 ; optional
   #+END_SRC
 
+* Magit
+  Magit is an interface to the version control system Git, implemented as an Emacs package.  
+   #+BEGIN_SRC emacs-lisp
+     (use-package magit
+       :ensure t
+       :defer t
+       :bind (("C-x g" . magit-status)))
+   #+END_SRC
+
 * End notes
 
    Before you can build this on a new system, make sure that you put

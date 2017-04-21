@@ -122,6 +122,8 @@ user-mail-address "mail@shourai.net")
 :ensure t
 :bind (("C-z" . turn-on-evil-mode)
 ("C-x C-z" . turn-off-evil-mode))
+:init
+(setq evil-want-C-u-scroll t)
 :config
 (evil-mode t))
 
@@ -210,3 +212,8 @@ user-mail-address "mail@shourai.net")
 (setq python-shell-interpreter "python3")
 
 (setq elpy-rpc-python-command "python3")
+
+(use-package magit
+  :ensure t
+  :defer t
+  :bind (("C-x g" . magit-status)))
