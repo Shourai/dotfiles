@@ -631,9 +631,15 @@ Autocomplete dollar sign.
      (use-package magit
        :ensure t
        :defer t
-       :bind (("C-x g" . magit-status)))
+       :bind (("C-x g" . magit-status))
+       :config  (require 'evil-magit))
    #+END_SRC
 
+   #+BEGIN_SRC emacs-lisp
+     (use-package evil-magit
+       :ensure t
+       :defer t)
+   #+END_SRC
 * End notes
 
    Before you can build this on a new system, make sure that you put
