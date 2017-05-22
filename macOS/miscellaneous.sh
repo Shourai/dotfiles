@@ -7,6 +7,7 @@ curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.s
 # Install python 3 libraries
 pip3 install numpy
 pip3 install scipy
+pip3 install matplotlib
 pip3 install jedi
 pip3 install flake8
 pip3 install importmagic
