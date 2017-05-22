@@ -216,4 +216,9 @@ user-mail-address "mail@shourai.net")
 (use-package magit
   :ensure t
   :defer t
-  :bind (("C-x g" . magit-status)))
+  :bind (("C-x g" . magit-status))
+  :config  (require 'evil-magit))
+
+(use-package evil-magit
+  :ensure t
+  :defer t)
