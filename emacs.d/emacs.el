@@ -39,6 +39,8 @@ user-mail-address "mail@shourai.net")
 (scroll-bar-mode -1)
 (setq default-frame-alist
   '(
+    (top . 100)
+    (left . 100)
     (width . 130) ; character
     (height . 40) ; lines
     ))
