@@ -179,8 +179,11 @@ Furthermore it will load the languages that could be used.
   #+BEGIN_SRC emacs-lisp
     (tool-bar-mode -1)
     (scroll-bar-mode -1)
-    (if (window-system)
-    (set-frame-size (selected-frame) 140 35))
+    (setq default-frame-alist
+      '(
+        (width . 130) ; character
+        (height . 40) ; lines
+        ))
   #+END_SRC
   
   To get started directly when opening emacs I inhibit the startup message.

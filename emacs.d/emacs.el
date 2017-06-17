@@ -37,8 +37,11 @@ user-mail-address "mail@shourai.net")
 
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(if (window-system)
-(set-frame-size (selected-frame) 140 35))
+(setq default-frame-alist
+  '(
+    (width . 130) ; character
+    (height . 40) ; lines
+    ))
 
 (setq inhibit-startup-message t)
 
