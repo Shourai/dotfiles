@@ -70,4 +70,4 @@ defaults write com.apple.loginwindow TALLogoutSavesState -bool false
 
 # Enable trim
 # Only needed if you have a mac without an official Apple SSD
-sudo trimforce enable
+# sudo trimforce enable
