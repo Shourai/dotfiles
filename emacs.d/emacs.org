@@ -403,6 +403,12 @@ Adding yasnippet to company mode (doubts about this code)
     (evil-mode t))
   #+END_SRC
 
+  When the buffer loses focus, return to evil-normal-mode. \\
+  This is useful when you alt-tab back and directly want to move around.
+    #+BEGIN_SRC emacs-lisp
+        (add-hook 'focus-out-hook 'normal-mode)
+    #+END_SRC
+
 ** Custom Keybindings 
 
   Customizable key sequence to escape from insert state and everything else in Emacs. \\

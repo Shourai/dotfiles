@@ -132,6 +132,8 @@ user-mail-address "mail@shourai.net")
 :config
 (evil-mode t))
 
+(add-hook 'focus-out-hook 'normal-mode)
+
 (use-package evil-escape
 :ensure t
 :config
