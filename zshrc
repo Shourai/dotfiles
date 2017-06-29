@@ -24,7 +24,7 @@ alias python=python3
 alias pip=pip3
 alias cp='cp -iv'
 alias mkdir='mkdir -pv'
-alias emd='em
+alias emd='emacs --daemon'
 
 ########## Run emacs in the background ##########
 # emacs() { command emacs "$@" & }
@@ -78,11 +78,20 @@ done
 ########## Eliminating delays on ESC in zsh ##########
 export KEYTIMEOUT=1
 
-########## Enable autojump ##########
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+########## fasd #########
+# initialize fasd
+eval "$(fasd --init auto)"   
+
+# custom fasd aliases
+alias e='f -e "emacsclient -n -c"' # quick opening files with emacs
 
 ########## Enable Enhancd  ##########
 [ -f ~/Documents/enhancd/init.sh ] && source ~/Documents/enhancd/init.sh
 
 ########## Fuzzy completion for zsh by junegunn ##########
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+########## Enable autojump ##########
+# Using fasd now instead of autojump
+# [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
