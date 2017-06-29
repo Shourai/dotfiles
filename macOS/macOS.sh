@@ -54,7 +54,7 @@ defaults write com.apple.dock showAppExposeGestureEnabled -bool true
 defaults write com.apple.dock showMissionControlGestureEnabled -bool true
 
 # Set tracking speed
-defaults write -g com.apple.trackpad.scaling -float 2.5
+defaults write -g com.apple.trackpad.scaling -float 3.0
 
 # Set keyboard delay until repeat to short
 defaults write -g InitialKeyRepeat -int 15

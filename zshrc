@@ -17,9 +17,14 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 alias ls='ls -GFh'
 alias ll='ls -GFhl'
 alias la='ls -GFha'
-alias ..='cd ..'
+alias ..='cd ../'
+alias /='cd /'
+alias ~='cd ~'
 alias python=python3
 alias pip=pip3
+alias cp='cp -iv'
+alias mkdir='mkdir -pv'
+alias emd='em
 
 ########## Run emacs in the background ##########
 # emacs() { command emacs "$@" & }
