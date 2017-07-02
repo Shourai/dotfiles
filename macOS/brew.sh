@@ -10,6 +10,7 @@ brew analytics off
 brew install autojump
 brew install coreutils
 brew install emacs --with-cocoa --srgb emacs
+brew install fasd
 brew install fzf
 brew install markdown
 brew install python3
