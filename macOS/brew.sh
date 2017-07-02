@@ -7,7 +7,7 @@ brew analytics off
 
 # Install homebrew packages
 
-brew install autojump
+# brew install autojump
 brew install coreutils
 brew install emacs --with-cocoa --srgb emacs
 brew install fasd
