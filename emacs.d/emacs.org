@@ -664,6 +664,13 @@ Furthermore it will load the languages that could be used.
        :ensure t
        :defer t)
    #+END_SRC
+* Ledger
+  A major mode for editing files in the format used by the [[https://github.com/ledger/ledger][ledger]] command-line accounting system.
+   #+BEGIN_SRC emacs-lisp
+     (use-package ledger-mode
+       :ensure t
+       :defer t)
+   #+END_SRC
 * End notes
 
    Before you can build this on a new system, make sure that you put

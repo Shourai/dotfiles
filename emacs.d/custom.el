@@ -16,7 +16,7 @@
  '(mode-require-final-newline nil)
  '(package-selected-packages
    (quote
-    (rainbow-delimiters mic-paren highlight-parentheses magit which-key use-package smartparens nlinum-relative helm expand-region evil-surround evil-numbers evil-mc evil-escape elpy company-quickhelp company-auctex color-theme-sanityinc-tomorrow avy auctex-latexmk atom-one-dark-theme))))
+    (ledger-mode rainbow-delimiters mic-paren highlight-parentheses magit which-key use-package smartparens nlinum-relative helm expand-region evil-surround evil-numbers evil-mc evil-escape elpy company-quickhelp company-auctex color-theme-sanityinc-tomorrow avy auctex-latexmk atom-one-dark-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

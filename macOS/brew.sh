@@ -12,6 +12,7 @@ brew install coreutils
 brew install emacs --with-cocoa --srgb emacs
 brew install fasd
 brew install fzf
+brew install ledger
 brew install markdown
 brew install python3
 brew install tree
