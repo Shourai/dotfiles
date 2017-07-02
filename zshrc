@@ -91,7 +91,6 @@ alias e='f -e "emacsclient -n -c"' # quick opening files with emacs
 ########## Fuzzy completion for zsh by junegunn ##########
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
 ########## Enable autojump ##########
 # Using fasd now instead of autojump
 # [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh

@@ -115,7 +115,6 @@ focus-in-hook will run.
      (eval-when-compile
        (require 'use-package))
    #+END_SRC
-   
 * Variables
   
 ** Personal Information
@@ -142,39 +141,11 @@ focus-in-hook will run.
      (setq-default tab-always-indent t)
      (setq-default tab-always-indent 'complete)
    #+END_SRC
-   
-* Org mode settings
-  
-The following is for syntax highlighting the code source blocks inside org mode.
-Furthermore it will load the languages that could be used.
-
-  #+BEGIN_SRC emacs-lisp
-    (setq org-confirm-babel-evaluate nil
-          org-src-fontify-natively t
-          org-src-tab-acts-natively t)
-  #+END_SRC
-
-  #+BEGIN_SRC emacs-lisp :tangle no
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((sh         . t)
-       (emacs-lisp . t)
-       (python     . t)
-       (latex      . t)
-       (ruby       . t)
-       (dot        . t)
-       (css        . t)))
-  #+END_SRC
-  
-  Remove the HTML validate link that appears at the postamble of your exported HTML file.
-
-  #+BEGIN_SRC emacs-lisp
-    (setq org-html-validation-link nil)
-  #+END_SRC
-* Display settings
+* Visual settings
   
   I like a minimal setup when working on code, therefore I disable the toolbar and scroll bar. \\
-  And if it detects I'm using a GUI I set the frame to be the size of 140x35 pixels.
+  And if it detects I'm using a GUI I set the frame to be the size of 130
+  columns and 40 rows. Also the windows open at 100 pixels from the top and left.
   
   #+BEGIN_SRC emacs-lisp
     (tool-bar-mode -1)
@@ -287,6 +258,22 @@ today, including Google's Java standard and the Linux kernel standard.
       (add-hook 'LaTeX-mode-hook '(lambda ()
                                     (auto-fill-mode 1)))
     #+END_SRC
+
+** Rainbow delimiter
+  #+BEGIN_SRC emacs-lisp
+    (use-package rainbow-delimiters
+    :ensure t
+    :defer t 
+    :config )
+  #+END_SRC
+** Highlight parenthesis
+  #+BEGIN_SRC emacs-lisp
+    (use-package highlight-parentheses
+    :ensure t
+    :defer t 
+    :config )
+  #+END_SRC
+
 * Undo and Redo
   The ultimate undo history visualizer.
   #+BEGIN_SRC emacs-lisp
@@ -326,7 +313,6 @@ today, including Google's Java standard and the Linux kernel standard.
      (setq ido-enable-flex-matching t) ;; display any item that contains the chars you typed
      (setq max-mini-window-height 0.5))
    #+END_SRC
-   
 * Autocompletion
 ** Company Mode
    Modular in-buffer completion framework for Emacs.
@@ -388,7 +374,6 @@ Adding yasnippet to company mode (doubts about this code)
      :config
      (require 'smartparens-latex))
    #+END_SRC
-   
 * Evil mode
   Evil is an extensible vi layer for Emacs. \\
   It provides Vim features like Visual selection and text objects.
@@ -447,7 +432,6 @@ This package emulates [[https://github.com/tpope/vim-surround][surround.vim by T
     :ensure t
     :defer t)
   #+END_SRC
- 
 * Movement
 ** Avy
    Avy is a GNU Emacs package for jumping to visible text using a char-based decision tree. \\
@@ -634,6 +618,35 @@ Autocomplete dollar sign.
   #+BEGIN_SRC emacs-lisp :tangle no
     (add-hook 'python-mode-hook 'jedi:setup)
     (setq jedi:complete-on-dot t)                 ; optional
+  #+END_SRC
+   
+* Org mode
+  
+The following is for syntax highlighting the code source blocks inside org mode.
+Furthermore it will load the languages that could be used.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq org-confirm-babel-evaluate nil
+          org-src-fontify-natively t
+          org-src-tab-acts-natively t)
+  #+END_SRC
+
+  #+BEGIN_SRC emacs-lisp :tangle no
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((sh         . t)
+       (emacs-lisp . t)
+       (python     . t)
+       (latex      . t)
+       (ruby       . t)
+       (dot        . t)
+       (css        . t)))
+  #+END_SRC
+  
+  Remove the HTML validate link that appears at the postamble of your exported HTML file.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq org-html-validation-link nil)
   #+END_SRC
 
 * Magit

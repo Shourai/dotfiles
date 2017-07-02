@@ -29,12 +29,6 @@ user-mail-address "mail@shourai.net")
 (setq-default indent-tabs-mode nil)
 (setq tab-width 4)
 
-(setq org-confirm-babel-evaluate nil
-      org-src-fontify-natively t
-      org-src-tab-acts-natively t)
-
-(setq org-html-validation-link nil)
-
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (setq default-frame-alist
@@ -76,6 +70,16 @@ user-mail-address "mail@shourai.net")
 
 (add-hook 'LaTeX-mode-hook '(lambda ()
                               (auto-fill-mode 1)))
+
+(use-package rainbow-delimiters
+:ensure t
+:defer t 
+:config )
+
+(use-package highlight-parentheses
+:ensure t
+:defer t 
+:config )
 
 (use-package undo-tree
 :ensure t
@@ -219,6 +223,12 @@ user-mail-address "mail@shourai.net")
 (setq python-shell-interpreter "python3")
 
 (setq elpy-rpc-python-command "python3")
+
+(setq org-confirm-babel-evaluate nil
+      org-src-fontify-natively t
+      org-src-tab-acts-natively t)
+
+(setq org-html-validation-link nil)
 
 (use-package magit
   :ensure t
