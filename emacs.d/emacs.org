@@ -320,7 +320,7 @@ today, including Google's Java standard and the Linux kernel standard.
      (use-package company
      :ensure t
      :defer 10
-     :config
+     :init
      (add-hook 'after-init-hook 'global-company-mode))
 
    #+END_SRC

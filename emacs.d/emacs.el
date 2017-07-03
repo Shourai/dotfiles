@@ -102,7 +102,7 @@ user-mail-address "mail@shourai.net")
 (use-package company
 :ensure t
 :defer 10
-:config
+:init
 (add-hook 'after-init-hook 'global-company-mode))
 
 (use-package company-quickhelp
@@ -237,5 +237,9 @@ user-mail-address "mail@shourai.net")
   :config  (require 'evil-magit))
 
 (use-package evil-magit
+  :ensure t
+  :defer t)
+
+(use-package ledger-mode
   :ensure t
   :defer t)
