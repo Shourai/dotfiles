@@ -405,7 +405,7 @@ Adding yasnippet to company mode (doubts about this code)
   When the buffer loses focus, return to evil-normal-mode. \\
   This is useful when you alt-tab back and directly want to move around.
     #+BEGIN_SRC emacs-lisp
-        (add-hook 'focus-out-hook 'normal-mode)
+        (add-hook 'focus-in-hook 'normal-mode)
     #+END_SRC
 
 ** Custom Keybindings 
