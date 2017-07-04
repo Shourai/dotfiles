@@ -78,7 +78,8 @@ Change 'yes/no' to just 'y/n'
 Save file when the frame loses focus.
 These hooks fire when any Emacs frame gains or loses focus. \\
 This means that if you Alt-Tab or Alt-` between Emacs frames, the focus-out-hook and
-focus-in-hook will run.
+focus-in-hook will run. \\
+I think this also causes auto-save to not work anymore (i.e. no more foo# files)
 
 #+BEGIN_SRC emacs-lisp
     (defun save-all ()
@@ -86,6 +87,19 @@ focus-in-hook will run.
     (save-some-buffers t))
 
     (add-hook 'focus-out-hook 'save-all)
+#+END_SRC
+
+Set backup files directory in `~/.saves`.
+
+#+BEGIN_SRC emacs-lisp
+(setq
+   backup-by-copying t      ; don't clobber symlinks
+   backup-directory-alist
+    '(("." . "~/.saves"))    ; don't litter my fs tree
+   delete-old-versions t
+   kept-new-versions 6
+   kept-old-versions 2
+   version-control t)       ; use versioned backups
 #+END_SRC
 
 * Package Initialization
