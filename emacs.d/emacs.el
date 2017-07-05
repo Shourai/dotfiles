@@ -252,3 +252,8 @@ user-mail-address "mail@shourai.net")
 (use-package ledger-mode
   :ensure t
   :defer t)
+
+(with-eval-after-load 'ledger-mode
+  ;(define-key ledger-mode-map (kbd "C-c $") "€")
+  (define-key ledger-mode-map (kbd "C-c $") (lambda () (interactive) (insert "€")))
+  (define-key ledger-mode-map (kbd "C-c c") 'ledger-mode-clean-buffer))

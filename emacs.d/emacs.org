@@ -685,6 +685,14 @@ Furthermore it will load the languages that could be used.
        :ensure t
        :defer t)
    #+END_SRC
+  
+  Set `C-c $` to insert `€` symbol.
+   #+BEGIN_SRC emacs-lisp
+     (with-eval-after-load 'ledger-mode
+       ;(define-key ledger-mode-map (kbd "C-c $") "€")
+       (define-key ledger-mode-map (kbd "C-c $") (lambda () (interactive) (insert "€")))
+       (define-key ledger-mode-map (kbd "C-c c") 'ledger-mode-clean-buffer))
+   #+END_SRC
 * End notes
 
    Before you can build this on a new system, make sure that you put
