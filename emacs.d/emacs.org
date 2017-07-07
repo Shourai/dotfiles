@@ -334,8 +334,14 @@ today, including Google's Java standard and the Linux kernel standard.
      (use-package company
      :ensure t
      :defer 10
+     :bind (("C-<tab>" . company-complete)
+         ("TAB" . company-indent-or-complete-common))
      :init
-     (add-hook 'after-init-hook 'global-company-mode))
+
+     (add-hook 'after-init-hook 'global-company-mode)
+
+     ;; company delay until suggestions are shown
+     (setq company-idle-delay 0.3))
 
    #+END_SRC
    
@@ -361,9 +367,6 @@ Adding yasnippet to company mode (doubts about this code)
                    '(:with company-yasnippet))))
 
            (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
-
-     ;; company delay until suggestions are shown
-     (setq company-idle-delay 0.5)
    #+END_SRC
 ** Snippets
    A template system for Emacs.
