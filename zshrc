@@ -6,8 +6,6 @@ setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a d
 setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
 
-autoload -Uz compinit 
-compinit
 
 ########## Syntax highlighting package from brew ##########
 
@@ -60,6 +58,10 @@ ec() { command emacsclient -n -c "$@" & }
 # ------------------------------------------------------------------------------
 # - Autocompletion settings                                                    -
 # ------------------------------------------------------------------------------
+
+# Use completion functionality
+autoload -Uz compinit 
+compinit
 
 # If the <tab> key is pressed with multiple possible options, print the
 # options.  If the options are printed, begin cycling through them.
