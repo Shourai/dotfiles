@@ -343,15 +343,21 @@ today, including Google's Java standard and the Linux kernel standard.
      (use-package company
      :ensure t
      :defer 10
-     :bind (("C-<tab>" . company-complete)
-         ("TAB" . company-indent-or-complete-common))
+     :bind ("C-," . company-complete-common)
      :init
-     (setq company-idle-delay 0.3) ; company delay until suggestions are shown
+     (add-hook 'after-init-hook 'global-company-mode)
      :config
-     (add-hook 'after-init-hook 'global-company-mode))
+     (setq company-idle-delay  0.3 ; company delay until suggestions are shown
+           company-show-numbers t))
 
    #+END_SRC
    
+  Took these binds out for testing purposes 
+   #+BEGIN_SRC emacs-lisp :tangle no
+     :bind (("C-<tab>" . company-complete)
+         ("TAB" . company-indent-or-complete-common))
+   #+END_SRC
+
    Add quickhelp for company mode
    #+BEGIN_SRC emacs-lisp
      (use-package company-quickhelp
@@ -405,7 +411,7 @@ Adding yasnippet to company mode (doubts about this code)
     (use-package evil
     :ensure t
     :bind (("C-z" . turn-on-evil-mode)
-    ("C-x C-z" . turn-off-evil-mode))
+           ("C-x C-z" . turn-off-evil-mode))
     :init
     (setq evil-want-C-u-scroll t)
     :config
@@ -435,7 +441,7 @@ Adding yasnippet to company mode (doubts about this code)
     (use-package evil-numbers
     :ensure t
     :bind ("C-c +" . evil-numbers/inc-at-pt)
-    ("C-c -" . evil-numbers/dec-at-pt))
+          ("C-c -" . evil-numbers/dec-at-pt))
   #+END_SRC
   
 ** Surround
