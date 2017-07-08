@@ -75,10 +75,17 @@ Change 'yes/no' to just 'y/n'
      (fset 'yes-or-no-p 'y-or-n-p)
    #+END_SRC
 
+Clean scratch buffer and don't ask about symlinks
+   #+BEGIN_SRC emacs-lisp
+     (setq initial-scratch-message nil
+           vc-follow-symlinks t)
+   #+END_SRC
+
 Save file when the frame loses focus.
 These hooks fire when any Emacs frame gains or loses focus. \\
 This means that if you Alt-Tab or Alt-` between Emacs frames, the focus-out-hook and
-focus-in-hook will run.
+focus-in-hook will run. \\
+I think this also causes auto-save to not work anymore (i.e. no more foo# files)
 
 #+BEGIN_SRC emacs-lisp
     (defun save-all ()
@@ -86,6 +93,19 @@ focus-in-hook will run.
     (save-some-buffers t))
 
     (add-hook 'focus-out-hook 'save-all)
+#+END_SRC
+
+Set backup files directory in `~/.saves`.
+
+#+BEGIN_SRC emacs-lisp
+(setq
+   backup-by-copying t      ; don't clobber symlinks
+   backup-directory-alist
+    '(("." . "~/.saves"))    ; don't litter my fs tree
+   delete-old-versions t
+   kept-new-versions 6
+   kept-old-versions 2
+   version-control t)       ; use versioned backups
 #+END_SRC
 
 * Package Initialization
@@ -131,15 +151,15 @@ focus-in-hook will run.
    See [[http://ergoemacs.org/emacs/emacs_tabs_space_indentation_setup.html][this discussion]] for details.
    
    #+BEGIN_SRC emacs-lisp
-     (setq-default indent-tabs-mode nil)
-     (setq tab-width 4)
+     (setq-default indent-tabs-mode nil
+                   tab-width 4)
    #+END_SRC
    
    Make tab key do indent first then completion.
    
    #+BEGIN_SRC emacs-lisp :tangle no
-     (setq-default tab-always-indent t)
-     (setq-default tab-always-indent 'complete)
+     (setq-default tab-always-indent t
+                   tab-always-indent 'complete)
    #+END_SRC
 * Visual settings
   
@@ -150,6 +170,7 @@ focus-in-hook will run.
   #+BEGIN_SRC emacs-lisp
     (tool-bar-mode -1)
     (scroll-bar-mode -1)
+    (menu-bar-mode -1)
     (setq default-frame-alist
       '(
         (top . 100)
@@ -289,17 +310,19 @@ today, including Google's Java standard and the Linux kernel standard.
    
    Emacs incremental completion and selection narrowing framework.
    #+BEGIN_SRC emacs-lisp
-    (use-package helm
-    :ensure t
-    :defer 1
-    :bind (("M-x" . helm-M-x)
-           ("C-x C-b" . helm-mini)
-           ("C-x C-f" . helm-find-files)
-           ("M-y" . helm-show-kill-ring))
-    :config
-    (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
-    (setq helm-buffers-fuzzy-matching t
-      helm-recentf-fuzzy-match    t))
+     (use-package helm
+     :ensure t
+     :defer 1
+     :bind (("M-x" . helm-M-x)
+            ("C-x h" . helm-command-prefix)
+            ("C-x C-b" . helm-mini)
+            ("C-x C-f" . helm-find-files)
+            ("M-y" . helm-show-kill-ring))
+     :config
+     (setq helm-M-x-fuzzy-match         t    ;; optional fuzzy matching for helm-M-x
+           helm-buffers-fuzzy-matching  t
+           helm-recentf-fuzzy-match     t
+           helm-quick-update            t))
    #+END_SRC
    
 ** Ido
@@ -309,9 +332,9 @@ today, including Google's Java standard and the Linux kernel standard.
      (use-package ido
      :config
      (ido-mode t)
-     (setq ido-separator "\n") ;; make ido display choices vertically
-     (setq ido-enable-flex-matching t) ;; display any item that contains the chars you typed
-     (setq max-mini-window-height 0.5))
+     (setq ido-separator            "\n" ;; make ido display choices vertically
+           ido-enable-flex-matching t ;; display any item that contains the chars you typed
+           max-mini-window-height   0.5))
    #+END_SRC
 * Autocompletion
 ** Company Mode
@@ -320,11 +343,21 @@ today, including Google's Java standard and the Linux kernel standard.
      (use-package company
      :ensure t
      :defer 10
+     :bind ("C-," . company-complete-common)
      :init
-     (add-hook 'after-init-hook 'global-company-mode))
+     (add-hook 'after-init-hook 'global-company-mode)
+     :config
+     (setq company-idle-delay  0.3 ; company delay until suggestions are shown
+           company-show-numbers t))
 
    #+END_SRC
    
+  Took these binds out for testing purposes 
+   #+BEGIN_SRC emacs-lisp :tangle no
+     :bind (("C-<tab>" . company-complete)
+         ("TAB" . company-indent-or-complete-common))
+   #+END_SRC
+
    Add quickhelp for company mode
    #+BEGIN_SRC emacs-lisp
      (use-package company-quickhelp
@@ -347,9 +380,6 @@ Adding yasnippet to company mode (doubts about this code)
                    '(:with company-yasnippet))))
 
            (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
-
-     ;; company delay until suggestions are shown
-     (setq company-idle-delay 0.5)
    #+END_SRC
 ** Snippets
    A template system for Emacs.
@@ -381,7 +411,7 @@ Adding yasnippet to company mode (doubts about this code)
     (use-package evil
     :ensure t
     :bind (("C-z" . turn-on-evil-mode)
-    ("C-x C-z" . turn-off-evil-mode))
+           ("C-x C-z" . turn-off-evil-mode))
     :init
     (setq evil-want-C-u-scroll t)
     :config
@@ -390,8 +420,8 @@ Adding yasnippet to company mode (doubts about this code)
 
   When the buffer loses focus, return to evil-normal-mode. \\
   This is useful when you alt-tab back and directly want to move around.
-    #+BEGIN_SRC emacs-lisp
-        (add-hook 'focus-out-hook 'normal-mode)
+    #+BEGIN_SRC emacs-lisp :tangle no
+        (add-hook 'focus-in-hook 'normal-mode)
     #+END_SRC
 
 ** Custom Keybindings 
@@ -411,7 +441,7 @@ Adding yasnippet to company mode (doubts about this code)
     (use-package evil-numbers
     :ensure t
     :bind ("C-c +" . evil-numbers/inc-at-pt)
-    ("C-c -" . evil-numbers/dec-at-pt))
+          ("C-c -" . evil-numbers/dec-at-pt))
   #+END_SRC
   
 ** Surround
@@ -524,13 +554,10 @@ works as well as any dedicated LaTeX program.
     :mode ("\\.tex\\'" . LaTeX-mode)
     :interpreter ("LatexMk" . LaTeX-mode)
     :config
-    ;; enable parse on load and save
-    (setq TeX-auto-save t)
-    (setq TeX-parse-self t)
-    ;; autosave before compiling
-    (setq TeX-save-query nil)
-    ;; let AUCTeX query for master file name
-    (setq-default TeX-master nil))
+    (setq TeX-auto-save      t      ;; enable parse on load and save
+          TeX-parse-self     t
+          TeX-save-query     nil)    ;; autosave before compiling
+    (setq-default TeX-master nil))  ;; let AUCTeX query for master file name
 #+END_SRC
 
 When a latex file is loaded, let it load visual-line, flyspell, math-mode and reftex.
@@ -627,8 +654,8 @@ Furthermore it will load the languages that could be used.
 
   #+BEGIN_SRC emacs-lisp
     (setq org-confirm-babel-evaluate nil
-          org-src-fontify-natively t
-          org-src-tab-acts-natively t)
+          org-src-fontify-natively   t
+          org-src-tab-acts-natively  t)
   #+END_SRC
 
   #+BEGIN_SRC emacs-lisp :tangle no
@@ -670,6 +697,14 @@ Furthermore it will load the languages that could be used.
      (use-package ledger-mode
        :ensure t
        :defer t)
+   #+END_SRC
+  
+  Set `C-c $` to insert `€` symbol.
+   #+BEGIN_SRC emacs-lisp
+     (with-eval-after-load 'ledger-mode
+       ;(define-key ledger-mode-map (kbd "C-c $") "€")
+       (define-key ledger-mode-map (kbd "C-c $") (lambda () (interactive) (insert "€")))
+       (define-key ledger-mode-map (kbd "C-c c") 'ledger-mode-clean-buffer))
    #+END_SRC
 * End notes
 

@@ -23,6 +23,7 @@ tags
 auto-save-list
 tramp
 .\#*
+emacs.el
 
 # Org-mode
 .org-id-locations
