@@ -33,7 +33,7 @@ brew cask install google-chrome
 brew cask install istat-menus
 brew cask install iterm2
 # brew cask install libreoffice
-brew cask install mplayerx
+brew cask install mpv
 brew cask install skim
 brew cask install the-unarchiver
 brew cask install transmission
