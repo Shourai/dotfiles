@@ -397,7 +397,12 @@ Adding yasnippet to company mode (doubts about this code)
      (use-package smartparens
      :ensure t
      :defer 10
-     :bind (("TAB" . sp-up-sexp))
+     :bind (
+    ("TAB" . sp-up-sexp)
+    ("C-<right>" . sp-forward-slurp-sexp)
+    ("M-<right>" . sp-forward-barf-sexp)
+    ("C-<left>"  . sp-backward-slurp-sexp)
+    ("M-<left>"  . sp-backward-barf-sexp))
      :init
      (add-hook 'python-mode-hook #'smartparens-mode)
      (add-hook 'LaTeX-mode-hook #'smartparens-mode)
