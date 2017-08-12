@@ -29,6 +29,7 @@ brew cask install 1password
 brew cask install bettertouchtool
 brew cask install calibre
 brew cask install dropbox
+brew cask install firefox
 brew cask install google-chrome
 brew cask install istat-menus
 brew cask install iterm2
