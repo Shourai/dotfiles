@@ -706,6 +706,17 @@ Furthermore it will load the languages that could be used.
        (define-key ledger-mode-map (kbd "C-c $") (lambda () (interactive) (insert "€")))
        (define-key ledger-mode-map (kbd "C-c c") 'ledger-mode-clean-buffer))
    #+END_SRC
+* Markdown
+   #+BEGIN_SRC emacs-lisp
+	(use-package markdown-mode
+	  :ensure t
+	  :commands (markdown-mode gfm-mode)
+	  :mode (("README\\.md\\'" . gfm-mode)
+		 ("\\.md\\'" . markdown-mode)
+		 ("\\.markdown\\'" . markdown-mode))
+	  :init (setq markdown-command "multimarkdown"))
+   #+END_SRC
+
 * End notes
 
    Before you can build this on a new system, make sure that you put
