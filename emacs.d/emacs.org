@@ -467,6 +467,13 @@ This package emulates [[https://github.com/tpope/vim-surround][surround.vim by T
     :ensure t
     :defer t)
   #+END_SRC
+** Custom settings
+Prevent the visual selection overriding the system clipboard.
+This is useful if when using `viwp`, which does not work otherwise.
+
+#+BEGIN_SRC emacs-lisp
+(fset 'evil-visual-update-x-selection 'ignore)
+#+END_SRC
 * Movement
 ** Avy
    Avy is a GNU Emacs package for jumping to visible text using a char-based decision tree. \\
