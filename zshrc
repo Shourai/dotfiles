@@ -1,11 +1,3 @@
-HISTFILE=~/.zsh_history
-HISTSIZE=10000000
-SAVEHIST=10000000
-setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
-setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
-setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
-setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
-
 
 ########## Syntax highlighting package from brew ##########
 
@@ -23,6 +15,8 @@ alias ls='ls -GFh'
 alias ll='ls -GFhl'
 alias la='ls -GFha'
 alias ..='cd ../'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 alias /='cd /'
 alias ~='cd ~'
 alias python=python3
@@ -43,10 +37,29 @@ setopt autocd
 # Note there is a "correctall" variant which also prompts to correct arguments
 # to commands, but this ends up being more troublesome than useful.
 setopt correct
+setopt correctall
 
 # Disables the beep zsh would otherwise make when giving invalid input (such as
 # hitting backspace on an command line).
-setopt nobeep
+setopt no_beep
+
+# History settings
+HISTFILE=~/.zsh_history
+HISTSIZE=10000000
+SAVEHIST=10000000
+setopt append_history         # Allow multiple terminal sessions to all append to one zsh command history
+setopt extended_history       # save timestamp of command and duration
+setopt inc_append_history     # Add comamnds as they are typed, don't wait until shell exit
+setopt hist_expire_dups_first # when trimming history, lose oldest duplicates first
+setopt hist_ignore_dups       # Do not write events to history that are duplicates of previous events
+setopt hist_ignore_space      # remove command line from history list when first character on the line is a space
+setopt hist_find_no_dups      # When searching history don't display results already cycled through twice
+setopt hist_reduce_blanks     # Remove extra blanks from each command line being added to history
+setopt hist_verify            # don't execute, just expand history
+setopt share_history          # imports new commands and appends typed commands to history
+setopt hist_ignore_all_dups   # Delete old recorded entry if new entry is a duplicate.
+setopt hist_save_no_dups      # Don't write duplicate entries in the history file.
+
 
 
 # ------------------------------------------------------------------------------
@@ -62,6 +75,13 @@ ec() { command emacsclient -n -c "$@" & }
 # Use completion functionality
 autoload -Uz compinit 
 compinit
+
+setopt always_to_end # When completing from the middle of a word, move the cursor to the end of the word
+setopt auto_menu # show completion menu on successive tab press. needs unsetop menu_complete to work
+setopt auto_name_dirs # any parameter that is set to the absolute name of a directory immediately becomes a name for that directory
+setopt complete_in_word # Allow completion from within a word/phrase
+
+unsetopt menu_complete # do not autoselect the first completion entry
 
 # If the <tab> key is pressed with multiple possible options, print the
 # options.  If the options are printed, begin cycling through them.
