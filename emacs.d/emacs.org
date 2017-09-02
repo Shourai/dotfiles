@@ -108,6 +108,12 @@ Set backup files directory in `~/.saves`.
    version-control t)       ; use versioned backups
 #+END_SRC
 
+Do not silently put a newline at the end of a file when saving or writng a file
+if there isn't already one.
+#+BEGIN_SRC emacs-lisp
+(setq mode-require-final-newline nil)
+#+END_SRC
+
 * Package Initialization
   
 ** Package Managers
@@ -610,6 +616,7 @@ It needs to be saved into the init.el file before it can work (using customize-v
 #+BEGIN_SRC emacs-lisp
 (setq LaTeX-math-list())
 (add-to-list 'LaTeX-math-list '(?1 "partial" "Misc Symbol" 8706))
+ ;;  '(LaTeX-math-list (quote ((49 "partial" "Misc Symbol" 8706))))
 #+END_SRC
 
 Insert braces after typing <^> and <_> in math mode.
@@ -617,6 +624,15 @@ Autocomplete dollar sign.
 #+BEGIN_SRC emacs-lisp
 (setq TeX-electric-sub-and-superscript 1)
 ;; (setq TeX-electric-math (cons "$" "$"))
+#+END_SRC
+
+Set custom program to open pdf, dvi and html
+
+#+BEGIN_SRC emacs-lisp
+(setq TeX-view-program-selection
+    '((output-dvi "open")
+     (output-pdf "Skim")
+     (output-html "open")))
 #+END_SRC
 
 * Python
@@ -718,6 +734,11 @@ Furthermore it will load the languages that could be used.
        (define-key ledger-mode-map (kbd "C-c $") (lambda () (interactive) (insert "€")))
        (define-key ledger-mode-map (kbd "C-c c") 'ledger-mode-clean-buffer))
    #+END_SRC
+
+  Set the ledger schedule file
+  #+BEGIN_SRC emacs-lisp
+     (setq ledger-schedule-file "~/Dropbox/Budget/schedule")
+  #+END_SRC
 * Markdown
    #+BEGIN_SRC emacs-lisp
 (use-package markdown-mode
