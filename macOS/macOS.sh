@@ -14,6 +14,13 @@ defaults write com.apple.dock tilesize -float 30
 # Enable dock autohide
 defaults write com.apple.dock autohide -bool true
 
+# Change the autohide delay
+defaults write com.apple.dock autohide-time-modifier -float 0.4
+defaults write com.apple.dock autohide-delay -float 0
+
+# Show all file extensions
+defaults write -g AppleShowAllExtensions -bool true
+
 # Disable smart quotes as they’re annoying when typing code
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 
