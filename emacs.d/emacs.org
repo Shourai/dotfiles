@@ -306,7 +306,8 @@ today, including Google's Java standard and the Linux kernel standard.
   #+BEGIN_SRC emacs-lisp
     (use-package undo-tree
     :ensure t
-    :defer t 
+    :defer 5
+    :init
     :config
     (global-undo-tree-mode t))
   #+END_SRC
@@ -343,6 +344,16 @@ today, including Google's Java standard and the Linux kernel standard.
            max-mini-window-height   0.5))
    #+END_SRC
 * Autocompletion
+** Snippets
+   A template system for Emacs.
+   #+BEGIN_SRC emacs-lisp
+     (use-package yasnippet
+     :ensure t
+     :defer 10
+     :config
+     (yas-global-mode 1))
+   #+END_SRC
+   
 ** Company Mode
    Modular in-buffer completion framework for Emacs.
    #+BEGIN_SRC emacs-lisp
@@ -351,8 +362,9 @@ today, including Google's Java standard and the Linux kernel standard.
      :defer 10
      :bind ("C-," . company-complete-common)
      :init
-     (add-hook 'after-init-hook 'global-company-mode)
+     ;(add-hook 'after-init-hook 'global-company-mode)  ;; using this doesn't allow deferring
      :config
+     (global-company-mode 1)
      (setq company-idle-delay  0.3 ; company delay until suggestions are shown
            company-show-numbers t))
 
@@ -371,30 +383,6 @@ today, including Google's Java standard and the Linux kernel standard.
      :defer 10
      :config
      (company-quickhelp-mode 1))
-   #+END_SRC
-   
-Adding yasnippet to company mode (doubts about this code)
-   #+BEGIN_SRC emacs-lisp :tangle no
-     ;; Weight by frequency
-          (setq company-transformers '(company-sort-by-occurrence))
-
-          (defvar company-mode/enable-yas t "Enable yasnippet for all backends.")
-           (defun company-mode/backend-with-yas (backend)
-             (if (or (not company-mode/enable-yas) (and (listp backend)    (member 'company-yasnippet backend)))
-             backend
-           (append (if (consp backend) backend (list backend))
-                   '(:with company-yasnippet))))
-
-           (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
-   #+END_SRC
-** Snippets
-   A template system for Emacs.
-   #+BEGIN_SRC emacs-lisp
-     (use-package yasnippet
-     :ensure t
-     :defer 10
-     :config
-     (yas-global-mode 1))
    #+END_SRC
    
 ** Smartparens
@@ -425,7 +413,6 @@ Adding yasnippet to company mode (doubts about this code)
            ("C-x C-z" . turn-off-evil-mode))
     :init
     (setq evil-want-C-u-scroll t)
-    :config
     (evil-mode t))
   #+END_SRC
 
@@ -440,7 +427,7 @@ Adding yasnippet to company mode (doubts about this code)
   Customizable key sequence to escape from insert state and everything else in Emacs. \\
   The default keybinding is =fd=.
   See [[https://github.com/syl20bnr/evil-escape][github]] for further details.
-  #+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp :tangle no
     (use-package evil-escape
     :ensure t
     :config
