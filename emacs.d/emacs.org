@@ -707,7 +707,8 @@ Furthermore it will load the languages that could be used.
        :defer t)
    #+END_SRC
 * Ledger
-  A major mode for editing files in the format used by the [[https://github.com/ledger/ledger][ledger]] command-line accounting system.
+A major mode for editing files in the format used by the [[https://github.com/ledger/ledger][ledger]] command-line accounting system.
+
    #+BEGIN_SRC emacs-lisp
      (use-package ledger-mode
        :ensure t
@@ -727,6 +728,8 @@ Furthermore it will load the languages that could be used.
      (setq ledger-schedule-file "~/Dropbox/Budget/schedule")
   #+END_SRC
 * Markdown
+A major mode for editing Markdown-formatted text.
+
    #+BEGIN_SRC emacs-lisp
 (use-package markdown-mode
   :ensure t
