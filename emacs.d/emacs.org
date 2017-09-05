@@ -595,13 +595,12 @@ Add LatexMk support to AUCTeX
         ;; Let LatexMk to pass the -pdf flag when TeX-PDF-mode is active 
         (setq auctex-latexmk-inherit-TeX-PDF-mode t)
         ;; Make LatexMk be the default command when invoking TeX-command-master (C-c C-c)
+        (add-hook 'LaTeX-mode-hook
         (lambda ()
         (push
         '("latexmk" "latexmk -pdf %s" TeX-run-TeX nil t
             :help "Run latexmk on file")
             TeX-command-list)))
-                (add-hook 'LaTeX-mode-hook 
-                TeX-command-list)))
         (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk"))))
 
     #+END_SRC
