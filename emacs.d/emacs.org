@@ -403,6 +403,13 @@ today, including Google's Java standard and the Linux kernel standard.
      :config
      (require 'smartparens-latex))
    #+END_SRC
+* Spell-checking
+While typing text I like to activate `flyspell mode` which checks my spelling on
+the fly. My preferred spelling is `en_GB`. \\
+The dictionaries have to be installed via `brew install aspell`.
+#+BEGIN_SRC emacs-lisp
+(setq ispell-dictionary "en_GB")
+#+END_SRC 
 * Evil mode
   Evil is an extensible vi layer for Emacs. \\
   It provides Vim features like Visual selection and text objects.
