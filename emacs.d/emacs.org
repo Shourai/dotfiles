@@ -95,18 +95,24 @@ I think this also causes auto-save to not work anymore (i.e. no more foo# files)
     (add-hook 'focus-out-hook 'save-all)
 #+END_SRC
 
-Set backup files directory in `~/.saves`.
+Tidy up the backup and auto-save files created by emacs.
+They are neatly tucked away in a folder.
 
 #+BEGIN_SRC emacs-lisp
-(setq
-   backup-by-copying t      ; don't clobber symlinks
-   backup-directory-alist
-    '(("." . "~/.saves"))    ; don't litter my fs tree
-   delete-old-versions t
-   kept-new-versions 6
-   kept-old-versions 2
-   version-control t)       ; use versioned backups
+    (setq 
+        backup-directory-alist
+            '(("." . "~/.tmp/emacs/backups/"))    ; don't litter my fs tree
+        auto-save-file-name-transforms
+            `((".*" , "~/.tmp/emacs/auto-saves/" t)))
+
+    (setq
+        backup-by-copying t      ; don't clobber symlinks
+        delete-old-versions t    ; don't ask about deleting old versions
+        kept-new-versions 10     ; keep 10 latest versions
+        kept-old-versions 2      ; keep 2 old versions
+        version-control t)       ; use versioned backups
 #+END_SRC
+
 
 Do not silently put a newline at the end of a file when saving or writng a file
 if there isn't already one.
