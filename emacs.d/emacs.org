@@ -604,7 +604,7 @@ Add LatexMk support to AUCTeX
         (add-hook 'LaTeX-mode-hook
         (lambda ()
         (push
-        '("latexmk" "latexmk -pdf %s" TeX-run-TeX nil t
+        '("latexmk" "latexmk -pdf %s -auxdir=build" TeX-run-TeX nil t
             :help "Run latexmk on file")
             TeX-command-list)))
         (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk"))))
@@ -638,10 +638,18 @@ Autocomplete dollar sign.
 Set custom program to open pdf, dvi and html
 
 #+BEGIN_SRC emacs-lisp
-(setq TeX-view-program-selection
-    '((output-dvi "open")
-     (output-pdf "Skim")
-     (output-html "open")))
+(setq
+ ;; Set the list of viewers for Mac OS X.
+ TeX-view-program-list
+ '(("Preview.app" "open -a Preview.app %o")
+   ("Skim" "open -a Skim.app %o")
+   ("displayline" "displayline %n %o %b")
+   ("open" "open build/%o"))
+ ;; Select the viewers for each file type.
+ TeX-view-program-selection
+ '((output-dvi "open")
+   (output-pdf "Skim")
+   (output-html "open")))
 #+END_SRC
 
 * Python
