@@ -129,9 +129,9 @@ bindkey -v
 # Minimize escape sequence detection delay
 export KEYTIMEOUT=1
 
-## Prompt when in insert or normal mode
+# Prompt when in insert or normal mode
 function zle-line-init zle-keymap-select {
-    VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+    VIM_PROMPT="%F{grey}%S[NORMAL]%s%f"
     RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
     zle reset-prompt
 }
