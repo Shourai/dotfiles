@@ -3,46 +3,48 @@ let mapleader = ","
 let maplocalleader = ","
                  
 " =================================================== 
-"                     Neobundle 
+"                 Vim-Plug core 
 " ===================================================
-set runtimepath+=~/.vim/bundle/neobundle.vim/
-call neobundle#begin(expand('~/.vim/bundle/'))
-NeoBundleFetch 'Shougo/neobundle.vim'
+if has('vim_starting')
+  set nocompatible               " Be iMproved
+endif
 
-" --------------------------------
-" ---- non-customised plugins ----
-" --------------------------------
-NeoBundle 'Shougo/vimproc.vim', {
-      \ 'build' : {
-      \     'windows' : 'tools\\update-dll-mingw',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'linux' : 'make',
-      \     'unix' : 'gmake',
-      \    },
-      \ }
-NeoBundle 'Shougo/unite.vim' 
-NeoBundle 'jonathanfilip/vim-lucius' " Colorscheme
-NeoBundle 'chriskempson/base16-vim' " Colorscheme
-NeoBundle 'sheerun/vim-polyglot' " Syntax highlighting for multiple languages
-NeoBundle 'Shougo/neocomplcache' " auto completion based on cache
-NeoBundle 'bling/vim-airline' " statusline plugin for vim
-NeoBundle 'honza/vim-snippets' " A collection of snippets for snipmate
-NeoBundle 'kien/ctrlp.vim' " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
-NeoBundle 'tpope/vim-surround' " The plugin provides mappings to easily delete, change and add such surroundings in pairs.
+let vimplug_exists=expand('~/.vim/autoload/plug.vim')
+
+let g:vim_bootstrap_langs = "python"
+let g:vim_bootstrap_editor = "vim"				" nvim or vim
+
+if !filereadable(vimplug_exists)
+  if !executable("curl")
+    echoerr "You have to install curl or first install vim-plug yourself!"
+    execute "q!"
+  endif
+  echo "Installing Vim-Plug..."
+  echo ""
+  silent !\curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  let g:not_finish_vimplug = "yes"
+
+  autocmd VimEnter * PlugInstall
+endif
+
+" Required:
+call plug#begin(expand('~/.vim/plugged'))
 
 " ----------------------------
 " ---- customised plugins ----
 " ----------------------------
 
 " Use tab for completion
-NeoBundle 'ervandew/supertab' 
+Plug 'ervandew/supertab' 
+
+" colorscheme
+Plug 'romainl/flattened'
 
 " Setting the default completion to supertab's 'context' completion
 let g:SuperTabDefaultCompletionType = "context"
 
 " " Auto completion for python
-" NeoBundle 'davidhalter/jedi-vim' 
+" Plug 'davidhalter/jedi-vim' 
 " 
 " " Don't let docstring window to popup during completion
 " autocmd FileType python setlocal completeopt-=preview
@@ -51,13 +53,13 @@ let g:SuperTabDefaultCompletionType = "context"
 " let g:jedi#popup_on_dot = 0
 " 
 " " Python in VIM
-" NeoBundle 'klen/python-mode' 
+" Plug 'klen/python-mode' 
 " 
 " " Avoid overlap in functionality with jedi-vim
 " let g:pymode_rope = 0
 " 
 " " Latex for Vim!
-" NeoBundle 'lervag/vimtex' 
+" Plug 'lervag/vimtex' 
 " 
 " " Set all tex files not as plaintex but as tex 
 " let g:tex_flavor='latex'
@@ -69,13 +71,13 @@ let g:SuperTabDefaultCompletionType = "context"
 " let g:vimtex_latexmk_build_dir = "build"
 " 
 " " autocomplete brackets
-" NeoBundle 'Raimondi/delimitMate'
+" Plug 'Raimondi/delimitMate'
 " 
 " " autocomplete '$' in tex
 " au FileType tex let b:delimitMate_quotes = "\" ' $"
 " 
 " " Syntax checking hacks for vim
-" NeoBundle 'scrooloose/syntastic' 
+" Plug 'scrooloose/syntastic' 
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
@@ -86,7 +88,7 @@ let g:SuperTabDefaultCompletionType = "context"
 " let g:syntastic_check_on_wq = 0
 
 " A simple, easy-to-use Vim alignment plugin.
-NeoBundle 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'
 
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
@@ -95,15 +97,19 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " " Ultimate snippets for VIM
-" NeoBundle 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 " let g:UltiSnipsExpandTrigger="<tab>"
 " let g:UltiSnipsJumpForwardTrigger="<tab>"
 " let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-" All of your Plugins must be added before the following line
-call neobundle#end()
-filetype plugin indent on
-NeoBundleCheck
+if isdirectory('/usr/local/opt/fzf')
+  Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+else
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+  Plug 'junegunn/fzf.vim'
+endif
+
+call plug#end()
 
 " =================================================== 
 "                       Shortcuts 
@@ -275,10 +281,10 @@ endif
 let base16colorspace=256
 
 " Colorscheme
-colorscheme lucius
+colorscheme flattened_light
 
-" Dark background
-set background=dark
+" Light background
+set background=light
 
 " Set the font for mvim / gvim
 if has("gui_running")

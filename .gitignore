@@ -284,3 +284,8 @@ ENV/
 # Debug files
 *.dSYM/
 *.su
+
+# Ranger
+ranger/bookmarks
+ranger/tagged
+ranger/history
