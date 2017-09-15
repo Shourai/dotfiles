@@ -28,7 +28,7 @@ Here I have my configuration for a clean setup.
 Basically run the `install` after cloning this repository.  
 Or run the following cURL command:  
 ```
-curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | bash
+curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | sh
 ```
 
 ## Future reference
