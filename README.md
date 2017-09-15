@@ -1,30 +1,34 @@
 # Configuration for macOS with dotfiles
 
 ## Overview
-This repository installs everything I need from a clean install of macOS Sierra.
-By running `install.sh`, `homebrew` will be installed which subsequently installs `git`.  
+This repository installs everything I need from a clean install of macOS Sierra or Debian.
+By running `install`, `homebrew` will be installed (on macOS) which subsequently installs `git`.  
 The repositories `macOS` and `dotfiles` will be cloned to my Documents folder.
 
+### macOS directory
 in `brew.sh` are all brew packages I use.   
 in `dotfiles.sh`, the dotfiles are symlinked to the home directory.  
 in `shell.sh`, BASH gets replaced for ZSH.  
 in `miscellaneous.sh` some packages are installed e.g. `matplotlib` for python3.  
 Finally in `macOS.sh`, configurations to macOS Sierra are performed e.g.: keyboard repeat speed.  
 
+###  debian directory
+in `packages.sh`, are all the packges I use.
+
 ## Features
 - macOS Sierra
+- Debian
 - iTerm2
-- Chalkboard theme ([Chalkboard](https://github.com/mbadolato/iTerm2-Color-Schemes/blob/master/schemes/Chalkboard.itermcolors))
-- Zsh
-- Vim
-- Emacs
+- zsh with syntax highlighting
+- (neo)vim
+- emacs
 
 ## Installation
-Here I have my configuration for a clean macOS setup.  
-Basically run the `install.sh` after cloning this repository.  
+Here I have my configuration for a clean setup.  
+Basically run the `install` after cloning this repository.  
 Or run the following cURL command:  
 ```
-curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/macOS/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | sh
 ```
 
 ## Future reference

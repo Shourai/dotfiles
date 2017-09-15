@@ -1,6 +1,3 @@
-# Install NeoBundle for vim
-curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
-
 # Install fzf keybindings
 /usr/local/opt/fzf/install
 

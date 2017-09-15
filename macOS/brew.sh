@@ -9,7 +9,7 @@ brew analytics off
 
 # brew install autojump
 brew install coreutils
-brew install emacs --with-cocoa --srgb emacs
+brew install --with-cocoa --srgb emacs
 brew install fasd
 brew install fzf
 brew install ledger

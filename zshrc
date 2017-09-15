@@ -265,7 +265,7 @@ alias p='f -e python3' # quick opening files with python3
 # ------------------------------------------------------------------------------
 # - Enable Enhancd                                                             -
 # ------------------------------------------------------------------------------
-[ -f ~/Documents/enhancd/init.sh ] && source ~/Documents/enhancd/init.sh
+# [ -f ~/Documents/enhancd/init.sh ] && source ~/Documents/enhancd/init.sh
 
 # ------------------------------------------------------------------------------
 # - Fuzzy completion for zsh by junegunn                                       -
