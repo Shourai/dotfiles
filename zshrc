@@ -14,9 +14,15 @@ fi
 # ------------------------------------------------------------------------------
 
 # Colorize output, add file type indicator, and put sizes in human readable format
-alias ls='ls -GFh'
-alias ll='ls -GFhl'
-alias la='ls -GFha'
+if [[ "$(uname)" = "Darwin" ]]; then
+    alias ls='ls -GFh'
+    alias ll='ls -GFhl'
+    alias la='ls -GFha'
+else
+    alias ls='ls -Fh --color=always'
+    alias ll='ls -Fhl --color=always'
+    alias la='ls -Fha --color=always'
+fi
 alias ..='cd ../'
 alias ...='cd ../..'
 alias ....='cd ../../..'
