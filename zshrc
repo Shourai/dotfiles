@@ -24,6 +24,8 @@ alias pip=pip3
 alias cp='cp -iv'
 alias mkdir='mkdir -pv'
 alias emd='emacs --daemon'
+alias vi='\vim'
+alias vim='nvim'
 
 
 # ------------------------------------------------------------------------------
@@ -61,6 +63,8 @@ setopt hist_ignore_all_dups   # Delete old recorded entry if new entry is a dupl
 setopt hist_save_no_dups      # Don't write duplicate entries in the history file.
 
 
+# Set editor
+export EDITOR=/usr/local/bin/nvim
 
 # ------------------------------------------------------------------------------
 # - Run emacs in the background                                                -

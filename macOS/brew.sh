@@ -14,6 +14,7 @@ brew install fasd
 brew install fzf
 brew install ledger
 brew install markdown
+brew install neovim
 brew install python3
 brew install tree
 brew install vim
@@ -39,7 +40,7 @@ brew cask install skim
 brew cask install the-unarchiver
 brew cask install transmission
 brew cask install tunnelblick
- 
+
 # Clean up brew and cask
 
 brew cleanup

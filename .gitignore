@@ -289,3 +289,8 @@ ENV/
 ranger/bookmarks
 ranger/tagged
 ranger/history
+
+# Neovim
+nvim/plugged
+nvim/autoload
+nvim/session
