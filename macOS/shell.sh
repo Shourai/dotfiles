@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Change shell to zsh
 if [[ "$(uname)" = "Darwin" ]]; then
     sudo sh -c 'echo "$(brew --prefix)/bin/zsh" >> /etc/shells'
