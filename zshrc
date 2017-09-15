@@ -1,10 +1,13 @@
-
 ########## Syntax highlighting package from brew ##########
 
 # ------------------------------------------------------------------------------
-# - Syntax highlighting package from brew                                      -
+# - Syntax highlighting package                                                -
 # ------------------------------------------------------------------------------
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ "$(uname)" = "Darwin" ]]; then
+    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+else
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 # ------------------------------------------------------------------------------
 # - Aliases                                                                    -

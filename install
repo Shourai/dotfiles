@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Go to root directory
 cd ~
@@ -41,14 +41,14 @@ if [[ "$(uname)" = "Darwin" ]]; then
     sh ~/Documents/github/dotfiles/macOS/brew.sh
 else
     # Install packages
-    sh ~/Documents/github/dotfiles/debian/packages.sh
+    bash ~/Documents/github/dotfiles/debian/packages.sh
 fi
 
 # Link dotfiles
-sh ~/Documents/github/dotfiles/macOS/dotfiles.sh
+bash ~/Documents/github/dotfiles/macOS/dotfiles.sh
 
 # Change shell to zsh
-sh ~/Documents/github/dotfiles/macOS/shell.sh
+bash ~/Documents/github/dotfiles/macOS/shell.sh
 
 if [[ "$(uname)" = "Darwin" ]]; then
     # macOS changes
@@ -56,6 +56,6 @@ if [[ "$(uname)" = "Darwin" ]]; then
 fi
 
 # Additional installations
-sh ~/Documents/github/dotfiles/macOS/miscellaneous.sh
+bash ~/Documents/github/dotfiles/macOS/miscellaneous.sh
 
 echo "Success! Reboot the machine for the changes to take effect"

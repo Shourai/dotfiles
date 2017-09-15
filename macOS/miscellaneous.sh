@@ -1,5 +1,7 @@
-# Install fzf keybindings
-/usr/local/opt/fzf/install
+if [[ "$(uname)" = "Darwin" ]]; then
+    # Install fzf keybindings
+    /usr/local/opt/fzf/install
+fi
 
 # Install python 3 libraries
 pip3 install numpy
