@@ -14,6 +14,8 @@ sudo pacman -S ledger --noconfirm
 sudo pacman -S fasd --noconfirm
 sudo pacman -S fzf --noconfirm
 sudo pacman -S urxvt --noconfirm
+sudo pacman -S dmenu --noconfirm
+sudo pacman -S i3blocks --noconfirm
 
 
 # Do a cleanup

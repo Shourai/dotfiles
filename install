@@ -63,12 +63,17 @@ sh ~/Documents/github/dotfiles/macOS/dotfiles.sh
 # Change shell to zsh
 sh ~/Documents/github/dotfiles/macOS/shell.sh
 
+# macOS changes
 if [ "$(uname)" = "Darwin" ]; then
-    # macOS changes
     sh ~/Documents/github/dotfiles/macOS/macOS.sh
 fi
 
 # Additional installations
-sh ~/Documents/github/dotfiles/macOS/miscellaneous.sh
+if [ "$(uname)" = "Darwin" ]; then
+    sh ~/Documents/github/dotfiles/macOS/miscellaneous.sh
+else
+    sh ~/Documents/github/dotfiles/macOS/miscellaneous.sh | sed 's/pip3/sudo pip3/g'
+fi
+
 
 echo "Success! Reboot the machine for the changes to take effect"
