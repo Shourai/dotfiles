@@ -16,6 +16,8 @@ sudo pacman -S fzf --noconfirm
 sudo pacman -S urxvt --noconfirm
 sudo pacman -S dmenu --noconfirm
 sudo pacman -S i3blocks --noconfirm
+sudo pacman -S archey3 --noconfirm
+sudo pacman -S ttf-dejavu --noconfirm
 
 
 # Do a cleanup
