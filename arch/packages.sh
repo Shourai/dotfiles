@@ -13,6 +13,7 @@ sudo pacman -S emacs --noconfirm
 sudo pacman -S ledger --noconfirm
 sudo pacman -S fasd --noconfirm
 sudo pacman -S fzf --noconfirm
+sudo pacman -S urxvt --noconfirm
 
 
 # Do a cleanup

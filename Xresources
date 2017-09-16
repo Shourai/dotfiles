@@ -1,4 +1,5 @@
 xterm.termName: xterm-256color
+urxvt*scrollBar: false
 
 ! drop in Solarized colorscheme for Xresources/Xdefaults
 
