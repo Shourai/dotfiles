@@ -19,9 +19,16 @@ if [ "$(uname)" = "Darwin" ]; then
     git config --global user.name "Shourai"
     git config --global user.email "mail@shourai.net"
     git config --global credential.helper osxkeychain
-else
+elif [ -f /etc/debian_version ]; then
     # Install git
     sudo apt-get install git -y
+
+    # Setup github
+    git config --global user.name "Shourai"
+    git config --global user.email "mail@shourai.net"
+elif [ -f /etc/arch-release ]; then
+    # Install git
+    sudo pacman -S git --noconfirm
 
     # Setup github
     git config --global user.name "Shourai"
@@ -39,12 +46,15 @@ sleep 1
 if [ "$(uname)" = "Darwin" ]; then
     # Install brew packages
     sh ~/Documents/github/dotfiles/macOS/brew.sh
-else
+elif [ -f /etc/debian_version ]; then
     # alias bash to sh instead of dash
     # Install packages
     sudo rm /bin/sh
     sudo ln -s /bin/bash /bin/sh
     sh ~/Documents/github/dotfiles/debian/packages.sh
+elif [ -f /etc/arch-release ]; then
+    # Install pacman packages
+    sh ~/Documents/github/dotfiles/arch/packages.sh
 fi
 
 # Link dotfiles
