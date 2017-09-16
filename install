@@ -26,6 +26,7 @@ elif [ -f /etc/debian_version ]; then
     # Setup github
     git config --global user.name "Shourai"
     git config --global user.email "mail@shourai.net"
+    git config --global credential.helper cache
 elif [ -f /etc/arch-release ]; then
     # Install git
     sudo pacman -S git --noconfirm
@@ -33,6 +34,7 @@ elif [ -f /etc/arch-release ]; then
     # Setup github
     git config --global user.name "Shourai"
     git config --global user.email "mail@shourai.net"
+    git config --global credential.helper cache
 fi
 
 # Clone respository
