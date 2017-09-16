@@ -20,6 +20,7 @@ sudo pacman -S archey3 --noconfirm
 sudo pacman -S ttf-dejavu --noconfirm
 sudo pacman -S sysstat --noconfirm
 sudo pacman -S acpi --noconfirm
+sudo pacman -S feh --noconfirm
 
 
 # Do a cleanup
