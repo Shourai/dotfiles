@@ -163,6 +163,10 @@ if !exists('g:not_finish_vimplug')
   colorscheme flattened_light
 endif
 
+if filereadable("/etc/arch-release")
+    colorscheme flattened_dark
+endif
+
 set mousemodel=popup
 set t_Co=256
 set guioptions=egmrti
