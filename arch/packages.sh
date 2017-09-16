@@ -12,9 +12,8 @@ sudo pacman -S zsh-syntax-highlighting --noconfirm
 sudo pacman -S emacs --noconfirm
 sudo pacman -S ledger --noconfirm
 sudo pacman -S fasd --noconfirm
+sudo pacman -S fzf --noconfirm
 
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
 
 # Do a cleanup
 sudo pacman -Sc
