@@ -8,7 +8,7 @@ if [[ "$(uname)" = "Darwin" ]]; then
 elif [ -f /etc/debian_version ]; then
     source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 elif [ -f /etc/arch-release ]; then
-    source /usr/share/zsh/plugin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # ------------------------------------------------------------------------------
