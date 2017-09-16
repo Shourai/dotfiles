@@ -2,6 +2,7 @@
 sudo pacman -Syu --noconfirm
 
 # Install packages
+sudo pacman -S sudo --noconfirm
 sudo pacman -S python3 --noconfirm
 sudo pacman -S python-pip --noconfirm
 sudo pacman -S tmux --noconfirm
@@ -21,6 +22,9 @@ sudo pacman -S ttf-dejavu --noconfirm
 sudo pacman -S sysstat --noconfirm
 sudo pacman -S acpi --noconfirm
 sudo pacman -S feh --noconfirm
+sudo pacman -S alsa-utils --noconfirm
+sudo pacman -S pulseaudioalsa-utils --noconfirm
+
 
 
 # Do a cleanup
