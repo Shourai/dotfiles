@@ -18,6 +18,8 @@ sudo pacman -S dmenu --noconfirm
 sudo pacman -S i3blocks --noconfirm
 sudo pacman -S archey3 --noconfirm
 sudo pacman -S ttf-dejavu --noconfirm
+sudo pacman -S sysstat --noconfirm
+sudo pacman -S acpi --noconfirm
 
 
 # Do a cleanup
