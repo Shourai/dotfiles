@@ -74,9 +74,17 @@ case "$1" in
         rm $IMG
         exit 1 ;; # exit with error 
 esac
+
+# i3lock-color-git parameters
+param=("--textcolor=ffffff00" "--insidecolor=ffffff1c" "--ringcolor=ffffff3e" \
+    "--linecolor=ffffff00" "--keyhlcolor=00000080" "--ringvercolor=00000000" \
+    "--separatorcolor=22222260" "--insidevercolor=0000001c" \
+    "--ringwrongcolor=00000055" "--insidewrongcolor=0000001c")
+
 #convert $IMG $ICN -gravity center -composite -matte $IMG
-convert $IMG -pointsize 26 -gravity center -font DejaVu-Sans -fill white \
-    -annotate +0+160 "$text" $ICN -gravity center -composite $IMG
+convert $IMG -pointsize 26 -gravity center -font DejaVu-Sans-Bold \
+    -fill white -stroke black -annotate +0+160 "$text" \
+    $ICN -gravity center -composite $IMG
 # Lock with screenshot
-i3lock -u -i $IMG
+i3lock "${param[@]}" -i $IMG
 rm $IMG
