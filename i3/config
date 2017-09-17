@@ -92,9 +92,13 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+# Set workspace variables
+set $ws1 "1: Terminal"
+set $ws2 "2: Firefox"
+
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace 3
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
@@ -105,8 +109,8 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
 bindsym $mod+Shift+3 move container to workspace 3
 bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
@@ -157,6 +161,7 @@ bar {
                 background #2f343f
                }
         position top
+        strip_workspace_numbers yes
     }
 
 bindsym $mod+shift+x exec i3lock
@@ -180,3 +185,5 @@ bindsym XF86AudioPrev exec playerctl previous
 # exec --no-startup-id "xset r rate 200 30"
 # exec --no-startup-id "xinput set-prop 13 276 -26 -26"
 
+# Assign firefox terminals to workspace 2
+assign [class="Firefox"] $ws2
