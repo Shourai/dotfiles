@@ -164,7 +164,7 @@ bar {
         strip_workspace_numbers yes
     }
 
-bindsym $mod+shift+x exec i3lock
+bindsym $mod+shift+x exec ~/.config/i3/i3lock++ blur
 
 # Pulse Audio controls
 bindsym XF86AudioMute        exec --no-startup-id "amixer -q set Master toggle"
