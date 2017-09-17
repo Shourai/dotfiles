@@ -2,5 +2,110 @@
 
 This sets up a clean install of Arch Linux.
 
-To get grub working you need at least a 1MB parition set to BIOS boot.
-The rest can be set to linux file systems.
+# Arch Installation guide
+
+### Connect to the internet
+```
+wifi-menu
+```
+
+### Update the system clock
+
+```
+timedatectl set-ntp true
+```
+
+### Partition the disks
+Use `fdisk -l` to identify the block devices.  
+To partition the disk use:
+```
+fdisk /dev/sdX
+```
+where `X` stands for the disk name found with `fdisk -l`.
+
+#### Create swap disk
+Create a swap disk the size of your RAM.
+
+#### Create boot disk
+Create a boot disk of at least 1MB so we can install `grub` on it.
+
+### Format the partitions
+
+```
+mkfs.ext4 /dev/sdXY
+```
+Where `X` and `Y` is the disk where you install Arch on.
+
+### Mount the file systems
+
+```
+mount /dev/sdXY/ /mnt
+```
+
+## Installation
+
+### Install the base packages
+
+```
+pacstrap /mnt base base-devel
+```
+
+## Configure the system
+
+### Fstab
+
+```
+genfstab -U /mnt >> /mnt/etc/fstab
+```
+
+### Chroot
+Change root into the new system:
+
+```
+arch-chroot /mnt
+```
+
+### Time zone
+Set the time zone:
+
+```
+ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
+```
+
+### Locale
+Uncomment en_US.UTF-8 UTF-8 and other needed localizations in /etc/locale.gen, and generate them with:
+
+```
+locale-gen
+```
+
+Set the LANG variable in locale.conf(5) accordingly, for example:
+
+```
+/etc/locale.conf
+
+LANG=en_US.UTF-8
+```
+
+### Hostname
+Create the hostname file
+```
+echo HOSTNAME > /etc/hostname
+```
+
+### Network configuration
+Install the following packages to allow for `wifi-menu`
+
+```
+pacman -S dialog wpa_supplicant
+```
+
+### Root password
+Set the root password:
+
+```
+passwd
+```
+
+## Reboot
+
