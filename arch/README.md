@@ -109,3 +109,9 @@ passwd
 
 ## Reboot
 
+## Packages
+
+```
+pacman -S i3 xorg
+```
+
