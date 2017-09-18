@@ -34,8 +34,8 @@ sudo pacman -S acpi --noconfirm
 sudo pacman -S feh --noconfirm
 sudo pacman -S alsa-utils --noconfirm
 sudo pacman -S pulseaudioalsa-utils --noconfirm
-sudo yaourt -S i3lock-color-git --noconfirm
-sudo pacman -S ttf-font-awesome --noconfirm
+yaourt -S ttf-font-awesome --noconfirm
+yaourt -S i3lock-color-git --noconfirm
 
 # Do a cleanup
 sudo pacman -Sc --noconfirm
