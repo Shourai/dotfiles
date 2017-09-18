@@ -75,7 +75,13 @@ setopt hist_save_no_dups      # Don't write duplicate entries in the history fil
 
 
 # Set editor
-export EDITOR=/usr/local/bin/nvim
+if [[ "$(uname)" = "Darwin" ]]; then
+    export EDITOR=/usr/local/bin/nvim
+elif [ -f /etc/debian_version ]; then
+    export EDITOR=/usr/bin/nvim
+elif [ -f /etc/arch-release ]; then
+    export EDITOR=/usr/bin/nvim
+fi
 
 # ------------------------------------------------------------------------------
 # - Run emacs in the background                                                -
