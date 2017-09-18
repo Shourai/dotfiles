@@ -167,14 +167,6 @@ if !exists('g:not_finish_vimplug')
     endif
 endif
 
-if filereadable("/etc/arch-release")
-    if has('gui_running')
-        colorscheme flattened_light
-    else
-        colorscheme Tomorrow-Night-Eighties
-    endif
-endif
-
 set mousemodel=popup
 set t_Co=256
 set guioptions=egmrti
