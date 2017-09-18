@@ -158,12 +158,12 @@ git_info() {
 
   if [ -n "$GIT_LOCATION" ]; then
 
-    local AHEAD="%{$fg[red]%}⇡NUM%{$reset_color%}"
-    local BEHIND="%{$fg[cyan]%}⇣NUM%{$reset_color%}"
-    local MERGING="%{$fg[magenta]%}⚡︎%{$reset_color%}"
-    local UNTRACKED="%{$fg[red]%}●%{$reset_color%}"
-    local MODIFIED="%{$fg[yellow]%}●%{$reset_color%}"
-    local STAGED="%{$fg[green]%}●%{$reset_color%}"
+    local AHEAD="%F{red}⇡NUM"
+    local BEHIND="%F{cyan}⇣NUM"
+    local MERGING="%F{magenta}⚡︎"
+    local UNTRACKED="%F{red}●"
+    local MODIFIED="%F{yellow}●"
+    local STAGED="%F{green}●"
 
     local -a DIVERGENCES
     local -a FLAGS
@@ -200,7 +200,7 @@ git_info() {
     [ -n "$GIT_STATUS" ] && GIT_INFO+=( "$GIT_STATUS" )
     [[ ${#DIVERGENCES[@]} -ne 0 ]] && GIT_INFO+=( "${(j::)DIVERGENCES}" )
     [[ ${#FLAGS[@]} -ne 0 ]] && GIT_INFO+=( "${(j::)FLAGS}" )
-    GIT_INFO+=( "%F{245}$GIT_LOCATION%{$reset_color%}" )
+    GIT_INFO+=( "%F{245}$GIT_LOCATION" )
     echo "${(j: :)GIT_INFO}"
 
   fi
