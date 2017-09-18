@@ -41,5 +41,5 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | s
 4. `diff a b`
 
 ## Improvements
-I would like to have a script that differentiates between macos/arch/debian instead of using `if statements`
-in bash
+I would like to have a script that differentiates between macos/arch/debian
+instead of using `if statements` in bash.
