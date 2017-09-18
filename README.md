@@ -39,3 +39,7 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | s
 2. Open system preferences and change the setting to some other value than the default.
 3. `defaults read > b`
 4. `diff a b`
+
+## Improvements
+I would like to have a script that differentiates between macos/arch/debian instead of using `if statements`
+in bash
