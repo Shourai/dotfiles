@@ -115,3 +115,16 @@ passwd
 pacman -S i3 xorg
 ```
 
+### Automatic wifi login
+For wireless settings, you can use `wifi-menu -o` as root to generate 
+the profile file in `/etc/netctl/`. The dialog package is required to use wifi-menu.
+
+###Enabling a profile
+
+A profile can be enabled to start at boot by using:
+
+```
+netctl enable profile
+```
+
+
