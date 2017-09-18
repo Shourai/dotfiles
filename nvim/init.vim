@@ -75,6 +75,7 @@ Plug 'honza/vim-snippets'
 
 "" Color
 Plug 'romainl/flattened'
+Plug 'chriskempson/vim-tomorrow-theme'
 
 "*****************************************************************************
 "" Custom bundles
@@ -155,14 +156,23 @@ let g:session_command_aliases = 1
 syntax on
 set ruler
 set number
+set relativenumber
 
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
-  colorscheme flattened_light
+    if has('gui_running')
+        colorscheme flattened_light
+    else
+        colorscheme Tomorrow-Night-Eighties
+    endif
 endif
 
 if filereadable("/etc/arch-release")
-    colorscheme flattened_dark
+    if has('gui_running')
+        colorscheme flattened_light
+    else
+        colorscheme Tomorrow-Night-Eighties
+    endif
 endif
 
 set mousemodel=popup
@@ -214,7 +224,7 @@ if exists("*fugitive#statusline")
 endif
 
 " vim-airline
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'minimalist'
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
