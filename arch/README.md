@@ -82,9 +82,7 @@ locale-gen
 Set the LANG variable in locale.conf(5) accordingly, for example:
 
 ```
-/etc/locale.conf
-
-LANG=en_US.UTF-8
+echo LANG=en_US.UTF-8 > /etc/locale.conf
 ```
 
 ### Hostname
@@ -107,16 +105,17 @@ Set the root password:
 passwd
 ```
 
+## Install bootloader
+```
+pacman -S grub
+grub-install /dev/sdX
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
 ## Reboot
 
-## Packages
-
-```
-pacman -S i3 xorg
-```
-
 ### Automatic wifi login
-For wireless settings, you can use `wifi-menu -o` as root to generate 
+For wireless settings, you can use `wifi-menu -o` as root to generate
 the profile file in `/etc/netctl/`. The dialog package is required to use wifi-menu.
 
 ###Enabling a profile
@@ -124,7 +123,25 @@ the profile file in `/etc/netctl/`. The dialog package is required to use wifi-m
 A profile can be enabled to start at boot by using:
 
 ```
-netctl enable profile
+netctl enable PROFILE
+```
+You can find `PROFILE` under `ls /etc/netctl/`
+
+## Create user and add to sudoers
+Add sudo user
+```
+pacman -S sudo
+adduser -m -g users -s /bin/bash USER
+passwd USER
 ```
 
+Edit the sudoers file using either `visudo` or edit it via another text editer
+```
+/etc/sudoers
+```
 
+Add the user below root like:
+```
+root ALL=(ALL) ALL
+USER ALL=(ALL) ALL
+```

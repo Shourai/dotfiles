@@ -11,6 +11,9 @@ sudo pacman -Syu --noconfirm
 
 # Install packages
 sudo pacman -S yaourt --noconfirm
+sudo pacman -S i3 --noconfirm
+sudo pacman -S xorg --noconfirm
+sudo pacman -S xorg-xinit --noconfirm
 sudo pacman -S openssh --noconfirm
 sudo pacman -S sudo --noconfirm
 sudo pacman -S python3 --noconfirm
@@ -24,7 +27,7 @@ sudo pacman -S emacs --noconfirm
 sudo pacman -S ledger --noconfirm
 sudo pacman -S fasd --noconfirm
 sudo pacman -S fzf --noconfirm
-sudo pacman -S urxvt --noconfirm
+sudo pacman -S rxvt-unicode --noconfirm
 sudo pacman -S dmenu --noconfirm
 sudo pacman -S i3blocks --noconfirm
 sudo pacman -S archey3 --noconfirm
@@ -32,8 +35,9 @@ sudo pacman -S ttf-dejavu --noconfirm
 sudo pacman -S sysstat --noconfirm
 sudo pacman -S acpi --noconfirm
 sudo pacman -S feh --noconfirm
+sudo pacman -S pulseaudio --noconfirm
 sudo pacman -S alsa-utils --noconfirm
-sudo pacman -S pulseaudioalsa-utils --noconfirm
+#sudo pacman -S pulseaudioalsa-utils --noconfirm
 yaourt -S ttf-font-awesome --noconfirm
 yaourt -S i3lock-color-git --noconfirm
 

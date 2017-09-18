@@ -905,6 +905,14 @@
 	</dict>
 	<key>Default Bookmark Guid</key>
 	<string>0C904716-2C38-4BB8-B459-E3D88BED067C</string>
+	<key>DimBackgroundWindows</key>
+	<false/>
+	<key>DimInactiveSplitPanes</key>
+	<true/>
+	<key>DisableFullscreenTransparency</key>
+	<false/>
+	<key>HideScrollbar</key>
+	<false/>
 	<key>HideTab</key>
 	<true/>
 	<key>HideTabNumber</key>
@@ -958,11 +966,11 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>577 1254 796 473 -306 800 1920 1057 </string>
+	<string>577 1280 1018 447 -306 800 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>-196 1053 1354 692 -306 800 1920 1057 </string>
+	<string>176 1067 955 524 -306 800 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>308 1019 948 609 -306 800 1920 1057 </string>
+	<string>-306 1340 955 517 -306 800 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>565 41 682 418 0 0 1280 777 </string>
 	<key>New Bookmarks</key>
@@ -1771,8 +1779,12 @@
 	<false/>
 	<key>ShowBookmarkName</key>
 	<false/>
+	<key>SplitPaneDimmingAmount</key>
+	<real>0.35751953125000013</real>
 	<key>TabStyle</key>
 	<integer>0</integer>
+	<key>UseBorder</key>
+	<false/>
 	<key>WindowNumber</key>
 	<true/>
 	<key>WordCharacters</key>

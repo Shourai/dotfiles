@@ -5,11 +5,6 @@ brew update
 brew upgrade -all
 
 ##################################################
-# Add taps
-##################################################
-brew tap caskroom/fonts
-
-##################################################
 # Opt-out of homebrew analytics
 ##################################################
 brew analytics off
@@ -32,6 +27,7 @@ brew install weechat
 brew install wget
 brew install zsh
 brew install zsh-syntax-highlighting
+brew install eddieantonio/eddieantonio/imgcat
 
 ##################################################
 # Install cask packages
@@ -48,7 +44,7 @@ brew cask install mpv
 brew cask install skim
 brew cask install the-unarchiver
 brew cask install transmission
-brew cask install font-menlo-for-powerline
+brew cask install caskroom/fonts/font-menlo-for-powerline
 # brew cask install arduino
 # brew cask install libreoffice
 # brew cask install tunnelblick
