@@ -11,7 +11,7 @@ xinput set-prop 13 276 -26 -26
 [ -f ~/.xmodmap ] && xmodmap ~/.xmodmap
 
 # Wallpaper
-feh --bg-scale ~/Downloads/bg.jpg
+feh --bg-scale ~/.config/i3/bg.jpg
 
 # Execute i3 windows manager
 exec i3

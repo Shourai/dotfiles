@@ -1,6 +1,8 @@
 xterm.termName: xterm-256color
-urxvt*scrollBar: false
-urxvt*font: xft:DejaVu Sans Mono:size=8
+urxvt.scrollBar: false
+urxvt.font: xft:DejaVu Sans Mono:size=8
+urxvt*transparent: true
+urxvt*shading: 20
 
 ! drop in Solarized colorscheme for Xresources/Xdefaults
 
