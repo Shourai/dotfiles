@@ -26,6 +26,15 @@ where `X` stands for the disk name found with `fdisk -l`.
 #### Create swap disk
 Create a swap disk the size of your RAM.
 
+```
+mkswap /dev/sdxy
+```
+Warning: All data on the specified partition will be lost.
+To enable the device for paging:
+```
+swapon /dev/sdxy
+```
+
 #### Create boot disk
 Create a boot disk of at least 1MB so we can install `grub` on it.
 
@@ -131,7 +140,7 @@ You can find `PROFILE` under `ls /etc/netctl/`
 Add sudo user
 ```
 pacman -S sudo
-adduser -m -g users -s /bin/bash USER
+useradd -m -g users -s /bin/bash USER
 passwd USER
 ```
 
