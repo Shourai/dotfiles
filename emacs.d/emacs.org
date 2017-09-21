@@ -232,7 +232,8 @@ if there isn't already one.
        :ensure t
        :config
        (global-nlinum-relative-mode)
-       (setq nlinum-relative-redisplay-delay 0.5))
+       (setq nlinum-relative-redisplay-delay 0.5)
+       :defer 2)
      #+END_SRC
      
 ** Theme
@@ -256,12 +257,13 @@ if there isn't already one.
    [[https://github.com/TheBB/spaceline][This]] is the package that provides Spacemacs with its famous mode-line theme.
    Disabled since it requires a third of a second during startup.
    
-   #+BEGIN_SRC emacs-lisp :tangle no
+   #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package spaceline
      :ensure t
      :config
      (require 'spaceline-config)
-     (spaceline-spacemacs-theme))
+     (spaceline-emacs-theme)
+(setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state))
    #+END_SRC
 
 ** Highlight current line
@@ -413,9 +415,10 @@ today, including Google's Java standard and the Linux kernel standard.
 While typing text I like to activate `flyspell mode` which checks my spelling on
 the fly. My preferred spelling is `en_GB`. \\
 The dictionaries have to be installed via `brew install aspell`.
-#+BEGIN_SRC emacs-lisp
-(setq ispell-dictionary "en_GB")
-#+END_SRC 
+
+    #+BEGIN_SRC emacs-lisp
+        (setq ispell-dictionary "en_GB")
+    #+END_SRC 
 * Evil mode
   Evil is an extensible vi layer for Emacs. \\
   It provides Vim features like Visual selection and text objects.
@@ -477,9 +480,9 @@ This package emulates [[https://github.com/tpope/vim-surround][surround.vim by T
 Prevent the visual selection overriding the system clipboard.
 This is useful if when using `viwp`, which does not work otherwise.
 
-#+BEGIN_SRC emacs-lisp
-(fset 'evil-visual-update-x-selection 'ignore)
-#+END_SRC
+    #+BEGIN_SRC emacs-lisp
+        (fset 'evil-visual-update-x-selection 'ignore)
+    #+END_SRC
 * Movement
 ** Avy
    Avy is a GNU Emacs package for jumping to visible text using a char-based decision tree. \\

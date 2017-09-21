@@ -160,7 +160,7 @@ set relativenumber
 
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
-    if has('gui_running')
+    if has('gui_running') || has('gui_vimr')
         colorscheme flattened_light
     else
         colorscheme Tomorrow-Night-Eighties
@@ -185,8 +185,6 @@ else
   let g:indentLine_concealcursor = 0
   let g:indentLine_char = '┆'
   let g:indentLine_faster = 1
-
-
 endif
 
 "" Disable the blinking cursor.
@@ -216,7 +214,11 @@ if exists("*fugitive#statusline")
 endif
 
 " vim-airline
-let g:airline_theme = 'minimalist'
+if has("gui_vimr")
+    let g:airline_theme = 'solarized'
+else
+    let g:airline_theme = 'minimalist'
+endif
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
