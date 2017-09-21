@@ -381,7 +381,7 @@ today, including Google's Java standard and the Linux kernel standard.
   Took these binds out for testing purposes 
    #+BEGIN_SRC emacs-lisp :tangle no
      :bind (("C-<tab>" . company-complete)
-         ("TAB" . company-indent-or-complete-common))
+         ("<tab>" . company-indent-or-complete-common))
    #+END_SRC
 
    Add quickhelp for company mode
@@ -396,20 +396,21 @@ today, including Google's Java standard and the Linux kernel standard.
 ** Smartparens
    Minor mode for Emacs that deals with parens pairs and tries to be smart about it.
    #+BEGIN_SRC emacs-lisp
-     (use-package smartparens
-     :ensure t
-     :defer 10
-     :bind (
-    ("TAB" . sp-up-sexp)
-    ("C-<right>" . sp-forward-slurp-sexp)
-    ("M-<right>" . sp-forward-barf-sexp)
-    ("C-<left>"  . sp-backward-slurp-sexp)
-    ("M-<left>"  . sp-backward-barf-sexp))
-     :init
-     (add-hook 'python-mode-hook #'smartparens-mode)
-     (add-hook 'LaTeX-mode-hook #'smartparens-mode)
-     :config
-     (require 'smartparens-latex))
+      (use-package smartparens
+      :ensure t
+      :defer 10
+      :bind (
+     ("<tab>" . sp-up-sexp)
+     ("C-<right>" . sp-forward-slurp-sexp)
+     ("M-<right>" . sp-forward-barf-sexp)
+     ("C-<left>"  . sp-backward-slurp-sexp)
+     ("M-<left>"  . sp-backward-barf-sexp))
+      :init
+      (add-hook 'python-mode-hook #'smartparens-mode)
+      (add-hook 'LaTeX-mode-hook #'smartparens-mode)
+      :config
+     (sp-pair "$" "$")
+      (require 'smartparens-latex))
    #+END_SRC
 * Spell-checking
 While typing text I like to activate `flyspell mode` which checks my spelling on
