@@ -37,6 +37,7 @@ alias mkdir='mkdir -pv'
 alias emd='emacs --daemon'
 alias vi='\vim'
 alias vim='nvim'
+alias zshrc='vim ~/.zshrc'
 
 
 # ------------------------------------------------------------------------------
