@@ -85,10 +85,11 @@ elif [ -f /etc/arch-release ]; then
 fi
 
 # ------------------------------------------------------------------------------
-# - Run emacs in the background                                                -
+# - Custom functions                                                           -
 # ------------------------------------------------------------------------------
+mkcd() { mkdir -p "$@" && cd "$@"; }      # Create a directory and cd to it afterwards
+ec() { command emacsclient -n -c "$@" & } # use `ec <file>` to open file in emacsclient 
 # emacs() { command emacs "$@" & }
-ec() { command emacsclient -n -c "$@" & }
 
 # ------------------------------------------------------------------------------
 # - Autocompletion settings                                                    -
