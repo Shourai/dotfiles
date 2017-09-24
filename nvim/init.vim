@@ -150,6 +150,9 @@ let g:session_autoload = "no"
 let g:session_autosave = "no"
 let g:session_command_aliases = 1
 
+" Auto save files when focus is lost
+au FocusLost * silent! wa
+
 "*****************************************************************************
 "" Visual Settings
 "*****************************************************************************
