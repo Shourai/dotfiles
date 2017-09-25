@@ -1,8 +1,3 @@
-if [[ "$(uname)" = "Darwin" ]]; then
-    # Install fzf keybindings
-    /usr/local/opt/fzf/install
-fi
-
 # Install python 3 libraries
 pip3 install numpy
 pip3 install scipy
@@ -14,3 +9,8 @@ pip3 install autopep8
 pip3 install sympy
 pip3 install jupyter
 pip3 install neovim
+
+if [[ "$(uname)" = "Darwin" ]]; then
+    # Install fzf keybindings
+    /usr/local/opt/fzf/install
+fi

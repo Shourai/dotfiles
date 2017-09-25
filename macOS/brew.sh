@@ -32,7 +32,7 @@ brew install eddieantonio/eddieantonio/imgcat
 ##################################################
 # Install cask packages
 ##################################################
-brew cask install epassword
+brew cask install 1password
 brew cask install bettertouchtool
 brew cask install calibre
 brew cask install dropbox
