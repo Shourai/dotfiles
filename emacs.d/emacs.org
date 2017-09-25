@@ -380,7 +380,7 @@ today, including Google's Java standard and the Linux kernel standard.
    
   Took these binds out for testing purposes 
    #+BEGIN_SRC emacs-lisp :tangle no
-     :bind (("C-<tab>" . company-complete)
+     :bind (
          ("<tab>" . company-indent-or-complete-common))
    #+END_SRC
 
@@ -400,7 +400,7 @@ today, including Google's Java standard and the Linux kernel standard.
       :ensure t
       :defer 10
       :bind (
-     ("<tab>" . sp-up-sexp)
+     ("TAB" . sp-up-sexp) ; <tab> is truly the tabkey, TAB interferes with C-i
      ("C-<right>" . sp-forward-slurp-sexp)
      ("M-<right>" . sp-forward-barf-sexp)
      ("C-<left>"  . sp-backward-slurp-sexp)
