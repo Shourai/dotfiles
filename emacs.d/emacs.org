@@ -625,11 +625,18 @@ Add company support to AUCTeX
 
 Add custom shortcuts to LaTeX-math-list
 Can be customized using "`M-x` customize-variable `RET` LaTeX-math-list `RET`"
-It needs to be saved into the init.el file before it can work (using customize-variable).
+I prefer it to be saved into the init.el (using customize-variable) instead of custom.el.
 #+BEGIN_SRC emacs-lisp
-(setq LaTeX-math-list())
-(add-to-list 'LaTeX-math-list '(?1 "partial" "Misc Symbol" 8706))
- ;;  '(LaTeX-math-list (quote ((49 "partial" "Misc Symbol" 8706))))
+  (setq LaTeX-math-list
+        '((?2 "prime" "Misc Symbol" 2032)))
+#+END_SRC
+
+Define shortcuts for LaTeX-math-mode
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'LaTeX-math-mode-hook
+    (lambda ()
+     (local-set-key (kbd "`1") 'LaTeX-math-partial)
+     (local-set-key (kbd "`3") 'LaTeX-math-sqrt)))
 #+END_SRC
 
 Insert braces after typing <^> and <_> in math mode.
