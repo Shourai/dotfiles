@@ -14,3 +14,6 @@ if [[ "$(uname)" = "Darwin" ]]; then
     # Install fzf keybindings
     /usr/local/opt/fzf/install
 fi
+
+mkdir ~/.tmp/emacs/auto-saves/
+mkdir ~/.tmp/emacs/backups/
