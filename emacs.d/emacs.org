@@ -183,6 +183,7 @@ if there isn't already one.
     (tool-bar-mode -1)
     (scroll-bar-mode -1)
     (menu-bar-mode -1)
+    (blink-cursor-mode -1)
     (setq default-frame-alist
       '(
         (top . 100)
@@ -484,6 +485,15 @@ This is useful if when using `viwp`, which does not work otherwise.
     #+BEGIN_SRC emacs-lisp
         (fset 'evil-visual-update-x-selection 'ignore)
     #+END_SRC
+** Replace with register
+  Port of [ReplaceWithRegister](http://www.vim.org/scripts/script.php?script_id=2703)
+  #+BEGIN_SRC emacs-lisp
+    (use-package evil-replace-with-register
+    :ensure t
+    :init
+    (setq evil-replace-with-register-key (kbd "gr"))
+    (evil-replace-with-register-install))
+  #+END_SRC
 * Movement
 ** Avy
    Avy is a GNU Emacs package for jumping to visible text using a char-based decision tree. \\
