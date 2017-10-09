@@ -60,7 +60,7 @@ flycheck_*.el
 .projectile
 
 # recentf
-.recentf
+recentf
 
 ### macOS ###
 *.DS_Store

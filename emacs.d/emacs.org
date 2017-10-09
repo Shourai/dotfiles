@@ -97,8 +97,10 @@ I think this also causes auto-save to not work anymore (i.e. no more foo# files)
 
 Tidy up the backup and auto-save files created by emacs.
 They are neatly tucked away in a folder.
+The auto-saves directory is not automatically created so we have to do it explicitly.
 
 #+BEGIN_SRC emacs-lisp
+    (make-directory "~/.tmp/emacs/auto-saves/"  t)
     (setq 
         backup-directory-alist
             '(("." . "~/.tmp/emacs/backups/"))    ; don't litter my fs tree
