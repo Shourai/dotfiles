@@ -1,5 +1,5 @@
-#+TITLE: Emacs Configuration File
 #+AUTHOR: Shourai
+#+TITLE: Emacs Configuration File
 
 This configuration is now using [[https://github.com/jwiegley/use-package][use-package]] package from John Wiegley, which is
 a fantastic way to manage package configurations.  The configuration is hugely
@@ -253,9 +253,19 @@ if there isn't already one.
     (use-package solarized-theme 
     :ensure t
     :init
-    (load-theme 'solarized-light t))
+    (setq solarized-high-contrast-mode-line t)
+    (load-theme 'solarized-light t)
+    :config
+    (custom-set-faces
+    '(mode-line ((t
+    (:underline nil :overline nil :box
+                (:line-width 1 :color "#fdf6e3")
+                :foreground "#fdf6e3" :background "#657b83")))))
+    )
    #+END_SRC
-   
+
+   #+BEGIN_SRC emacs-lisp
+   #+END_SRC
    
    [[https://github.com/TheBB/spaceline][This]] is the package that provides Spacemacs with its famous mode-line theme.
    Disabled since it requires a third of a second during startup.
@@ -266,7 +276,8 @@ if there isn't already one.
      :config
      (require 'spaceline-config)
      (spaceline-emacs-theme)
-(setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state))
+     (setq ns-use-srgb-colorspace nil)
+     (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state))
    #+END_SRC
 
 ** Highlight current line
