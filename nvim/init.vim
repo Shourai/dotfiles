@@ -1,1 +1,1 @@
-/Users/ambience/Documents/github/dotfiles/vimrc
+../vimrc

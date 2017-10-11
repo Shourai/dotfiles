@@ -167,7 +167,7 @@ let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
     if has('gui_running') || has('gui_vimr')
         colorscheme flattened_light
-    if filereadable("/etc/arch-release")
+    elseif filereadable("/etc/arch-release")
         colorscheme flattened_dark
     else
         colorscheme Tomorrow-Night-Eighties
