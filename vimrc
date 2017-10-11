@@ -1,5 +1,3 @@
-" vim-bootstrap 89346c6
-
 "*****************************************************************************
 "" Vim-PLug core
 "*****************************************************************************
@@ -7,10 +5,10 @@ if has('vim_starting')
   set nocompatible               " Be iMproved
 endif
 
-let vimplug_exists=expand('~/.vim/autoload/plug.vim')
+let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
 
 let g:vim_bootstrap_langs = "python"
-let g:vim_bootstrap_editor = "vim"				" nvim or vim
+let g:vim_bootstrap_editor = "nvim"				" nvim or vim
 
 if !filereadable(vimplug_exists)
   if !executable("curl")
@@ -19,14 +17,14 @@ if !filereadable(vimplug_exists)
   endif
   echo "Installing Vim-Plug..."
   echo ""
-  silent !\curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  silent !\curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   let g:not_finish_vimplug = "yes"
 
   autocmd VimEnter * PlugInstall
 endif
 
 " Required:
-call plug#begin(expand('~/.vim/plugged'))
+call plug#begin(expand('~/.config/nvim/plugged'))
 
 "*****************************************************************************
 "" Plug install packages
@@ -35,6 +33,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
@@ -76,6 +75,7 @@ Plug 'honza/vim-snippets'
 
 "" Color
 Plug 'romainl/flattened'
+Plug 'chriskempson/vim-tomorrow-theme'
 
 "*****************************************************************************
 "" Custom bundles
@@ -91,15 +91,14 @@ Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 "*****************************************************************************
 
 "" Include user's extra bundle
-if filereadable(expand("~/.vimrc.local.bundles"))
-  source ~/.vimrc.local.bundles
+if filereadable(expand("~/.config/nvim/local_bundles.vim"))
+  source ~/.config/nvim/local_bundles.vim
 endif
 
 call plug#end()
 
 " Required:
 filetype plugin indent on
-
 
 "*****************************************************************************
 "" Basic Setup
@@ -110,7 +109,9 @@ set fileencoding=utf-8
 set fileencodings=utf-8
 set bomb
 set binary
-set ttyfast
+if !has('nvim')
+    set ttyfast
+endif
 
 "" Fix backspace indent
 set backspace=indent,eol,start
@@ -146,10 +147,13 @@ else
 endif
 
 " session management
-let g:session_directory = "~/.vim/session"
+let g:session_directory = "~/.config/nvim/session"
 let g:session_autoload = "no"
 let g:session_autosave = "no"
 let g:session_command_aliases = 1
+
+" Auto save files when focus is lost
+au FocusLost * silent! wa
 
 "*****************************************************************************
 "" Visual Settings
@@ -157,14 +161,17 @@ let g:session_command_aliases = 1
 syntax on
 set ruler
 set number
+set relativenumber
 
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
-  colorscheme flattened_light
-endif
-
-if filereadable("/etc/arch-release")
-    colorscheme flattened_dark
+    if has('gui_running') || has('gui_vimr')
+        colorscheme flattened_light
+    if filereadable("/etc/arch-release")
+        colorscheme flattened_dark
+    else
+        colorscheme Tomorrow-Night-Eighties
+    endif
 endif
 
 set mousemodel=popup
@@ -185,23 +192,7 @@ else
   let g:indentLine_concealcursor = 0
   let g:indentLine_char = '┆'
   let g:indentLine_faster = 1
-
-  
-  if $COLORTERM == 'gnome-terminal'
-    set term=gnome-256color
-  else
-    if $TERM == 'xterm'
-      set term=xterm-256color
-    endif
-  endif
-  
 endif
-
-
-if &term =~ '256color'
-  set t_ut=
-endif
-
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
@@ -230,7 +221,11 @@ if exists("*fugitive#statusline")
 endif
 
 " vim-airline
-let g:airline_theme = 'solarized'
+if has("gui_vimr")
+    let g:airline_theme = 'solarized'
+else
+    let g:airline_theme = 'minimalist'
+endif
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -474,6 +469,7 @@ let g:jedi#rename_command = "<leader>r"
 let g:jedi#show_call_signatures = "0"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#smart_auto_mappings = 0
+let g:jedi#force_py_version = 3
 
 " syntastic
 let g:syntastic_python_checkers=['python', 'flake8']
@@ -491,8 +487,8 @@ let python_highlight_all = 1
 "*****************************************************************************
 
 "" Include user's local vim config
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
+if filereadable(expand("~/.config/nvim/local_init.vim"))
+  source ~/.config/nvim/local_init.vim
 endif
 
 "*****************************************************************************
@@ -504,6 +500,7 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
+let g:airline_powerline_fonts = 1
 if !exists('g:airline_powerline_fonts')
   let g:airline#extensions#tabline#left_sep = ' '
   let g:airline#extensions#tabline#left_alt_sep = '|'
