@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# key: sl
+# group: font
+# name: \slashed{}
+# --
+\slashed{$1}$0

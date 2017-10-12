@@ -177,11 +177,10 @@ endif
 set mousemodel=popup
 set t_Co=256
 set guioptions=egmrti
-set gfn=Monospace\ 10
 
 if has("gui_running")
-  if has("gui_mac") || has("gui_macvim")
-    set guifont=Menlo:h12
+  if has("gui_vimr") || has("gui_macvim")
+    set guifont=Menlo\ for\ Powerline:h12
     set transparency=7
   endif
 else
@@ -221,7 +220,7 @@ if exists("*fugitive#statusline")
 endif
 
 " vim-airline
-if has("gui_vimr")
+if has("gui_vimr") || has("gui_running")
     let g:airline_theme = 'solarized'
 else
     let g:airline_theme = 'minimalist'

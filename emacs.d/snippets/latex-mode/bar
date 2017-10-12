@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# key: bar
+# group: font
+# name: \bar{}
+# --
+\bar{$1}$0
