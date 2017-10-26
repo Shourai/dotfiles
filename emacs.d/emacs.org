@@ -195,11 +195,17 @@ if there isn't already one.
         ))
   #+END_SRC
   
-  To get started directly when opening emacs I inhibit the startup message.
+    To get started directly when opening emacs I inhibit the startup message.
   
-  #+BEGIN_SRC emacs-lisp
-(setq inhibit-startup-message t)
-  #+END_SRC
+    #+BEGIN_SRC emacs-lisp
+    (setq inhibit-startup-message t)
+    #+END_SRC
+  
+    Show the time in 24 hour format when `display-time` is enabled` and enable date
+    #+BEGIN_SRC emacs-lisp
+    (setq display-time-24hr-format  t
+        display-time-day-and-date t)
+    #+END_SRC
   
 ** Which key
    [[https://github.com/justbur/emacs-which-key][Which key]] allows for a contextualized completion of emacs commands
