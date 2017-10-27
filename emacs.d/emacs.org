@@ -757,7 +757,7 @@ Furthermore it will load the languages that could be used.
   
   Remove the HTML validate link that appears at the postamble of your exported HTML file.
 
-  #+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp :tangle no
     (setq org-html-validation-link nil)
   #+END_SRC
 
@@ -810,6 +810,23 @@ A major mode for editing Markdown-formatted text.
   :init (setq markdown-command "multimarkdown"))
    #+END_SRC
 
+* Custom Functions
+Insert the result of some Emacs Lisp expression at point.
+Useful if you want do quick arithmetic.
+
+    #+BEGIN_SRC emacs-lisp
+    (defun eval-and-replace ()
+    "Replace the preceding sexp with its value."
+    (interactive)
+    (backward-kill-sexp)
+    (condition-case nil
+        (prin1 (eval (read (current-kill 0)))
+                (current-buffer))
+        (error (message "Invalid expression")
+            (insert (current-kill 0)))))
+
+    (global-set-key (kbd "C-c e") 'eval-and-replace)
+    #+END_SRC
 * End notes
 
    Before you can build this on a new system, make sure that you put
