@@ -825,7 +825,7 @@ Useful if you want do quick arithmetic.
         (error (message "Invalid expression")
             (insert (current-kill 0)))))
 
-    (global-set-key (kbd "C-c e") 'eval-and-replace)
+    (global-set-key (kbd "C-c C-e") 'eval-and-replace)
     #+END_SRC
 * End notes
 
