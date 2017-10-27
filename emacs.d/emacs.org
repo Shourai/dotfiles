@@ -310,8 +310,10 @@ today, including Google's Java standard and the Linux kernel standard.
       (add-hook 'text-mode-hook '(lambda ()
                                      (auto-fill-mode 1)))
 
-      (add-hook 'LaTeX-mode-hook '(lambda ()
-                                    (auto-fill-mode 1)))
+      ;; It's annoying to have equations cut off at 80 characters in LaTeX, 
+      ;; when writing regular text use `M-x fill-paragraph` bound to `M-q` to align at 80 characters.
+      ;;(add-hook 'LaTeX-mode-hook '(lambda ()
+      ;;                              (auto-fill-mode 1)))
     #+END_SRC
 
 ** Rainbow delimiter
@@ -449,7 +451,7 @@ The dictionaries have to be installed via `brew install aspell`.
     :bind (("C-z" . turn-on-evil-mode)
            ("C-x C-z" . turn-off-evil-mode))
     :init
-    (setq evil-want-C-u-scroll t)
+    ;; (setq evil-want-C-u-scroll t) ;; This does not play nicely when having to use `C-u M-x` commands
     (evil-mode t))
   #+END_SRC
 
