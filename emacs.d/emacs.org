@@ -307,13 +307,23 @@ today, including Google's Java standard and the Linux kernel standard.
     #+BEGIN_SRC emacs-lisp
       (setq-default fill-column 80)
 
-      (add-hook 'text-mode-hook '(lambda ()
-                                     (auto-fill-mode 1)))
+      ;;(add-hook 'text-mode-hook '(lambda ()
+      ;;                               (auto-fill-mode 1)))
 
       ;; It's annoying to have equations cut off at 80 characters in LaTeX, 
       ;; when writing regular text use `M-x fill-paragraph` bound to `M-q` to align at 80 characters.
       ;;(add-hook 'LaTeX-mode-hook '(lambda ()
       ;;                              (auto-fill-mode 1)))
+    #+END_SRC
+
+
+Highlight text that crosses over the 80 column mark. It does not automatically
+fill the line but only gives a visual indication.
+    #+BEGIN_SRC emacs-lisp
+    (setq-default
+    whitespace-line-column 80
+    whitespace-style       '(face lines-tail))
+    ; (add-hook 'LaTeX-mode-hook 'whitespace-mode) ; not working?
     #+END_SRC
 
 ** Rainbow delimiter
