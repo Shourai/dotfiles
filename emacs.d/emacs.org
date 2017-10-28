@@ -270,9 +270,6 @@ if there isn't already one.
     )
    #+END_SRC
 
-   #+BEGIN_SRC emacs-lisp
-   #+END_SRC
-   
    [[https://github.com/TheBB/spaceline][This]] is the package that provides Spacemacs with its famous mode-line theme.
    Disabled since it requires a third of a second during startup.
    
