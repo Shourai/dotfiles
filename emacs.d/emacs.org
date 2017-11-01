@@ -801,11 +801,12 @@ A major mode for editing files in the format used by the [[https://github.com/le
        (define-key ledger-mode-map (kbd "C-c $") (lambda () (interactive) (insert "€")))
        (define-key ledger-mode-map (kbd "C-c c") 'ledger-mode-clean-buffer))
    #+END_SRC
-
-  Set the ledger schedule file
-  #+BEGIN_SRC emacs-lisp
-     (setq ledger-schedule-file "~/Dropbox/Budget/schedule")
-  #+END_SRC
+  
+  Set a custom color for the periodic xact face as it was too bright green.
+    #+BEGIN_SRC emacs-lisp
+    (custom-set-faces
+    '(ledger-font-periodic-xact-face ((t (:foreground "#859900" :weight normal)))))
+    #+END_SRC
 * Markdown
 A major mode for editing Markdown-formatted text.
 
