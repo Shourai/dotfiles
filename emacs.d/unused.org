@@ -1,0 +1,91 @@
+* Movement
+** Vim keys
+   
+   Go to next CHAR which is similar to =f= and =t= in vim
+   setting for iy-go-to-char.  \\
+   It's currently not in use since I'm using evil mode.
+   
+   #+BEGIN_SRC emacs-lisp :tangle no
+(use-package iy-go-to-char 
+  :ensure t
+  :bind
+  ("C-c f" . iy-go-to-char)
+  ("C-c F" . iy-go-to-char-backward)
+  ("C-c ;" . iy-go-to-or-up-to-continue)
+  ("C-c ," . iy-go-to-or-up-to-continue-backward))
+   #+END_SRC
+
+** Windmove
+   Move around windows using cardinal directions (S-<left>, S-<right>, S-<up>,
+   S-<down>) \\
+   When using evil mode ~C-w h/j/k/l~ also work. \\
+   Which is actually faster because your fingers stay on the homerow. \\
+   To enable tangle this code block.
+   
+   #+BEGIN_SRC emacs-lisp :tangle no
+     (windmove-default-keybindings)
+   #+END_SRC
+   
+** Delete selection mode
+   Delete Selection mode lets you treat an Emacs region much like a typical text selection outside of Emacs. \\
+   Not in use right now due to evil mode.
+   #+BEGIN_SRC emacs-lisp :tangle no
+     (delete-selection-mode 1)
+   #+END_SRC
+   
+** Multiple cursors
+   Multiple cursors for Emacs. \\
+   Using the evil version, so this is disabled for the time being.
+   #+BEGIN_SRC emacs-lisp :tangle no
+       (use-package multiple-cursors
+       :ensure t
+       :bind (
+         ("C-S-c C-S-c" . mc/edit-lines)
+         ("C-c C-. ."   . mc/mark-all-dwim)
+         ("C-c C-. C-." . mc/mark-all-like-this-dwim)
+         ("C->"         . mc/mark-next-like-this)
+         ("C-<"         . mc/mark-previous-like-this)
+         ("C-c C-. n"   . mc/mark-next-like-this)
+         ("C-c C-. p"   . mc/mark-previous-like-this)
+         ("C-c C-. a"   . mc/mark-all-like-this)
+         ("C-c C-. N"   . mc/mark-next-symbol-like-this)
+         ("C-c C-. P"   . mc/mark-previous-symbol-like-this)
+         ("C-c C-. A"   . mc/mark-all-symbols-like-this)
+         ("C-c C-. f"   . mc/mark-all-like-this-in-defun)
+         ("C-c C-. l"   . mc/edit-lines)
+         ("C-c C-. e"   . mc/edit-ends-of-lines) ))
+   #+END_SRC
+   
+* Visual settings
+  
+** Line numbering
+*** Enable line numbers in all buffers
+    Turned off for now since I'm using relative file numbering
+    
+    #+BEGIN_SRC emacs-lisp :tangle no
+      (global-linum-mode t)
+    #+END_SRC
+    
+* Loading and Finding Files
+** Ido
+   Interactively do things with buffers and files.
+   Helm replaced Ido mode for me, hence I didn't tangle this.
+   #+BEGIN_SRC emacs-lisp :tangle no
+     (use-package ido
+     :config
+     (ido-mode t)
+     (setq ido-separator            "\n" ;; make ido display choices vertically
+           ido-enable-flex-matching t ;; display any item that contains the chars you typed
+           max-mini-window-height   0.5))
+   #+END_SRC
+
+* Evil mode
+  Customizable key sequence to escape from insert state and everything else in Emacs. \\
+  The default keybinding is =fd=.
+  See [[https://github.com/syl20bnr/evil-escape][github]] for further details.
+  #+BEGIN_SRC emacs-lisp :tangle no
+    (use-package evil-escape
+    :ensure t
+    :config
+    (evil-escape-mode t)) 
+#+END_SRC
