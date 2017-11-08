@@ -89,3 +89,17 @@
     :config
     (evil-escape-mode t)) 
 #+END_SRC
+* Python
+  Company-mode completion back-end for Python JEDI.
+  #+BEGIN_SRC emacs-lisp :tangle no
+    (defun my/python-mode-hook ()
+      (add-to-list 'company-backends 'company-jedi))
+
+    (add-hook 'python-mode-hook 'my/python-mode-hook)
+  #+END_SRC
+  
+  Call jedi in python buffer.
+  #+BEGIN_SRC emacs-lisp :tangle no
+    (add-hook 'python-mode-hook 'jedi:setup)
+    (setq jedi:complete-on-dot t)                 ; optional
+  #+END_SRC

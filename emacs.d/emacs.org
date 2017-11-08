@@ -630,31 +630,19 @@ Set custom program to open pdf, dvi and html
     #+END_SRC
 
   Set the shell interpreter to python 3 instead of python 2.
-  #+BEGIN_SRC emacs-lisp 
+  #+BEGIN_SRC emacs-lisp
     (setq python-shell-interpreter "python3")
   #+END_SRC
 
   Change elpy's RPC to python 3
-  #+BEGIN_SRC emacs-lisp 
+  #+BEGIN_SRC emacs-lisp
     (setq elpy-rpc-python-command "python3")
   #+END_SRC
 
-  Company-mode completion back-end for Python JEDI.
-
-  #+BEGIN_SRC emacs-lisp :tangle no
-    (defun my/python-mode-hook ()
-      (add-to-list 'company-backends 'company-jedi))
-
-    (add-hook 'python-mode-hook 'my/python-mode-hook)
-  #+END_SRC
-  
-  Call jedi in python buffer.
-
-  #+BEGIN_SRC emacs-lisp :tangle no
-    (add-hook 'python-mode-hook 'jedi:setup)
-    (setq jedi:complete-on-dot t)                 ; optional
-  #+END_SRC
-   
+  This is used as an workaround for the following issue [[https://github.com/jorgenschaefer/elpy/issues/887]]
+#+BEGIN_SRC emacs-lisp
+ (setq python-shell-completion-native-enable nil)
+#+END_SRC  
 * Org mode
   
 The following is for syntax highlighting the code source blocks inside org mode.
