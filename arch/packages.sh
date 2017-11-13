@@ -41,6 +41,7 @@ sudo pacman -S alsa-utils --noconfirm
 sudo pacman -S pulseaudio --noconfirm
 sudo pacman -S alsa-utils --noconfirm
 #sudo pacman -S pulseaudioalsa-utils --noconfirm
+sudo pacman -S xorg-backlight --noconfirm
 sudo pacman -S xf86-video-intel --noconfirm
 sudo pacman -S mpv --noconfirm
 yaourt -S ttf-font-awesome --noconfirm
