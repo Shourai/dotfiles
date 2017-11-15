@@ -187,3 +187,6 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # Assign firefox terminals to workspace 2
 assign [class="Firefox"] $ws2
+
+# Border style for new windows
+new_window pixel 1
