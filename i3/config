@@ -190,3 +190,6 @@ assign [class="Firefox"] $ws2
 
 # Border style for new windows
 new_window pixel 2
+
+# Automatic back-and-forth when switching to the current workspace
+workspace_auto_back_and_forth yes
