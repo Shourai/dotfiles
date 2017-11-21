@@ -1,9 +1,12 @@
 xterm.termName: xterm-256color
-urxvt.scrollBar: false
-urxvt.font: xft:DejaVu Sans Mono:size=8
-urxvt*transparent: true
-urxvt*shading: 20
-URxvt.perl-ext-common: selection-to-clipboard,font-size
+URxvt.scrollBar: false
+URxvt.font: xft:DejaVu Sans Mono:size=8
+URxvt*transparent: true
+URxvt*shading: 20
+URxvt.perl-ext-common: selection-to-clipboard,font-size,keyboard-select
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.C-Up:     perl:font-size:increase
+URxvt.keysym.C-Down:   perl:font-size:decrease
 
 ! drop in Solarized colorscheme for Xresources/Xdefaults
 
