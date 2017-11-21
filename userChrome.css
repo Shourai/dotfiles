@@ -1,0 +1,11 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/* Remove blue line above tabs */
+#TabsToolbar .tabbrowser-tab .tab-line {
+    display: none !important;
+}
+
+/* Remove blue border when urlbar in focus */
+#urlbar[focused] {
+    border: 1px solid transparent !important;
+}
