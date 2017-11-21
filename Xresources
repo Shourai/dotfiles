@@ -3,7 +3,7 @@ urxvt.scrollBar: false
 urxvt.font: xft:DejaVu Sans Mono:size=8
 urxvt*transparent: true
 urxvt*shading: 20
-URxvt.perl-ext-common: selection-to-clipboard
+URxvt.perl-ext-common: selection-to-clipboard,font-size
 
 ! drop in Solarized colorscheme for Xresources/Xdefaults
 

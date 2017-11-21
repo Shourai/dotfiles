@@ -16,4 +16,5 @@ if [ "$(uname)" = "Linux" ]; then
     ln -s ~/Documents/github/dotfiles/Xresources ~/.Xresources
     ln -s ~/Documents/github/dotfiles/i3 ~/.config/i3
     ln -s ~/Documents/github/dotfiles/30.touchpad.conf /etc/x11/xorg.conf.d/30.touchpad.conf
+    ln -s ~/Documents/github/dotfiles/urxvt ~/.urxvt
 fi
