@@ -157,5 +157,4 @@ USER ALL=(ALL) ALL
 
 ## Adding Wi-Fi
 To add a connection use `wifi-menu -o`, the `-o` option ensures the key is hashed.  
-To see all the wifi profiles use `netctl list`, the profiles are saved in `/etc/netctl/`
-
+To see all the wifi profiles use `netctl list`, the profiles are saved in `/etc/netctl/`.
