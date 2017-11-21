@@ -189,7 +189,10 @@ bindsym XF86AudioPrev exec playerctl previous
 assign [class="Firefox"] $ws2
 
 # Border style for new windows
-new_window pixel 2
+new_window pixel 1
 
 # Automatic back-and-forth when switching to the current workspace
 workspace_auto_back_and_forth yes
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #66CC33
