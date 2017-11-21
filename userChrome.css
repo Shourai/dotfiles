@@ -1,3 +1,15 @@
+/*
+ * profile location can be found in:
+ *
+ * Unix/Linux 	~/.mozilla/
+ * Mac OS X 	~/Library/Mozilla/
+ *              ~/Library/Application Support/
+ *
+ * e.g.
+ * ~/.mozilla/firefox/<profile>.default/chrome/
+ * the _chrome_ folder might need to be created first
+ */
+
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
 /* Remove blue line above tabs */
