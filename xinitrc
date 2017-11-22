@@ -13,5 +13,8 @@ xinput set-prop 13 276 -26 -26
 # Wallpaper
 feh --bg-scale ~/.config/i3/bg.jpg
 
+# Start dropbox in background
+( ( sleep 2 && /usr/bin/dropbox ) & )
+
 # Execute i3 windows manager
 exec i3
