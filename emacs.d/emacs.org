@@ -606,13 +606,25 @@ Set custom program to open pdf, dvi and html
  TeX-view-program-list
  '(("Preview.app" "open -a Preview.app %o")
    ("Skim" "open -a Skim.app %o")
+   ("okular" "okular %o")
    ("displayline" "displayline %n %o %b")
-   ("open" "open build/%o"))
+   ("open" "open build/%o")))
+
+(if (eq system-type 'darwin)
  ;; Select the viewers for each file type.
+ ;; Depending on system-type
+(setq
  TeX-view-program-selection
  '((output-dvi "open")
    (output-pdf "Skim")
    (output-html "open")))
+(if (eq system-type 'gnu/linux)
+(setq
+ TeX-view-program-selection
+ '((output-dvi "open")
+   (output-pdf "okular")
+   (output-html "open"))))
+)
 #+END_SRC
 
 * Python
