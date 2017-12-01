@@ -905,6 +905,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>DarkThemeHasBlackTitlebar</key>
+	<true/>
 	<key>Default Bookmark Guid</key>
 	<string>0C904716-2C38-4BB8-B459-E3D88BED067C</string>
 	<key>DimBackgroundWindows</key>
@@ -997,9 +999,9 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 126 606 469 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>75 220 796 473 0 0 1440 877 </string>
+	<string>75 264 770 429 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>154 229 885 517 0 0 1440 877 </string>
+	<string>202 192 885 540 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>176 70 885 517 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
@@ -1803,7 +1805,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-11-09T19:14:16Z</date>
+	<date>2017-11-22T21:11:04Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -1815,7 +1817,7 @@
 	<key>StretchTabsToFillBar</key>
 	<false/>
 	<key>TabStyle</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>UseBorder</key>
 	<false/>
 	<key>WindowNumber</key>
