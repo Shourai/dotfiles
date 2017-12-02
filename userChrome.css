@@ -2,22 +2,22 @@
  * profile location can be found in:
  *
  * Unix/Linux 	~/.mozilla/
- * Mac OS X 	~/Library/Mozilla/
- *              ~/Library/Application Support/
+ * Mac OS X 	~/Library/Application Support/Firefox/Profiles/<profile>.default/chrome/
  *
  * e.g.
  * ~/.mozilla/firefox/<profile>.default/chrome/
- * the _chrome_ folder might need to be created first
+ * the `chrome` folder might need to be created first
  */
 
-@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
-
-/* Remove blue line above tabs */
-#TabsToolbar .tabbrowser-tab .tab-line {
-    display: none !important;
+/* Change blue line above tabs to green */
+:root:-moz-lwtheme {
+  --tab-line-color: #79c879 !important;
 }
 
 /* Remove blue border when urlbar in focus */
-#urlbar[focused] {
-    border: 1px solid transparent !important;
+#urlbar[focused="true"],
+.searchbar-textbox[focused="true"] {
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
+
