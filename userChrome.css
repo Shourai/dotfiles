@@ -14,6 +14,11 @@
   --tab-line-color: #79c879 !important;
 }
 
+/* Change tab-line width to 1 px*/
+.tab-line {
+  height: 1px !important;
+}
+
 /* Remove blue border when urlbar in focus */
 #urlbar[focused="true"],
 .searchbar-textbox[focused="true"] {
