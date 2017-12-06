@@ -26,3 +26,12 @@
   box-shadow: none !important;
 }
 
+/* Show tab close on hover only */
+.tabbrowser-tab:not([pinned]):not(:hover) .tab-close-button {
+  visibility: collapse !important;
+}
+
+.tabbrowser-tab:not([pinned]):hover .tab-close-button {
+  visibility: visible !important;
+  display: block !important;
+}
