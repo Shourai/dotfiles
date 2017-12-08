@@ -164,7 +164,11 @@ bar {
         strip_workspace_numbers yes
     }
 
-bindsym $mod+shift+x exec ~/.config/i3/i3lock++ blur
+# Update image cache
+exec ~/.config/i3/lock.sh -u ~/.config/i3/lock.jpg
+
+# Lock computer
+bindsym $mod+shift+x exec ~/.config/i3/lock.sh --lock
 
 # Pulse Audio controls
 bindsym XF86AudioMute        exec --no-startup-id "amixer -q set Master toggle"
@@ -189,7 +193,7 @@ bindsym XF86AudioPrev exec playerctl previous
 assign [class="Firefox"] $ws2
 
 # Border style for new windows
-new_window pixel 1
+new_window pixel 3
 
 # Automatic back-and-forth when switching to the current workspace
 workspace_auto_back_and_forth yes
