@@ -20,6 +20,7 @@ brew install fzf
 brew install ledger
 brew install markdown
 brew install neovim
+brew install pandoc
 brew install python3
 brew install tree
 brew install vim

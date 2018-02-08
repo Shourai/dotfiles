@@ -415,8 +415,8 @@ fill the line but only gives a visual indication.
       :ensure t
       :defer 10
       :init
-      (add-hook 'python-mode-hook #'smartparens-strict-mode)
-      (add-hook 'LaTeX-mode-hook #'smartparens-strict-mode)
+      (add-hook 'python-mode-hook #'smartparens-mode)
+      (add-hook 'LaTeX-mode-hook #'smartparens-mode)
       :config
       (eval-after-load 'latex '(require 'smartparens-latex))
       (sp-use-smartparens-bindings))
@@ -427,8 +427,7 @@ fill the line but only gives a visual indication.
       :ensure t
       :defer 10
       :init
-      (add-hook 'python-mode-hook #'evil-smartparens-mode)
-      (add-hook 'LaTeX-mode-hook #'evil-smartparens-mode))
+      (add-hook 'python-mode-hook #'evil-smartparens-mode))
    #+END_SRC
 * Spell-checking
 While typing text I like to activate `flyspell mode` which checks my spelling on
@@ -739,7 +738,7 @@ A major mode for editing Markdown-formatted text.
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "multimarkdown"))
+  :init (setq markdown-command "pandoc"))
    #+END_SRC
 
 * Custom Functions
