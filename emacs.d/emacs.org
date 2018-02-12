@@ -738,7 +738,11 @@ A major mode for editing Markdown-formatted text.
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "pandoc"))
+  :init (setq markdown-command
+            (concat
+            "/usr/local/bin/pandoc"
+            " --from=markdown+hard_line_breaks --to=html"
+            " --mathjax --highlight-style=pygments")))
    #+END_SRC
 
 * Custom Functions
