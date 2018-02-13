@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# key: tx
+# group: font
+# name: \text{...}
+# --
+\text{$1}$0
