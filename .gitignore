@@ -62,6 +62,9 @@ flycheck_*.el
 # recentf
 recentf
 
+# url folder
+/url/
+
 ### macOS ###
 *.DS_Store
 .AppleDouble
