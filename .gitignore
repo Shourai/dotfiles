@@ -63,7 +63,7 @@ flycheck_*.el
 recentf
 
 # url folder
-/url/
+emacs.d/url/
 
 ### macOS ###
 *.DS_Store
