@@ -13,18 +13,21 @@ Abrams.
   
   Here's what the parameter means.
    - ~--with-cocoa~ :: installs emacs with the OS X GUI version
-   - ~--with-imagemagick~ :: installs emacs with imagemagick support for image processing
    - ~--with-gnutls~ :: installs emacs with GnuTLS to utilize encrypted SSL and TLS connections
+   - ~--with-imagemagick~ :: installs emacs with imagemagick support for image processing
+   - ~--with-librsvg~ :: install emacs with SVG rendering support using Cairo
+        
+Note:
+Emacs does not support ImageMagick 7:
+Reported on 2017-03-04: https://debbugs.gnu.org/cgi/bugreport.cgi?bug=25967
+As soon as support is added ~--with-imagemagick@6~ can be changed to ~--with-imagemagick~
         
    #+begin_src sh
-   brew install emacs --with-cocoa --with-imagemagick --with-gnutls
-   
-   brew linkapps emacs
+   brew install emacs --with-cocoa --with-gnutls --with-imagemagick@6 --with-librsvg
    #+end_src
    
-   Not only does this install the latest version of Emacs in
-   =/usr/local/bin/emacs=, but it also links a GUI version in
-   =/Application/Emacs.app=.
+   This installs the latest version of Emacs in =/usr/local/bin/emacs=.
+   To link the GUI version to =/Application/Emacs.app= use =brew linkapps emacs=.
    
    All Homebrew options for Emacs can be seen with the command:
    
