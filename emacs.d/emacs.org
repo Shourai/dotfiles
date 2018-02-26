@@ -332,19 +332,6 @@ fill the line but only gives a visual indication.
     :config )
   #+END_SRC
 
-* Undo and Redo
-  The ultimate undo history visualizer.  
-  Evil requires undo-tree, no need for this explicitly.
-  #+BEGIN_SRC emacs-lisp :tangle no
-    (use-package undo-tree
-    :ensure t
-    :defer t)
-    :bind ("C-x u" . undo-tree-visualize))
-    :init
-    :config
-    (global-undo-tree-mode t))
-  #+END_SRC
-  
 * Loading and Finding Files
 ** Helm
    [[https://tuhdo.github.io/helm-intro.html][Helm information]]  
