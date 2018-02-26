@@ -431,11 +431,11 @@ fill the line but only gives a visual indication.
    #+END_SRC
 * Spell-checking
 While typing text I like to activate `flyspell mode` which checks my spelling on
-the fly. My preferred spelling is `en_GB`. \\
+the fly. My preferred spelling is `english`. \\
 The dictionaries have to be installed via `brew install aspell`.
 
     #+BEGIN_SRC emacs-lisp
-        (setq ispell-dictionary "en_GB")
+        (setq ispell-dictionary "english")
     #+END_SRC 
 * Evil mode
   Evil is an extensible vi layer for Emacs. \\
