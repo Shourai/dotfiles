@@ -735,17 +735,21 @@ A major mode for editing files in the format used by the [[https://github.com/le
 A major mode for editing Markdown-formatted text.
 
    #+BEGIN_SRC emacs-lisp
-(use-package markdown-mode
-  :ensure t
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command
-            (concat
-            "/usr/local/bin/pandoc"
-            " --from=markdown+hard_line_breaks --to=html"
-            " --mathjax --highlight-style=pygments")))
+     (use-package markdown-mode
+       :ensure t
+       :commands (markdown-mode gfm-mode)
+       :mode (("README\\.md\\'" . gfm-mode)
+              ("\\.md\\'" . markdown-mode)
+              ("\\.markdown\\'" . markdown-mode))
+       :init (setq markdown-command
+                 (concat
+                 "/usr/local/bin/pandoc"
+                 " --from=markdown+hard_line_breaks --to=html"
+                 " --mathjax --highlight-style=pygments"))
+       :config
+              (setq markdown-max-image-size (quote (50 . 20))
+                    markdown-live-preview-delete-export 'delete-on-export
+                    markdown-split-window-direction 'right ))
    #+END_SRC
 
 * Custom Functions
