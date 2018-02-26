@@ -126,7 +126,6 @@ if there isn't already one.
 #+END_SRC
 
 * Package Initialization
-  
 ** Package Managers
    #+BEGIN_SRC emacs-lisp
 (require 'package)
@@ -334,11 +333,13 @@ fill the line but only gives a visual indication.
   #+END_SRC
 
 * Undo and Redo
-  The ultimate undo history visualizer.
-  #+BEGIN_SRC emacs-lisp
+  The ultimate undo history visualizer.  
+  Evil requires undo-tree, no need for this explicitly.
+  #+BEGIN_SRC emacs-lisp :tangle no
     (use-package undo-tree
     :ensure t
-    :defer 5
+    :defer t)
+    :bind ("C-x u" . undo-tree-visualize))
     :init
     :config
     (global-undo-tree-mode t))
@@ -346,19 +347,21 @@ fill the line but only gives a visual indication.
   
 * Loading and Finding Files
 ** Helm
-   
+   [[https://tuhdo.github.io/helm-intro.html][Helm information]]  
    Emacs incremental completion and selection narrowing framework.
    #+BEGIN_SRC emacs-lisp
      (use-package helm
      :ensure t
-     :defer 1
+     :defer t
      :bind (("M-x" . helm-M-x)
-            ("C-x h" . helm-command-prefix)
+            ("C-c h" . helm-command-prefix)
             ("C-x C-b" . helm-mini)
             ("C-x C-f" . helm-find-files)
             ("M-y" . helm-show-kill-ring))
      :config
-     (setq helm-M-x-fuzzy-match         t    ;; optional fuzzy matching for helm-M-x
+     (require 'helm-config)
+     (helm-mode 1)
+     (setq helm-mode-fuzzy-match        t    ;; globally enable fuzzy matching for helm-mode
            helm-buffers-fuzzy-matching  t
            helm-recentf-fuzzy-match     t
            helm-quick-update            t))
@@ -426,11 +429,11 @@ fill the line but only gives a visual indication.
    #+END_SRC
    
    #+BEGIN_SRC emacs-lisp
-      (use-package evil-smartparens
-      :ensure t
-      :defer 10
-      :init
-      (add-hook 'python-mode-hook #'evil-smartparens-mode))
+     (use-package evil-smartparens
+     :ensure t
+     :defer 10
+     :init
+     (add-hook 'python-mode-hook #'evil-smartparens-mode))
    #+END_SRC
 * Spell-checking
 While typing text I like to activate `flyspell mode` which checks my spelling on
@@ -446,6 +449,7 @@ The dictionaries have to be installed via `brew install aspell`.
   #+BEGIN_SRC emacs-lisp
     (use-package evil
     :ensure t
+    :defer t
     :bind (("C-z" . turn-on-evil-mode)
            ("C-x C-z" . turn-off-evil-mode))
     :init
