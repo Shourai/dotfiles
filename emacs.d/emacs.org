@@ -341,10 +341,12 @@ fill the line but only gives a visual indication.
      :ensure t
      :defer t
      :bind (("M-x" . helm-M-x)
-            ("C-c h" . helm-command-prefix)
             ("C-x C-b" . helm-mini)
             ("C-x C-f" . helm-find-files)
-            ("M-y" . helm-show-kill-ring))
+            ("M-y" . helm-show-kill-ring)
+            ("C-c h" . helm-command-prefix)
+            :map helm-command-map
+            ("o" . helm-occur))
      :config
      (require 'helm-config)
      (helm-mode 1)
@@ -352,6 +354,26 @@ fill the line but only gives a visual indication.
            helm-buffers-fuzzy-matching  t
            helm-recentf-fuzzy-match     t
            helm-quick-update            t))
+   #+END_SRC
+   
+** Projectile
+   [[https://github.com/bbatsov/projectile][Projectile]] is a project interaction library for Emacs.
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package projectile
+     :ensure t
+     :defer t
+     :bind ("C-c p f" . projectile-find-file)
+     :config (projectile-mode 1))
+   #+END_SRC
+
+   Add helm integration to projectile.
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package helm-projectile
+     :ensure t
+     :after (projectile)
+     :config)
    #+END_SRC
    
 * Autocompletion

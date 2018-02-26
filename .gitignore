@@ -65,6 +65,10 @@ recentf
 # url folder
 emacs.d/url/
 
+# projectile files
+projectile.cache
+projectile-bookmarks.eld
+
 ### macOS ###
 *.DS_Store
 .AppleDouble
