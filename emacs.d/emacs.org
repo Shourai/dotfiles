@@ -218,6 +218,7 @@ if there isn't already one.
      (use-package which-key
         :ensure t 
         :defer 2 
+        :delight
         :config
         (which-key-mode))
    #+END_SRC
@@ -233,10 +234,10 @@ if there isn't already one.
      #+BEGIN_SRC emacs-lisp
        (use-package nlinum-relative
        :ensure t
+       :defer 2
        :config
        (global-nlinum-relative-mode)
-       (setq nlinum-relative-redisplay-delay 0.5)
-       :defer 2)
+       (setq nlinum-relative-redisplay-delay 0.5))
      #+END_SRC
      
 ** Theme
@@ -264,18 +265,19 @@ if there isn't already one.
     )
    #+END_SRC
 
-   [[https://github.com/TheBB/spaceline][This]] is the package that provides Spacemacs with its famous mode-line theme.
-   Disabled since it requires a third of a second during startup.
+   [[https://github.com/TheBB/spaceline][This]] is the package that provides Spacemacs with its famous mode-line theme.  
+   I am still looking for a way to defer loading of spaceline.
    
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package spaceline
-     :ensure t
-     :config
-     (require 'spaceline-config)
-     (spaceline-emacs-theme)
-     (setq ns-use-srgb-colorspace nil)
-     (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state))
-   #+END_SRC
+    #+BEGIN_SRC emacs-lisp
+        (use-package spaceline
+        :ensure t
+        :after evil-mode
+        :init
+        (require 'spaceline-config)
+        (spaceline-emacs-theme)
+        (setq ns-use-srgb-colorspace nil)
+        (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state))
+    #+END_SRC
 
 ** Highlight current line
    #+BEGIN_SRC emacs-lisp
@@ -332,6 +334,16 @@ fill the line but only gives a visual indication.
     :config )
   #+END_SRC
 
+** Delight
+   [[https://www.emacswiki.org/emacs/DelightedModes][Delight]] enables you to easily customise how major and minor modes appear in the ModeLine.
+   Usepackage support :delight
+  #+BEGIN_SRC emacs-lisp
+    (use-package delight
+    :ensure t
+    :defer t 
+    :config )
+  #+END_SRC
+
 * Loading and Finding Files
 ** Helm
    [[https://tuhdo.github.io/helm-intro.html][Helm information]]  
@@ -340,6 +352,7 @@ fill the line but only gives a visual indication.
      (use-package helm
      :ensure t
      :defer t
+     :delight
      :bind (("M-x" . helm-M-x)
             ("C-x C-b" . helm-mini)
             ("C-x C-f" . helm-find-files)
@@ -363,6 +376,7 @@ fill the line but only gives a visual indication.
      (use-package projectile
      :ensure t
      :defer t
+     :delight '(:eval (concat " " (projectile-project-name)))
      :bind ("C-c p h" . helm-projectile)
      :config (projectile-mode 1))
    #+END_SRC
@@ -382,6 +396,7 @@ fill the line but only gives a visual indication.
    #+BEGIN_SRC emacs-lisp
      (use-package yasnippet
      :ensure t
+     :delight yas-minor-mode
      :defer 10
      :config
      (yas-global-mode 1))
@@ -392,6 +407,7 @@ fill the line but only gives a visual indication.
    #+BEGIN_SRC emacs-lisp
      (use-package company
      :ensure t
+     :delight
      :defer 10
      :bind ("C-," . company-complete-common)
      :init
@@ -458,7 +474,8 @@ The dictionaries have to be installed via `brew install aspell`.
   #+BEGIN_SRC emacs-lisp
     (use-package evil
     :ensure t
-    :defer t
+    :delight undo-tree-mode
+    :defer t ;; only works if evil-mode lies in ~:config~
     :bind (("C-z" . turn-on-evil-mode)
            ("C-x C-z" . turn-off-evil-mode))
     :init
@@ -511,7 +528,8 @@ This is useful if when using `viwp`, which does not work otherwise.
   #+BEGIN_SRC emacs-lisp
     (use-package evil-replace-with-register
     :ensure t
-    :init
+    :defer 1
+    :config
     (setq evil-replace-with-register-key (kbd "gr"))
     (evil-replace-with-register-install))
   #+END_SRC
@@ -761,7 +779,7 @@ A major mode for editing Markdown-formatted text.
                  " --mathjax --highlight-style=pygments"))
        :config
               (setq markdown-max-image-size (quote (50 . 20))
-                    markdown-live-preview-delete-export 'delete-on-export
+                    markdown-live-preview-delete-export 'delete-on-export  ;; doesn't create .html file when using live-preview mode, deletes after refresh.
                     markdown-split-window-direction 'right ))
    #+END_SRC
 
