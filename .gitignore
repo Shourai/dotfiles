@@ -69,6 +69,9 @@ emacs.d/url/
 projectile.cache
 projectile-bookmarks.eld
 
+# misc
+network-security.data
+
 ### macOS ###
 *.DS_Store
 .AppleDouble
