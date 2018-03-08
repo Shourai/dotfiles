@@ -1,0 +1,7 @@
+#browser vbox#appcontent tabbrowser,
+#content,
+#tabbrowser-tabpanels,
+browser[type=content-primary],
+browser[type=content] > html {
+  background: var(--url-and-searchbar-background-color, hsla(0,0%,100%,.8))!important
+}
