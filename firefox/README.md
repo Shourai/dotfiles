@@ -7,4 +7,4 @@ e.g.
 ~/.mozilla/firefox/<profile>.default/chrome/
 the `chrome` folder might need to be created first
 
-Symlink all the files to the `chrome` folder using `link.sh`
+Copy all the files to the `chrome` folder using `sync.sh`

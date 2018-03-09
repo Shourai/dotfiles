@@ -28,12 +28,25 @@
   .pdfViewer .page {
     border-image: none!important
   }
+  #pageNumber,
+  #scaleSelectContainer {
+    border: 1px solid!important
+  }
   #loadingBar {
     position: relative;
     width: 100%;
     height: 4px;
     background-color: var(--theme-selection-background-hover)!important;
     border-bottom: 1px solid!important
+  }
+  #sidebarContainer,
+  #sidebarContent {
+    background-color: var(--in-content-page-background)!important
+  }
+  #toolbarSidebar {
+    background-color: var(--in-content-category-header-background)!important;
+    background-image: none!important;
+    border-color: var(--in-content-box-background)!important
   }
   .doorHanger,
   .doorHangerRight {

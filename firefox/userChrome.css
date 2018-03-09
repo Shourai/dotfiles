@@ -18,4 +18,23 @@
 @import "userChrome-files/secure_connection_colors.css";
 @import "userChrome-files/sidebar.css";
 @import "userChrome-files/status_panel.css";
-@import "userChrome-files/tabs.css";
+
+/* Override previously defined colors in color_variables */
+--in-content-page-color: var(--tone-2)!important;
+--in-content-page-background: var(--tone-6)!important;
+
+/* Change tab line color and thickness */
+.tab-line[selected=true] {
+    background-color: #79c879 !important;
+    height: 1px !important;
+}
+
+/* Show tab close on hover only */
+.tabbrowser-tab:not([pinned]):not(:hover) .tab-close-button {
+  visibility: collapse !important;
+}
+
+.tabbrowser-tab:not([pinned]):hover .tab-close-button {
+  visibility: visible !important;
+  display: block !important;
+}

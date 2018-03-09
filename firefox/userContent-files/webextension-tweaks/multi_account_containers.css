@@ -1,6 +1,6 @@
 /*! Alters the webextension Multi-Account Containers
   IMPORTANT: change the Internal UUID in BOTH locations */
-@-moz-document url-prefix("moz-extension://UUID/") {
+@-moz-document url-prefix("moz-extension://multi_account_containers_UUID/") {
   #current-tab,
   .column-panel-content,
   html body div#container-panel.panel.container-panel {
@@ -81,14 +81,13 @@
     background: var(--tone-7)!important;
     color: var(--tone-4)!important
   }
-    /* Remove line between "Edit Containers" and "+" */
-.edit-containers-text {
-	border-inline-end: solid 0px #d8d8d8 !important;
+  .edit-containers-text {
+    border-inline-end: solid 0 #d8d8d8!important
   }
 }
 /*! Alters the webextension Multi-Account Containers
   IMPORTANT: change the Internal UUID in BOTH locations */
-@-moz-document url-prefix("moz-extension://6e2e0fc7-e24e-a649-b676-70f4a55f969b/confirm-page") {
+@-moz-document url-prefix("moz-extension://multi_account_containers_UUID/confirm-page") {
   body {
     background-color: var(--tone-7)!important
   }
@@ -117,6 +116,4 @@
     background-image: url(chrome://global/skin/in-content/check.svg)!important;
     background-color: var(--tone-6)!important
   }
-
-  
 }
