@@ -7,32 +7,35 @@
 # Define profileID
 profileID="h30x2e04"
 
+# Define paths
 shadowfox="$HOME/Documents/github/ShadowFox"
 source="$HOME/Documents/github/dotfiles/firefox"
 target="$HOME/Library/Application Support/Firefox/Profiles/$profileID.default/chrome/"
 
-# Check existence ShadowFox repo
+# Check existence ShadowFox repo else clone it
 if [ ! -d "$shadowfox" ]; then
   # Control will enter here if $dir doesn't exist.
   git clone git@github.com:Shourai/ShadowFox.git $shadowfox
 fi
 
-# Get the latest updates
+# Get the latest updates and assign stdout to output
 git -C $shadowfox pull
 
-# Check the existence of chrome folder
+# Check the existence of chrome folder, mkdir if non existent
 if [ ! -d "$target" ]; then
   # Control will enter here if $dir doesn't exist.
     mkdir -v "$target"
 fi
 
 # Copy files to chrome folder
-cp -f $source/userChrome.css "$target"
-cp -f $source/userContent.css "$target"
-cp -f $shadowfox/color_variables.css "$target"
-cp -rf $shadowfox/userChrome-files "$target"
-cp -rf $shadowfox/userContent-files "$target"
-cp -rf $shadowfox/common-files "$target"
+cp  $source/userChrome.css "$target"
+cp  $source/userContent.css "$target"
+cp  $shadowfox/color_variables.css "$target"
+cp -R $shadowfox/userChrome-files "$target"
+cp -R $shadowfox/userContent-files "$target"
+cp -R $shadowfox/common-files "$target"
+
+echo "userChrome and userContent files succesfully copied!"
 
 # Insert any UUIDs defined in internal_UUIDs.txt into userContent.css
 while IFS='' read -r line || [[ -n "$line" ]]; do
@@ -40,3 +43,5 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
     webextension_name=${array[0]%_UUID}
     sed -i '' "s/${array[0]}/${array[1]}/" "$target/userContent-files/webextension-tweaks/${webextension_name}.css"
 done < "internal_UUIDs.txt"
+
+echo "UUIDs succesfully applied!"
