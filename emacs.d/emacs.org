@@ -180,12 +180,14 @@ if there isn't already one.
 * Visual settings
   
   I like a minimal setup when working on code, therefore I disable the toolbar and scroll bar. \\
+  In daemon mode `scroll-bar-mode -1` does not work, therefore I have a workaround. \\
   And if it detects I'm using a GUI I set the frame to be the size of 130
   columns and 40 rows. Also the windows open at 100 pixels from the top and left.
   
   #+BEGIN_SRC emacs-lisp
-    (tool-bar-mode -1)
+    (add-hook 'after-make-frame-functions (lambda (frame) (when (display-graphic-p frame) (scroll-bar-mode -1))))
     (scroll-bar-mode -1)
+    (tool-bar-mode -1)
     (menu-bar-mode -1)
     (blink-cursor-mode -1)
     (setq default-frame-alist
@@ -241,27 +243,23 @@ if there isn't already one.
      #+END_SRC
      
 ** Theme
-   A beautiful theme by [[https://github.com/purcell/color-theme-sanityinc-tomorrow][Steve Purcell]], you can check out screenshots over at [[https://emacsthemes.com/themes/sanityinc-tomorrow-themes.html][emacsthemes.com]].
-   
-   #+BEGIN_SRC emacs-lisp :tangle no
-    (use-package color-theme-sanityinc-tomorrow
-    :ensure t
-    :init
-    (load-theme 'sanityinc-tomorrow-night t))
-   #+END_SRC
-   
+   [[https://github.com/bbatsov/solarized-emacs][Solarized theme]]  
+   Light color/foreground: `#fdf6e3`  
+   Dark color/foreground: `#002b36`
    #+BEGIN_SRC emacs-lisp
     (use-package solarized-theme 
     :ensure t
     :init
     (setq solarized-high-contrast-mode-line t)
-    (load-theme 'solarized-light t)
+    (setq solarized-use-less-bold t)
+    ;(setq solarized-distinct-fringe-background t)
+    (load-theme 'solarized-dark t)
     :config
     (custom-set-faces
     '(mode-line ((t
     (:underline nil :overline nil :box
-                (:line-width 1 :color "#fdf6e3")
-                :foreground "#fdf6e3" :background "#657b83")))))
+                (:line-width 1 :color "#002b36")
+                :foreground "#002b36" :background "#657b83")))))
     )
    #+END_SRC
 

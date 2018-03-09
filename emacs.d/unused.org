@@ -57,7 +57,6 @@
    #+END_SRC
    
 * Visual settings
-  
 ** Line numbering
 *** Enable line numbers in all buffers
     Turned off for now since I'm using relative file numbering
@@ -66,6 +65,15 @@
       (global-linum-mode t)
     #+END_SRC
     
+** Theme
+   A beautiful theme by [[https://github.com/purcell/color-theme-sanityinc-tomorrow][Steve Purcell]], you can check out screenshots over at [[https://emacsthemes.com/themes/sanityinc-tomorrow-themes.html][emacsthemes.com]].
+   
+   #+BEGIN_SRC emacs-lisp :tangle no
+    (use-package color-theme-sanityinc-tomorrow
+    :ensure t
+    :init
+    (load-theme 'sanityinc-tomorrow-night t))
+   #+END_SRC
 * Loading and Finding Files
 ** Ido
    Interactively do things with buffers and files.
