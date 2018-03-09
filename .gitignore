@@ -138,3 +138,6 @@ ranger/history
 nvim/plugged
 nvim/autoload
 nvim/session
+
+### Firefox ###
+internal_UUIDs.txt
