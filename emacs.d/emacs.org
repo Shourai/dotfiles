@@ -121,21 +121,23 @@ The auto-saves directory is not automatically created so we have to do it explic
 
 Do not silently put a newline at the end of a file when saving or writng a file
 if there isn't already one.
+
 #+BEGIN_SRC emacs-lisp
 (setq mode-require-final-newline nil)
 #+END_SRC
 
 * Package Initialization
 ** Package Managers
-   #+BEGIN_SRC emacs-lisp
-(require 'package)
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-			 ("marmalade" . "https://marmalade-repo.org/packages/")
-			 ("melpa" . "https://melpa.org/packages/")
-			 ("org" . "https://orgmode.org/elpa/")))
-;; (package-initialize)
-;; (package-refresh-contents)
-   #+END_SRC
+
+    #+BEGIN_SRC emacs-lisp
+      (require 'package)
+      (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                               ("marmalade" . "https://marmalade-repo.org/packages/")
+                               ("melpa" . "https://melpa.org/packages/")
+                               ("org" . "https://orgmode.org/elpa/")))
+      ;; (package-initialize)
+      ;; (package-refresh-contents)
+    #+END_SRC
    
 ** Use-Package
    
@@ -288,6 +290,7 @@ if there isn't already one.
    #+BEGIN_SRC emacs-lisp
      (set-face-attribute 'region nil :background "#676767")
    #+END_SRC
+
 ** Word wrap
 The sacred 80 column rule that states “Thou shalt not cross 80 columns in thy
 file” originated from IBM 80 column punch cards, was reinforced by early
@@ -323,6 +326,7 @@ fill the line but only gives a visual indication.
     :defer t 
     :config )
   #+END_SRC
+
 ** Highlight parenthesis
   #+BEGIN_SRC emacs-lisp
     (use-package highlight-parentheses
@@ -355,7 +359,7 @@ fill the line but only gives a visual indication.
             ("C-x C-f" . helm-find-files)
             ("M-y" . helm-show-kill-ring)
             ("C-c h" . helm-command-prefix)
-            :map helm-command-map
+            :map helm-command-map  ;; using prefix C-c h-...
             ("o" . helm-occur))
      :config
      (require 'helm-config)
@@ -394,7 +398,7 @@ fill the line but only gives a visual indication.
      (use-package yasnippet
      :ensure t
      :delight yas-minor-mode
-     :defer 10
+     :defer 2
      :config
      (yas-global-mode 1))
    #+END_SRC
@@ -405,7 +409,7 @@ fill the line but only gives a visual indication.
      (use-package company
      :ensure t
      :delight
-     :defer 10
+     :defer 2
      :bind ("C-," . company-complete-common)
      :init
      ;(add-hook 'after-init-hook 'global-company-mode)  ;; using this doesn't allow deferring
@@ -416,7 +420,6 @@ fill the line but only gives a visual indication.
 
    #+END_SRC
 
-
    Cycle forward and backward using C-n and C-p instead of M-n and M-p.
    #+BEGIN_SRC emacs-lisp
     (with-eval-after-load 'company
@@ -426,12 +429,11 @@ fill the line but only gives a visual indication.
     (define-key company-active-map (kbd "C-p") #'company-select-previous))
    #+END_SRC
 
-
    Add quickhelp for company mode
    #+BEGIN_SRC emacs-lisp
      (use-package company-quickhelp
      :ensure t
-     :defer 10
+     :after (company)
      :config
      (company-quickhelp-mode 1))
    #+END_SRC
@@ -441,7 +443,7 @@ fill the line but only gives a visual indication.
    #+BEGIN_SRC emacs-lisp
       (use-package smartparens
       :ensure t
-      :defer 10
+      :defer 2
       :init
       (add-hook 'python-mode-hook #'smartparens-mode)
       (add-hook 'LaTeX-mode-hook #'smartparens-mode)
@@ -450,13 +452,14 @@ fill the line but only gives a visual indication.
       (sp-use-smartparens-bindings))
    #+END_SRC
    
+   Load after smartparens-strict-mode
    #+BEGIN_SRC emacs-lisp
      (use-package evil-smartparens
      :ensure t
-     :defer 10
-     :init
-     (add-hook 'python-mode-hook #'evil-smartparens-mode))
+     :after (smartparens)
+     :init)
    #+END_SRC
+
 * Spell-checking
 While typing text I like to activate `flyspell mode` which checks my spelling on
 the fly. My preferred spelling is `english`. \\
@@ -465,6 +468,7 @@ The dictionaries have to be installed via `brew install aspell`.
     #+BEGIN_SRC emacs-lisp
         (setq ispell-dictionary "english")
     #+END_SRC 
+
 * Evil mode
   Evil is an extensible vi layer for Emacs. \\
   It provides Vim features like Visual selection and text objects.
@@ -501,7 +505,7 @@ This package emulates [[https://github.com/tpope/vim-surround][surround.vim by T
   #+BEGIN_SRC emacs-lisp
     (use-package evil-surround
     :ensure t
-    :defer 10
+    :defer 2
     :config
     (global-evil-surround-mode 1))
   #+END_SRC
@@ -514,6 +518,7 @@ This package emulates [[https://github.com/tpope/vim-surround][surround.vim by T
     :ensure t
     :defer t)
   #+END_SRC
+
 ** Custom settings
 Prevent the visual selection overriding the system clipboard.
 This is useful if when using `viwp`, which does not work otherwise.
@@ -521,6 +526,7 @@ This is useful if when using `viwp`, which does not work otherwise.
     #+BEGIN_SRC emacs-lisp
         (fset 'evil-visual-update-x-selection 'ignore)
     #+END_SRC
+
 ** Replace with register
   Port of [ReplaceWithRegister](http://www.vim.org/scripts/script.php?script_id=2703)
   #+BEGIN_SRC emacs-lisp
@@ -531,6 +537,7 @@ This is useful if when using `viwp`, which does not work otherwise.
     (setq evil-replace-with-register-key (kbd "gr"))
     (evil-replace-with-register-install))
   #+END_SRC
+
 * Movement
 ** Avy
    Avy is a GNU Emacs package for jumping to visible text using a char-based decision tree. \\
@@ -540,8 +547,8 @@ This is useful if when using `viwp`, which does not work otherwise.
      (use-package avy
        :ensure t
        :defer t
-       :bind (("C-:" . avy-goto-char)
-       ("C-'" . avy-goto-char-2)
+       :bind (("C-;" . avy-goto-char)
+       ("C-:" . avy-goto-char-2)
        ("M-g f" . avy-goto-line)
        ("M-g w" . avy-goto-word-1)
        ("M-g e" . avy-goto-word-0)))
@@ -590,7 +597,7 @@ Add LatexMk support to AUCTeX
     #+BEGIN_SRC emacs-lisp
         (use-package auctex-latexmk
         :ensure t
-        :defer 10
+        :defer 2
         :init (add-hook 'LaTeX-mode-hook 'auctex-latexmk-setup)
         :config
         ;; Let LatexMk to pass the -pdf flag when TeX-PDF-mode is active 
@@ -609,19 +616,21 @@ Add company support to AUCTeX
     #+BEGIN_SRC emacs-lisp
       (use-package company-auctex
         :ensure t
-        :defer 5
+        :after (company)
         :init (add-hook 'LaTeX-mode-hook 'company-auctex-init))
     #+END_SRC
 
 Add custom shortcuts to LaTeX-math-list
 Can be customized using "`M-x` customize-variable `RET` LaTeX-math-list `RET`"
 I prefer it to be saved into the init.el (using customize-variable) instead of custom.el.
+
 #+BEGIN_SRC emacs-lisp
   (setq LaTeX-math-list
         '((?2 "prime" "Misc Symbol" 2032)))
 #+END_SRC
 
 Define shortcuts for LaTeX-math-mode
+
 #+BEGIN_SRC emacs-lisp
   (add-hook 'LaTeX-math-mode-hook
     (lambda ()
@@ -665,6 +674,13 @@ Set custom program to open pdf, dvi and html
 )
 #+END_SRC
 
+Latex color overrides in solarized dark theme
+
+#+BEGIN_SRC emacs-lisp
+ (custom-set-faces
+ '(font-latex-script-char-face ((t (:foreground "firebrick3")))))
+#+END_SRC
+
 * Python
   Elpy is an Emacs package to bring powerful Python editing to Emacs. It
   combines and configures a number of other packages, both written in Emacs Lisp
@@ -672,7 +688,7 @@ Set custom program to open pdf, dvi and html
     #+BEGIN_SRC emacs-lisp
       (use-package elpy
       :ensure t
-      :after python
+      :after (python)
       ;:mode ("\\.py\\'" . python-mode)
       ;:interpreter ("python" . python-mode)
       :config
@@ -723,6 +739,7 @@ Furthermore it will load the languages that could be used.
   #+END_SRC
 
 * Magit
+
   Magit is an interface to the version control system Git, implemented as an Emacs package.  
    #+BEGIN_SRC emacs-lisp
      (use-package magit
@@ -738,6 +755,7 @@ Furthermore it will load the languages that could be used.
        :defer t)
    #+END_SRC
 * Ledger
+
 A major mode for editing files in the format used by the [[https://github.com/ledger/ledger][ledger]] command-line accounting system.
 
    #+BEGIN_SRC emacs-lisp
@@ -759,6 +777,7 @@ A major mode for editing files in the format used by the [[https://github.com/le
     (custom-set-faces
     '(ledger-font-periodic-xact-face ((t (:foreground "#859900" :weight normal)))))
     #+END_SRC
+
 * Markdown
 A major mode for editing Markdown-formatted text.
 
@@ -782,6 +801,7 @@ A major mode for editing Markdown-formatted text.
    #+END_SRC
 
 * Custom Functions
+
 Insert the result of some Emacs Lisp expression at point.
 Useful if you want do quick arithmetic.
 
@@ -798,6 +818,7 @@ Useful if you want do quick arithmetic.
 
     (global-set-key (kbd "C-c C-e") 'eval-and-replace)
     #+END_SRC
+
 * End notes
 
    Before you can build this on a new system, make sure that you put
