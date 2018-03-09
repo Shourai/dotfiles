@@ -21,7 +21,7 @@ brew install ledger
 brew install markdown
 brew install neovim
 brew install pandoc
-brew install python3
+brew install python
 brew install tree
 brew install vim
 brew install weechat
