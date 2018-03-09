@@ -42,3 +42,10 @@
     color: #fff!important;
     background-color: transparent !important
   }
+
+/* pdf */
+/* Remove border around page numbers */
+#pageNumber,
+#scaleSelectContainer {
+border: 0px solid!important
+}
