@@ -14,7 +14,7 @@ target="$HOME/Library/Application Support/Firefox/Profiles/$profileID.default/ch
 # Check existence ShadowFox repo
 if [ ! -d "$shadowfox" ]; then
   # Control will enter here if $dir doesn't exist.
-  git pull git@github.com:Shourai/ShadowFox.git
+  git clone git@github.com:Shourai/ShadowFox.git $shadowfox
 fi
 
 # Get the latest updates
