@@ -12,10 +12,11 @@ shadowfox="$HOME/Documents/github/ShadowFox"
 source="$HOME/Documents/github/dotfiles/firefox"
 target="$HOME/Library/Application Support/Firefox/Profiles/$profileID.default/chrome/"
 
-# Check existence ShadowFox repo else clone it
+# Check existence ShadowFox repo else clone it and add upstream repo
 if [ ! -d "$shadowfox" ]; then
   # Control will enter here if $dir doesn't exist.
   git clone git@github.com:Shourai/ShadowFox.git $shadowfox
+  git -C $shadowfox remote add upstream git@github.com:overdodactyl/ShadowFox.git
 fi
 
 # Get the latest updates and assign stdout to output
