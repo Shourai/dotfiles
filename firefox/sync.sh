@@ -41,12 +41,12 @@ read -p "Pull the latest commits from repo Y/N? " -n 1 -r
 echo -e "\n"
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 
-# Check existence ShadowFox repo else clone it and add upstream repo
-if [ ! -d "$shadowfox" ]; then
-  # Control will enter here if $dir doesn't exist.
-  git clone git@github.com:Shourai/ShadowFox.git $shadowfox
-  git -C $shadowfox remote add upstream git@github.com:overdodactyl/ShadowFox.git
-fi
+    # Check existence ShadowFox repo else clone it and add upstream repo
+    if [ ! -d "$shadowfox" ]; then
+    # Control will enter here if $dir doesn't exist.
+    git clone git@github.com:Shourai/ShadowFox.git $shadowfox
+    git -C $shadowfox remote add upstream git@github.com:overdodactyl/ShadowFox.git
+    fi
 
 git -C $shadowfox pull
 
@@ -64,28 +64,17 @@ declare -A styled=(
                     ["uMatrix@raymondhill.net"]="umatrix"
                   )
 
-line=$(sed -n -e '/^user_pref("extensions.webextensions.uuids"/p' "$profile/prefs.js")
+line=$(sed -n -e 's/^user_pref("extensions.webextensions.uuids", "{\(.*\).*}");/\1/p' "$profile/prefs.js")
 
-## Remove prefix and suffix
-prefix='user_pref("extensions.webextensions.uuids", "{'
-suffix='}");'
-line=${line#$prefix}
-line=${line%$suffix}
-prefix='\\"'
-suffix='\\"'
 
 IFS=',' read -ra EXTS <<< "$line"
 for i in "${EXTS[@]}"; do
-    id=${i%:*}
-    uuid=${i#*:}
-    id=${id#$prefix}
-    id=${id%$suffix}
-    uuid=${uuid#$prefix}
-    uuid=${uuid%$suffix}
+    id=$(echo $i | sed -n 's/.*"\(.*\)\\":.*/\1/p')
+    uuid=$(echo $i | sed -n 's/.*"\(.*\)\\".*/\1/p')
     if test "${styled[$id]+isset}"
     then
         sed -i '' "s/${styled[$id]}_UUID/$uuid/" "$target/userContent-files/webextension-tweaks/${styled[$id]}.css"
     fi;
 done
-
+echo "UUIDs applied!"
 fi
