@@ -9,11 +9,8 @@ if [ $(bash -c 'echo ${BASH_VERSINFO[0]}') -lt 4 ]; then
     exit 1
 fi
 
-# echo "Enter <profileID>.default: "
-# read profileID
-
 # Define profileID
-profileID="h30x2e04"
+profileID=$(ls "$HOME/Library/Application Support/Firefox/Profiles" | grep default | sed -n 's/\([[:alnum:]]*\).*/\1/p')
 
 # Define paths
 shadowfox="$HOME/Documents/github/ShadowFox"
