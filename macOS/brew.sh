@@ -13,15 +13,20 @@ brew analytics off
 # Install homebrew packages
 ##################################################
 # brew install autojump
+brew install ag
+brew install bash
 brew install coreutils
-brew install --with-cocoa --srgb emacs
+brew install emacs --with-cocoa --with-gnutls --with-imagemagick@6 --with-librsvg
 brew install fasd
 brew install fzf
+brew install gnu-sed
+brew install gnutls
 brew install ledger
 brew install markdown
 brew install neovim
 brew install pandoc
 brew install python
+brew install tmux
 brew install tree
 brew install vim
 brew install weechat
