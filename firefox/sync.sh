@@ -71,7 +71,7 @@ IFS=',' read -ra EXTS <<< "$line"
 for i in "${EXTS[@]}"; do
     id=$(echo $i | sed -n 's/.*"\(.*\)\\":.*/\1/p')
     uuid=$(echo $i | sed -n 's/.*"\(.*\)\\".*/\1/p')
-    if test "${styled[$id]+isset}"
+    if [[ -n "${styled[$id]}" ]]
     then
         sed -i '' "s/${styled[$id]}_UUID/$uuid/" "$target/userContent-files/webextension-tweaks/${styled[$id]}.css"
     fi;
