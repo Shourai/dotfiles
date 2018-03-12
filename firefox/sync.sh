@@ -50,10 +50,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 
 git -C $shadowfox pull
 
-cp  $shadowfox/color_variables.css "$target"
-cp -R $shadowfox/userChrome-files "$target"
-cp -R $shadowfox/userContent-files "$target"
-cp -R $shadowfox/common-files "$target"
+cp -R $shadowfox/css "$target"
 echo "Updated to latest version!"
 
 # Retrieve and set internal UUIDs
@@ -73,7 +70,7 @@ for i in "${EXTS[@]}"; do
     uuid=$(echo $i | sed -n 's/.*"\(.*\)\\".*/\1/p')
     if [[ -n "${styled[$id]}" ]]
     then
-        sed -i '' "s/${styled[$id]}_UUID/$uuid/" "$target/userContent-files/webextension-tweaks/${styled[$id]}.css"
+        sed -i '' "s/${styled[$id]}_UUID/$uuid/" "$target/css/userContent-files/webextension-tweaks/${styled[$id]}.css"
     fi;
 done
 echo "UUIDs applied!"
