@@ -9,14 +9,12 @@ if [ $(bash -c 'echo ${BASH_VERSINFO[0]}') -lt 4 ]; then
     exit 1
 fi
 
-# Define profileID
-profileID=$(ls "$HOME/Library/Application Support/Firefox/Profiles" | grep default | sed -n 's/\([[:alnum:]]*\).*/\1/p')
-
 # Define paths
+# Only works when there is only one profile
+profile=$(find "$HOME/Library/Application Support/Firefox/Profiles"/* -maxdepth 0)
 shadowfox="$HOME/Documents/github/ShadowFox"
 source="$HOME/Documents/github/dotfiles/firefox"
-target="$HOME/Library/Application Support/Firefox/Profiles/$profileID.default/chrome"
-profile="$HOME/Library/Application Support/Firefox/Profiles/$profileID.default"
+target="$profile/chrome"
 
 # Check the existence of chrome folder, mkdir if non existent
 if [ ! -d "$target" ]; then
