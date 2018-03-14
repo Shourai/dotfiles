@@ -43,30 +43,33 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     git -C $shadowfox remote add upstream git@github.com:overdodactyl/ShadowFox.git
     fi
 
-git -C $shadowfox pull
+    # Get the latest changes upstream
+    git -C $shadowfox fetch upstream
+    git -C $shadowfox merge upstream/master
+    git -C $shadowfox push
+    
+    cp -R $shadowfox/css "$target"
+    echo "Updated to latest version!"
 
-cp -R $shadowfox/css "$target"
-echo "Updated to latest version!"
+    # Retrieve and set internal UUIDs
+    declare -A styled=( 
+                        ["{174b2d58-b983-4501-ab4b-07e71203cb43}"]="dark_mode"
+                        ["@testpilot-containers"]="multi_account_containers"
+                        ["uBlock0@raymondhill.net"]="ublock_origin"
+                        ["uMatrix@raymondhill.net"]="umatrix"
+                    )
 
-# Retrieve and set internal UUIDs
-declare -A styled=( 
-                    ["{174b2d58-b983-4501-ab4b-07e71203cb43}"]="dark_mode"
-                    ["@testpilot-containers"]="multi_account_containers"
-                    ["uBlock0@raymondhill.net"]="ublock_origin"
-                    ["uMatrix@raymondhill.net"]="umatrix"
-                  )
-
-line=$(sed -n -e 's/^user_pref("extensions.webextensions.uuids", "{\(.*\).*}");/\1/p' "$profile/prefs.js")
+    line=$(sed -n -e 's/^user_pref("extensions.webextensions.uuids", "{\(.*\).*}");/\1/p' "$profile/prefs.js")
 
 
-IFS=',' read -ra EXTS <<< "$line"
-for i in "${EXTS[@]}"; do
-    id=$(echo $i | sed -n 's/.*"\(.*\)\\":.*/\1/p')
-    uuid=$(echo $i | sed -n 's/.*"\(.*\)\\".*/\1/p')
-    if [[ -n "${styled[$id]}" ]]
-    then
-        sed -i '' "s/${styled[$id]}_UUID/$uuid/" "$target/css/userContent-files/webextension-tweaks/${styled[$id]}.css"
-    fi;
-done
-echo "UUIDs applied!"
+    IFS=',' read -ra EXTS <<< "$line"
+    for i in "${EXTS[@]}"; do
+        id=$(echo $i | sed -n 's/.*"\(.*\)\\":.*/\1/p')
+        uuid=$(echo $i | sed -n 's/.*"\(.*\)\\".*/\1/p')
+        if [[ -n "${styled[$id]}" ]]
+        then
+            sed -i '' "s/${styled[$id]}_UUID/$uuid/" "$target/css/userContent-files/webextension-tweaks/${styled[$id]}.css"
+        fi;
+    done
+    echo "UUIDs applied!"
 fi
