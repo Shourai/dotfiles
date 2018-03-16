@@ -210,7 +210,9 @@ if there isn't already one.
     Show the time in 24 hour format when `display-time` is enabled` and enable date
     #+BEGIN_SRC emacs-lisp
     (setq display-time-24hr-format  t
-        display-time-day-and-date t)
+          display-time-day-and-date t
+          display-time-format "%H:%M - %a %d %B %Y"
+          display-time-default-load-average nil)
     #+END_SRC
   
 ** Which key
@@ -253,16 +255,16 @@ if there isn't already one.
     (use-package solarized-theme 
     :ensure t
     :init
-    (setq solarized-high-contrast-mode-line t)
+    (setq solarized-high-contrast-mode-line nil)
     (setq solarized-use-less-bold t)
     ;(setq solarized-distinct-fringe-background t)
-    (load-theme 'solarized-dark t)
+    (load-theme 'solarized-light t)
     :config
-    (custom-set-faces
-    '(mode-line ((t
-    (:underline nil :overline nil :box
-                (:line-width 1 :color "#002b36")
-                :foreground "#002b36" :background "#657b83")))))
+   ; (custom-set-faces
+   ; '(mode-line ((t
+   ; (:underline nil :overline nil :box
+   ;             (:line-width 1 :color "#002b36")
+   ;             :foreground "#002b36" :background "#657b83")))))
     )
    #+END_SRC
 
@@ -270,13 +272,17 @@ if there isn't already one.
    I am still looking for a way to defer loading of spaceline.
    
     #+BEGIN_SRC emacs-lisp
-        (use-package spaceline
-        :ensure t
-        :init
-        (require 'spaceline-config)
-        (spaceline-emacs-theme)
-        (setq ns-use-srgb-colorspace nil)
-        (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state))
+      (use-package spaceline
+      :ensure t
+      :init
+      (require 'spaceline-config)
+      (spaceline-emacs-theme)
+      (setq powerline-image-apple-rgb t  ;; Fix for https://github.com/milkypostman/powerline/issues/54
+            spaceline-highlight-face-func 'spaceline-highlight-face-evil-state))
+      :config
+      (custom-set-faces
+      '(mode-line ((t
+      (:underline nil :overline nil)))))
     #+END_SRC
 
 ** Highlight current line
@@ -317,7 +323,7 @@ fill the line but only gives a visual indication.
   #+BEGIN_SRC emacs-lisp
     (use-package rainbow-delimiters
     :ensure t
-    :defer t 
+    ;:defer t 
     :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode) )
   #+END_SRC
 
@@ -829,33 +835,6 @@ Useful if you want do quick arithmetic.
             (insert (current-kill 0)))))
 
     (global-set-key (kbd "C-c C-e") 'eval-and-replace)
-    #+END_SRC
-
-Change solarized theme.
-    #+BEGIN_SRC emacs-lisp
-    (defun solarized-dark ()
-    "Change solarized theme"
-    (interactive)
-    (load-theme 'solarized-dark t)
-    (custom-set-faces
-    '(mode-line ((t
-    (:underline nil :overline nil :box
-                (:line-width 1 :color "#002b36")
-                :foreground "#002b36" :background "#657b83")))))
-    (set-face-attribute 'linum nil :height 120) ;; Fix for large font size
-    (spaceline-compile))
-
-    (defun solarized-light ()
-    "Change solarized theme"
-    (interactive)
-    (load-theme 'solarized-light t)
-    (custom-set-faces
-    '(mode-line ((t
-    (:underline nil :overline nil :box
-                (:line-width 1 :color "#fdf6e3")
-                :foreground "#fdf6e3" :background "#657b83")))))
-    (set-face-attribute 'linum nil :height 120) ;; Fix for large font size
-    (spaceline-compile))
     #+END_SRC
 
 Simply pressing `Control-c r` will reload this file, very handy. 
