@@ -74,6 +74,13 @@
     :init
     (load-theme 'sanityinc-tomorrow-night t))
    #+END_SRC
+** Highlight background colour
+   Background color in visual select mode.
+   
+   #+BEGIN_SRC emacs-lisp
+;;     (set-face-background 'hl-line "#2b2f31")
+    (set-face-attribute 'region nil :background "#676767")
+   #+END_SRC
 * Loading and Finding Files
 ** Ido
    Interactively do things with buffers and files.
