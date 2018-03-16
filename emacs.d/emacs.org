@@ -318,7 +318,7 @@ fill the line but only gives a visual indication.
     (use-package rainbow-delimiters
     :ensure t
     :defer t 
-    :config )
+    :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode) )
   #+END_SRC
 
 ** Highlight parenthesis
@@ -531,7 +531,7 @@ This is useful if when using `viwp`, which does not work otherwise.
     (setq evil-replace-with-register-key (kbd "gr"))
     (evil-replace-with-register-install))
   #+END_SRC
-
+  
 * Movement
 ** Avy
    Avy is a GNU Emacs package for jumping to visible text using a char-based decision tree. \\
@@ -542,7 +542,7 @@ This is useful if when using `viwp`, which does not work otherwise.
        :ensure t
        :defer t
        :bind (("C-'" . avy-goto-char)
-       ("C-\"" . avy-goto-char-2)
+       ("C-:" . avy-goto-char-2)
        ("M-g f" . avy-goto-line)
        ("M-g w" . avy-goto-word-1)
        ("M-g e" . avy-goto-word-0)))
@@ -741,6 +741,15 @@ Furthermore it will load the languages that could be used.
      )
    #+END_SRC
 
+  Evil bindings for org mode
+   #+BEGIN_SRC emacs-lisp
+     (use-package evil-org
+       :ensure t
+       :defer t
+       :delight
+       :init (add-hook 'org-mode-hook 'evil-org-mode))
+   #+END_SRC
+
 * Magit
 
   Magit is an interface to the version control system Git, implemented as an Emacs package.  
@@ -848,6 +857,24 @@ Change solarized theme.
     (set-face-attribute 'linum nil :height 120) ;; Fix for large font size
     (spaceline-compile))
     #+END_SRC
+
+Simply pressing `Control-c r` will reload this file, very handy. 
+You can also manually invoke `config-reload`.
+#+BEGIN_SRC emacs-lisp
+(defun config-reload ()
+  "Reloads ~/.emacs.d/config.org at runtime"
+  (interactive)
+  (org-babel-load-file (expand-file-name "emacs.org" user-emacs-directory)))
+(global-set-key (kbd "C-c r") 'config-reload)
+#+END_SRC
+
+Quicky edit `emacs.org`.
+#+BEGIN_SRC emacs-lisp
+(defun config-visit ()
+  (interactive)
+  (find-file (expand-file-name "emacs.org" user-emacs-directory)))
+(global-set-key (kbd "C-c e") 'config-visit)
+#+END_SRC
 
 * End notes
 
