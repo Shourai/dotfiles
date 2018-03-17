@@ -249,8 +249,6 @@ if there isn't already one.
      
 ** Theme
    [[https://github.com/bbatsov/solarized-emacs][Solarized theme]]  
-   Light color/foreground: `#fdf6e3`  
-   Dark color/foreground: `#002b36`
    #+BEGIN_SRC emacs-lisp
     (use-package solarized-theme 
     :ensure t
@@ -258,13 +256,11 @@ if there isn't already one.
     (setq solarized-high-contrast-mode-line nil)
     (setq solarized-use-less-bold t)
     ;(setq solarized-distinct-fringe-background t)
-    (load-theme 'solarized-light t)
+    (load-theme 'solarized-dark t)
     :config
-   ; (custom-set-faces
-   ; '(mode-line ((t
-   ; (:underline nil :overline nil :box
-   ;             (:line-width 1 :color "#002b36")
-   ;             :foreground "#002b36" :background "#657b83")))))
+    (custom-set-faces
+    '(mode-line ((t
+    (:underline nil :overline nil)))))
     )
    #+END_SRC
 
@@ -280,9 +276,6 @@ if there isn't already one.
       (setq powerline-image-apple-rgb t  ;; Fix for https://github.com/milkypostman/powerline/issues/54
             spaceline-highlight-face-func 'spaceline-highlight-face-evil-state))
       :config
-      (custom-set-faces
-      '(mode-line ((t
-      (:underline nil :overline nil)))))
     #+END_SRC
 
 ** Highlight current line
