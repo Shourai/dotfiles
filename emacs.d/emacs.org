@@ -211,8 +211,9 @@ if there isn't already one.
     #+BEGIN_SRC emacs-lisp
     (setq display-time-24hr-format  t
           display-time-day-and-date t
-          display-time-format "%H:%M - %a %d %B %Y"
+          display-time-format "%H:%M | %a %d %B"
           display-time-default-load-average nil)
+    (display-time-mode t)
     #+END_SRC
   
 ** Which key
