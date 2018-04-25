@@ -188,9 +188,9 @@ if there isn't already one.
   
   #+BEGIN_SRC emacs-lisp
     (add-hook 'after-make-frame-functions (lambda (frame) (when (display-graphic-p frame) (scroll-bar-mode -1))))
-    (scroll-bar-mode -1)
+   ; (scroll-bar-mode -1)
     (tool-bar-mode -1)
-    (menu-bar-mode -1)
+   ; (menu-bar-mode -1)
     (blink-cursor-mode -1)
     (setq default-frame-alist
       '(
@@ -241,7 +241,7 @@ if there isn't already one.
      #+BEGIN_SRC emacs-lisp
        (use-package nlinum-relative
        :ensure t
-       :defer 2
+       :defer 1
        :config
        (global-nlinum-relative-mode)
        (set-face-attribute 'linum nil :height 120) ;; Fix for large font size
@@ -253,12 +253,13 @@ if there isn't already one.
    #+BEGIN_SRC emacs-lisp
     (use-package solarized-theme 
     :ensure t
+    :defer 1
     :init
+    :config
     (setq solarized-high-contrast-mode-line nil)
     (setq solarized-use-less-bold t)
     ;(setq solarized-distinct-fringe-background t)
     (load-theme 'solarized-dark t)
-    :config
     (custom-set-faces
     '(mode-line ((t
     (:underline nil :overline nil)))))
@@ -269,14 +270,15 @@ if there isn't already one.
    I am still looking for a way to defer loading of spaceline.
    
     #+BEGIN_SRC emacs-lisp
-      (use-package spaceline
-      :ensure t
-      :init
+      (use-package spaceline-config
+      :ensure spaceline
+      :defer 2
+      :demand t
+      :config
       (require 'spaceline-config)
       (spaceline-emacs-theme)
       (setq powerline-image-apple-rgb t  ;; Fix for https://github.com/milkypostman/powerline/issues/54
             spaceline-highlight-face-func 'spaceline-highlight-face-evil-state))
-      :config
     #+END_SRC
 
 ** Highlight current line
@@ -317,8 +319,8 @@ fill the line but only gives a visual indication.
   #+BEGIN_SRC emacs-lisp
     (use-package rainbow-delimiters
     :ensure t
-    ;:defer t 
-    :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode) )
+    :defer t
+    :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode) )
   #+END_SRC
 
 ** Highlight parenthesis
@@ -476,6 +478,7 @@ The dictionaries have to be installed via `brew install aspell`.
            ("C-x C-z" . turn-off-evil-mode))
     :init
     ;; (setq evil-want-C-u-scroll t) ;; This does not play nicely when having to use `C-u M-x` commands
+    :config
     (evil-mode t))
   #+END_SRC
 
@@ -527,7 +530,7 @@ This is useful if when using `viwp`, which does not work otherwise.
   #+BEGIN_SRC emacs-lisp
     (use-package evil-replace-with-register
     :ensure t
-    :defer 1
+    :defer 2
     :config
     (setq evil-replace-with-register-key (kbd "gr"))
     (evil-replace-with-register-install))
@@ -592,7 +595,7 @@ Add LatexMk support to AUCTeX
     #+BEGIN_SRC emacs-lisp
         (use-package auctex-latexmk
         :ensure t
-        :defer 2
+        :defer 5
         :init (add-hook 'LaTeX-mode-hook 'auctex-latexmk-setup)
         :config
         ;; Let LatexMk to pass the -pdf flag when TeX-PDF-mode is active 
