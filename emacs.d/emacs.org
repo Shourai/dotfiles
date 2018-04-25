@@ -319,7 +319,7 @@ fill the line but only gives a visual indication.
   #+BEGIN_SRC emacs-lisp
     (use-package rainbow-delimiters
     :ensure t
-    :defer t
+    ;:defer t
     :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode) )
   #+END_SRC
 
@@ -327,8 +327,12 @@ fill the line but only gives a visual indication.
   #+BEGIN_SRC emacs-lisp
     (use-package highlight-parentheses
     :ensure t
-    :defer t 
-    :config )
+    ;:defer t 
+    :delight
+    :config
+    (custom-set-variables
+    `(hl-paren-colors (quote ("tomato2" "#b58900" "#268bd2" "#6c71c4" "#859900"))))
+    (add-hook 'prog-mode-hook #'highlight-parentheses-mode))
   #+END_SRC
 
 ** Delight
