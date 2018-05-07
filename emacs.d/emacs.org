@@ -436,21 +436,21 @@ fill the line but only gives a visual indication.
      :after (company)
      :config
      (company-quickhelp-mode 1))
-   #+END_SRC
-   
+   #+END_SRC   
+
 ** Smartparens
    Minor mode for Emacs that deals with parens pairs and tries to be smart about it.
    #+BEGIN_SRC emacs-lisp
-      (use-package smartparens
-      :ensure t
-      :defer 2
-      :delight 
-      :init
-      (add-hook 'python-mode-hook #'smartparens-mode)
-      (add-hook 'LaTeX-mode-hook #'smartparens-mode)
-      :config
-      (eval-after-load 'latex '(require 'smartparens-latex))
-      (sp-use-smartparens-bindings))
+     (use-package smartparens
+     :ensure t
+     :defer 2
+     :delight 
+     :init
+     (add-hook 'python-mode-hook #'smartparens-mode)
+     (add-hook 'LaTeX-mode-hook #'smartparens-mode)
+     :config
+     (eval-after-load 'latex '(require 'smartparens-latex))
+     (sp-use-smartparens-bindings))
    #+END_SRC
    
    Load after smartparens-strict-mode
@@ -540,7 +540,7 @@ This is useful if when using `viwp`, which does not work otherwise.
     (evil-replace-with-register-install))
   #+END_SRC
   
-* Movement
+* Movement and Search
 ** Avy
    Avy is a GNU Emacs package for jumping to visible text using a char-based decision tree. \\
    See for more information [[https://github.com/abo-abo/avy][abo-abo]]'s github.
@@ -560,12 +560,24 @@ This is useful if when using `viwp`, which does not work otherwise.
    Expand region increases the selected region by semantic units.
    
    #+BEGIN_SRC emacs-lisp
-(use-package expand-region
-  :ensure t
-  :defer t
-  :bind ("C-=" . er/expand-region))
+     (use-package expand-region
+       :ensure t
+       :defer t
+       :bind ("C-=" . er/expand-region))
    #+END_SRC
    
+** Anzu
+   Anzu provides a minor mode which displays current match and total matches
+   information in the mode-line in various search modes.
+   
+   #+BEGIN_SRC emacs-lisp
+     (use-package anzu
+       :ensure t
+       :defer t
+       :config
+       (setq anzu-cons-mode-line-p nil))
+   #+END_SRC
+  
 * Latex
 We will be using AUCTeX as our Emacs TeX environment, together with yasnippets it 
 works as well as any dedicated LaTeX program.
@@ -697,21 +709,24 @@ Latex color overrides in solarized dark theme
       :config
       (elpy-enable))
     #+END_SRC
+  
+ Change elpy's RPC to python 3
+ #+BEGIN_SRC emacs-lisp
+   (setq elpy-rpc-python-command "python3")
+ #+END_SRC
 
-  Set the shell interpreter to python 3 instead of python 2.
+  Use Jupyter console (recommended for interactive Python).
   #+BEGIN_SRC emacs-lisp
-    (setq python-shell-interpreter "python3")
-  #+END_SRC
-
-  Change elpy's RPC to python 3
-  #+BEGIN_SRC emacs-lisp
-    (setq elpy-rpc-python-command "python3")
+    (setq python-shell-interpreter "jupyter"
+        python-shell-interpreter-args "console --simple-prompt"
+        python-shell-prompt-detect-failure-warning nil)
+   ;; (add-to-list 'python-shell-completion-native-disabled-interpreters "jupyter")
   #+END_SRC
 
   This is used as an workaround for the following issue [[https://github.com/jorgenschaefer/elpy/issues/887]]
-#+BEGIN_SRC emacs-lisp
- (setq python-shell-completion-native-enable nil)
-#+END_SRC  
+    #+BEGIN_SRC emacs-lisp
+    (setq python-shell-completion-native-enable nil)
+    #+END_SRC  
 * Org mode
   
 The following is for syntax highlighting the code source blocks inside org mode.
