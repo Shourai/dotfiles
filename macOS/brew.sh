@@ -21,8 +21,10 @@ brew install fasd
 brew install fzf
 brew install gnu-sed
 brew install gnutls
+brew install htop
 brew install ledger
 brew install markdown
+brew install mpv
 brew install neovim
 brew install pandoc
 brew install python
