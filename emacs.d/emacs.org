@@ -370,6 +370,13 @@ fill the line but only gives a visual indication.
            helm-quick-update            t))
    #+END_SRC
    
+  `helm-ag.el` provides interfaces of [[https://github.com/ggreer/the_silver_searcher][The Silver Searcher]] with helm. 
+   #+BEGIN_SRC emacs-lisp
+     (use-package helm-ag
+     :ensure t
+     :defer t)
+   #+END_SRC
+   
 ** Projectile
    [[https://github.com/bbatsov/projectile][Projectile]] is a project interaction library for Emacs.
 
