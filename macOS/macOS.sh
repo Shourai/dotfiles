@@ -72,6 +72,9 @@ defaults write -g KeyRepeat -int 1
 # Disable reopen windows when logging back in
 defaults write com.apple.loginwindow TALLogoutSavesState -bool false
 
+# Use dark menu bar and dock
+defaults write -g AppleInterfaceStyle Dark
+
 # Skim: turn off auto reload dialog, default to auto reload
 defaults write -app Skim SKAutoReloadFileUpdate -boolean true
 
