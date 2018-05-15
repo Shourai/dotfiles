@@ -11,6 +11,6 @@ pip3 install jupyter
 pip3 install neovim
 
 if [[ "$(uname)" = "Darwin" ]]; then
-    echo "Install fzf keybindings with"
+    echo "Manually install fzf keybindings with"
     echo "/usr/local/opt/fzf/install"
 fi

@@ -78,6 +78,9 @@ defaults write -g AppleInterfaceStyle Dark
 # Skim: turn off auto reload dialog, default to auto reload
 defaults write -app Skim SKAutoReloadFileUpdate -boolean true
 
+# Set iTerm2 preference folder
+defaults write -app iTerm PrefsCustomFolder "$HOME/Documents/github/dotfiles/"
+
 # Disable the sound effects on boot
 #sudo nvram SystemAudioVolume=" "
 
