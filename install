@@ -78,7 +78,7 @@ fi
 if [ "$(uname)" = "Darwin" ]; then
     sh ~/Documents/github/dotfiles/macOS/miscellaneous.sh
 else
-    sed 's/pip3/sudo pip3/g' ~/Documents/github/dotfiles/macOS/miscellaneous.sh | sh
+    sed 's/pip3/pip3 --user/g' ~/Documents/github/dotfiles/macOS/miscellaneous.sh | sh
 fi
 
 

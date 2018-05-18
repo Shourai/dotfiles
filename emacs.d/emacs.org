@@ -718,7 +718,7 @@ Latex color overrides in solarized dark theme
     #+END_SRC
   
  Change elpy's RPC to python 3
- #+BEGIN_SRC emacs-lisp
+ #+BEGIN_SRC emacs-lisp :tangle no
    (setq elpy-rpc-python-command "python3")
  #+END_SRC
 
