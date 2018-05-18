@@ -35,11 +35,6 @@ elif [ -f /etc/arch-release ]; then
     git config --global user.name "Shourai"
     git config --global user.email "10200748+Shourai@users.noreply.github.com"
     git config --global credential.helper cache
-elif [ "$OSTYPE" = "linux-androideabi" ]; then
-    apt install git -y
-    git config --global user.name "Shourai"
-    git config --global user.email "10200748+Shourai@users.noreply.github.com"
-    git config --global credential.helper cache
 fi
 
 # Clone respository
@@ -66,8 +61,6 @@ elif [ -f /etc/debian_version ]; then
 elif [ -f /etc/arch-release ]; then
     # Install pacman packages
     sh ~/Documents/github/dotfiles/arch/packages.sh
-elif [ "$OSTYPE" = "linux-androideabi" ]; then
-    sh ~/Documents/github/dotfiles/android/packages.sh
 fi
 
 # Link dotfiles
@@ -87,6 +80,5 @@ if [ "$(uname)" = "Darwin" ]; then
 elif [ -f /etc/debian_version -o  -f /etc/arch-release ]
     sed 's/pip3/pip3 --user/g' ~/Documents/github/dotfiles/macOS/miscellaneous.sh | sh
 fi
-
 
 echo "Success! Reboot the machine for the changes to take effect"
