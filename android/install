@@ -11,9 +11,6 @@ git config --global credential.helper cache
 # Clone respository
 git clone https://github.com/Shourai/dotfiles.git ~/Documents/github/dotfiles
 
-# Change git repo from https to SSH
-git -C ~/Documents/github/dotfiles remote set-url origin git@github.com:Shourai/dotfiles.git
-
 # Wait for a little while before continuing
 echo "We are now installing the needed packages and setting the desired configuration."
 sleep 1
