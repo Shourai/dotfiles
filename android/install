@@ -23,4 +23,7 @@ sh ~/Documents/github/dotfiles/macOS/dotfiles.sh
 # Change shell to zsh
 sh ~/Documents/github/dotfiles/macOS/shell.sh
 
+# Add termux config
+ln -s ~/Documents/github/dotfiles/android/termux.properties ~/.termux/termux.properties
+
 echo "Success! Reboot the machine for the changes to take effect"
