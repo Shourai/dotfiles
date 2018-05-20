@@ -118,6 +118,16 @@
     (add-hook 'python-mode-hook 'jedi:setup)
     (setq jedi:complete-on-dot t)                 ; optional
   #+END_SRC
+  
+    Use Jupyter console (recommended for interactive Python).
+  For it to work in virtualenvs: `pip3 install juptyter-console`.
+  #+BEGIN_SRC emacs-lisp :tangle no
+    (setq python-shell-interpreter "jupyter"
+        python-shell-interpreter-args "console --simple-prompt"
+        python-shell-prompt-detect-failure-warning nil)
+   ;; (add-to-list 'python-shell-completion-native-disabled-interpreters "jupyter")
+  #+END_SRC
+
 * Undo and Redo
   The ultimate undo history visualizer.  
   Evil requires undo-tree, no need for this explicitly.

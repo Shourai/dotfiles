@@ -721,15 +721,19 @@ Latex color overrides in solarized dark theme
  #+BEGIN_SRC emacs-lisp :tangle no
    (setq elpy-rpc-python-command "python3")
  #+END_SRC
+ 
+ Change virtualenvwrapper to python 3
+ #+BEGIN_SRC emacs-lisp :tangle no
+   (setq pyvenv-virtualenvwrapper-python "python3")
+ #+END_SRC
 
-  Use Jupyter console (recommended for interactive Python).
+  Use ipython console.
+  For it to work in virtualenvs: `pip3 install ipython`.
   #+BEGIN_SRC emacs-lisp
-    (setq python-shell-interpreter "jupyter"
-        python-shell-interpreter-args "console --simple-prompt"
-        python-shell-prompt-detect-failure-warning nil)
-   ;; (add-to-list 'python-shell-completion-native-disabled-interpreters "jupyter")
+    (setq python-shell-interpreter "ipython"
+        python-shell-interpreter-args "-i --simple-prompt")
   #+END_SRC
-
+  
   This is used as an workaround for the following issue [[https://github.com/jorgenschaefer/elpy/issues/887]]
     #+BEGIN_SRC emacs-lisp
     (setq python-shell-completion-native-enable nil)

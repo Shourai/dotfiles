@@ -33,8 +33,8 @@ alias ~='cd ~'
 alias cp='cp -iv'
 alias mkdir='mkdir -pv'
 alias emd='emacs --daemon'
-alias python='python3'
-alias pip='pip3'
+#alias python='python3'
+#alias pip='pip3'
 alias vi='\vim'
 alias vim='nvim'
 alias zshrc='vim ~/.zshrc'
@@ -68,6 +68,22 @@ alias gsb='git status -sb'
 alias gss='git status -s'
 alias gst='git status'
 
+## Virtualenv
+alias venv="workon"
+alias venv.exit="deactivate"
+alias venv.ls="lsvirtualenv"
+alias venv.show="showvirtualenv"
+alias venv.init="mkvirtualenv"
+alias venv.rm="rmvirtualenv"
+alias venv.switch="workon"
+alias venv.add="add2virtualenv"
+alias venv.cd="cdproject"
+alias venv.cdsp="cdsitepackages"
+alias venv.cdenv="cdvirtualenv"
+alias venv.lssp="lssitepackages"
+alias venv.proj="mkproject"
+alias venv.setproj="setvirtualenvproject"
+alias venv.wipe="wipeenv"
 
 # ------------------------------------------------------------------------------
 # - General Configurations                                                     -
@@ -240,10 +256,19 @@ git_info() {
 
 # Use ❯ as the non-root prompt character; # for root
 # Change the prompt character color if the last command had a nonzero exit code
-PS1='
+PS1=' 
 $(ssh_info)%F{147}%~%u $(git_info)
 %(?.%F{blue}.%F{red})%(!.#.❯)%f '
 
+# Add virtualenv prompt on the right side of the prompt
+# Need to fix blinking when deactivating venv
+function virtualenv_prompt {
+if [ $VIRTUAL_ENV ]; then
+EPS1='《 %F{250}%B `basename \"$VIRTUAL_ENV` %b%f 》'
+elif [ -z $VIRTUAL_ENV ]; then
+EPS1=''
+fi
+}
 
 # ------------------------------------------------------------------------------
 # - Vi mode in ZSH                                                             -
@@ -255,8 +280,8 @@ export KEYTIMEOUT=1
 
 # Prompt when in insert or normal mode
 function zle-line-init zle-keymap-select {
-    VIM_PROMPT="%F{grey}%S[NORMAL]%s%f"
-    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
+    VIM_PROMPT="%B%F{grey}%S[NORMAL]%s%f%b"
+    RPS1="$EPS1 ${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}"
     zle reset-prompt
 }
 
@@ -399,6 +424,15 @@ alias v='f -e nvim' # quick opening files with neovim
 # ------------------------------------------------------------------------------
 # Using fasd now instead of autojump
 # [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+# ------------------------------------------------------------------------------
+# - Virtualenvwrapper settings                                                 -
+# ------------------------------------------------------------------------------
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Documents/Python-Projects
+source /usr/local/bin/virtualenvwrapper.sh
 
 
 # ==============================================================================
