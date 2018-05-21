@@ -38,6 +38,7 @@ alias emd='emacs --daemon'
 alias vi='\vim'
 alias vim='nvim'
 alias zshrc='vim ~/.zshrc'
+alias activate='source bin/activate'
 
 ## Github related
 alias g='git'
@@ -260,16 +261,6 @@ PS1='
 $(ssh_info)%F{147}%~%u $(git_info)
 %(?.%F{blue}.%F{red})%(!.#.❯)%f '
 
-# Add virtualenv prompt on the right side of the prompt
-# Need to fix blinking when deactivating venv
-function virtualenv_prompt {
-if [ $VIRTUAL_ENV ]; then
-EPS1='《 %F{250}%B `basename \"$VIRTUAL_ENV` %b%f 》'
-elif [ -z $VIRTUAL_ENV ]; then
-EPS1=''
-fi
-}
-
 # ------------------------------------------------------------------------------
 # - Vi mode in ZSH                                                             -
 # ------------------------------------------------------------------------------
@@ -279,9 +270,21 @@ bindkey -v
 export KEYTIMEOUT=1
 
 # Prompt when in insert or normal mode
+# Add virtualenv prompt on the right side of the prompt
+# Need to fix blinking when deactivating venv
+
+function right_prompt() {
+    if [ $VIRTUAL_ENV ]; then
+    RPS1="$EPS1 ${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}"
+    elif [ -z $VIRTUAL_ENV ]; then
+    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}"
+    fi
+}
+
 function zle-line-init zle-keymap-select {
     VIM_PROMPT="%B%F{grey}%S[NORMAL]%s%f%b"
-    RPS1="$EPS1 ${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}"
+    EPS1='《 %F{250}%B `basename \"$VIRTUAL_ENV` %b%f 》'
+    right_prompt
     zle reset-prompt
 }
 
