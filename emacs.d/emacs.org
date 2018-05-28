@@ -215,6 +215,12 @@ if there isn't already one.
           display-time-default-load-average nil)
     (display-time-mode t)
     #+END_SRC
+    
+ Change the look and feel for Mac.
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
+#+END_SRC
   
 ** Which key
    [[https://github.com/justbur/emacs-which-key][Which key]] allows for a contextualized completion of emacs commands
@@ -230,24 +236,13 @@ if there isn't already one.
         (which-key-mode))
    #+END_SRC
 ** Line numbering
-***  Relative line numbering
-     
-     For relative line numbering I use nlinum-relative. \\
-     nlinum-relative is faster than linum-relative because of its use of
-     jit-lock. \\
-     nlinum-relative only redisplays line numbers when idle which
-     is much more smoother especially with big files.
-     
-     #+BEGIN_SRC emacs-lisp
-       (use-package nlinum-relative
-       :ensure t
-       :defer 1
-       :config
-       (global-nlinum-relative-mode)
-       (set-face-attribute 'linum nil :height 120) ;; Fix for large font size
-       (setq nlinum-relative-redisplay-delay 0.5))
-     #+END_SRC
-     
+   #+BEGIN_SRC emacs-lisp
+     (setq line-number-mode nil)
+     (setq display-line-numbers-type 'relative)
+     (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+     (add-hook 'text-mode-hook 'display-line-numbers-mode)
+   #+END_SRC
+   
 ** Theme
    [[https://github.com/bbatsov/solarized-emacs][Solarized theme]]  
    #+BEGIN_SRC emacs-lisp

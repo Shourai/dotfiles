@@ -11,6 +11,12 @@ pip3 install jupyter
 pip3 install neovim
 
 if [[ "$(uname)" = "Darwin" ]]; then
+    #Symlink python3 to python
+    pypath=$(greadlink -f $(brew --prefix)/bin/python3)
+    pippath=$(greadlink -f $(brew --prefix)/bin/pip3)
+    ln -sf $pypath $(brew --prefix)/bin/python
+    ln -sf $pippath $(brew --prefix)/bin/pip
+    
     echo "Manually install fzf keybindings with"
     echo "/usr/local/opt/fzf/install"
 fi
