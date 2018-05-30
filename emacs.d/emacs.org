@@ -237,8 +237,7 @@ if there isn't already one.
    #+END_SRC
 ** Line numbering
    #+BEGIN_SRC emacs-lisp
-     (setq line-number-mode nil)
-     (setq display-line-numbers-type 'relative)
+     (setq display-line-numbers-type 'visual)
      (add-hook 'prog-mode-hook 'display-line-numbers-mode)
      (add-hook 'text-mode-hook 'display-line-numbers-mode)
    #+END_SRC
@@ -844,9 +843,10 @@ A major mode for editing Markdown-formatted text.
 
 * IRC
   Using emacs' built-in ERC for IRC.
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp 
     (use-package erc-hl-nicks
-        :ensure t)
+        :ensure t
+        :after erc)
 
     ; Align nicknames
     (setq erc-fill-function `erc-fill-static)
