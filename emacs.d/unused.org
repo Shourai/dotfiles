@@ -56,6 +56,15 @@
          ("C-c C-. e"   . mc/edit-ends-of-lines) ))
    #+END_SRC
    
+* Variables
+** Tabs vs Spaces
+   Make tab key do indent first then completion.
+   
+   #+BEGIN_SRC emacs-lisp :tangle no
+     (setq-default tab-always-indent t
+                   tab-always-indent 'complete)
+   #+END_SRC
+
 * Visual settings
 ** Line numbering
 *** Enable line numbers in all buffers
@@ -104,6 +113,34 @@
     :config
     (evil-escape-mode t)) 
 #+END_SRC
+
+** Custom settings
+Prevent the visual selection overriding the system clipboard.
+This is useful if when using `viwp`, which does not work otherwise.
+
+    #+BEGIN_SRC emacs-lisp
+        (fset 'evil-visual-update-x-selection 'ignore)
+    #+END_SRC
+
+* Org mode
+  Load the languages that could be used.
+  #+BEGIN_SRC emacs-lisp :tangle no
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((sh         . t)
+       (emacs-lisp . t)
+       (python     . t)
+       (latex      . t)
+       (ruby       . t)
+       (dot        . t)
+       (css        . t)))
+  #+END_SRC
+  
+  Remove the HTML validate link that appears at the postamble of your exported HTML file.
+  #+BEGIN_SRC emacs-lisp :tangle no
+    (setq org-html-validation-link nil)
+  #+END_SRC
+
 * Python
   Company-mode completion back-end for Python JEDI.
   #+BEGIN_SRC emacs-lisp :tangle no
@@ -127,6 +164,16 @@
         python-shell-prompt-detect-failure-warning nil)
    ;; (add-to-list 'python-shell-completion-native-disabled-interpreters "jupyter")
   #+END_SRC
+  
+ Change elpy's RPC to python 3
+ #+BEGIN_SRC emacs-lisp :tangle no
+   (setq elpy-rpc-python-command "python3")
+ #+END_SRC
+ 
+ Change virtualenvwrapper to python 3
+ #+BEGIN_SRC emacs-lisp :tangle no
+   (setq pyvenv-virtualenvwrapper-python "python3")
+ #+END_SRC
 
 * Undo and Redo
   The ultimate undo history visualizer.  

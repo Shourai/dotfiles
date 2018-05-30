@@ -173,12 +173,6 @@ if there isn't already one.
                    tab-width 4)
    #+END_SRC
    
-   Make tab key do indent first then completion.
-   
-   #+BEGIN_SRC emacs-lisp :tangle no
-     (setq-default tab-always-indent t
-                   tab-always-indent 'complete)
-   #+END_SRC
 * Visual settings
   
   I like a minimal setup when working on code, therefore I disable the toolbar and scroll bar. \\
@@ -207,7 +201,7 @@ if there isn't already one.
     (setq inhibit-startup-message t)
     #+END_SRC
   
-    Show the time in 24 hour format when `display-time` is enabled` and enable date
+    Show the time in 24 hour format when `display-time` is enabled and enable date
     #+BEGIN_SRC emacs-lisp
     (setq display-time-24hr-format  t
           display-time-day-and-date t
@@ -218,8 +212,8 @@ if there isn't already one.
     
  Change the look and feel for Mac.
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-(add-to-list 'default-frame-alist '(ns-appearance . dark))
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . dark))
 #+END_SRC
   
 ** Which key
@@ -236,6 +230,7 @@ if there isn't already one.
         (which-key-mode))
    #+END_SRC
 ** Line numbering
+   From emacs 26+, emacs has a builtin line numbering.
    #+BEGIN_SRC emacs-lisp
      (setq display-line-numbers-type 'visual)
      (add-hook 'prog-mode-hook 'display-line-numbers-mode)
@@ -245,19 +240,19 @@ if there isn't already one.
 ** Theme
    [[https://github.com/bbatsov/solarized-emacs][Solarized theme]]  
    #+BEGIN_SRC emacs-lisp
-    (use-package solarized-theme 
-    :ensure t
-    :defer 1
-    :init
-    :config
-    (setq solarized-high-contrast-mode-line nil)
-    (setq solarized-use-less-bold t)
-    ;(setq solarized-distinct-fringe-background t)
-    (load-theme 'solarized-dark t)
-    (custom-set-faces
-    '(mode-line ((t
-    (:underline nil :overline nil)))))
-    )
+     (use-package solarized-theme 
+     :ensure t
+     :defer 1
+     :init
+     :config
+     (setq solarized-high-contrast-mode-line nil
+           solarized-use-less-bold t)
+     ;(setq solarized-distinct-fringe-background t)
+     (load-theme 'solarized-dark t)
+     (custom-set-faces
+     '(mode-line ((t
+     (:underline nil :overline nil)))))
+     )
    #+END_SRC
 
    [[https://github.com/TheBB/spaceline][This]] is the package that provides Spacemacs with its famous mode-line theme.  
@@ -277,7 +272,7 @@ if there isn't already one.
 
 ** Highlight current line
    #+BEGIN_SRC emacs-lisp
-     (global-hl-line-mode 1) 
+     (global-hl-line-mode t)
    #+END_SRC
 
 
@@ -300,8 +295,8 @@ today, including Google's Java standard and the Linux kernel standard.
     #+END_SRC
 
 
-Highlight text that crosses over the 80 column mark. It does not automatically
-fill the line but only gives a visual indication.
+Highlight text that crosses over the 80 column mark in whitespace mode.
+It does not automatically fill the line but only gives a visual indication.
     #+BEGIN_SRC emacs-lisp
     (setq-default
     whitespace-line-column 80
@@ -314,7 +309,9 @@ fill the line but only gives a visual indication.
     (use-package rainbow-delimiters
     :ensure t
     ;:defer t
-    :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode) )
+    :config 
+    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+    (add-hook 'text-mode-hook #'rainbow-delimiters-mode))
   #+END_SRC
 
 ** Highlight parenthesis
@@ -324,14 +321,14 @@ fill the line but only gives a visual indication.
     ;:defer t 
     :delight
     :config
-    (custom-set-variables
-    `(hl-paren-colors (quote ("tomato2" "#b58900" "#268bd2" "#6c71c4" "#859900"))))
-    (add-hook 'prog-mode-hook #'highlight-parentheses-mode))
+    (setq hl-paren-colors (quote ("tomato2" "#b58900" "#268bd2" "#6c71c4" "#859900")))
+    (add-hook 'prog-mode-hook #'highlight-parentheses-mode)
+    (add-hook 'text-mode-hook #'highlight-parentheses-mode))
   #+END_SRC
 
 ** Delight
    [[https://www.emacswiki.org/emacs/DelightedModes][Delight]] enables you to easily customise how major and minor modes appear in the ModeLine.
-   Usepackage support :delight
+   Usepackage supports :delight
   #+BEGIN_SRC emacs-lisp
     (use-package delight
     :ensure t
@@ -418,7 +415,6 @@ fill the line but only gives a visual indication.
      (global-company-mode 1)
      (setq company-idle-delay  0.3 ; company delay until suggestions are shown
            company-show-numbers t))
-
    #+END_SRC
 
    Cycle forward and backward using C-n and C-p instead of M-n and M-p.
@@ -447,8 +443,8 @@ fill the line but only gives a visual indication.
      :defer 2
      :delight 
      :init
-     (add-hook 'python-mode-hook #'smartparens-mode)
-     (add-hook 'LaTeX-mode-hook #'smartparens-mode)
+     (add-hook 'prog-mode-hook #'smartparens-mode)
+     (add-hook 'text-mode-hook #'smartparens-mode)
      :config
      (eval-after-load 'latex '(require 'smartparens-latex))
      (sp-use-smartparens-bindings))
@@ -480,7 +476,10 @@ The dictionaries have to be installed via `brew install aspell`.
     :delight undo-tree-mode
     :defer t ;; only works if evil-mode lies in ~:config~
     :bind (("C-z" . turn-on-evil-mode)
-           ("C-x C-z" . turn-off-evil-mode))
+           ("C-x C-z" . turn-off-evil-mode)
+           :map evil-normal-state-map
+           ("{" . evil-next-buffer)
+           ("}" . evil-prev-buffer))
     :init
     ;; (setq evil-want-C-u-scroll t) ;; This does not play nicely when having to use `C-u M-x` commands
     :config
@@ -499,8 +498,8 @@ The dictionaries have to be installed via `brew install aspell`.
     (use-package evil-numbers
     :ensure t
     :defer t
-    :bind ("C-c +" . evil-numbers/inc-at-pt)
-          ("C-c -" . evil-numbers/dec-at-pt))
+    :bind ("C-=" . evil-numbers/inc-at-pt)
+          ("C--" . evil-numbers/dec-at-pt))
   #+END_SRC
   
 ** Surround
@@ -522,16 +521,8 @@ This package emulates [[https://github.com/tpope/vim-surround][surround.vim by T
     :defer t)
   #+END_SRC
 
-** Custom settings
-Prevent the visual selection overriding the system clipboard.
-This is useful if when using `viwp`, which does not work otherwise.
-
-    #+BEGIN_SRC emacs-lisp
-        (fset 'evil-visual-update-x-selection 'ignore)
-    #+END_SRC
-
 ** Replace with register
-  Port of [ReplaceWithRegister](http://www.vim.org/scripts/script.php?script_id=2703)
+  Port of [[http://www.vim.org/scripts/script.php?script_id=2703][Replace With Register]].
   #+BEGIN_SRC emacs-lisp
     (use-package evil-replace-with-register
     :ensure t
@@ -550,11 +541,12 @@ This is useful if when using `viwp`, which does not work otherwise.
      (use-package avy
        :ensure t
        :defer t
-       :bind (("C-'" . avy-goto-char)
-       ("C-:" . avy-goto-char-2)
-       ("M-g f" . avy-goto-line)
-       ("M-g w" . avy-goto-word-1)
-       ("M-g e" . avy-goto-word-0)))
+       :bind 
+        (("C-'"  . avy-goto-char)
+        ("C-:"   . avy-goto-char-2)
+        ("M-g f" . avy-goto-line)
+        ("M-g w" . avy-goto-word-1)
+        ("M-g e" . avy-goto-word-0)))
    #+END_SRC
    
 ** Expand region
@@ -711,16 +703,6 @@ Latex color overrides in solarized dark theme
       (elpy-enable))
     #+END_SRC
   
- Change elpy's RPC to python 3
- #+BEGIN_SRC emacs-lisp :tangle no
-   (setq elpy-rpc-python-command "python3")
- #+END_SRC
- 
- Change virtualenvwrapper to python 3
- #+BEGIN_SRC emacs-lisp :tangle no
-   (setq pyvenv-virtualenvwrapper-python "python3")
- #+END_SRC
-
   Use ipython console.
   For it to work in virtualenvs: `pip3 install ipython`.
   #+BEGIN_SRC emacs-lisp
@@ -735,7 +717,6 @@ Latex color overrides in solarized dark theme
 * Org mode
   
 The following is for syntax highlighting the code source blocks inside org mode.
-Furthermore it will load the languages that could be used.
 
   #+BEGIN_SRC emacs-lisp
     (setq org-confirm-babel-evaluate nil
@@ -743,24 +724,6 @@ Furthermore it will load the languages that could be used.
           org-src-tab-acts-natively  t)
   #+END_SRC
 
-  #+BEGIN_SRC emacs-lisp :tangle no
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((sh         . t)
-       (emacs-lisp . t)
-       (python     . t)
-       (latex      . t)
-       (ruby       . t)
-       (dot        . t)
-       (css        . t)))
-  #+END_SRC
-  
-  Remove the HTML validate link that appears at the postamble of your exported HTML file.
-
-  #+BEGIN_SRC emacs-lisp :tangle no
-    (setq org-html-validation-link nil)
-  #+END_SRC
-  
   Use UTF-8 bullets for org lists
    #+BEGIN_SRC emacs-lisp
      (use-package org-bullets
@@ -795,6 +758,7 @@ Furthermore it will load the languages that could be used.
        :ensure t
        :defer t)
    #+END_SRC
+   
 * Ledger
 
 A major mode for editing files in the format used by the [[https://github.com/ledger/ledger][ledger]] command-line accounting system.
@@ -849,8 +813,8 @@ A major mode for editing Markdown-formatted text.
         :after erc)
 
     ; Align nicknames
-    (setq erc-fill-function `erc-fill-static)
-    (setq erc-fill-static-center 16)
+    (setq erc-fill-function `erc-fill-static
+          erc-fill-static-center 16)
    #+END_SRC
 
 * Custom Functions
@@ -874,21 +838,32 @@ Useful if you want do quick arithmetic.
 
 Simply pressing `Control-c r` will reload this file, very handy. 
 You can also manually invoke `config-reload`.
-#+BEGIN_SRC emacs-lisp
-(defun config-reload ()
-  "Reloads ~/.emacs.d/config.org at runtime"
-  (interactive)
-  (org-babel-load-file (expand-file-name "emacs.org" user-emacs-directory)))
-(global-set-key (kbd "C-c r") 'config-reload)
-#+END_SRC
+    #+BEGIN_SRC emacs-lisp
+        (defun config-reload ()
+        "Reloads ~/.emacs.d/config.org at runtime"
+        (interactive)
+        (org-babel-load-file (expand-file-name "emacs.org" user-emacs-directory)))
+        (global-set-key (kbd "C-c r") 'config-reload)
+    #+END_SRC
 
-Quicky edit `emacs.org`.
-#+BEGIN_SRC emacs-lisp
-(defun config-visit ()
-  (interactive)
-  (find-file (expand-file-name "emacs.org" user-emacs-directory)))
-(global-set-key (kbd "C-c e") 'config-visit)
-#+END_SRC
+Quickly edit `emacs.org`.
+    #+BEGIN_SRC emacs-lisp
+        (defun config-visit ()
+        (interactive)
+        (find-file (expand-file-name "emacs.org" user-emacs-directory)))
+        (global-set-key (kbd "C-c e") 'config-visit)
+    #+END_SRC
+
+When switching projects in Emacs, it can be prudent to clean up every once in a
+while. Deleting all buffers except the current one is one of the things I often
+do (especially in the long-running `emacsclient`).
+
+    #+BEGIN_SRC emacs-lisp
+        (defun kill-other-buffers ()
+        "Kill all other buffers."
+        (interactive)
+        (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
+    #+END_SRC
 
 * End notes
 
