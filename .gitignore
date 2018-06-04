@@ -21,6 +21,7 @@ tags
 /.emacs.desktop.lock
 *.elc
 auto-save-list
+/emacs.d/request
 tramp
 .\#*
 emacs.el

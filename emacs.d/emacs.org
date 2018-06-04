@@ -131,10 +131,10 @@ if there isn't already one.
 
     #+BEGIN_SRC emacs-lisp
       (require 'package)
-      (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+      (setq package-archives '(("gnu"       . "https://elpa.gnu.org/packages/")
                                ("marmalade" . "https://marmalade-repo.org/packages/")
-                               ("melpa" . "https://melpa.org/packages/")
-                               ("org" . "https://orgmode.org/elpa/")))
+                               ("melpa"     . "https://melpa.org/packages/")
+                               ("org"       . "https://orgmode.org/elpa/")))
       ;; (package-initialize)
       ;; (package-refresh-contents)
     #+END_SRC
@@ -224,7 +224,7 @@ if there isn't already one.
    #+BEGIN_SRC emacs-lisp
      (use-package which-key
         :ensure t 
-        :defer 2 
+        :defer 5 
         :delight
         :config
         (which-key-mode))
@@ -542,7 +542,7 @@ This package emulates [[https://github.com/tpope/vim-surround][surround.vim by T
        :ensure t
        :defer t
        :bind 
-        (("C-'"  . avy-goto-char)
+        (("C-;"  . avy-goto-char)
         ("C-:"   . avy-goto-char-2)
         ("M-g f" . avy-goto-line)
         ("M-g w" . avy-goto-word-1)
@@ -556,7 +556,7 @@ This package emulates [[https://github.com/tpope/vim-surround][surround.vim by T
      (use-package expand-region
        :ensure t
        :defer t
-       :bind ("C-=" . er/expand-region))
+       :bind ("C-+" . er/expand-region))
    #+END_SRC
    
 ** Anzu
@@ -571,6 +571,16 @@ This package emulates [[https://github.com/tpope/vim-surround][surround.vim by T
        (setq anzu-cons-mode-line-p nil))
    #+END_SRC
   
+** Ag
+   
+   #+BEGIN_SRC emacs-lisp
+     (use-package ag
+       :ensure t
+       :defer t
+       :commands ag
+       :config (setq ag-highlight-search t))
+   #+END_SRC
+
 * Latex
 We will be using AUCTeX as our Emacs TeX environment, together with yasnippets it 
 works as well as any dedicated LaTeX program.
@@ -693,26 +703,36 @@ Latex color overrides in solarized dark theme
   combines and configures a number of other packages, both written in Emacs Lisp
   as well as Python.
     #+BEGIN_SRC emacs-lisp
-      (use-package elpy
-      :ensure t
-      :after (python)
-      ;:mode ("\\.py\\'" . python-mode)
-      ;:interpreter ("python" . python-mode)
-      :delight highlight-indentation-mode
-      :config
-      (elpy-enable))
+        (use-package elpy
+        :ensure t
+        :after (python)
+        :mode ("\\.py\\'" . python-mode)
+        :interpreter ("python" . python-mode)
+        :delight highlight-indentation-mode
+        :config
+        (setq python-indent-offset 4)
+        (elpy-enable))
     #+END_SRC
   
   Use ipython console.
   For it to work in virtualenvs: `pip3 install ipython`.
   #+BEGIN_SRC emacs-lisp
     (setq python-shell-interpreter "ipython"
-        python-shell-interpreter-args "-i --simple-prompt")
+          python-shell-interpreter-args "-i --simple-prompt")
   #+END_SRC
   
   This is used as an workaround for the following issue [[https://github.com/jorgenschaefer/elpy/issues/887]]
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle no
     (setq python-shell-completion-native-enable nil)
+    #+END_SRC  
+   
+  Emacs IPython Notebook (EIN)
+    #+BEGIN_SRC emacs-lisp
+      (use-package ein
+      :ensure t
+      :defer t
+      :config
+      (setq ein:completion-backend (quote ein:use-company-backend)))
     #+END_SRC  
 * Org mode
   
@@ -808,13 +828,26 @@ A major mode for editing Markdown-formatted text.
 * IRC
   Using emacs' built-in ERC for IRC.
    #+BEGIN_SRC emacs-lisp 
-    (use-package erc-hl-nicks
-        :ensure t
-        :after erc)
+     (use-package erc-hl-nicks
+         :ensure t
+         :after erc
+         :config
+         ; Align nicknames
+         (setq erc-fill-function `erc-fill-static
+               erc-fill-static-center 16)
 
-    ; Align nicknames
-    (setq erc-fill-function `erc-fill-static
-          erc-fill-static-center 16)
+         ; Set the ERC prompt
+         (setq erc-prompt ">> "))
+   #+END_SRC
+
+* PDF
+  Use emacs to view PDFs
+  Use homebrew to install poppler and automake first: `brew install automake poppler`
+  Then make sure your pdf-tools emacs package is up to date (in fact make sure that all of your packages are up to date), then do `M-x pdf-tools-install`.
+   #+BEGIN_SRC emacs-lisp 
+     (use-package pdf-tools
+         :ensure t
+         :defer t)
    #+END_SRC
 
 * Custom Functions
