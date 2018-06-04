@@ -837,7 +837,7 @@ A major mode for editing Markdown-formatted text.
                erc-fill-static-center 16)
 
          ; Set the ERC prompt
-         (setq erc-prompt ">> "))
+         (setq erc-prompt "❯❯ "))
    #+END_SRC
 
 * PDF
