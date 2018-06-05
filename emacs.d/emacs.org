@@ -215,7 +215,7 @@ if there isn't already one.
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
 #+END_SRC
-  
+
 ** Which key
    [[https://github.com/justbur/emacs-which-key][Which key]] allows for a contextualized completion of emacs commands
    shown in the mini-buffer. \\
@@ -483,14 +483,26 @@ The dictionaries have to be installed via `brew install aspell`.
     :init
     ;; (setq evil-want-C-u-scroll t) ;; This does not play nicely when having to use `C-u M-x` commands
     :config
+    (setq evil-want-integration nil)
     (evil-mode t))
   #+END_SRC
+
+    This is a collection of Evil bindings for the parts of Emacs that Evil does not
+    cover properly by default, such as help-mode, M-x calendar, Eshell and more.
+
+    #+BEGIN_SRC emacs-lisp
+        (use-package evil-collection
+        :after evil
+        :ensure t
+        :config)
+    #+END_SRC
 
   When the buffer loses focus, return to evil-normal-mode. \\
   This is useful when you alt-tab back and directly want to move around.
     #+BEGIN_SRC emacs-lisp :tangle no
         (add-hook 'focus-in-hook 'normal-mode)
     #+END_SRC
+    
 
 ** Custom Keybindings 
   Increment and decrement numbers in Emacs.
@@ -732,7 +744,8 @@ Latex color overrides in solarized dark theme
       :ensure t
       :defer t
       :config
-      (setq ein:completion-backend (quote ein:use-company-backend)))
+      (setq ein:completion-backend (quote ein:use-company-backend))
+      (setq ein:jupyter-server-args (list "--no-browser")))
     #+END_SRC  
 * Org mode
   
@@ -813,6 +826,7 @@ A major mode for editing Markdown-formatted text.
        :mode (("README\\.md\\'" . gfm-mode)
               ("\\.md\\'" . markdown-mode)
               ("\\.markdown\\'" . markdown-mode))
+       :bind ("<tab>" . markdown-cycle)
        :init (setq markdown-command
                  (concat
                  "/usr/local/bin/pandoc"
@@ -821,7 +835,7 @@ A major mode for editing Markdown-formatted text.
        :config
               (setq markdown-max-image-size (quote (50 . 20))
                     ; doesn't create .html file when using live-preview mode, deletes after refresh.
-                    markdown-live-preview-delete-export 'delete-on-export  
+                    ; markdown-live-preview-delete-export 'delete-on-export  
                     markdown-split-window-direction 'right ))
    #+END_SRC
 
@@ -847,7 +861,9 @@ A major mode for editing Markdown-formatted text.
    #+BEGIN_SRC emacs-lisp 
      (use-package pdf-tools
          :ensure t
-         :defer t)
+         :defer t
+         :config 
+         (with-eval-after-load 'pdf-view (require 'evil-collection-pdf) (evil-collection-pdf-setup)))
    #+END_SRC
 
 * Custom Functions
