@@ -6,9 +6,9 @@ xrdb ~/.Xresources
 
 # Set natural scrolling
 xinput set-prop 13 276 -26 -26
-xinput set-prop 12 281 1 # natural scrolling Asus
-xinput set-prop 12 273 1 # enabled tapping Asus
-xinput set-prop 12 288 0.5 # accel speed Asus
+xinput set-prop 12 280 1 # natural scrolling Asus
+xinput set-prop 12 272 1 # enabled tapping Asus
+xinput set-prop 12 287 0.5 # accel speed Asus
 
 # Source xmodmap
 [ -f ~/.xmodmap ] && xmodmap ~/.xmodmap
