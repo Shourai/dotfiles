@@ -7,7 +7,7 @@ makepkg -si
 sudo pacman -Syu --noconfirm
 
 # Install packages
-sudo pacman -S i3 --noconfirm
+sudo pacman -S i3-wm --noconfirm
 sudo pacman -S xorg --noconfirm
 sudo pacman -S xorg-xinit --noconfirm
 sudo pacman -S dmenu --noconfirm
