@@ -261,7 +261,7 @@ if there isn't already one.
     #+BEGIN_SRC emacs-lisp
       (use-package spaceline-config
       :ensure spaceline
-      :defer 2
+      :defer 1
       :demand t
       :config
       (require 'spaceline-config)
@@ -718,8 +718,8 @@ Latex color overrides in solarized dark theme
         (use-package elpy
         :ensure t
         :after (python)
-        :mode ("\\.py\\'" . python-mode)
-        :interpreter ("python" . python-mode)
+        ;:mode ("\\.py\\'" . python-mode)
+        ;:interpreter ("python" . python-mode)
         :delight highlight-indentation-mode
         :config
         (setq python-indent-offset 4)
