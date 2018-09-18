@@ -431,11 +431,14 @@ alias v='f -e nvim' # quick opening files with neovim
 # ------------------------------------------------------------------------------
 # - Virtualenvwrapper settings                                                 -
 # ------------------------------------------------------------------------------
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Documents/Python-Projects
-source /usr/local/bin/virtualenvwrapper.sh
+
+if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+    export VIRTUAL_ENV_DISABLE_PROMPT=1
+    export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+    export WORKON_HOME=$HOME/.virtualenvs
+    export PROJECT_HOME=$HOME/Documents/Python-Projects
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
 
 
 # ==============================================================================
