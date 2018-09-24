@@ -171,9 +171,9 @@ exec ~/.config/i3/lock.sh -u ~/.config/i3/lock.jpg
 bindsym $mod+shift+x exec ~/.config/i3/lock.sh --lock
 
 # Pulse Audio controls
-bindsym XF86AudioMute        exec --no-startup-id "amixer -q set Master toggle"
-bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -q set Master 5%+ unmute"
-bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -q set Master 5%- unmute"
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+1 i3blocks
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness

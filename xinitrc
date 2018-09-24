@@ -4,8 +4,9 @@ xset r rate 200 30
 # Load .Xresources for xterm colour scheme
 xrdb ~/.Xresources
 
-# Set natural scrolling
-xinput set-prop 13 276 -26 -26
+# Touchpad config
+xinput set-prop 13 286 1 # natural scrolling Acer
+xinput set-prop 13 278 1 # enabled tapping Acer
 xinput set-prop 12 280 1 # natural scrolling Asus
 xinput set-prop 12 272 1 # enabled tapping Asus
 xinput set-prop 12 287 0.5 # accel speed Asus

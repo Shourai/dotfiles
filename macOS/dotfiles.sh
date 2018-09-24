@@ -9,6 +9,7 @@ ln -s ~/Documents/github/dotfiles/ledgerrc ~/.ledgerrc
 ln -s ~/Documents/github/dotfiles/latexmkrc ~/.latexmkrc
 ln -s ~/Documents/github/dotfiles/ranger ~/.config/ranger
 ln -s ~/Documents/github/dotfiles/nvim ~/.config/nvim
+ln -s ~/Documents/github/dotfiles/tmux.conf ~/.tmux.conf
 
 if [ "$(uname)" = "Linux" ]; then
     ln -s ~/Documents/github/dotfiles/xinitrc ~/.xinitrc
