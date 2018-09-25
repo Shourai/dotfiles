@@ -77,7 +77,7 @@ fi
 # Additional installations
 if [ "$(uname)" = "Darwin" ]; then
     sh ~/Documents/github/dotfiles/macOS/miscellaneous.sh
-elif [ -f /etc/debian_version -o  -f /etc/arch-release ]
+elif [ -f /etc/debian_version -o  -f /etc/arch-release ]; then
     sed 's/pip3/pip3 --user/g' ~/Documents/github/dotfiles/macOS/miscellaneous.sh | sh
 fi
 
