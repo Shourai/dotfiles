@@ -60,4 +60,3 @@ brew cask install caskroom/fonts/font-menlo-for-powerline
 # Clean up brew and cask
 ##################################################
 brew cleanup
-brew cask cleanup

@@ -211,7 +211,7 @@ if there isn't already one.
     #+END_SRC
     
  Change the look and feel for Mac.
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
 #+END_SRC
