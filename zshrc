@@ -110,17 +110,16 @@ HISTSIZE=10000000
 SAVEHIST=10000000
 setopt append_history         # Allow multiple terminal sessions to all append to one zsh command history
 setopt extended_history       # save timestamp of command and duration
-setopt inc_append_history     # Add comamnds as they are typed, don't wait until shell exit
+setopt inc_append_history     # Add comamnds as they are typed, do not wait until shell exit
 setopt hist_expire_dups_first # when trimming history, lose oldest duplicates first
 setopt hist_ignore_dups       # Do not write events to history that are duplicates of previous events
 setopt hist_ignore_space      # remove command line from history list when first character on the line is a space
-setopt hist_find_no_dups      # When searching history don't display results already cycled through twice
+setopt hist_find_no_dups      # When searching history do not display results already cycled through twice
 setopt hist_reduce_blanks     # Remove extra blanks from each command line being added to history
-setopt hist_verify            # don't execute, just expand history
+setopt hist_verify            # do not execute, just expand history
 setopt share_history          # imports new commands and appends typed commands to history
 setopt hist_ignore_all_dups   # Delete old recorded entry if new entry is a duplicate.
-setopt hist_save_no_dups      # Don't write duplicate entries in the history file.
-
+setopt hist_save_no_dups      # Do not write duplicate entries in the history file.
 
 # Set editor
 if [[ "$(uname)" = "Darwin" ]]; then
@@ -143,7 +142,7 @@ emc() { command emacsclient -n -c -a '' "$@" & } # use `emc <file>` to open file
 # ------------------------------------------------------------------------------
 
 # Use completion functionality
-autoload -Uz compinit 
+autoload -Uz compinit
 compinit
 
 setopt always_to_end # When completing from the middle of a word, move the cursor to the end of the word
@@ -157,7 +156,7 @@ unsetopt menu_complete # do not autoselect the first completion entry
 # options.  If the options are printed, begin cycling through them.
 zstyle ':completion:*' menu select
 
-# Case insensitive completion 
+# Case insensitive completion
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 # Print the categories the completion options fit into.
@@ -258,7 +257,7 @@ git_info() {
 
 # Use ❯ as the non-root prompt character; # for root
 # Change the prompt character color if the last command had a nonzero exit code
-PS1=' 
+PS1='
 $(ssh_info)%F{147}%~%u $(git_info)
 %(?.%F{blue}.%F{red})%(!.#.❯)%f '
 
@@ -270,27 +269,31 @@ bindkey -v
 # Minimize escape sequence detection delay
 export KEYTIMEOUT=1
 
-# Prompt when in insert or normal mode
-# Add virtualenv prompt on the right side of the prompt
-# Need to fix blinking when deactivating venv
+# Save previous RPROMPT to restore when vim status not displayed
+RPROMPT_PREVIOUS=$RPROMPT
 
-function right_prompt() {
-    if [ $VIRTUAL_ENV ]; then
-    RPS1="$EPS1 ${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}"
-    elif [ -z $VIRTUAL_ENV ]; then
-    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}"
-    fi
+# Default color settings
+if [ -z "$VIMTO_COLOR_NORMAL_TEXT" ]; then VIMTO_COLOR_NORMAL_TEXT=black; fi
+if [ -z "$VIMTO_COLOR_NORMAL_BACKGROUND" ]; then VIMTO_COLOR_NORMAL_BACKGROUND=white; fi
+
+function zle-keymap-select zle-line-init {
+	# Command mode
+	if [ $KEYMAP = vicmd ]; then
+		RPROMPT_PREVIOUS=$RPROMPT
+		RPROMPT=$'%K{$VIMTO_COLOR_NORMAL_BACKGROUND} %F{$VIMTO_COLOR_NORMAL_TEXT}NORMAL%f %k'
+	# Insert mode
+	else
+		RPROMPT=$RPROMPT_PREVIOUS
+	fi
+	zle reset-prompt
 }
 
-function zle-line-init zle-keymap-select {
-    VIM_PROMPT="%B%F{grey}%S[NORMAL]%s%f%b"
-    EPS1='《 %F{250}%B `basename \"$VIRTUAL_ENV` %b%f 》'
-    right_prompt
-    zle reset-prompt
-}
+# Need to initially clear RPROMPT for it to work on first prompt
+export RPROMPT=$RPROMPT_PREVIOUS
 
-zle -N zle-keymap-select
-zle -N zle-line-init
+# Change appearance
+zle -N zle-line-init # When a new line starts
+zle -N zle-keymap-select  # When vi mode changes
 
 # ------------------------------------------------------------------------------
 # - insert_mode_(key bindings)                                                 -
@@ -299,26 +302,26 @@ zle -N zle-line-init
 # Have i_backspace work as it does in Vim.
 bindkey -M viins "^?" backward-delete-char
 
+# Have i_ctrl-h work as it does in Vim.
+bindkey -M viins "^H" backward-delete-char
+
 # Have i_ctrl-a work as it does in Vim.
 bindkey -M viins "^A" beginning-of-line
+
+# Have i_ctrl-e work as it does in Vim.
+#bindkey -M viins "^E" end-of-line
 
 # Have i_ctrl-p work as c_ctrl-p does in Vim.
 bindkey -M viins "^P" up-line-or-history
 
-# Have i_ctrl-e work as it does in Vim.
-bindkey -M viins "^E" end-of-line
-
 # Have i_ctrl-n work as c_ctrl-n does in Vim.
 bindkey -M viins "^N" down-line-or-history
 
-# Have i_ctrl-h work as it does in Vim.
-bindkey -M viins "^H" backward-delete-char
+# Have i_ctrl-b work as i_ctrl-b does in emacs.
+bindkey -M viins "^B" backward-char
 
-# Have i_ctrl-b work as i_ctrl-p does in Vim.
-bindkey -M viins "^B" _history-complete-newer
-
-# Have i_ctrl-f work as i_ctrl-n does in Vim.
-bindkey -M viins "^F" _history-complete-older
+# Have i_ctrl-f work as i_ctrl-f does in emacs.
+bindkey -M viins "^F" forward-char
 
 # Prepend "sudo ".  This does not have a Vim parallel.
 bindkey "^S" prepend-sudo
@@ -332,9 +335,6 @@ bindkey -M viins "^U" backward-kill-line
 # Have i_ctrl-w work as it does in Vim.
 bindkey -M viins "^W" backward-kill-word
 
-# Have i_ctrl-x_i_ctrl-l work as it does in Vim.
-bindkey -M viins "^X^L" history-beginning-search-backward-then-append
-
 # Display _completion_help for creating completion functions.  This does not
 # have a Vim parallel.
 bindkey -M viins "^X^H" _complete_help
@@ -346,6 +346,12 @@ bindkey -M viins "^X^L" history-incremental-search-backward
 # Cut the contents of the line and paste immediately when the next prompt
 # appears.  This does not have a clean Vim parallel.
 bindkey -M viins "^Y" push-line
+
+# Exchange the current word with the one before it.
+bindkey -M viins "^T" transpose-words
+
+# Re-enable incremental search from emacs mode (it is useful).
+bindkey "^r" history-incremental-search-backward
 
 
 # ------------------------------------------------------------------------------
@@ -395,39 +401,25 @@ bindkey -M vicmd "^R" redo
 autoload edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd "^V" edit-command-line
-bindkey -M vicmd v edit-command-line
 
 # Have ctrl-a work as it does in Vim.
 bindkey -M vicmd "^X" decrement-number
-
 
 # ------------------------------------------------------------------------------
 # - fasd                                                                       -
 # ------------------------------------------------------------------------------
 # initialize fasd
-eval "$(fasd --init auto)"   
+eval "$(fasd --init auto)"
 
 # custom fasd aliases
 alias e='f -e "emacsclient -n -c"' # quick opening files with emacs
 alias p='f -e python3' # quick opening files with python3
 alias v='f -e nvim' # quick opening files with neovim
 
-
-# ------------------------------------------------------------------------------
-# - Enable Enhancd                                                             -
-# ------------------------------------------------------------------------------
-# [ -f ~/Documents/enhancd/init.sh ] && source ~/Documents/enhancd/init.sh
-
 # ------------------------------------------------------------------------------
 # - Fuzzy completion for zsh by junegunn                                       -
 # ------------------------------------------------------------------------------
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# ------------------------------------------------------------------------------
-# - Enable autojump                                                            -
-# ------------------------------------------------------------------------------
-# Using fasd now instead of autojump
-# [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 # ------------------------------------------------------------------------------
 # - Virtualenvwrapper settings                                                 -
@@ -638,12 +630,3 @@ decrement-number() {
 	CURSOR=$((pos + $#newnum - 2))
 }
 zle -N decrement-number
-
-
-# ------------------------------------------------------------------------------
-# - X server setting                                                           -
-# ------------------------------------------------------------------------------
-
-# if [[ "$(tty)" = "/dev/tty1" ]]; then
-#     pgrep i3 || startx
-# fi
