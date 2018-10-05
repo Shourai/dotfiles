@@ -11,9 +11,6 @@ elif [ -f /etc/arch-release ]; then
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
-
-[[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ ' && return
-
 # ------------------------------------------------------------------------------
 # - Aliases                                                                    -
 # ------------------------------------------------------------------------------
