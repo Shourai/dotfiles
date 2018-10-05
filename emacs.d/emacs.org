@@ -23,10 +23,10 @@ Reported on 2017-03-04: https://debbugs.gnu.org/cgi/bugreport.cgi?bug=25967
 As soon as support is added ~--with-imagemagick@6~ can be changed to ~--with-imagemagick~
         
    #+begin_src sh
-   brew install emacs --with-cocoa --with-gnutls --with-imagemagick@6 --with-librsvg
+   brew install emacs --with-cocoa --with-imagemagick@6 --with-librsvg --HEAD
    #+end_src
    
-   This installs the latest version of Emacs in =/usr/local/bin/emacs=.
+   This installs the latest HEAD build of Emacs in =/usr/local/bin/emacs=.
    To link the GUI version to =/Application/Emacs.app= use =brew linkapps emacs=.
    
    All Homebrew options for Emacs can be seen with the command:
@@ -242,7 +242,7 @@ if there isn't already one.
    #+BEGIN_SRC emacs-lisp
      (use-package solarized-theme 
      :ensure t
-     :defer 1
+     ; :defer 1
      :init
      :config
      (setq solarized-high-contrast-mode-line nil
@@ -261,7 +261,7 @@ if there isn't already one.
     #+BEGIN_SRC emacs-lisp
       (use-package spaceline-config
       :ensure spaceline
-      :defer 1
+      ; :defer 1
       :demand t
       :config
       (require 'spaceline-config)
@@ -857,7 +857,8 @@ A major mode for editing Markdown-formatted text.
 * PDF
   Use emacs to view PDFs
   Use homebrew to install poppler and automake first: `brew install automake poppler`
-  Then make sure your pdf-tools emacs package is up to date (in fact make sure that all of your packages are up to date), then do `M-x pdf-tools-install`.
+  Then make sure your pdf-tools emacs package is up to date
+ (in fact make sure that all of your packages are up to date), then do `M-x pdf-tools-install`.
    #+BEGIN_SRC emacs-lisp 
      (use-package pdf-tools
          :ensure t

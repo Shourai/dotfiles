@@ -11,6 +11,9 @@ elif [ -f /etc/arch-release ]; then
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
+
+[[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ ' && return
+
 # ------------------------------------------------------------------------------
 # - Aliases                                                                    -
 # ------------------------------------------------------------------------------
@@ -348,10 +351,10 @@ bindkey -M viins "^X^L" history-incremental-search-backward
 bindkey -M viins "^Y" push-line
 
 # Exchange the current word with the one before it.
-bindkey -M viins "^T" transpose-words
+# bindkey -M viins "^T" transpose-words
 
 # Re-enable incremental search from emacs mode (it is useful).
-bindkey "^r" history-incremental-search-backward
+# bindkey "^r" history-incremental-search-backward
 
 
 # ------------------------------------------------------------------------------
@@ -630,3 +633,9 @@ decrement-number() {
 	CURSOR=$((pos + $#newnum - 2))
 }
 zle -N decrement-number
+
+# ==============================================================================
+# = emacs TRAMP config                                                         =
+# ==============================================================================
+
+[[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ ' && return
