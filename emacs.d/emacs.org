@@ -163,7 +163,7 @@ if there isn't already one.
    #+END_SRC
    
 ** Tabs vs Spaces
-   
+
    I have learned to distrust tabs in my source code, so let's make
    sure that we only have spaces. \\ 
    See [[http://ergoemacs.org/emacs/emacs_tabs_space_indentation_setup.html][this discussion]] for details.
@@ -827,7 +827,7 @@ A major mode for editing Markdown-formatted text.
        :mode (("README\\.md\\'" . gfm-mode)
               ("\\.md\\'" . markdown-mode)
               ("\\.markdown\\'" . markdown-mode))
-       :bind ("<tab>" . markdown-cycle)
+       ;:bind ("<tab>" . markdown-cycle)
        :init (setq markdown-command
                  (concat
                  "/usr/local/bin/pandoc"
