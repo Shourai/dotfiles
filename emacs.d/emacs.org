@@ -8,64 +8,64 @@ An essential read on literative programming would be this [[http://howardism.org
 Abrams.
 
 * Installing Emacs
-  
+
   On OS X, [[http://brew.sh/][homebrew]] is an easy way to install emacs.
-  
+
   Here's what the parameter means.
    - ~--with-cocoa~ :: installs emacs with the OS X GUI version
    - ~--with-gnutls~ :: installs emacs with GnuTLS to utilize encrypted SSL and TLS connections
    - ~--with-imagemagick~ :: installs emacs with imagemagick support for image processing
    - ~--with-librsvg~ :: install emacs with SVG rendering support using Cairo
-        
+
 Note:
 Emacs does not support ImageMagick 7:
 Reported on 2017-03-04: https://debbugs.gnu.org/cgi/bugreport.cgi?bug=25967
 As soon as support is added ~--with-imagemagick@6~ can be changed to ~--with-imagemagick~
-        
+
    #+begin_src sh
    brew install emacs --with-cocoa --with-imagemagick@6 --with-librsvg --HEAD
    #+end_src
-   
+
    This installs the latest HEAD build of Emacs in =/usr/local/bin/emacs=.
    To link the GUI version to =/Application/Emacs.app= use =brew linkapps emacs=.
-   
+
    All Homebrew options for Emacs can be seen with the command:
-   
+
    #+BEGIN_SRC sh
      brew options emacs
    #+END_SRC
-   
+
 ** Loading this File
-   
+
    To "load" the contents of this file, add the following to =$HOME/.emacs.d/init.el=:
-   
+
    #+BEGIN_SRC emacs-lisp :tangle no
       (org-babel-load-file "~/.emacs.d/emacs.org")
    #+END_SRC
-   
+
    It will automatically generate an =emacs.el= file and subsequently load it in.
-   
+
 * General Settings
 
 ** Customization Section
-   
+
    While I would rather program my configurations, sometimes the Emacs
    menu system is "good enough", but I want it in its own file:
-   
+
    #+BEGIN_SRC emacs-lisp :tangle no
      (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
      (when (file-exists-p custom-file)
        (load custom-file))
    #+END_SRC
-   
+
    While this ought to work, I found that you need to put this in the `init.el`
    file instead.
-   
+
 ** Setting up the Load Path
-   
+
    Extra packages not available via the package manager go in my
    personal stash at: =$HOME/.emacs.d/elisp=
-   
+
    #+BEGIN_SRC emacs-lisp :tangle no
      (add-to-list 'load-path (user-emacs-directory "elisp"))
    #+END_SRC
@@ -104,7 +104,7 @@ The auto-saves directory is not automatically created so we have to do it explic
 
 #+BEGIN_SRC emacs-lisp
     (make-directory "~/.tmp/emacs/auto-saves/"  t)
-    (setq 
+    (setq
         backup-directory-alist
             '(("." . "~/.tmp/emacs/backups/"))    ; don't litter my fs tree
         auto-save-file-name-transforms
@@ -121,9 +121,11 @@ The auto-saves directory is not automatically created so we have to do it explic
 
 Do not silently put a newline at the end of a file when saving or writng a file
 if there isn't already one.
+Also remove any trailing whitespaces from the buffer.
 
 #+BEGIN_SRC emacs-lisp
-(setq mode-require-final-newline nil)
+  (setq mode-require-final-newline nil)
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
 #+END_SRC
 
 * Package Initialization
@@ -138,12 +140,12 @@ if there isn't already one.
       ;; (package-initialize)
       ;; (package-refresh-contents)
     #+END_SRC
-   
+
 ** Use-Package
-   
+
    Using [[https://github.com/jwiegley/use-package][use-package]] to automatically install certain packages, as
    well as the ease of lazily loading them.
-   
+
    #+BEGIN_SRC emacs-lisp
     (unless (package-installed-p 'use-package)
         (package-refresh-contents)
@@ -154,32 +156,32 @@ if there isn't already one.
        (require 'use-package))
    #+END_SRC
 * Variables
-  
+
 ** Personal Information
-   
+
    #+BEGIN_SRC emacs-lisp
      (setq user-full-name "Shourai"
      user-mail-address "mail@shourai.net")
    #+END_SRC
-   
+
 ** Tabs vs Spaces
 
    I have learned to distrust tabs in my source code, so let's make
-   sure that we only have spaces. \\ 
+   sure that we only have spaces. \\
    See [[http://ergoemacs.org/emacs/emacs_tabs_space_indentation_setup.html][this discussion]] for details.
-   
+
    #+BEGIN_SRC emacs-lisp
      (setq-default indent-tabs-mode nil
                    tab-width 4)
    #+END_SRC
-   
+
 * Visual settings
-  
+
   I like a minimal setup when working on code, therefore I disable the toolbar and scroll bar. \\
   In daemon mode `scroll-bar-mode -1` does not work, therefore I have a workaround. \\
   And if it detects I'm using a GUI I set the frame to be the size of 130
   columns and 40 rows. Also the windows open at 100 pixels from the top and left.
-  
+
   #+BEGIN_SRC emacs-lisp
     (add-hook 'after-make-frame-functions (lambda (frame) (when (display-graphic-p frame) (scroll-bar-mode -1))))
    ; (scroll-bar-mode -1)
@@ -194,13 +196,13 @@ if there isn't already one.
         (height . 40) ; lines
         ))
   #+END_SRC
-  
+
     To get started directly when opening emacs I inhibit the startup message.
-  
+
     #+BEGIN_SRC emacs-lisp
     (setq inhibit-startup-message t)
     #+END_SRC
-  
+
     Show the time in 24 hour format when `display-time` is enabled and enable date
     #+BEGIN_SRC emacs-lisp
     (setq display-time-24hr-format  t
@@ -209,7 +211,7 @@ if there isn't already one.
           display-time-default-load-average nil)
     (display-time-mode t)
     #+END_SRC
-    
+
  Change the look and feel for Mac.
 #+BEGIN_SRC emacs-lisp :tangle no
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
@@ -220,11 +222,11 @@ if there isn't already one.
    [[https://github.com/justbur/emacs-which-key][Which key]] allows for a contextualized completion of emacs commands
    shown in the mini-buffer. \\
    It's really helpful if you can't remember the next keypress.
-   
+
    #+BEGIN_SRC emacs-lisp
      (use-package which-key
-        :ensure t 
-        :defer 5 
+        :ensure t
+        :defer 5
         :delight
         :config
         (which-key-mode))
@@ -236,11 +238,11 @@ if there isn't already one.
      (add-hook 'prog-mode-hook 'display-line-numbers-mode)
      (add-hook 'text-mode-hook 'display-line-numbers-mode)
    #+END_SRC
-   
+
 ** Theme
-   [[https://github.com/bbatsov/solarized-emacs][Solarized theme]]  
+   [[https://github.com/bbatsov/solarized-emacs][Solarized theme]]
    #+BEGIN_SRC emacs-lisp
-     (use-package solarized-theme 
+     (use-package solarized-theme
      :ensure t
      ; :defer 1
      :init
@@ -255,9 +257,9 @@ if there isn't already one.
      )
    #+END_SRC
 
-   [[https://github.com/TheBB/spaceline][This]] is the package that provides Spacemacs with its famous mode-line theme.  
+   [[https://github.com/TheBB/spaceline][This]] is the package that provides Spacemacs with its famous mode-line theme.
    I am still looking for a way to defer loading of spaceline.
-   
+
     #+BEGIN_SRC emacs-lisp
       (use-package spaceline-config
       :ensure spaceline
@@ -288,7 +290,7 @@ today, including Google's Java standard and the Linux kernel standard.
       ;;(add-hook 'text-mode-hook '(lambda ()
       ;;                               (auto-fill-mode 1)))
 
-      ;; It's annoying to have equations cut off at 80 characters in LaTeX, 
+      ;; It's annoying to have equations cut off at 80 characters in LaTeX,
       ;; when writing regular text use `M-x fill-paragraph` bound to `M-q` to align at 80 characters.
       ;;(add-hook 'LaTeX-mode-hook '(lambda ()
       ;;                              (auto-fill-mode 1)))
@@ -300,7 +302,7 @@ It does not automatically fill the line but only gives a visual indication.
     #+BEGIN_SRC emacs-lisp
     (setq-default
     whitespace-line-column 80
-    whitespace-style       '(face lines-tail))
+    whitespace-style       '(face lines-tail trailing empty))
     ; (add-hook 'LaTeX-mode-hook 'whitespace-mode) ; not working?
     #+END_SRC
 
@@ -309,7 +311,7 @@ It does not automatically fill the line but only gives a visual indication.
     (use-package rainbow-delimiters
     :ensure t
     ;:defer t
-    :config 
+    :config
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
     (add-hook 'text-mode-hook #'rainbow-delimiters-mode))
   #+END_SRC
@@ -318,7 +320,7 @@ It does not automatically fill the line but only gives a visual indication.
   #+BEGIN_SRC emacs-lisp
     (use-package highlight-parentheses
     :ensure t
-    ;:defer t 
+    ;:defer t
     :delight
     :config
     (setq hl-paren-colors (quote ("tomato2" "#b58900" "#268bd2" "#6c71c4" "#859900")))
@@ -332,13 +334,13 @@ It does not automatically fill the line but only gives a visual indication.
   #+BEGIN_SRC emacs-lisp
     (use-package delight
     :ensure t
-    :defer t 
+    :defer t
     :config )
   #+END_SRC
-   
+
 * Loading and Finding Files
 ** Helm
-   [[https://tuhdo.github.io/helm-intro.html][Helm information]]  
+   [[https://tuhdo.github.io/helm-intro.html][Helm information]]
    Emacs incremental completion and selection narrowing framework.
    #+BEGIN_SRC emacs-lisp
      (use-package helm
@@ -360,14 +362,14 @@ It does not automatically fill the line but only gives a visual indication.
            helm-recentf-fuzzy-match     t
            helm-quick-update            t))
    #+END_SRC
-   
-  `helm-ag.el` provides interfaces of [[https://github.com/ggreer/the_silver_searcher][The Silver Searcher]] with helm. 
+
+  `helm-ag.el` provides interfaces of [[https://github.com/ggreer/the_silver_searcher][The Silver Searcher]] with helm.
    #+BEGIN_SRC emacs-lisp
      (use-package helm-ag
      :ensure t
      :defer t)
    #+END_SRC
-   
+
 ** Projectile
    [[https://github.com/bbatsov/projectile][Projectile]] is a project interaction library for Emacs.
 
@@ -388,7 +390,7 @@ It does not automatically fill the line but only gives a visual indication.
      :after (projectile)
      :config)
    #+END_SRC
-   
+
 * Autocompletion
 ** Snippets
    A template system for Emacs.
@@ -400,7 +402,7 @@ It does not automatically fill the line but only gives a visual indication.
      :config
      (yas-global-mode 1))
    #+END_SRC
-   
+
 ** Company Mode
    Modular in-buffer completion framework for Emacs.
    #+BEGIN_SRC emacs-lisp
@@ -433,7 +435,7 @@ It does not automatically fill the line but only gives a visual indication.
      :after (company)
      :config
      (company-quickhelp-mode 1))
-   #+END_SRC   
+   #+END_SRC
 
 ** Smartparens
    Minor mode for Emacs that deals with parens pairs and tries to be smart about it.
@@ -441,7 +443,7 @@ It does not automatically fill the line but only gives a visual indication.
      (use-package smartparens
      :ensure t
      :defer 2
-     :delight 
+     :delight
      :init
      (add-hook 'prog-mode-hook #'smartparens-mode)
      (add-hook 'text-mode-hook #'smartparens-mode)
@@ -449,7 +451,7 @@ It does not automatically fill the line but only gives a visual indication.
      (eval-after-load 'latex '(require 'smartparens-latex))
      (sp-use-smartparens-bindings))
    #+END_SRC
-   
+
    Load after smartparens-strict-mode
    #+BEGIN_SRC emacs-lisp
      (use-package evil-smartparens
@@ -465,7 +467,7 @@ The dictionaries have to be installed via `brew install aspell`.
 
     #+BEGIN_SRC emacs-lisp
         (setq ispell-dictionary "english")
-    #+END_SRC 
+    #+END_SRC
 
 * Evil mode
   Evil is an extensible vi layer for Emacs. \\
@@ -503,9 +505,9 @@ The dictionaries have to be installed via `brew install aspell`.
     #+BEGIN_SRC emacs-lisp :tangle no
         (add-hook 'focus-in-hook 'normal-mode)
     #+END_SRC
-    
 
-** Custom Keybindings 
+
+** Custom Keybindings
   Increment and decrement numbers in Emacs.
   #+BEGIN_SRC emacs-lisp
     (use-package evil-numbers
@@ -514,7 +516,7 @@ The dictionaries have to be installed via `brew install aspell`.
     :bind ("C-=" . evil-numbers/inc-at-pt)
           ("C--" . evil-numbers/dec-at-pt))
   #+END_SRC
-  
+
 ** Surround
 This package emulates [[https://github.com/tpope/vim-surround][surround.vim by Tim Pope]]. The functionality is wrapped into a minor mode.
   #+BEGIN_SRC emacs-lisp
@@ -544,38 +546,38 @@ This package emulates [[https://github.com/tpope/vim-surround][surround.vim by T
     (setq evil-replace-with-register-key (kbd "gr"))
     (evil-replace-with-register-install))
   #+END_SRC
-  
+
 * Movement and Search
 ** Avy
    Avy is a GNU Emacs package for jumping to visible text using a char-based decision tree. \\
    See for more information [[https://github.com/abo-abo/avy][abo-abo]]'s github.
-   
+
    #+BEGIN_SRC emacs-lisp
      (use-package avy
        :ensure t
        :defer t
-       :bind 
+       :bind
         (("C-;"  . avy-goto-char)
         ("C-:"   . avy-goto-char-2)
         ("M-g f" . avy-goto-line)
         ("M-g w" . avy-goto-word-1)
         ("M-g e" . avy-goto-word-0)))
    #+END_SRC
-   
+
 ** Expand region
    Expand region increases the selected region by semantic units.
-   
+
    #+BEGIN_SRC emacs-lisp
      (use-package expand-region
        :ensure t
        :defer t
        :bind ("C-+" . er/expand-region))
    #+END_SRC
-   
+
 ** Anzu
    Anzu provides a minor mode which displays current match and total matches
    information in the mode-line in various search modes.
-   
+
    #+BEGIN_SRC emacs-lisp
      (use-package anzu
        :ensure t
@@ -583,9 +585,9 @@ This package emulates [[https://github.com/tpope/vim-surround][surround.vim by T
        :config
        (setq anzu-cons-mode-line-p nil))
    #+END_SRC
-  
+
 ** Ag
-   
+
    #+BEGIN_SRC emacs-lisp
      (use-package ag
        :ensure t
@@ -595,7 +597,7 @@ This package emulates [[https://github.com/tpope/vim-surround][surround.vim by T
    #+END_SRC
 
 * Latex
-We will be using AUCTeX as our Emacs TeX environment, together with yasnippets it 
+We will be using AUCTeX as our Emacs TeX environment, together with yasnippets it
 works as well as any dedicated LaTeX program.
 
 #+BEGIN_SRC emacs-lisp
@@ -630,7 +632,7 @@ Add LatexMk support to AUCTeX
         :defer 5
         :init (add-hook 'LaTeX-mode-hook 'auctex-latexmk-setup)
         :config
-        ;; Let LatexMk to pass the -pdf flag when TeX-PDF-mode is active 
+        ;; Let LatexMk to pass the -pdf flag when TeX-PDF-mode is active
         (setq auctex-latexmk-inherit-TeX-PDF-mode t)
         ;; Make LatexMk be the default command when invoking TeX-command-master (C-c C-c)
         ;(add-hook 'LaTeX-mode-hook
@@ -726,19 +728,19 @@ Latex color overrides in solarized dark theme
         (setq python-indent-offset 4)
         (elpy-enable))
     #+END_SRC
-  
+
   Use ipython console.
   For it to work in virtualenvs: `pip3 install ipython`.
   #+BEGIN_SRC emacs-lisp
     (setq python-shell-interpreter "ipython"
           python-shell-interpreter-args "-i --simple-prompt")
   #+END_SRC
-  
+
   This is used as an workaround for the following issue [[https://github.com/jorgenschaefer/elpy/issues/887]]
     #+BEGIN_SRC emacs-lisp :tangle no
     (setq python-shell-completion-native-enable nil)
-    #+END_SRC  
-   
+    #+END_SRC
+
   Emacs IPython Notebook (EIN)
     #+BEGIN_SRC emacs-lisp
       (use-package ein
@@ -747,9 +749,9 @@ Latex color overrides in solarized dark theme
       :config
       (setq ein:completion-backend (quote ein:use-company-backend))
       (setq ein:jupyter-server-args (list "--no-browser")))
-    #+END_SRC  
+    #+END_SRC
 * Org mode
-  
+
 The following is for syntax highlighting the code source blocks inside org mode.
 
   #+BEGIN_SRC emacs-lisp
@@ -778,7 +780,7 @@ The following is for syntax highlighting the code source blocks inside org mode.
 
 * Magit
 
-  Magit is an interface to the version control system Git, implemented as an Emacs package.  
+  Magit is an interface to the version control system Git, implemented as an Emacs package.
    #+BEGIN_SRC emacs-lisp
      (use-package magit
        :ensure t
@@ -792,7 +794,7 @@ The following is for syntax highlighting the code source blocks inside org mode.
        :ensure t
        :defer t)
    #+END_SRC
-   
+
 * Ledger
 
 A major mode for editing files in the format used by the [[https://github.com/ledger/ledger][ledger]] command-line accounting system.
@@ -802,7 +804,7 @@ A major mode for editing files in the format used by the [[https://github.com/le
        :ensure t
        :defer t)
    #+END_SRC
-  
+
   Set `C-c $` to insert `€` symbol.
    #+BEGIN_SRC emacs-lisp
      (with-eval-after-load 'ledger-mode
@@ -810,7 +812,7 @@ A major mode for editing files in the format used by the [[https://github.com/le
        (define-key ledger-mode-map (kbd "C-c $") (lambda () (interactive) (insert "€")))
        (define-key ledger-mode-map (kbd "C-c c") 'ledger-mode-clean-buffer))
    #+END_SRC
-  
+
   Set a custom color for the periodic xact face as it was too bright green.
     #+BEGIN_SRC emacs-lisp
     (custom-set-faces
@@ -836,13 +838,13 @@ A major mode for editing Markdown-formatted text.
        :config
               (setq markdown-max-image-size (quote (50 . 20))
                     ; doesn't create .html file when using live-preview mode, deletes after refresh.
-                    ; markdown-live-preview-delete-export 'delete-on-export  
+                    ; markdown-live-preview-delete-export 'delete-on-export
                     markdown-split-window-direction 'right ))
    #+END_SRC
 
 * IRC
   Using emacs' built-in ERC for IRC.
-   #+BEGIN_SRC emacs-lisp 
+   #+BEGIN_SRC emacs-lisp
      (use-package erc-hl-nicks
          :ensure t
          :after erc
@@ -860,13 +862,13 @@ A major mode for editing Markdown-formatted text.
   Use homebrew to install poppler and automake first: `brew install automake poppler`
   Then make sure your pdf-tools emacs package is up to date
  (in fact make sure that all of your packages are up to date), then do `M-x pdf-tools-install`.
-   #+BEGIN_SRC emacs-lisp 
+   #+BEGIN_SRC emacs-lisp
      (use-package pdf-tools
          :ensure t
          :defer t
          :init
          (pdf-tools-install)
-         :config 
+         :config
          (with-eval-after-load 'pdf-view (require 'evil-collection-pdf) (evil-collection-pdf-setup)))
    #+END_SRC
 
@@ -889,7 +891,7 @@ Useful if you want do quick arithmetic.
     (global-set-key (kbd "C-c C-e") 'eval-and-replace)
     #+END_SRC
 
-Simply pressing `Control-c r` will reload this file, very handy. 
+Simply pressing `Control-c r` will reload this file, very handy.
 You can also manually invoke `config-reload`.
     #+BEGIN_SRC emacs-lisp
         (defun config-reload ()
