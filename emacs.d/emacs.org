@@ -481,9 +481,10 @@ The dictionaries have to be installed via `brew install aspell`.
            ("{" . evil-next-buffer)
            ("}" . evil-prev-buffer))
     :init
+    (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+    (setq evil-want-keybinding nil)
     ;; (setq evil-want-C-u-scroll t) ;; This does not play nicely when having to use `C-u M-x` commands
     :config
-    (setq evil-want-integration nil)
     (evil-mode t))
   #+END_SRC
 
@@ -491,10 +492,10 @@ The dictionaries have to be installed via `brew install aspell`.
     cover properly by default, such as help-mode, M-x calendar, Eshell and more.
 
     #+BEGIN_SRC emacs-lisp
-        (use-package evil-collection
-        :after evil
-        :ensure t
-        :config)
+      (use-package evil-collection
+      :after evil
+      :ensure t
+      :config)
     #+END_SRC
 
   When the buffer loses focus, return to evil-normal-mode. \\
@@ -863,6 +864,8 @@ A major mode for editing Markdown-formatted text.
      (use-package pdf-tools
          :ensure t
          :defer t
+         :init
+         (pdf-tools-install)
          :config 
          (with-eval-after-load 'pdf-view (require 'evil-collection-pdf) (evil-collection-pdf-setup)))
    #+END_SRC
