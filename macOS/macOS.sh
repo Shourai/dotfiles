@@ -1,4 +1,4 @@
-# macOS changes 
+# macOS changes
 
 # Wipe all (default) app icons from the Dock
 # This is only really useful when setting up a new Mac, or if you don’t use
@@ -82,7 +82,7 @@ defaults write -app Skim SKAutoReloadFileUpdate -boolean true
 defaults write -app iTerm PrefsCustomFolder "$HOME/Documents/github/dotfiles/"
 
 # Disable the sound effects on boot
-#sudo nvram SystemAudioVolume=" "
+# sudo nvram SystemAudioVolume=%00
 
 # Enable trim
 # Only needed if you have a mac without an official Apple SSD

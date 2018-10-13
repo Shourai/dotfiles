@@ -14,28 +14,18 @@ if [ "$(uname)" = "Darwin" ]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     # Install git
     brew install git
-
-    # Setup github
-    git config --global user.name "Shourai"
-    git config --global user.email "10200748+Shourai@users.noreply.github.com"
-    git config --global credential.helper osxkeychain
 elif [ -f /etc/debian_version ]; then
     # Install git
     sudo apt-get install git -y
-
-    # Setup github
-    git config --global user.name "Shourai"
-    git config --global user.email "10200748+Shourai@users.noreply.github.com"
-    git config --global credential.helper cache
 elif [ -f /etc/arch-release ]; then
     # Install git
     sudo pacman -S git --noconfirm
-
-    # Setup github
-    git config --global user.name "Shourai"
-    git config --global user.email "10200748+Shourai@users.noreply.github.com"
-    git config --global credential.helper cache
 fi
+
+# Setup git
+git config --global user.name "Shourai"
+git config --global user.email "10200748+Shourai@users.noreply.github.com"
+git config --global credential.helper cache
 
 # Clone respository
 git clone https://github.com/Shourai/dotfiles.git ~/Documents/github/dotfiles
@@ -43,31 +33,29 @@ git clone https://github.com/Shourai/dotfiles.git ~/Documents/github/dotfiles
 # Change git repo from https to SSH
 git -C ~/Documents/github/dotfiles remote set-url origin git@github.com:Shourai/dotfiles.git
 
-
 # Wait for a little while before continuing
 echo "We are now installing the needed packages and setting the desired configuration."
-sleep 1
-
+sleep 3
 
 if [ "$(uname)" = "Darwin" ]; then
     # Install brew packages
-    sh ~/Documents/github/dotfiles/macOS/brew.sh
+    bash ~/Documents/github/dotfiles/macOS/brew.sh
 elif [ -f /etc/debian_version ]; then
     # alias bash to sh instead of dash
     # Install packages
     sudo rm /bin/sh
     sudo ln -s /bin/bash /bin/sh
-    sh ~/Documents/github/dotfiles/debian/packages.sh
+    bash ~/Documents/github/dotfiles/debian/packages.sh
 elif [ -f /etc/arch-release ]; then
     # Install pacman packages
-    sh ~/Documents/github/dotfiles/arch/packages.sh
+    bash ~/Documents/github/dotfiles/arch/packages.sh
 fi
 
 # Link dotfiles
-sh ~/Documents/github/dotfiles/macOS/dotfiles.sh
+bash ~/Documents/github/dotfiles/macOS/dotfiles.sh
 
 # Change shell to zsh
-sh ~/Documents/github/dotfiles/macOS/shell.sh
+bash ~/Documents/github/dotfiles/macOS/shell.sh
 
 # macOS changes
 if [ "$(uname)" = "Darwin" ]; then
@@ -76,9 +64,9 @@ fi
 
 # Additional installations
 if [ "$(uname)" = "Darwin" ]; then
-    sh ~/Documents/github/dotfiles/macOS/miscellaneous.sh
+    bash ~/Documents/github/dotfiles/macOS/miscellaneous.sh
 elif [ -f /etc/debian_version -o  -f /etc/arch-release ]; then
-    sed 's/pip3/pip3 --user/g' ~/Documents/github/dotfiles/macOS/miscellaneous.sh | sh
+    sed 's/pip3/pip3 --user/g' ~/Documents/github/dotfiles/macOS/miscellaneous.sh | bash
 fi
 
 echo "Success! Reboot the machine for the changes to take effect"

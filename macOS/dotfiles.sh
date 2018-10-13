@@ -3,6 +3,8 @@
 mkdir ~/.config
 ln -s ~/Documents/github/dotfiles/vimrc ~/.vimrc
 ln -s ~/Documents/github/dotfiles/zshrc ~/.zshrc
+ln -s ~/Documents/github/dotfiles/pure.zsh "$fpath[1]/prompt_pure_setup"
+ln -s ~/Documents/github/dotfiles/async.zsh "$fpath[1]/async"
 ln -s ~/Documents/github/dotfiles/emacs.d ~/.emacs.d
 ln -s ~/Documents/github/dotfiles/weechat.conf ~/.weechat.conf
 ln -s ~/Documents/github/dotfiles/ledgerrc ~/.ledgerrc

@@ -128,6 +128,17 @@ Also remove any trailing whitespaces from the buffer.
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
 #+END_SRC
 
+Disable audio notifications in emacs
+#+BEGIN_SRC emacs-lisp
+(setq ring-bell-function 'ignore)
+#+END_SRC
+
+Set the initial major mode to org.
+#+BEGIN_SRC emacs-lisp
+(setq-default major-mode 'org-mode)
+(setq initial-major-mode 'org-mode)
+#+END_SRC
+
 * Package Initialization
 ** Package Managers
 
@@ -357,10 +368,9 @@ It does not automatically fill the line but only gives a visual indication.
      :config
      (require 'helm-config)
      (helm-mode 1)
-     (setq helm-mode-fuzzy-match        t    ;; globally enable fuzzy matching for helm-mode
-           helm-buffers-fuzzy-matching  t
-           helm-recentf-fuzzy-match     t
-           helm-quick-update            t))
+     (setq helm-mode-fuzzy-match                 t    ;; globally enable fuzzy matching for helm-mode
+           helm-completion-in-region-fuzzy-match t
+           helm-quick-update                     t))
    #+END_SRC
 
   `helm-ag.el` provides interfaces of [[https://github.com/ggreer/the_silver_searcher][The Silver Searcher]] with helm.
@@ -497,7 +507,10 @@ The dictionaries have to be installed via `brew install aspell`.
       (use-package evil-collection
       :after evil
       :ensure t
+      :init
+      (with-eval-after-load 'dired (require 'evil-collection-dired) (evil-collection-dired-setup))
       :config)
+
     #+END_SRC
 
   When the buffer loses focus, return to evil-normal-mode. \\

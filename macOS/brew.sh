@@ -16,7 +16,7 @@ brew analytics off
 brew install ag
 brew install bash
 brew install coreutils
-brew install emacs --with-cocoa --with-gnutls --with-imagemagick@6 --with-librsvg
+brew install emacs --with-cocoa --with-imagemagick@6 --with-librsvg --HEAD
 brew install fasd
 brew install fzf
 brew install gnu-sed
@@ -30,12 +30,11 @@ brew install pandoc
 brew install python
 brew install tmux
 brew install tree
-brew install vim
+# brew install vim
 brew install weechat
 brew install wget
 brew install zsh
 brew install zsh-syntax-highlighting
-brew install eddieantonio/eddieantonio/imgcat
 
 ##################################################
 # Install cask packages
@@ -48,7 +47,7 @@ brew cask install caskroom/versions/firefox-beta
 brew cask install istat-menus
 brew cask install iterm2
 brew cask install mpv
-brew cask install skim
+# brew cask install skim
 brew cask install the-unarchiver
 brew cask install transmission
 brew cask install caskroom/fonts/font-menlo-for-powerline
