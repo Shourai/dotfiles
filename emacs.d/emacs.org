@@ -614,15 +614,15 @@ We will be using AUCTeX as our Emacs TeX environment, together with yasnippets i
 works as well as any dedicated LaTeX program.
 
 #+BEGIN_SRC emacs-lisp
-    (use-package tex
-    :ensure auctex
-    :mode ("\\.tex\\'" . LaTeX-mode)
-    :interpreter ("LatexMk" . LaTeX-mode)
-    :config
-    (setq TeX-auto-save      t      ;; enable parse on load and save
-          TeX-parse-self     t
-          TeX-save-query     nil)    ;; autosave before compiling
-    (setq-default TeX-master nil))  ;; let AUCTeX query for master file name
+  (use-package tex
+  :ensure auctex
+  :mode ("\\.tex\\'" . LaTeX-mode)
+  :interpreter ("LatexMk" . LaTeX-mode)
+  :config
+  (setq TeX-auto-save      t      ;; enable parse on load and save
+        TeX-parse-self     t
+        TeX-save-query     nil)    ;; autosave before compiling
+  (setq-default TeX-master nil))  ;; let AUCTeX query for master file name
 #+END_SRC
 
 When a latex file is loaded, let it load visual-line, flyspell, math-mode and reftex.
@@ -633,6 +633,7 @@ It's also necessary (at least on a mac) to add the path with the latex bin files
     (add-hook 'LaTeX-mode-hook 'flyspell-mode)
     (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
     (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+    (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode) ;; For synctex to work https://www.gnu.org/software/auctex/manual/auctex/I_002fO-Correlation.html
     (setq reftex-plug-into-AUCTeX t)
     (setenv "PATH" (concat (getenv "PATH") ":/Library/TeX/texbin"))
     (setq exec-path (append exec-path '("/Library/TeX/texbin")))
@@ -654,7 +655,7 @@ Add LatexMk support to AUCTeX
         ;'("latexmk" "latexmk -pdf %s -auxdir=build" TeX-run-TeX nil t
         ;    :help "Run latexmk on file")
         ;    TeX-command-list)))
-        (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "LatexMk"))))
+        (add-hook 'LaTeX-mode-hook '(lambda () (setq TeX-command-default "LatexMk"))))
     #+END_SRC
 
 Add company support to AUCTeX
@@ -880,9 +881,10 @@ A major mode for editing Markdown-formatted text.
          :ensure t
          :defer t
          :init
-         (pdf-tools-install)
+         (pdf-loader-install)
          :config
-         (with-eval-after-load 'pdf-view (require 'evil-collection-pdf) (evil-collection-pdf-setup)))
+         (with-eval-after-load 'pdf-view (require 'evil-collection-pdf) (evil-collection-pdf-setup))
+         (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
    #+END_SRC
 
 * Custom Functions
