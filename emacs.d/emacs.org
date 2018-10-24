@@ -240,7 +240,8 @@ Set the initial major mode to org.
         :defer 5
         :delight
         :config
-        (which-key-mode))
+        (which-key-mode)
+        (setq which-key-idle-delay 0.5))
    #+END_SRC
 ** Line numbering
    From emacs 26+, emacs has a builtin line numbering.
@@ -279,6 +280,7 @@ Set the initial major mode to org.
       :config
       (require 'spaceline-config)
       (spaceline-emacs-theme)
+      (spaceline-helm-mode 1)
       (setq powerline-image-apple-rgb t  ;; Fix for https://github.com/milkypostman/powerline/issues/54
             spaceline-highlight-face-func 'spaceline-highlight-face-evil-state))
     #+END_SRC
@@ -328,16 +330,31 @@ It does not automatically fill the line but only gives a visual indication.
   #+END_SRC
 
 ** Highlight parenthesis
-  #+BEGIN_SRC emacs-lisp
+It would be nice to have the first matching parenthesis to be underlined.
+So when this [[https://github.com/tsdh/highlight-parentheses.el/issues/9][issue]] is solved, enable this package.
+  #+BEGIN_SRC emacs-lisp :tangle no
     (use-package highlight-parentheses
     :ensure t
     ;:defer t
     :delight
     :config
-    (setq hl-paren-colors (quote ("tomato2" "#b58900" "#268bd2" "#6c71c4" "#859900")))
+    (setq hl-paren-highlight-adjacent t)
+    (setq hl-paren-colors (quote ("tomato2" "yellow3" "#268bd2" "#6c71c4" "#859900")))
     (add-hook 'prog-mode-hook #'highlight-parentheses-mode)
     (add-hook 'text-mode-hook #'highlight-parentheses-mode))
   #+END_SRC
+
+For now, use the builtin parentheses hightlighting.
+#+BEGIN_SRC emacs-lisp
+  (setq show-paren-delay 0
+        show-paren-style 'parenthesis
+        show-paren-when-point-in-periphery t
+        show-paren-when-point-inside-paren t)
+  (set-face-attribute 'show-paren-match nil :underline '(:color "white" :style line))
+  (set-face-foreground 'show-paren-match "yellow3")
+  (add-hook 'prog-mode-hook 'show-paren-mode)
+  (add-hook 'text-mode-hook 'show-paren-mode)
+#+END_SRC
 
 ** Delight
    [[https://www.emacswiki.org/emacs/DelightedModes][Delight]] enables you to easily customise how major and minor modes appear in the ModeLine.
@@ -425,7 +442,8 @@ It does not automatically fill the line but only gives a visual indication.
      ;(add-hook 'after-init-hook 'global-company-mode)  ;; using this doesn't allow deferring
      :config
      (global-company-mode 1)
-     (setq company-idle-delay  0.3 ; company delay until suggestions are shown
+     (setq company-idle-delay  0.1 ; company delay until suggestions are shown
+           company-minimum-prefix-length 3
            company-show-numbers t))
    #+END_SRC
 
@@ -467,9 +485,10 @@ It does not automatically fill the line but only gives a visual indication.
      (use-package evil-smartparens
      :ensure t
      :after (smartparens)
+     :config
+     (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
      :init)
    #+END_SRC
-
 * Spell-checking
 While typing text I like to activate `flyspell mode` which checks my spelling on
 the fly. My preferred spelling is `english`. \\
@@ -493,8 +512,8 @@ The dictionaries have to be installed via `brew install aspell`.
            ("{" . evil-next-buffer)
            ("}" . evil-prev-buffer))
     :init
-    (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
-    (setq evil-want-keybinding nil)
+    (setq evil-want-integration t ;; This is optional since it's already set to t by default.
+          evil-want-keybinding nil)
     ;; (setq evil-want-C-u-scroll t) ;; This does not play nicely when having to use `C-u M-x` commands
     :config
     (evil-mode t))
@@ -762,7 +781,7 @@ Latex color overrides in solarized dark theme
       :defer t
       :config
       (setq ein:completion-backend (quote ein:use-company-backend))
-      (setq ein:jupyter-server-args (list "--no-browser")))
+            ein:jupyter-server-args (list "--no-browser"))
     #+END_SRC
 * Org mode
 
@@ -866,9 +885,7 @@ A major mode for editing Markdown-formatted text.
          ; Align nicknames
          (setq erc-fill-function `erc-fill-static
                erc-fill-static-center 16)
-
-         ; Set the ERC prompt
-         (setq erc-prompt "❯❯ "))
+               erc-prompt "❯❯ ")  ;; Set the ERC prompt
    #+END_SRC
 
 * PDF
