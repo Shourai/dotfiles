@@ -165,7 +165,7 @@ bar {
     }
 
 # Update image cache
-exec ~/.config/i3/lock.sh -u ~/.config/i3/lock.jpg
+exec --no-startup-id ~/.config/i3/lock.sh -u ~/.config/i3/lock.jpg
 
 # Lock computer
 bindsym $mod+shift+x exec ~/.config/i3/lock.sh --lock
