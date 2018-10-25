@@ -21,4 +21,4 @@ feh --bg-scale ~/.config/i3/bg.jpg
 ( ( sleep 2 && /usr/bin/dropbox ) & )
 
 # Execute i3 windows manager
-exec i3
+exec --no-startup-id i3
