@@ -2,34 +2,34 @@
 
 ## Overview
 This repository installs everything I need from a clean install of macOS Sierra or Debian or Arch Linux.
-By running `install`, `homebrew` will be installed (on macOS) which subsequently installs `git`.  
+By running `install`, `homebrew` will be installed (on macOS) which subsequently installs `git`.
 The repositories `macOS` and `dotfiles` will be cloned to my Documents folder.
 
 ### macOS directory
-in `brew.sh` are all brew packages I use.   
-in `dotfiles.sh`, the dotfiles are symlinked to the home directory.  
-in `shell.sh`, BASH gets replaced for ZSH.  
-in `miscellaneous.sh` some packages are installed e.g. `matplotlib` for python3.  
-Finally in `macOS.sh`, configurations to macOS Sierra are performed e.g.: keyboard repeat speed.  
+in `brew.sh` are all brew packages I use.
+in `dotfiles.sh`, the dotfiles are symlinked to the home directory, this includes the dotfiles for Linux distros.
+in `shell.sh`, BASH gets replaced for ZSH, also for Linux distros.
+in `miscellaneous.sh` some packages are installed e.g. `matplotlib` for python3.
+Finally in `macOS.sh`, configurations to macOS are performed e.g.: keyboard repeat speed.
 
 ###  debian/arch directory
-in `packages.sh`, are all the packges I use.
+in `packages.sh`, are all the packages I use.
 
 ## Features
-- macOS Sierra
+- macOS
 - Debian
-- Arch Linux
+- Arch
 - iTerm2
 - zsh with syntax highlighting
 - (neo)vim
 - emacs
 
 ## Installation
-Here I have my configuration for a clean setup.  
-Basically run the `install` after cloning this repository.  
-Or run the following cURL command:  
+Here I have my configuration for a clean setup.
+Basically run the `install` after cloning this repository.
+Or run the following cURL command:
 ```
-curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | sh
+curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | bash
 ```
 
 ## Future reference

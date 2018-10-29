@@ -187,6 +187,7 @@ zstyle ':completion:*:cd:*' ignore-parents parent pwd
 # - Visual settings                                                            -
 # ------------------------------------------------------------------------------
 
+fpath=($fpath ~/.zsh/functions)
 autoload -U promptinit; promptinit
 prompt pure
 
