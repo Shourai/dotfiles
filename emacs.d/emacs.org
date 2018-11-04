@@ -13,7 +13,6 @@ Abrams.
 
   Here's what the parameter means.
    - ~--with-cocoa~ :: installs emacs with the OS X GUI version
-   - ~--with-gnutls~ :: installs emacs with GnuTLS to utilize encrypted SSL and TLS connections
    - ~--with-imagemagick~ :: installs emacs with imagemagick support for image processing
    - ~--with-librsvg~ :: install emacs with SVG rendering support using Cairo
 
@@ -73,7 +72,6 @@ As soon as support is added ~--with-imagemagick@6~ can be changed to ~--with-ima
 ** Miscellaneous settings
 
 Change 'yes/no' to just 'y/n'
-
    #+BEGIN_SRC emacs-lisp
      (fset 'yes-or-no-p 'y-or-n-p)
    #+END_SRC
@@ -103,19 +101,21 @@ They are neatly tucked away in a folder.
 The auto-saves directory is not automatically created so we have to do it explicitly.
 
 #+BEGIN_SRC emacs-lisp
-    (make-directory "~/.tmp/emacs/auto-saves/"  t)
-    (setq
-        backup-directory-alist
-            '(("." . "~/.tmp/emacs/backups/"))    ; don't litter my fs tree
-        auto-save-file-name-transforms
-            `((".*" , "~/.tmp/emacs/auto-saves/" t)))
+    (unless (file-exists-p "~/.tmp/emacs/auto-saves/")
+    (make-directory "~/.tmp/emacs/auto-saves/"))
 
-    (setq
-        backup-by-copying t      ; don't clobber symlinks
-        delete-old-versions t    ; don't ask about deleting old versions
-        kept-new-versions 10     ; keep 10 latest versions
-        kept-old-versions 2      ; keep 2 old versions
-        version-control t)       ; use versioned backups
+  (setq
+      backup-directory-alist
+          '(("." . "~/.tmp/emacs/backups/"))    ; don't litter my fs tree
+      auto-save-file-name-transforms
+          `((".*" , "~/.tmp/emacs/auto-saves/" t)))
+
+  (setq
+      backup-by-copying t      ; don't clobber symlinks
+      delete-old-versions t    ; don't ask about deleting old versions
+      kept-new-versions 10     ; keep 10 latest versions
+      kept-old-versions 2      ; keep 2 old versions
+      version-control t)       ; use versioned backups
 #+END_SRC
 
 
@@ -223,12 +223,6 @@ Set the initial major mode to org.
     (display-time-mode t)
     #+END_SRC
 
- Change the look and feel for Mac.
-#+BEGIN_SRC emacs-lisp :tangle no
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist '(ns-appearance . dark))
-#+END_SRC
-
 ** Which key
    [[https://github.com/justbur/emacs-which-key][Which key]] allows for a contextualized completion of emacs commands
    shown in the mini-buffer. \\
@@ -243,6 +237,7 @@ Set the initial major mode to org.
         (which-key-mode)
         (setq which-key-idle-delay 0.5))
    #+END_SRC
+
 ** Line numbering
    From emacs 26+, emacs has a builtin line numbering.
    #+BEGIN_SRC emacs-lisp
@@ -308,7 +303,6 @@ today, including Google's Java standard and the Linux kernel standard.
       ;;(add-hook 'LaTeX-mode-hook '(lambda ()
       ;;                              (auto-fill-mode 1)))
     #+END_SRC
-
 
 Highlight text that crosses over the 80 column mark in whitespace mode.
 It does not automatically fill the line but only gives a visual indication.
@@ -485,10 +479,12 @@ For now, use the builtin parentheses hightlighting.
      (use-package evil-smartparens
      :ensure t
      :after (smartparens)
+     :delight
      :config
      (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
      :init)
    #+END_SRC
+
 * Spell-checking
 While typing text I like to activate `flyspell mode` which checks my spelling on
 the fly. My preferred spelling is `english`. \\
@@ -529,15 +525,7 @@ The dictionaries have to be installed via `brew install aspell`.
       :init
       (with-eval-after-load 'dired (require 'evil-collection-dired) (evil-collection-dired-setup))
       :config)
-
     #+END_SRC
-
-  When the buffer loses focus, return to evil-normal-mode. \\
-  This is useful when you alt-tab back and directly want to move around.
-    #+BEGIN_SRC emacs-lisp :tangle no
-        (add-hook 'focus-in-hook 'normal-mode)
-    #+END_SRC
-
 
 ** Custom Keybindings
   Increment and decrement numbers in Emacs.
@@ -685,24 +673,6 @@ Add company support to AUCTeX
         :init (add-hook 'LaTeX-mode-hook 'company-auctex-init))
     #+END_SRC
 
-Add custom shortcuts to LaTeX-math-list
-Can be customized using "`M-x` customize-variable `RET` LaTeX-math-list `RET`"
-I prefer it to be saved into the init.el (using customize-variable) instead of custom.el.
-
-#+BEGIN_SRC emacs-lisp
-  (setq LaTeX-math-list
-        '((?2 "prime" "Misc Symbol" 2032)))
-#+END_SRC
-
-Define shortcuts for LaTeX-math-mode
-
-#+BEGIN_SRC emacs-lisp
-  (add-hook 'LaTeX-math-mode-hook
-    (lambda ()
-     (local-set-key (kbd "`1") 'LaTeX-math-partial)
-     (local-set-key (kbd "`3") 'LaTeX-math-sqrt)))
-#+END_SRC
-
 Insert braces after typing <^> and <_> in math mode.
 Autocomplete dollar sign.
 #+BEGIN_SRC emacs-lisp
@@ -711,7 +681,6 @@ Autocomplete dollar sign.
 #+END_SRC
 
 Set custom program to open pdf, dvi and html
-
 #+BEGIN_SRC emacs-lisp
 (setq
  ;; Set the list of viewers for Mac OS X.
@@ -783,8 +752,8 @@ Latex color overrides in solarized dark theme
       (setq ein:completion-backend (quote ein:use-company-backend))
             ein:jupyter-server-args (list "--no-browser"))
     #+END_SRC
-* Org mode
 
+* Org mode
 The following is for syntax highlighting the code source blocks inside org mode.
 
   #+BEGIN_SRC emacs-lisp
@@ -809,6 +778,11 @@ The following is for syntax highlighting the code source blocks inside org mode.
        :defer t
        :delight
        :init (add-hook 'org-mode-hook 'evil-org-mode))
+   #+END_SRC
+
+The most basic logging is to keep track of when a certain TODO item was finished. This is achieved with47
+   #+BEGIN_SRC emacs-lisp
+    (setq org-log-done 'time)
    #+END_SRC
 
 * Magit

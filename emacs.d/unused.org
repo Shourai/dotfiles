@@ -1,12 +1,12 @@
 * Movement
 ** Vim keys
-   
+
    Go to next CHAR which is similar to =f= and =t= in vim
    setting for iy-go-to-char.  \\
    It's currently not in use since I'm using evil mode.
-   
+
    #+BEGIN_SRC emacs-lisp :tangle no
-(use-package iy-go-to-char 
+(use-package iy-go-to-char
   :ensure t
   :bind
   ("C-c f" . iy-go-to-char)
@@ -21,18 +21,18 @@
    When using evil mode ~C-w h/j/k/l~ also work. \\
    Which is actually faster because your fingers stay on the homerow. \\
    To enable tangle this code block.
-   
+
    #+BEGIN_SRC emacs-lisp :tangle no
      (windmove-default-keybindings)
    #+END_SRC
-   
+
 ** Delete selection mode
    Delete Selection mode lets you treat an Emacs region much like a typical text selection outside of Emacs. \\
    Not in use right now due to evil mode.
    #+BEGIN_SRC emacs-lisp :tangle no
      (delete-selection-mode 1)
    #+END_SRC
-   
+
 ** Multiple cursors
    Multiple cursors for Emacs. \\
    Using the evil version, so this is disabled for the time being.
@@ -55,11 +55,11 @@
          ("C-c C-. l"   . mc/edit-lines)
          ("C-c C-. e"   . mc/edit-ends-of-lines) ))
    #+END_SRC
-   
+
 * Variables
 ** Tabs vs Spaces
    Make tab key do indent first then completion.
-   
+
    #+BEGIN_SRC emacs-lisp :tangle no
      (setq-default tab-always-indent t
                    tab-always-indent 'complete)
@@ -69,14 +69,14 @@
 ** Line numbering
 *** Enable line numbers in all buffers
     Turned off for now since I'm using relative file numbering
-    
+
     #+BEGIN_SRC emacs-lisp :tangle no
       (global-linum-mode t)
     #+END_SRC
-    
+
 ** Theme
    A beautiful theme by [[https://github.com/purcell/color-theme-sanityinc-tomorrow][Steve Purcell]], you can check out screenshots over at [[https://emacsthemes.com/themes/sanityinc-tomorrow-themes.html][emacsthemes.com]].
-   
+
    #+BEGIN_SRC emacs-lisp :tangle no
     (use-package color-theme-sanityinc-tomorrow
     :ensure t
@@ -85,11 +85,17 @@
    #+END_SRC
 ** Highlight background colour
    Background color in visual select mode.
-   
+
    #+BEGIN_SRC emacs-lisp
 ;;     (set-face-background 'hl-line "#2b2f31")
     (set-face-attribute 'region nil :background "#676767")
    #+END_SRC
+
+ Change the look and feel for Mac.
+#+BEGIN_SRC emacs-lisp :tangle no
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . dark))
+#+END_SRC
 * Loading and Finding Files
 ** Ido
    Interactively do things with buffers and files.
@@ -111,7 +117,7 @@
     (use-package evil-escape
     :ensure t
     :config
-    (evil-escape-mode t)) 
+    (evil-escape-mode t))
 #+END_SRC
 
 ** Custom settings
@@ -120,6 +126,12 @@ This is useful if when using `viwp`, which does not work otherwise.
 
     #+BEGIN_SRC emacs-lisp
         (fset 'evil-visual-update-x-selection 'ignore)
+    #+END_SRC
+
+  When the buffer loses focus, return to evil-normal-mode. \\
+  This is useful when you alt-tab back and directly want to move around.
+    #+BEGIN_SRC emacs-lisp :tangle no
+        (add-hook 'focus-in-hook 'normal-mode)
     #+END_SRC
 
 * Org mode
@@ -135,12 +147,30 @@ This is useful if when using `viwp`, which does not work otherwise.
        (dot        . t)
        (css        . t)))
   #+END_SRC
-  
+
   Remove the HTML validate link that appears at the postamble of your exported HTML file.
   #+BEGIN_SRC emacs-lisp :tangle no
     (setq org-html-validation-link nil)
   #+END_SRC
 
+* LaTeX
+Add custom shortcuts to LaTeX-math-list
+Can be customized using "`M-x` customize-variable `RET` LaTeX-math-list `RET`"
+I prefer it to be saved into the init.el (using customize-variable) instead of custom.el.
+
+#+BEGIN_SRC emacs-lisp
+  (setq LaTeX-math-list
+        '((?2 "prime" "Misc Symbol" 2032)))
+#+END_SRC
+
+Define shortcuts for LaTeX-math-mode
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'LaTeX-math-mode-hook
+    (lambda ()
+     (local-set-key (kbd "`1") 'LaTeX-math-partial)
+     (local-set-key (kbd "`3") 'LaTeX-math-sqrt)))
+#+END_SRC
 * Python
   Company-mode completion back-end for Python JEDI.
   #+BEGIN_SRC emacs-lisp :tangle no
@@ -149,13 +179,13 @@ This is useful if when using `viwp`, which does not work otherwise.
 
     (add-hook 'python-mode-hook 'my/python-mode-hook)
   #+END_SRC
-  
+
   Call jedi in python buffer.
   #+BEGIN_SRC emacs-lisp :tangle no
     (add-hook 'python-mode-hook 'jedi:setup)
     (setq jedi:complete-on-dot t)                 ; optional
   #+END_SRC
-  
+
     Use Jupyter console (recommended for interactive Python).
   For it to work in virtualenvs: `pip3 install juptyter-console`.
   #+BEGIN_SRC emacs-lisp :tangle no
@@ -164,19 +194,19 @@ This is useful if when using `viwp`, which does not work otherwise.
         python-shell-prompt-detect-failure-warning nil)
    ;; (add-to-list 'python-shell-completion-native-disabled-interpreters "jupyter")
   #+END_SRC
-  
+
  Change elpy's RPC to python 3
  #+BEGIN_SRC emacs-lisp :tangle no
    (setq elpy-rpc-python-command "python3")
  #+END_SRC
- 
+
  Change virtualenvwrapper to python 3
  #+BEGIN_SRC emacs-lisp :tangle no
    (setq pyvenv-virtualenvwrapper-python "python3")
  #+END_SRC
 
 * Undo and Redo
-  The ultimate undo history visualizer.  
+  The ultimate undo history visualizer.
   Evil requires undo-tree, no need for this explicitly.
   #+BEGIN_SRC emacs-lisp :tangle no
     (use-package undo-tree
