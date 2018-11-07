@@ -12,6 +12,16 @@ elif [ -f /etc/arch-release ]; then
 fi
 
 # ------------------------------------------------------------------------------
+# - Syntax highlighting package                                                -
+# ------------------------------------------------------------------------------
+
+if [[ "$(uname)" = "Darwin" ]]; then
+    source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+elif [ -f /etc/arch-release ]; then
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+# ------------------------------------------------------------------------------
 # - Aliases                                                                    -
 # ------------------------------------------------------------------------------
 
@@ -97,8 +107,8 @@ setopt autocd
 # Detect and prompt to correct typos in commands.
 # Note there is a "correctall" variant which also prompts to correct arguments
 # to commands, but this ends up being more troublesome than useful.
-setopt correct
-setopt correctall
+# setopt correct
+# setopt correctall
 
 # Disables the beep zsh would otherwise make when giving invalid input (such as
 # hitting backspace on an command line).
@@ -148,6 +158,7 @@ setopt always_to_end # When completing from the middle of a word, move the curso
 setopt auto_menu # show completion menu on successive tab press. needs unsetop menu_complete to work
 setopt auto_name_dirs # any parameter that is set to the absolute name of a directory immediately becomes a name for that directory
 setopt complete_in_word # Allow completion from within a word/phrase
+setopt auto_list # automatically list choices on ambiguous completion
 
 unsetopt menu_complete # do not autoselect the first completion entry
 
@@ -170,6 +181,10 @@ zstyle ':completion:*:default' list-prompt '%S%M matches%s'
 zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' verbose yes
+
+# correct if completion is not possible
+# enable approximate matches for completion
+zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
 
 # Use colors when outputting file names for completion options.
 # zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
@@ -560,9 +575,3 @@ decrement-number() {
 	CURSOR=$((pos + $#newnum - 2))
 }
 zle -N decrement-number
-
-# ==============================================================================
-# = emacs TRAMP config                                                         =
-# ==============================================================================
-
-[[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ ' && return

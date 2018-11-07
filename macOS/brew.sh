@@ -35,6 +35,7 @@ brew install weechat
 brew install wget
 brew install zsh
 brew install zsh-syntax-highlighting
+brew install zsh-autosuggestions
 
 ##################################################
 # Install cask packages

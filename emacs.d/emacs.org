@@ -744,7 +744,8 @@ Latex color overrides in solarized dark theme
     #+END_SRC
 
   Emacs IPython Notebook (EIN)
-    #+BEGIN_SRC emacs-lisp
+  Some jupyter server args error, will have to fix later and allow tangling
+    #+BEGIN_SRC emacs-lisp :tangle no
       (use-package ein
       :ensure t
       :defer t
@@ -780,7 +781,7 @@ The following is for syntax highlighting the code source blocks inside org mode.
        :init (add-hook 'org-mode-hook 'evil-org-mode))
    #+END_SRC
 
-The most basic logging is to keep track of when a certain TODO item was finished. This is achieved with47
+The most basic logging is to keep track of when a certain TODO item was finished.
    #+BEGIN_SRC emacs-lisp
     (setq org-log-done 'time)
    #+END_SRC
@@ -878,6 +879,18 @@ A major mode for editing Markdown-formatted text.
          (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
    #+END_SRC
 
+* Tramp
+[[https://github.com/masasam/emacs-helm-tramp][Tramp helm]] interface for ssh server and docker and vagrant.
+#+BEGIN_SRC emacs-lisp
+  (use-package helm-tramp
+      :ensure t
+      :defer t
+      :init
+      :bind ("C-c s" . helm-tramp)
+      :config
+      (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
+      (setq tramp-default-method "ssh"))
+#+END_SRC
 * Custom Functions
 
 Insert the result of some Emacs Lisp expression at point.

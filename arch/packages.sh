@@ -23,6 +23,7 @@ sudo pacman -S neovim --noconfirm
 # sudo pacman -S vim --noconfirm
 sudo pacman -S zsh --noconfirm
 sudo pacman -S zsh-syntax-highlighting --noconfirm
+sudo pacman -S zsh-autosuggestions --noconfirm
 sudo pacman -S emacs --noconfirm
 sudo pacman -S ledger --noconfirm
 sudo pacman -S fasd --noconfirm
