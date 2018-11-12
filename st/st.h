@@ -125,7 +125,6 @@ extern char *vtiden;
 extern char *worddelimiters;
 extern int allowaltscreen;
 extern char *termname;
-extern int usealtcolors;
 extern unsigned int tabspaces;
 extern unsigned int alpha;
 extern unsigned int defaultfg;
