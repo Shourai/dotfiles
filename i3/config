@@ -30,7 +30,8 @@ font pango:DejaVu Sans Mono 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+# bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec st
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -208,3 +209,5 @@ gaps outer 5
 gaps inner 5
 smart_gaps on
 
+# Enable opacity for suckless terminal using a composite manager
+exec --no-startup-id xcompmgr
