@@ -20,6 +20,7 @@ sudo pacman -S python3 --noconfirm
 sudo pacman -S python-pip --noconfirm
 sudo pacman -S tmux --noconfirm
 sudo pacman -S neovim --noconfirm
+sudo pacman -S xclip --noconfirm
 # sudo pacman -S vim --noconfirm
 sudo pacman -S zsh --noconfirm
 sudo pacman -S zsh-syntax-highlighting --noconfirm
