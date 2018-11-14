@@ -40,7 +40,7 @@ sudo pacman -S pavucontrol --noconfirm
 sudo pacman -S mpv --noconfirm
 sudo pacman -S ttf-dejavu --noconfirm
 yay -S otf-font-awesome --noconfirm
-yay -S i3lock-color-git --noconfirm
+yay -S betterlockscreen --noconfirm
 
 # Do a cleanup
 sudo pacman -Sc --noconfirm

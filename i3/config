@@ -165,11 +165,8 @@ bar {
         strip_workspace_numbers yes
     }
 
-# Update image cache
-exec --no-startup-id ~/.config/i3/lock.sh -u ~/.config/i3/lock.jpg
-
 # Lock computer
-bindsym $mod+shift+x exec ~/.config/i3/lock.sh --lock
+bindsym $mod+shift+x exec betterlockscreen -l dim
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+1 i3blocks
