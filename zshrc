@@ -9,7 +9,6 @@ elif [ -f /etc/debian_version ]; then
     source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 elif [ -f /etc/arch-release ]; then
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240" # fg=8 is the default fg for suckless terminal
 fi
 
 # ------------------------------------------------------------------------------
@@ -20,6 +19,7 @@ if [[ "$(uname)" = "Darwin" ]]; then
     source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 elif [ -f /etc/arch-release ]; then
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240' # fg=8 is the default fg for suckless terminal
 fi
 
 # ------------------------------------------------------------------------------
