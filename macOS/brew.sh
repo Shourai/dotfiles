@@ -42,9 +42,11 @@ brew install zsh-autosuggestions
 ##################################################
 brew cask install 1password
 brew cask install bettertouchtool
+brew cask install brave-browser-beta
 brew cask install calibre
+brew cask install chromium
 brew cask install dropbox
-brew cask install caskroom/versions/firefox-beta
+brew cask install firefox-beta
 brew cask install istat-menus
 brew cask install iterm2
 brew cask install mpv
