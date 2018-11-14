@@ -40,6 +40,8 @@ sudo pacman -S zsh-autosuggestions --noconfirm
 sudo pacman -S zsh-syntax-highlighting --noconfirm
 yay -S otf-font-awesome --noconfirm
 yay -S betterlockscreen --noconfirm
+yay -S compton-git --noconfirm # Change to community version when up to date?
+yay -S flashfocus-git --noconfirm
 # sudo pacman -S alsa-utils --noconfirm
 
 # Do a cleanup
