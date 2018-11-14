@@ -5,8 +5,6 @@
 # ------------------------------------------------------------------------------
 if [[ "$(uname)" = "Darwin" ]]; then
     source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [ -f /etc/debian_version ]; then
-    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 elif [ -f /etc/arch-release ]; then
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
@@ -135,8 +133,6 @@ setopt hist_save_no_dups      # Do not write duplicate entries in the history fi
 # Set editor
 if [[ "$(uname)" = "Darwin" ]]; then
     export EDITOR=/usr/local/bin/nvim
-elif [ -f /etc/debian_version ]; then
-    export EDITOR=/usr/bin/nvim
 elif [ -f /etc/arch-release ]; then
     export EDITOR=/usr/bin/nvim
 fi
