@@ -1,8 +1,8 @@
 # Set keyboard repeat rate
 xset r rate 200 30
 
-# Load .Xresources for xterm colour scheme
-xrdb ~/.Xresources
+# Load .xresources for xterm colour scheme
+xrdb ~/.xresources
 
 # Touchpad config
 xinput set-prop 13 286 1 # natural scrolling Acer
@@ -11,8 +11,8 @@ xinput set-prop 12 280 1 # natural scrolling Asus
 xinput set-prop 12 272 1 # enabled tapping Asus
 xinput set-prop 12 287 0.5 # accel speed Asus
 
-# Source xmodmap
-[ -f ~/.xmodmap ] && xmodmap ~/.xmodmap
+# Remap caps to control
+setxkbmap -option ctrl:nocaps
 
 # Wallpaper
 feh --bg-scale ~/.config/i3/bg.jpg
