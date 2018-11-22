@@ -83,6 +83,40 @@
     :init
     (load-theme 'sanityinc-tomorrow-night t))
    #+END_SRC
+
+   [[https://github.com/bbatsov/solarized-emacs][Solarized theme]]
+   #+BEGIN_SRC emacs-lisp :tangle no
+     (use-package solarized-theme
+     :ensure t
+     ; :defer 1
+     :init
+     :config
+     (setq solarized-high-contrast-mode-line nil
+           solarized-use-less-bold t)
+     ;(setq solarized-distinct-fringe-background t)
+     (load-theme 'solarized-dark t)
+     (custom-set-faces
+     '(mode-line ((t
+     (:underline nil :overline nil)))))
+     )
+   #+END_SRC
+
+   [[https://github.com/TheBB/spaceline][This]] is the package that provides Spacemacs with its famous mode-line theme.
+   I am still looking for a way to defer loading of spaceline.
+
+    #+BEGIN_SRC emacs-lisp :tangle no
+      (use-package spaceline-config
+      :ensure spaceline
+      ; :defer 1
+      :demand t
+      :config
+      (require 'spaceline-config)
+      (spaceline-emacs-theme)
+      (spaceline-helm-mode 1)
+      (setq powerline-image-apple-rgb t  ;; Fix for https://github.com/milkypostman/powerline/issues/54
+            spaceline-highlight-face-func 'spaceline-highlight-face-evil-state))
+    #+END_SRC
+
 ** Highlight background colour
    Background color in visual select mode.
 

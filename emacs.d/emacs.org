@@ -247,37 +247,24 @@ Set the initial major mode to org.
    #+END_SRC
 
 ** Theme
-   [[https://github.com/bbatsov/solarized-emacs][Solarized theme]]
-   #+BEGIN_SRC emacs-lisp
-     (use-package solarized-theme
-     :ensure t
-     ; :defer 1
-     :init
-     :config
-     (setq solarized-high-contrast-mode-line nil
-           solarized-use-less-bold t)
-     ;(setq solarized-distinct-fringe-background t)
-     (load-theme 'solarized-dark t)
-     (custom-set-faces
-     '(mode-line ((t
-     (:underline nil :overline nil)))))
-     )
-   #+END_SRC
-
-   [[https://github.com/TheBB/spaceline][This]] is the package that provides Spacemacs with its famous mode-line theme.
-   I am still looking for a way to defer loading of spaceline.
-
+[[https://github.com/hlissner/emacs-doom-themes][Doom theme]]
     #+BEGIN_SRC emacs-lisp
-      (use-package spaceline-config
-      :ensure spaceline
-      ; :defer 1
-      :demand t
-      :config
-      (require 'spaceline-config)
-      (spaceline-emacs-theme)
-      (spaceline-helm-mode 1)
-      (setq powerline-image-apple-rgb t  ;; Fix for https://github.com/milkypostman/powerline/issues/54
-            spaceline-highlight-face-func 'spaceline-highlight-face-evil-state))
+        (use-package doom-themes
+        :ensure t
+        :init
+        :config
+        (load-theme 'doom-one t)
+        )
+    #+END_SRC
+
+Using [[https://github.com/seagle0128/doom-modeline][Doom modeline]] as it is quite minimalistic plus a lot faster than spaceline.
+    #+BEGIN_SRC emacs-lisp
+      (use-package doom-modeline
+          :ensure t
+          :defer t
+          :hook (after-init . doom-modeline-init)
+          :config
+          (setq doom-modeline-height 10))
     #+END_SRC
 
 ** Highlight current line
@@ -723,8 +710,8 @@ Latex color overrides in solarized dark theme
         (use-package elpy
         :ensure t
         :after (python)
-        ;:mode ("\\.py\\'" . python-mode)
-        ;:interpreter ("python" . python-mode)
+        :mode ("\\.py\\'" . python-mode)
+        :interpreter ("python" . python-mode)
         :delight highlight-indentation-mode
         :config
         (setq python-indent-offset 4)
