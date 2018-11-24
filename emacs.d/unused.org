@@ -205,6 +205,13 @@ Define shortcuts for LaTeX-math-mode
      (local-set-key (kbd "`1") 'LaTeX-math-partial)
      (local-set-key (kbd "`3") 'LaTeX-math-sqrt)))
 #+END_SRC
+
+Latex color overrides in solarized dark theme
+#+BEGIN_SRC emacs-lisp
+ (custom-set-faces
+ '(font-latex-script-char-face ((t (:foreground "firebrick3")))))
+#+END_SRC
+
 * Python
   Company-mode completion back-end for Python JEDI.
   #+BEGIN_SRC emacs-lisp :tangle no
@@ -251,3 +258,9 @@ Define shortcuts for LaTeX-math-mode
     :config
     (global-undo-tree-mode t))
   #+END_SRC
+* Ledger
+  Set a custom color for the periodic xact face as it was too bright green in the Solarized theme.
+    #+BEGIN_SRC emacs-lisp
+    (custom-set-faces
+    '(ledger-font-periodic-xact-face ((t (:foreground "#859900" :weight normal)))))
+    #+END_SRC
