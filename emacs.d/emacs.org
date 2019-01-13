@@ -92,7 +92,6 @@ I think this also causes auto-save to not work anymore (i.e. no more foo# files)
     (defun save-all ()
     (interactive)
     (save-some-buffers t))
-
     (add-hook 'focus-out-hook 'save-all)
 #+END_SRC
 
@@ -306,8 +305,7 @@ It does not automatically fill the line but only gives a visual indication.
     :ensure t
     ;:defer t
     :config
-    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-    (add-hook 'text-mode-hook #'rainbow-delimiters-mode))
+    :hook ((prog-mode text-mode) . rainbow-delimiters-mode))
   #+END_SRC
 
 ** Highlight parenthesis
@@ -321,8 +319,7 @@ So when this [[https://github.com/tsdh/highlight-parentheses.el/issues/9][issue]
     :config
     (setq hl-paren-highlight-adjacent t)
     (setq hl-paren-colors (quote ("tomato2" "yellow3" "#268bd2" "#6c71c4" "#859900")))
-    (add-hook 'prog-mode-hook #'highlight-parentheses-mode)
-    (add-hook 'text-mode-hook #'highlight-parentheses-mode))
+    :hook ((prog-mode text-mode) . highlight-parentheses-mode))
   #+END_SRC
 
 For now, use the builtin parentheses hightlighting.
@@ -453,9 +450,8 @@ For now, use the builtin parentheses hightlighting.
      :ensure t
      :defer 2
      :delight
+     :hook ((prog-mode text-mode) . smartparens-mode)
      :init
-     (add-hook 'prog-mode-hook #'smartparens-mode)
-     (add-hook 'text-mode-hook #'smartparens-mode)
      :config
      (eval-after-load 'latex '(require 'smartparens-latex))
      (sp-use-smartparens-bindings))
@@ -467,8 +463,8 @@ For now, use the builtin parentheses hightlighting.
      :ensure t
      :after (smartparens)
      :delight
+     :hook (smartparens-enabled . evil-smartparens-mode)
      :config
-     (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
      :init)
    #+END_SRC
 
@@ -607,30 +603,24 @@ This package emulates [[https://github.com/tpope/vim-surround][surround.vim by T
 We will be using AUCTeX as our Emacs TeX environment, together with yasnippets it
 works as well as any dedicated LaTeX program.
 
+When a latex file is loaded, let it load visual-line, flyspell, math-mode and reftex.
+It's also necessary (at least on a mac) to add the path with the latex bin files.
+
+For synctex to work https://www.gnu.org/software/auctex/manual/auctex/I_002fO-Correlation.html
 #+BEGIN_SRC emacs-lisp
   (use-package tex
   :ensure auctex
   :mode ("\\.tex\\'" . LaTeX-mode)
   :interpreter ("LatexMk" . LaTeX-mode)
+  :hook ((LaTeX-mode) . (visual-line-mode flyspell-mode LaTeX-math-mode turn-on-reftex TeX-source-correlate-mode))
   :config
   (setq TeX-auto-save      t      ;; enable parse on load and save
         TeX-parse-self     t
         TeX-save-query     nil)    ;; autosave before compiling
-  (setq-default TeX-master nil))  ;; let AUCTeX query for master file name
-#+END_SRC
-
-When a latex file is loaded, let it load visual-line, flyspell, math-mode and reftex.
-It's also necessary (at least on a mac) to add the path with the latex bin files.
-
-#+BEGIN_SRC emacs-lisp
-    (add-hook 'LaTeX-mode-hook 'visual-line-mode)
-    (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-    (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-    (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-    (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode) ;; For synctex to work https://www.gnu.org/software/auctex/manual/auctex/I_002fO-Correlation.html
-    (setq reftex-plug-into-AUCTeX t)
-    (setenv "PATH" (concat (getenv "PATH") ":/Library/TeX/texbin"))
-    (setq exec-path (append exec-path '("/Library/TeX/texbin")))
+  (setq-default TeX-master nil)  ;; let AUCTeX query for master file name
+  (setq reftex-plug-into-AUCTeX t)
+  (setenv "PATH" (concat (getenv "PATH") ":/Library/TeX/texbin"))
+  (setq exec-path (append exec-path '("/Library/TeX/texbin"))))
 #+END_SRC
 
 Add LatexMk support to AUCTeX
@@ -638,7 +628,8 @@ Add LatexMk support to AUCTeX
         (use-package auctex-latexmk
         :ensure t
         :defer 5
-        :init (add-hook 'LaTeX-mode-hook 'auctex-latexmk-setup)
+        :hook (LaTeX-mode . auctex-latexmk-setup)
+        :init
         :config
         ;; Let LatexMk to pass the -pdf flag when TeX-PDF-mode is active
         (setq auctex-latexmk-inherit-TeX-PDF-mode t)
@@ -657,7 +648,7 @@ Add company support to AUCTeX
       (use-package company-auctex
         :ensure t
         :after (company)
-        :init (add-hook 'LaTeX-mode-hook 'company-auctex-init))
+        :hook (LaTeX-mode . company-auctex-init))
     #+END_SRC
 
 Insert braces after typing <^> and <_> in math mode.
@@ -699,15 +690,15 @@ Set custom program to open pdf, dvi and html
   combines and configures a number of other packages, both written in Emacs Lisp
   as well as Python.
     #+BEGIN_SRC emacs-lisp
-        (use-package elpy
-        :ensure t
-        :after (python)
-        :mode ("\\.py\\'" . python-mode)
-        :interpreter ("python" . python-mode)
-        :delight highlight-indentation-mode
-        :config
-        (setq python-indent-offset 4)
-        (elpy-enable))
+      (use-package elpy
+      :ensure t
+      :after (python)
+      :mode ("\\.py\\'" . python-mode)
+      :interpreter ("python" . python-mode)
+      :hook (python-mode . elpy-mode)
+      :delight highlight-indentation-mode
+      :config
+      (setq python-indent-offset 4))
     #+END_SRC
 
   Use ipython console.
@@ -747,8 +738,7 @@ The following is for syntax highlighting the code source blocks inside org mode.
      (use-package org-bullets
        :ensure t
        :defer t
-       :init (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-     )
+       :hook (org-mode . (lambda () (org-bullets-mode 1))))
    #+END_SRC
 
   Evil bindings for org mode
@@ -757,7 +747,7 @@ The following is for syntax highlighting the code source blocks inside org mode.
        :ensure t
        :defer t
        :delight
-       :init (add-hook 'org-mode-hook 'evil-org-mode))
+       :hook (org-mode . evil-org-mode))
    #+END_SRC
 
 The most basic logging is to keep track of when a certain TODO item was finished.
