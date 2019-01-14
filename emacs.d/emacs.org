@@ -69,18 +69,43 @@ As soon as support is added ~--with-imagemagick@6~ can be changed to ~--with-ima
      (add-to-list 'load-path (user-emacs-directory "elisp"))
    #+END_SRC
 
-** Miscellaneous settings
+** Personal Information
 
-Change 'yes/no' to just 'y/n'
    #+BEGIN_SRC emacs-lisp
-     (fset 'yes-or-no-p 'y-or-n-p)
+     (setq user-full-name "Shourai"
+     user-mail-address "mail@shourai.net")
    #+END_SRC
 
-Clean scratch buffer and don't ask about symlinks
-   #+BEGIN_SRC emacs-lisp
-     (setq initial-scratch-message nil
-           vc-follow-symlinks t)
-   #+END_SRC
+* Better Defaults
+
+#+BEGIN_SRC emacs-lisp
+  (setq
+   cursor-in-non-selected-windows t                     ; Hide the cursor in inactive windows
+   fill-column 80                                       ; Set width for automatic line breaks
+   help-window-select t                                 ; Focus new help windows when opened
+   inhibit-startup-screen t                             ; Disable start-up screen
+   initial-scratch-message ""                           ; Empty the initial *scratch* buffer
+   load-prefer-newer t                                  ; Prefers the newest version of a file
+   select-enable-clipboard t                            ; Merge system's and Emacs' clipboard
+   tab-width 4                                          ; Set width for tabs
+   inhibit-startup-screen t                             ; Disable start-up screen
+   display-time-24hr-format  t                          ; Display time in 24 hour format
+   display-time-day-and-date t                          ; Display date
+   display-time-format "%H:%M | %a %d %B"               ; Format the time string
+   display-time-default-load-average nil                ; Don't display load average
+   vc-follow-symlinks t                                 ; Always follow the symlinks
+   ring-bell-function 'ignore                           ; Disable audio notifications
+   mode-require-final-newline nil                       ; Don't put newline at the end of file when saving
+   view-read-only t)                                    ; Always open read-only buffers in view-mode
+  (cd "~/")                                             ; Move to the user directory
+  (column-number-mode 1)                                ; Show the column number
+  (display-time-mode 1)                                 ; Enable time in the mode-line
+  (fset 'yes-or-no-p 'y-or-n-p)                         ; Replace yes/no prompts with y/n
+  (global-hl-line-mode)                                 ; Hightlight current line
+  (set-default-coding-systems 'utf-8)                   ; Default to utf-8 encoding
+  (display-time-mode t)                                 ; Enable time in the mode-line
+#+END_SRC
+
 
 Save file when the frame loses focus.
 These hooks fire when any Emacs frame gains or loses focus. \\
@@ -93,6 +118,7 @@ I think this also causes auto-save to not work anymore (i.e. no more foo# files)
     (interactive)
     (save-some-buffers t))
     (add-hook 'focus-out-hook 'save-all)
+    (add-hook 'before-save-hook 'delete-trailing-whitespace)  ; Remove trailing whitespaces when saving
 #+END_SRC
 
 Tidy up the backup and auto-save files created by emacs.
@@ -117,42 +143,17 @@ The auto-saves directory is not automatically created so we have to do it explic
       version-control t)       ; use versioned backups
 #+END_SRC
 
-
-Do not silently put a newline at the end of a file when saving or writng a file
-if there isn't already one.
-Also remove any trailing whitespaces from the buffer.
-
-#+BEGIN_SRC emacs-lisp
-  (setq mode-require-final-newline nil)
-  (add-hook 'before-save-hook 'delete-trailing-whitespace)
-#+END_SRC
-
-Disable audio notifications in emacs
-#+BEGIN_SRC emacs-lisp
-(setq ring-bell-function 'ignore)
-#+END_SRC
-
-Set the initial major mode to org.
-#+BEGIN_SRC emacs-lisp
-(setq-default major-mode 'org-mode)
-(setq initial-major-mode 'org-mode)
-#+END_SRC
-
 * Package Initialization
-** Package Managers
+** Package Sources
 
     #+BEGIN_SRC emacs-lisp
-      (require 'package)
       (setq package-archives '(("gnu"       . "https://elpa.gnu.org/packages/")
                                ("marmalade" . "https://marmalade-repo.org/packages/")
                                ("melpa"     . "https://melpa.org/packages/")
                                ("org"       . "https://orgmode.org/elpa/")))
-      ;; (package-initialize)
-      ;; (package-refresh-contents)
     #+END_SRC
 
 ** Use-Package
-
    Using [[https://github.com/jwiegley/use-package][use-package]] to automatically install certain packages, as
    well as the ease of lazily loading them.
 
@@ -161,28 +162,8 @@ Set the initial major mode to org.
         (package-refresh-contents)
         (package-install 'use-package))
 
-          ;;(require 'use-package)
      (eval-when-compile
        (require 'use-package))
-   #+END_SRC
-* Variables
-
-** Personal Information
-
-   #+BEGIN_SRC emacs-lisp
-     (setq user-full-name "Shourai"
-     user-mail-address "mail@shourai.net")
-   #+END_SRC
-
-** Tabs vs Spaces
-
-   I have learned to distrust tabs in my source code, so let's make
-   sure that we only have spaces. \\
-   See [[http://ergoemacs.org/emacs/emacs_tabs_space_indentation_setup.html][this discussion]] for details.
-
-   #+BEGIN_SRC emacs-lisp
-     (setq-default indent-tabs-mode nil
-                   tab-width 4)
    #+END_SRC
 
 * Visual settings
@@ -194,7 +175,7 @@ Set the initial major mode to org.
 
   #+BEGIN_SRC emacs-lisp
     (add-hook 'after-make-frame-functions (lambda (frame) (when (display-graphic-p frame) (scroll-bar-mode -1))))
-   ; (scroll-bar-mode -1)
+    ;(scroll-bar-mode -1)
     (tool-bar-mode -1)
     (menu-bar-mode -1)
     (blink-cursor-mode -1)
@@ -207,20 +188,6 @@ Set the initial major mode to org.
         ))
   #+END_SRC
 
-    To get started directly when opening emacs I inhibit the startup message.
-
-    #+BEGIN_SRC emacs-lisp
-    (setq inhibit-startup-message t)
-    #+END_SRC
-
-    Show the time in 24 hour format when `display-time` is enabled and enable date
-    #+BEGIN_SRC emacs-lisp
-    (setq display-time-24hr-format  t
-          display-time-day-and-date t
-          display-time-format "%H:%M | %a %d %B"
-          display-time-default-load-average nil)
-    (display-time-mode t)
-    #+END_SRC
 
 ** Which key
    [[https://github.com/justbur/emacs-which-key][Which key]] allows for a contextualized completion of emacs commands
@@ -266,29 +233,6 @@ Using [[https://github.com/seagle0128/doom-modeline][Doom modeline]] as it is qu
           (setq doom-modeline-height 10))
     #+END_SRC
 
-** Highlight current line
-   #+BEGIN_SRC emacs-lisp
-     (global-hl-line-mode t)
-   #+END_SRC
-
-
-** Word wrap
-The sacred 80 column rule that states “Thou shalt not cross 80 columns in thy
-file” originated from IBM 80 column punch cards, was reinforced by early
-terminal and printout restrictions, and is still common in coding standards
-today, including Google's Java standard and the Linux kernel standard.
-
-    #+BEGIN_SRC emacs-lisp
-      (setq-default fill-column 80)
-
-      ;;(add-hook 'text-mode-hook '(lambda ()
-      ;;                               (auto-fill-mode 1)))
-
-      ;; It's annoying to have equations cut off at 80 characters in LaTeX,
-      ;; when writing regular text use `M-x fill-paragraph` bound to `M-q` to align at 80 characters.
-      ;;(add-hook 'LaTeX-mode-hook '(lambda ()
-      ;;                              (auto-fill-mode 1)))
-    #+END_SRC
 
 Highlight text that crosses over the 80 column mark in whitespace mode.
 It does not automatically fill the line but only gives a visual indication.
@@ -303,7 +247,6 @@ It does not automatically fill the line but only gives a visual indication.
   #+BEGIN_SRC emacs-lisp
     (use-package rainbow-delimiters
     :ensure t
-    ;:defer t
     :config
     :hook ((prog-mode text-mode) . rainbow-delimiters-mode))
   #+END_SRC
@@ -340,8 +283,7 @@ For now, use the builtin parentheses hightlighting.
   #+BEGIN_SRC emacs-lisp
     (use-package delight
     :ensure t
-    :defer t
-    :config )
+    :defer t)
   #+END_SRC
 
 * Loading and Finding Files
@@ -417,12 +359,12 @@ For now, use the builtin parentheses hightlighting.
      :defer 2
      :bind ("C-," . company-complete-common)
      :init
-     ;(add-hook 'after-init-hook 'global-company-mode)  ;; using this doesn't allow deferring
      :config
      (global-company-mode 1)
      (setq company-idle-delay  0.1 ; company delay until suggestions are shown
-           company-minimum-prefix-length 3
-           company-show-numbers t))
+           company-minimum-prefix-length 2
+           company-show-numbers t
+           company-tooltip-align-annotations t))
    #+END_SRC
 
    Cycle forward and backward using C-n and C-p instead of M-n and M-p.
@@ -647,7 +589,7 @@ Add company support to AUCTeX
     #+BEGIN_SRC emacs-lisp
       (use-package company-auctex
         :ensure t
-        :after (company)
+        :after (auctex company)
         :hook (LaTeX-mode . company-auctex-init))
     #+END_SRC
 
@@ -737,8 +679,7 @@ The following is for syntax highlighting the code source blocks inside org mode.
    #+BEGIN_SRC emacs-lisp
      (use-package org-bullets
        :ensure t
-       :defer t
-       :hook (org-mode . (lambda () (org-bullets-mode 1))))
+       :hook (org-mode . org-bullets-mode))
    #+END_SRC
 
   Evil bindings for org mode
