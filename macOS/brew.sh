@@ -16,7 +16,6 @@ brew analytics off
 brew install ag
 brew install bash
 brew install coreutils
-brew install emacs --with-cocoa --with-imagemagick@6 --with-librsvg --HEAD
 brew install fasd
 brew install fzf
 brew install gnu-sed
@@ -42,11 +41,10 @@ brew install zsh-autosuggestions
 ##################################################
 brew cask install 1password
 brew cask install bettertouchtool
-brew cask install brave-browser-beta
 brew cask install calibre
-brew cask install chromium
 brew cask install dropbox
-brew cask install firefox-beta
+brew cask install emacs
+brew cask install homebrew/cask-versions/firefox-beta
 brew cask install istat-menus
 brew cask install iterm2
 brew cask install mpv
