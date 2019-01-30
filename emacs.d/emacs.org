@@ -9,30 +9,18 @@ Abrams.
 
 * Installing Emacs
 
-  On OS X, [[http://brew.sh/][homebrew]] is an easy way to install emacs.
-
-  Here's what the parameter means.
-   - ~--with-cocoa~ :: installs emacs with the OS X GUI version
-   - ~--with-imagemagick~ :: installs emacs with imagemagick support for image processing
-   - ~--with-librsvg~ :: install emacs with SVG rendering support using Cairo
+  On macOS, using [[http://brew.sh/][homebrew]] is an easy way to install emacs.
 
 Note:
 Emacs does not support ImageMagick 7:
 Reported on 2017-03-04: https://debbugs.gnu.org/cgi/bugreport.cgi?bug=25967
-As soon as support is added ~--with-imagemagick@6~ can be changed to ~--with-imagemagick~
 
    #+begin_src sh
-   brew install emacs --with-cocoa --with-imagemagick@6 --with-librsvg --HEAD
+   brew cask install emacs
    #+end_src
 
-   This installs the latest HEAD build of Emacs in =/usr/local/bin/emacs=.
-   To link the GUI version to =/Application/Emacs.app= use =brew linkapps emacs=.
-
-   All Homebrew options for Emacs can be seen with the command:
-
-   #+BEGIN_SRC sh
-     brew options emacs
-   #+END_SRC
+   This installs the latest of Emacs from =https://emacsformacosx.com/= in =/usr/local/bin/emacs=.
+   Details in the following [[https://github.com/Homebrew/homebrew-core/pull/36070][pull request]] why `--with-cocoa` was removed.
 
 ** Loading this File
 
@@ -174,17 +162,22 @@ The auto-saves directory is not automatically created so we have to do it explic
   columns and 40 rows. Also the windows open at 100 pixels from the top and left.
 
   #+BEGIN_SRC emacs-lisp
+    (add-hook 'after-make-frame-functions (lambda (frame) (when (display-graphic-p frame) (scroll-bar-mode -1))))
     (scroll-bar-mode -1)
     (tool-bar-mode -1)
     (menu-bar-mode -1)
     (blink-cursor-mode -1)
     (setq default-frame-alist
       '(
-        (top . 100)
-        (left . 100)
-        (width . 130) ; character
-        (height . 40) ; lines
-        ))
+	(top . 100)
+	(left . 100)
+	(width . 130) ; character
+	(height . 40) ; lines
+	))
+    (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+    (add-to-list 'default-frame-alist '(ns-appearance . dark)) ;; assuming you are using a dark theme
+    (setq ns-use-proxy-icon nil) ;; Remove icon in the titlebar
+    (setq frame-title-format nil) ;; Remove filename in the titlebar
   #+END_SRC
 
 
