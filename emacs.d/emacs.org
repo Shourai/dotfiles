@@ -106,8 +106,7 @@ I think this also causes auto-save to not work anymore (i.e. no more foo# files)
   (defun save-all ()
   (interactive)
   (save-some-buffers t))
-  ;(add-hook 'focus-out-hook 'save-all)
-  (add-hook 'focus-out-hook (lambda () (save-some-buffers t)))
+  (add-hook 'focus-out-hook 'save-all)
   (add-hook 'before-save-hook 'delete-trailing-whitespace)  ; Remove trailing whitespaces when saving
 #+END_SRC
 
