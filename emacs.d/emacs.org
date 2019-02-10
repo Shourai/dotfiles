@@ -76,6 +76,7 @@ Reported on 2017-03-04: https://debbugs.gnu.org/cgi/bugreport.cgi?bug=25967
    load-prefer-newer t                                  ; Prefers the newest version of a file
    select-enable-clipboard t                            ; Merge system's and Emacs' clipboard
    tab-width 4                                          ; Set width for tabs
+   indent-tabs-mode nil                                 ; Use spaces to indent instead of tabs
    inhibit-startup-screen t                             ; Disable start-up screen
    display-time-24hr-format  t                          ; Display time in 24 hour format
    display-time-day-and-date t                          ; Display date
@@ -102,11 +103,12 @@ focus-in-hook will run. \\
 I think this also causes auto-save to not work anymore (i.e. no more foo# files)
 
 #+BEGIN_SRC emacs-lisp
-    (defun save-all ()
-    (interactive)
-    (save-some-buffers t))
-    (add-hook 'focus-out-hook 'save-all)
-    (add-hook 'before-save-hook 'delete-trailing-whitespace)  ; Remove trailing whitespaces when saving
+  (defun save-all ()
+  (interactive)
+  (save-some-buffers t))
+  ;(add-hook 'focus-out-hook 'save-all)
+  (add-hook 'focus-out-hook (lambda () (save-some-buffers t)))
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)  ; Remove trailing whitespaces when saving
 #+END_SRC
 
 Tidy up the backup and auto-save files created by emacs.
@@ -546,35 +548,27 @@ For synctex to work https://www.gnu.org/software/auctex/manual/auctex/I_002fO-Co
   :ensure auctex
   :mode ("\\.tex\\'" . LaTeX-mode)
   :interpreter ("LatexMk" . LaTeX-mode)
-  :hook ((LaTeX-mode) . (visual-line-mode flyspell-mode LaTeX-math-mode turn-on-reftex TeX-source-correlate-mode))
+  ; :hook ((LaTeX-mode) . (visual-line-mode flyspell-mode LaTeX-math-mode turn-on-reftex TeX-source-correlate-mode))
   :config
-  (setq TeX-auto-save      t      ;; enable parse on load and save
-        TeX-parse-self     t
-        TeX-save-query     nil)    ;; autosave before compiling
-  (setq-default TeX-master nil)  ;; let AUCTeX query for master file name
-  (setq reftex-plug-into-AUCTeX t)
-  (setenv "PATH" (concat (getenv "PATH") ":/Library/TeX/texbin"))
-  (setq exec-path (append exec-path '("/Library/TeX/texbin"))))
+  (setq TeX-auto-save      t     ;; enable parse on load and save
+	TeX-parse-self     t
+	TeX-save-query     nil   ;; autosave before compiling
+        TeX-master nil           ;; let AUCTeX query for master file name
+        reftex-plug-into-AUCTeX t))
 #+END_SRC
+
 
 Add LatexMk support to AUCTeX
     #+BEGIN_SRC emacs-lisp
-        (use-package auctex-latexmk
-        :ensure t
-        :defer 5
-        :hook (LaTeX-mode . auctex-latexmk-setup)
-        :init
-        :config
-        ;; Let LatexMk to pass the -pdf flag when TeX-PDF-mode is active
-        (setq auctex-latexmk-inherit-TeX-PDF-mode t)
-        ;; Make LatexMk be the default command when invoking TeX-command-master (C-c C-c)
-        ;(add-hook 'LaTeX-mode-hook
-        ;(lambda ()
-        ;(push
-        ;'("latexmk" "latexmk -pdf %s -auxdir=build" TeX-run-TeX nil t
-        ;    :help "Run latexmk on file")
-        ;    TeX-command-list)))
-        (add-hook 'LaTeX-mode-hook '(lambda () (setq TeX-command-default "LatexMk"))))
+      (use-package auctex-latexmk
+      :ensure t
+      :hook (LaTeX-mode . auctex-latexmk-setup)
+      :init
+      :config
+      ;; Let LatexMk to pass the -pdf flag when TeX-PDF-mode is active
+      (setq auctex-latexmk-inherit-TeX-PDF-mode t
+      ;; Make LatexMk be the default command when invoking TeX-command-master (C-c C-c)
+            TeX-command-default "LatexMk"))
     #+END_SRC
 
 Add company support to AUCTeX
