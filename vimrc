@@ -1,3 +1,5 @@
+" vim-bootstrap b0a75e4
+
 "*****************************************************************************
 "" Vim-PLug core
 "*****************************************************************************
@@ -29,11 +31,10 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 "*****************************************************************************
 "" Plug install packages
 "*****************************************************************************
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
@@ -74,8 +75,7 @@ endif
 Plug 'honza/vim-snippets'
 
 "" Color
-Plug 'romainl/flattened'
-Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'tomasr/molokai'
 
 "*****************************************************************************
 "" Custom bundles
@@ -100,6 +100,7 @@ call plug#end()
 " Required:
 filetype plugin indent on
 
+
 "*****************************************************************************
 "" Basic Setup
 "*****************************************************************************"
@@ -109,9 +110,7 @@ set fileencoding=utf-8
 set fileencodings=utf-8
 set bomb
 set binary
-if !has('nvim')
-    set ttyfast
-endif
+
 
 "" Fix backspace indent
 set backspace=indent,eol,start
@@ -152,35 +151,26 @@ let g:session_autoload = "no"
 let g:session_autosave = "no"
 let g:session_command_aliases = 1
 
-" Auto save files when focus is lost
-au FocusLost * silent! wa
-
 "*****************************************************************************
 "" Visual Settings
 "*****************************************************************************
 syntax on
 set ruler
 set number
-set relativenumber
 
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
-    if has('gui_running') || has('gui_vimr')
-        colorscheme flattened_light
-    elseif filereadable("/etc/arch-release")
-        colorscheme flattened_dark
-    else
-        colorscheme Tomorrow-Night-Eighties
-    endif
+  colorscheme molokai
 endif
 
 set mousemodel=popup
 set t_Co=256
 set guioptions=egmrti
+set gfn=Monospace\ 10
 
 if has("gui_running")
-  if has("gui_vimr") || has("gui_macvim")
-    set guifont=Menlo\ for\ Powerline:h12
+  if has("gui_mac") || has("gui_macvim")
+    set guifont=Menlo:h12
     set transparency=7
   endif
 else
@@ -191,7 +181,11 @@ else
   let g:indentLine_concealcursor = 0
   let g:indentLine_char = '┆'
   let g:indentLine_faster = 1
+
+  
 endif
+
+
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
@@ -220,11 +214,7 @@ if exists("*fugitive#statusline")
 endif
 
 " vim-airline
-if has("gui_vimr") || has("gui_running")
-    let g:airline_theme = 'solarized'
-else
-    let g:airline_theme = 'minimalist'
-endif
+let g:airline_theme = 'powerlineish'
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -256,7 +246,7 @@ let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
 let g:NERDTreeWinSize = 50
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 nnoremap <silent> <F2> :NERDTreeFind<CR>
-noremap <F3> :NERDTreeToggle<CR>
+nnoremap <silent> <F3> :NERDTreeToggle<CR>
 
 " grep.vim
 nnoremap <silent> <leader>f :Rgrep<CR>
@@ -468,7 +458,6 @@ let g:jedi#rename_command = "<leader>r"
 let g:jedi#show_call_signatures = "0"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#smart_auto_mappings = 0
-let g:jedi#force_py_version = 3
 
 " syntastic
 let g:syntastic_python_checkers=['python', 'flake8']
@@ -499,7 +488,6 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
-let g:airline_powerline_fonts = 1
 if !exists('g:airline_powerline_fonts')
   let g:airline#extensions#tabline#left_sep = ' '
   let g:airline#extensions#tabline#left_alt_sep = '|'

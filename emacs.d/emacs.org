@@ -427,7 +427,9 @@ The dictionaries have to be installed via `brew install aspell`.
            ("}" . evil-prev-buffer))
     :init
     (setq evil-want-integration t ;; This is optional since it's already set to t by default.
-          evil-want-keybinding nil)
+          evil-want-keybinding nil
+          evil-vsplit-window-right t
+          evil-split-window-below t)
     ;; (setq evil-want-C-u-scroll t) ;; This does not play nicely when having to use `C-u M-x` commands
     :config
     (evil-mode t))
@@ -625,7 +627,8 @@ Set custom program to open pdf, dvi and html
       :hook (python-mode . elpy-mode)
       :delight highlight-indentation-mode
       :config
-      (setq python-indent-offset 4))
+      (setq python-indent-offset 4
+            elpy-company-post-completion-function 'elpy-company-post-complete-parens))
     #+END_SRC
 
   Use ipython console.

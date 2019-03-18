@@ -51,7 +51,7 @@ brew cask install mpv
 # brew cask install skim
 brew cask install the-unarchiver
 brew cask install transmission
-brew cask install caskroom/fonts/font-menlo-for-powerline
+brew cask install homebrew/cask-fonts/font-dejavu-sans-mono-for-powerline
 # brew cask install arduino
 # brew cask install libreoffice
 # brew cask install tunnelblick
