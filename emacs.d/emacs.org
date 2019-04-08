@@ -310,6 +310,13 @@ For now, use the builtin parentheses hightlighting.
      :defer t)
    #+END_SRC
 
+Helm interface for company-mode
+    #+BEGIN_SRC emacs-lisp :tangle no
+	(use-package helm-company
+	:ensure t
+	:defer t)
+    #+END_SRC
+
 ** Projectile
    [[https://github.com/bbatsov/projectile][Projectile]] is a project interaction library for Emacs.
 
@@ -350,7 +357,8 @@ For now, use the builtin parentheses hightlighting.
      :ensure t
      :delight
      :defer 2
-     :bind ("C-," . company-complete-common)
+     :bind (("C-," . company-complete-common)
+            ("C-c y" . company-yasnippet))
      :init
      :config
      (global-company-mode 1)
@@ -554,8 +562,8 @@ For synctex to work https://www.gnu.org/software/auctex/manual/auctex/I_002fO-Co
   (setq TeX-auto-save      t     ;; enable parse on load and save
 	TeX-parse-self     t
 	TeX-save-query     nil   ;; autosave before compiling
-        TeX-master nil           ;; let AUCTeX query for master file name
-        reftex-plug-into-AUCTeX t))
+	TeX-master nil           ;; let AUCTeX query for master file name
+	reftex-plug-into-AUCTeX t))
 #+END_SRC
 
 
@@ -772,6 +780,7 @@ A major mode for editing Markdown-formatted text.
 
 * Tramp
 [[https://github.com/masasam/emacs-helm-tramp][Tramp helm]] interface for ssh server and docker and vagrant.
+
 #+BEGIN_SRC emacs-lisp
   (use-package helm-tramp
       :ensure t
@@ -782,6 +791,7 @@ A major mode for editing Markdown-formatted text.
       (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
       (setq tramp-default-method "ssh"))
 #+END_SRC
+
 * Custom Functions
 
 Insert the result of some Emacs Lisp expression at point.

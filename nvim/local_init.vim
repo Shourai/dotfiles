@@ -1,5 +1,6 @@
 " Always autosave everything
 au FocusLost * :wa
+set autowriteall
 set relativenumber
 
 " Colorscheme settings
