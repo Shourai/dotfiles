@@ -325,7 +325,20 @@ Helm interface for company-mode
      :ensure t
      :defer t
      :delight '(:eval (concat " " (projectile-project-name)))
-     :bind ("C-c p h" . helm-projectile)
+     :bind (("C-c p h" . helm-projectile)
+            ("C-c p p" . helm-projectile-switch-project)
+            ("C-c p f" . helm-projectile-find-file)
+            ("C-c p F" . helm-projectile-find-file-in-known-projects)
+            ("C-c p g" . helm-projectile-find-file-dwim)
+            ("C-c p d" . helm-projectile-find-dir)
+            ("C-c p e" . helm-projectile-recentf)
+            ("C-c p a" . helm-projectile-find-other-file)
+            ("C-c p i" . helm-projectile-invalidate-cache)
+            ("C-c p z" . helm-projectile-cache-current-file)
+            ("C-c p b" . helm-projectile-switch-to-buffer)
+            ("C-c p s g" . helm-projectile-grep)
+            ("C-c p s a" . helm-projectile-ack)
+            ("C-c p s s" . helm-projectile-ag))
      :config (projectile-mode 1))
    #+END_SRC
 
@@ -506,7 +519,7 @@ This package emulates [[https://github.com/tpope/vim-surround][surround.vim by T
        :defer t
        :bind
         (("C-;"  . avy-goto-char)
-        ("C-:"   . avy-goto-char-2)
+        ("C-:"   . avy-goto-char-timer)
         ("M-g f" . avy-goto-line)
         ("M-g w" . avy-goto-word-1)
         ("M-g e" . avy-goto-word-0)))
