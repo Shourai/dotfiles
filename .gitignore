@@ -26,6 +26,7 @@ tramp
 .\#*
 emacs.el
 custom.el
+package-quickstart.el
 
 # Org-mode
 .org-id-locations

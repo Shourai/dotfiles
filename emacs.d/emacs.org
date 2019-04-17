@@ -780,6 +780,9 @@ A major mode for editing Markdown-formatted text.
   Use homebrew to install poppler and automake first: `brew install automake poppler`
   Then make sure your pdf-tools emacs package is up to date
  (in fact make sure that all of your packages are up to date), then do `M-x pdf-tools-install`.
+ If building fails try setting
+`(setenv "PKG_CONFIG_PATH" "/usr/local/lib/pkgconfig:/usr/local/Cellar/libffi/3.2.1/lib/pkgconfig")`
+according to this post https://github.com/politza/pdf-tools/issues/480#issuecomment-473707355.
    #+BEGIN_SRC emacs-lisp
      (use-package pdf-tools
          :ensure t
