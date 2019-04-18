@@ -572,11 +572,11 @@ For synctex to work https://www.gnu.org/software/auctex/manual/auctex/I_002fO-Co
   :interpreter ("LatexMk" . LaTeX-mode)
   ; :hook ((LaTeX-mode) . (visual-line-mode flyspell-mode LaTeX-math-mode turn-on-reftex TeX-source-correlate-mode))
   :config
-  (setq TeX-auto-save      t     ;; enable parse on load and save
+  (setq TeX-auto-save      t		;; enable parse on load and save
 	TeX-parse-self     t
-	TeX-save-query     nil   ;; autosave before compiling
-	TeX-master nil           ;; let AUCTeX query for master file name
-	reftex-plug-into-AUCTeX t))
+	TeX-save-query     nil		;; autosave before compiling
+	reftex-plug-into-AUCTeX t)
+  (setq-default TeX-master nil))        ;; let AUCTeX query for master file name
 #+END_SRC
 
 
@@ -608,32 +608,11 @@ Autocomplete dollar sign.
 ;; (setq TeX-electric-math (cons "$" "$"))
 #+END_SRC
 
-Set custom program to open pdf, dvi and html
+Open PDFs with pdf-tools.
 #+BEGIN_SRC emacs-lisp
-(setq
- ;; Set the list of viewers for Mac OS X.
- TeX-view-program-list
- '(("Preview.app" "open -a Preview.app %o")
-   ("Skim" "open -a Skim.app %o")
-   ("okular" "okular %o")
-   ("displayline" "displayline %n %o %b")
-   ("open" "open build/%o")))
-
-(if (eq system-type 'darwin)
- ;; Select the viewers for each file type.
- ;; Depending on system-type
-(setq
- TeX-view-program-selection
- '((output-dvi "open")
-   (output-pdf "Skim")
-   (output-html "open")))
-(if (eq system-type 'gnu/linux)
-(setq
- TeX-view-program-selection
- '((output-dvi "open")
-   (output-pdf "okular")
-   (output-html "open"))))
-)
+  (setq TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))
+	TeX-view-program-selection '((output-pdf "PDF Tools"))
+	TeX-source-correlate-start-server t)
 #+END_SRC
 * Python
   Elpy is an Emacs package to bring powerful Python editing to Emacs. It
