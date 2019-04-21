@@ -312,9 +312,10 @@ For now, use the builtin parentheses hightlighting.
 
 Helm interface for company-mode
     #+BEGIN_SRC emacs-lisp :tangle no
-	(use-package helm-company
-	:ensure t
-	:defer t)
+      (use-package helm-company
+      :ensure t
+      :after (company)
+      :defer t)
     #+END_SRC
 
 ** Projectile
@@ -358,9 +359,10 @@ Helm interface for company-mode
      (use-package yasnippet
      :ensure t
      :delight yas-minor-mode
-     :defer 2
+     :hook ((LaTeX-mode . yas-minor-mode)
+            (python-mode . yas-minor-mode))
      :config
-     (yas-global-mode 1))
+     (yas-reload-all))
    #+END_SRC
 
 ** Company Mode
@@ -371,23 +373,19 @@ Helm interface for company-mode
      :delight
      :defer 2
      :bind (("C-," . company-complete-common)
-            ("C-c y" . company-yasnippet))
+	    ("C-c y" . company-yasnippet)
+           :map company-active-map
+                ("M-n" . nil)
+                ("M-p" . nil)
+                ("C-n" . #'company-select-next)
+                ("C-p" . #'company-select-previous))
      :init
      :config
      (global-company-mode 1)
      (setq company-idle-delay  0.1 ; company delay until suggestions are shown
-           company-minimum-prefix-length 2
-           company-show-numbers t
-           company-tooltip-align-annotations t))
-   #+END_SRC
-
-   Cycle forward and backward using C-n and C-p instead of M-n and M-p.
-   #+BEGIN_SRC emacs-lisp
-    (with-eval-after-load 'company
-    (define-key company-active-map (kbd "M-n") nil)
-    (define-key company-active-map (kbd "M-p") nil)
-    (define-key company-active-map (kbd "C-n") #'company-select-next)
-    (define-key company-active-map (kbd "C-p") #'company-select-previous))
+	   company-minimum-prefix-length 2
+	   company-show-numbers t
+	   company-tooltip-align-annotations t))
    #+END_SRC
 
    Add quickhelp for company mode
@@ -409,7 +407,7 @@ Helm interface for company-mode
      :hook ((prog-mode text-mode) . smartparens-mode)
      :init
      :config
-     (eval-after-load 'latex '(require 'smartparens-latex))
+     (require 'smartparens-config)
      (sp-use-smartparens-bindings))
    #+END_SRC
 
@@ -502,7 +500,7 @@ This package emulates [[https://github.com/tpope/vim-surround][surround.vim by T
   #+BEGIN_SRC emacs-lisp
     (use-package evil-replace-with-register
     :ensure t
-    :defer 2
+    :defer t
     :config
     (setq evil-replace-with-register-key (kbd "gr"))
     (evil-replace-with-register-install))
@@ -569,8 +567,10 @@ For synctex to work https://www.gnu.org/software/auctex/manual/auctex/I_002fO-Co
   (use-package tex
   :ensure auctex
   :mode ("\\.tex\\'" . LaTeX-mode)
-  :interpreter ("LatexMk" . LaTeX-mode)
-  ; :hook ((LaTeX-mode) . (visual-line-mode flyspell-mode LaTeX-math-mode turn-on-reftex TeX-source-correlate-mode))
+  ;:interpreter ("LatexMk" . LaTeX-mode)
+  :hook ((LaTeX-mode . turn-on-reftex)
+         (LaTeX-mode . LaTeX-math-mode)
+         (LaTeX-mode . TeX-source-correlate-mode))
   :config
   (setq TeX-auto-save      t		;; enable parse on load and save
 	TeX-parse-self     t
@@ -624,7 +624,7 @@ Open PDFs with pdf-tools.
       :after (python)
       :mode ("\\.py\\'" . python-mode)
       :interpreter ("python" . python-mode)
-      :hook (python-mode . elpy-mode)
+      :hook ((python-mode . elpy-mode))
       :delight highlight-indentation-mode
       :config
       (setq python-indent-offset 4
@@ -764,13 +764,14 @@ A major mode for editing Markdown-formatted text.
 according to this post https://github.com/politza/pdf-tools/issues/480#issuecomment-473707355.
    #+BEGIN_SRC emacs-lisp
      (use-package pdf-tools
-         :ensure t
-         :defer t
-         :init
-         (pdf-loader-install)
-         :config
-         (with-eval-after-load 'pdf-view (require 'evil-collection-pdf) (evil-collection-pdf-setup))
-         (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
+	 :ensure t
+	 :defer t
+         :mode (("\\.pdf$" . pdf-view-mode))
+	 :init
+	 (pdf-loader-install)
+	 :config
+	 (with-eval-after-load 'pdf-view (require 'evil-collection-pdf) (evil-collection-pdf-setup))
+	 (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
    #+END_SRC
 
 * Tramp
