@@ -22,15 +22,15 @@ brew install gnu-sed
 brew install gnutls
 brew install htop
 brew install ledger
-brew install markdown
+# brew install markdown
 brew install mpv
 brew install neovim
-brew install pandoc
+# brew install pandoc
 brew install python
 brew install tmux
 brew install tree
 # brew install vim
-brew install weechat
+# brew install weechat
 brew install wget
 brew install zsh
 brew install zsh-syntax-highlighting
