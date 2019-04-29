@@ -1,5 +1,5 @@
 " Always autosave everything
-au FocusLost * :wa
+au FocusLost * silent! :wa
 set autowriteall
 set relativenumber
 
