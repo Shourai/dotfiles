@@ -244,32 +244,6 @@ It does not automatically fill the line but only gives a visual indication.
     :hook ((prog-mode text-mode) . rainbow-delimiters-mode))
   #+END_SRC
 
-** Highlight parenthesis
-It would be nice to have the first matching parenthesis to be underlined.
-So when this [[https://github.com/tsdh/highlight-parentheses.el/issues/9][issue]] is solved, enable this package.
-  #+BEGIN_SRC emacs-lisp :tangle no
-    (use-package highlight-parentheses
-    :ensure t
-    ;:defer t
-    :delight
-    :config
-    (setq hl-paren-highlight-adjacent t)
-    (setq hl-paren-colors (quote ("tomato2" "yellow3" "#268bd2" "#6c71c4" "#859900")))
-    :hook ((prog-mode text-mode) . highlight-parentheses-mode))
-  #+END_SRC
-
-For now, use the builtin parentheses hightlighting.
-#+BEGIN_SRC emacs-lisp
-  (setq show-paren-delay 0
-        show-paren-style 'parenthesis
-        show-paren-when-point-in-periphery t
-        show-paren-when-point-inside-paren t)
-  (set-face-attribute 'show-paren-match nil :underline '(:color "white" :style line))
-  (set-face-foreground 'show-paren-match "yellow3")
-  (add-hook 'prog-mode-hook 'show-paren-mode)
-  (add-hook 'text-mode-hook 'show-paren-mode)
-#+END_SRC
-
 ** Delight
    [[https://www.emacswiki.org/emacs/DelightedModes][Delight]] enables you to easily customise how major and minor modes appear in the ModeLine.
    Usepackage supports :delight
@@ -404,11 +378,16 @@ Helm interface for company-mode
      :ensure t
      :defer 2
      :delight
-     :hook ((prog-mode text-mode) . smartparens-mode)
+     :hook (((prog-mode text-mode) . smartparens-mode)
+	   ((prog-mode text-mode) . show-smartparens-mode))
      :init
      :config
      (require 'smartparens-config)
-     (sp-use-smartparens-bindings))
+     (sp-use-smartparens-bindings)
+     (setq sp-show-pair-delay 0
+           sp-show-pair-from-inside t)
+     (set-face-attribute 'sp-show-pair-match-face nil
+                         :foreground "#ff6c6b" :underline "white"))
    #+END_SRC
 
    Load after smartparens-strict-mode
