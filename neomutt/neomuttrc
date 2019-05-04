@@ -1,28 +1,9 @@
-source private
+# Source work and personal account
+folder-hook 'personal' 'source ~/.config/neomutt/personal'
+folder-hook 'work' 'source ~/.config/neomutt/work'
 
-# Configure Internet Message Access Protocol for reading mail
-# Username and password for your Gmail or G Suite account
-set realname = $my_name
-set from = $my_user
-
-set imap_pass = $my_pass
-set imap_user = $my_user
-set smtp_pass = $my_pass
-
-# Specify smtp url and port
-set smtp_url = "smtp://$my_user:$my_pass@smtp.gmail.com:587"
-set smtp_authenticators = 'login'
-
-# Specifies the default location of your mailboxes
-set folder = "imaps://imap.gmail.com:993"
-
-# Location of mailboxes
-set spoolfile = "+INBOX"
-set record = "+[Gmail]/Sent Mail"
-set postponed = "+[Gmail]/Drafts"
-set trash = "+[Gmail]/Trash"
-
-mailboxes =Inbox =[Gmail]/Sent\ Mail =[Gmail]/Drafts =[Gmail]/Spam =[Gmail]/Trash
+# default account
+source personal
 
 # Activate caching, as it can greatly improve speed
 set header_cache = "~/.config/neomutt/cache/headers"
@@ -39,11 +20,23 @@ set sidebar_format = '%B%?F? [%F]?%* %?N?%N/? %?S?%S?'
 
 # General settings
 set date_format="%F %T"
-set index_format="%2C %zs %?X?A& ? %D %-15.15F %s (%-4.4c)"
+#set index_format="%4C %Z %?X?A& ? %D %-15.15L %s (%-4.4c)"
+set index_format = "%4C %Z %D %-15.15L (%?l?%4l&%4c?) %s"
 set sort = 'reverse-date'
 set wait_key = no
+set copy = no  # Turned off because gmail already saves a copy of sent emails
+set move = no
+set beep = no
+set sleep_time = 0
+
+# Force SSL
+set ssl_starttls = yes
 set ssl_force_tls = yes
-set copy = no
+
+# charset
+set charset	= "utf-8"
+set assumed_charset = "utf-8"
+set send_charset = "utf-8"
 
 # Keep the IMAP connection alive by polling intermittently (time in seconds).
 set imap_keepalive = 300
@@ -60,3 +53,13 @@ bind index,pager \CP sidebar-prev                 # Ctrl-p to select next folder
 bind index,pager \CN sidebar-next                 # Ctrl-n to select previous folder
 bind index,pager \CI sidebar-open                 # Ctrl-i to open selected folder
 bind index,pager \CB sidebar-toggle-visible       # Ctrl-b to toggle visibility of the sidebar
+
+bind pager g  noop
+bind pager gg  top
+bind pager G   bottom
+bind pager k   previous-line
+bind pager j next-line
+
+bind index g noop
+macro index gt1 '<sync-mailbox><enter-command>source ~/.config/neomutt/personal<enter><change-folder>!<enter>'
+macro index gt2 '<sync-mailbox><enter-command>source ~/.config/neomutt/work<enter><change-folder>!<enter>'
