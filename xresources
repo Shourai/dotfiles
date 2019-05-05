@@ -1,6 +1,6 @@
 xterm.termName: xterm-256color
 URxvt.scrollBar: false
-URxvt.font: xft:DejaVu Sans Mono:size=8
+URxvt.font: xft:DejaVu Sans Mono:size=10
 URxvt*transparent: true
 URxvt*shading: 20
 URxvt.perl-ext-common: selection-to-clipboard,font-size,keyboard-select
@@ -29,8 +29,9 @@ URxvt.keysym.C-Down:   perl:font-size:decrease
 !!cyan      #2aa198  6/6 cyan      37 #00afaf 60 -35 -05  42 161 152 175  74  63
 !!green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
-*background:            #002b36
-*foreground:            #657b83
+!! *background:            #002b36
+*background:            #272727
+!! *foreground:            #657b83
 *fading:                40
 *fadeColor:             #002b36
 *cursorColor:           #93a1a1
@@ -38,8 +39,10 @@ URxvt.keysym.C-Down:   perl:font-size:decrease
 *pointerColorForeground:#93a1a1
 
 !! black dark/light
-*color0:                #073642
-*color8:                #002b36
+*.color0: #1d2021
+*.color8: #928374
+!!*color0:                #073642
+!!*color8:                #002b36
 
 !! red dark/light
 *color1:                #dc322f
