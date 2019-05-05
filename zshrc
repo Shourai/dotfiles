@@ -21,6 +21,11 @@ elif [ -f /etc/arch-release ]; then
 fi
 
 # ------------------------------------------------------------------------------
+# - Path Config                                                                -
+# ------------------------------------------------------------------------------
+export PATH="$PATH:$HOME/.local/bin"
+
+# ------------------------------------------------------------------------------
 # - Aliases                                                                    -
 # ------------------------------------------------------------------------------
 
@@ -93,6 +98,11 @@ alias venv.lssp="lssitepackages"
 alias venv.proj="mkproject"
 alias venv.setproj="setvirtualenvproject"
 alias venv.wipe="wipeenv"
+
+## gcalcli
+alias gwk="gcalcli calw --military"
+alias gmon="gcalcli calm --military"
+alias agenda="gcalcli agenda now 31 --military"
 
 # ------------------------------------------------------------------------------
 # - General Configurations                                                     -
