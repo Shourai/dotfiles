@@ -15,8 +15,9 @@ sudo pacman -S fasd --noconfirm
 sudo pacman -S feh --noconfirm
 sudo pacman -S fzf --noconfirm
 sudo pacman -S htop --noconfirm
-sudo pacman -S i3-gaps --noconfirm
-sudo pacman -S i3blocks --noconfirm
+# sudo pacman -S i3-gaps --noconfirm
+# sudo pacman -S i3blocks --noconfirm
+sudo pacman -S bspwm
 sudo pacman -S ledger --noconfirm
 sudo pacman -S mpv --noconfirm
 sudo pacman -S neovim --noconfirm
@@ -42,6 +43,7 @@ yay -S otf-font-awesome --noconfirm
 yay -S betterlockscreen --noconfirm
 yay -S compton-git --noconfirm # Change to community version when up to date?
 yay -S flashfocus-git --noconfirm
+yay -S polybar --noconfirm
 # sudo pacman -S alsa-utils --noconfirm
 
 # Do a cleanup
