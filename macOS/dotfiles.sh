@@ -23,4 +23,7 @@ if [ "$(uname)" = "Linux" ]; then
     ln -s ~/Documents/github/dotfiles/i3 ~/.config/
     ln -s ~/Documents/github/dotfiles/urxvt ~/.urxvt
     ln -s ~/Documents/github/dotfiles/compton.conf ~/.config
+    ln -s ~/Documents/github/dotfiles/bspwm ~/.config
+    ln -s ~/Documents/github/dotfiles/sxhkd ~/.config
+    ln -s ~/Documents/github/dotfiles/polybar ~/.config
 fi
