@@ -57,7 +57,8 @@ fi
 if [ "$(uname)" = "Darwin" ]; then
     bash ~/Documents/github/dotfiles/macOS/miscellaneous.sh
 elif [ -f /etc/arch-release ]; then
-    sed 's/pip3/pip3 --user/g' ~/Documents/github/dotfiles/macOS/miscellaneous.sh | bash
+    echo "Installing python packages as --user"
+    bash ~/Documents/github/dotfiles/macOS/miscellaneous.sh
 fi
 
 echo "Success! Reboot the machine for the changes to take effect"
