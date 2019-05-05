@@ -11,14 +11,21 @@ xinput set-prop 12 280 1 # natural scrolling Asus
 xinput set-prop 12 272 1 # enabled tapping Asus
 xinput set-prop 12 287 0.5 # accel speed Asus
 
+# Mouse config
+xinput set-button-map 11 1 2 3 4 5 6 7 8 9 8 9 12 13 14 15 16 17 18 19 20  #Set back and forward button (by remapping 10,11 to 8,9)
+xinput set-prop 11 281 1  # Set reverse scrolling
+
+# Set the typematic delay and rate for an active x server
+xset r rate 200 100
+
 # Remap caps to control
 setxkbmap -option ctrl:nocaps
 
 # Wallpaper
-feh --bg-scale ~/.config/i3/bg.jpg
+feh --bg-scale ~/.config/bspwm/bg.jpg
 
 # Start dropbox in background
 ( ( sleep 2 && /usr/bin/dropbox ) & )
 
 # Execute i3 windows manager
-exec i3
+exec bspwm
