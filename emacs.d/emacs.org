@@ -116,7 +116,7 @@ The auto-saves directory is not automatically created so we have to do it explic
 
 #+BEGIN_SRC emacs-lisp
     (unless (file-exists-p "~/.tmp/emacs/auto-saves/")
-    (make-directory "~/.tmp/emacs/auto-saves/"))
+    (make-directory "~/.tmp/emacs/auto-saves/" t))
 
   (setq
       backup-directory-alist
