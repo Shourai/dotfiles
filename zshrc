@@ -100,9 +100,9 @@ alias venv.setproj="setvirtualenvproject"
 alias venv.wipe="wipeenv"
 
 ## gcalcli
-alias gwk="gcalcli calw --military"
-alias gmon="gcalcli calm --military"
-alias agenda="gcalcli agenda now 31 --military"
+alias calw="gcalcli calw --military"
+alias calm="gcalcli calm --military"
+alias agenda="gcalcli agenda --details location --details length --military"
 
 # ------------------------------------------------------------------------------
 # - General Configurations                                                     -
