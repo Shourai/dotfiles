@@ -100,9 +100,9 @@ alias venv.setproj="setvirtualenvproject"
 alias venv.wipe="wipeenv"
 
 ## gcalcli
-alias gwk="gcalcli calw --military"
-alias gmon="gcalcli calm --military"
-alias agenda="gcalcli agenda now 31 --military"
+alias calw="gcalcli calw --military"
+alias calm="gcalcli calm --military"
+alias agenda="gcalcli agenda --details location --details length --military"
 
 # ------------------------------------------------------------------------------
 # - General Configurations                                                     -
@@ -384,6 +384,13 @@ if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
 fi
 
+
+
+# ------------------------------------------------------------------------------
+# - Neomutt setting                                                            -
+# ------------------------------------------------------------------------------
+# see https://github.com/neomutt/neomutt/issues/1195
+stty discard undef
 
 # ==============================================================================
 # = functions_and_zle_widgets                                                  =

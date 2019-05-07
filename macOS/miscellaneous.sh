@@ -22,6 +22,7 @@ if [[ "$(uname)" = "Darwin" ]]; then
 
     echo "Manually install fzf keybindings with"
     echo "/usr/local/opt/fzf/install"
+    bash /usr/local/opt/fzf/install
 
 elif [ "$(uname)" = "Linux"]; then
 
