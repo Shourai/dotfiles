@@ -84,8 +84,8 @@ super + {o,i}
 	bspc wm -h on
 
 # focus or send to the given desktop
-super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'
+super + {_,shift + }{1-9,0,minus,equal}
+	bspc {desktop -f,node -d} '^{1-9,10,11,12}'
 
 #
 # preselect
@@ -130,3 +130,11 @@ alt + shift + x
 # Volume controls
 alt + shift + {comma,period}
     pactl set-sink-volume @DEFAULT_SINK@ {-5%,+5%}
+
+# show bar on key press
+super + space
+    polybar-msg cmd show
+
+# hide bar on key release
+@super + shift + space
+    polybar-msg cmd hide

@@ -23,7 +23,7 @@ background-alt = #444
 background-trans = #00000000
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
-foreground-alt = #555
+foreground-alt = #8c8c8c
 ;primary = #ffb52a
 primary = #26AD36
 secondary = #e60053
@@ -60,6 +60,7 @@ font-3 = "Font Awesome 5 Free:style=Regular:pixelsize=10;1"
 font-4 = "Font Awesome 5 Free:style=Solid:pixelsize=10;1"
 font-5 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;1"
 
+
 modules-left = bspwm
 modules-center =
 modules-right = filesystem pulseaudio memory cpu wlan temperature date
@@ -72,6 +73,7 @@ tray-padding = 2
 ;wm-restack = i3
 
 ;override-redirect = true
+enable-ipc = true
 
 ;scroll-up = bspwm-desknext
 ;scroll-down = bspwm-deskprev
@@ -116,16 +118,12 @@ label-unmounted-foreground = ${colors.foreground-alt}
 type = internal/bspwm
 pin-workspaces = true
 
-ws-icon-0 = 1;
-ws-icon-1 = 2;
-ws-icon-default = 
-
 format = <label-state> <label-mode>
 
-label-visible = %icon%
-label-unfocused = %icon%
+label-visible = %name%
+label-unfocused = %name%
 
-label-focused = %icon%
+label-focused = %name%
 label-focused-background = ${colors.background-trans}
 label-focused-underline= ${colors.primary}
 label-focused-padding = 2
@@ -133,7 +131,7 @@ label-focused-padding = 2
 label-occupied = %name%
 label-occupied-padding = 2
 
-label-urgent = %icon%!
+label-urgent = %name%!
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
 
@@ -327,7 +325,7 @@ screenchange-reload = true
 ;pseudo-transparency = true
 
 [global/wm]
-margin-top = 1
-margin-bottom = 1
+margin-top = 0
+margin-bottom = 0
 
 ; vim:ft=dosini
