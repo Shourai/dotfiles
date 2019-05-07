@@ -22,7 +22,7 @@ xset r rate 200 100
 setxkbmap -option ctrl:nocaps
 
 # Wallpaper
-feh --bg-scale ~/.config/bspwm/bg.jpg
+# feh --bg-fill ~/.config/bspwm/bg.jpg
 
 # Start dropbox in background
 ( ( sleep 2 && /usr/bin/dropbox ) & )
