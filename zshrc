@@ -370,6 +370,7 @@ alias v='f -e nvim' # quick opening files with neovim
 # - Fuzzy completion for zsh by junegunn                                       -
 # ------------------------------------------------------------------------------
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf/shell/key-bindings.zsh ] && source ~/.fzf/shell/key-bindings.zsh
 
 # ------------------------------------------------------------------------------
 # - Virtualenvwrapper settings                                                 -
