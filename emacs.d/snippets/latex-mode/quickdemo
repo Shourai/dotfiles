@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# key: qdemo
+# group: skeleton
+# name: quick demo snippet
+# --
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+$0
+\end{document}
