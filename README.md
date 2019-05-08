@@ -42,68 +42,68 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | b
 ## Improvements
 
 ## Directory Listing
-.
-├── README.md
-├── android
-│   ├── README.md
-│   ├── install
-│   ├── packages.sh
-│   └── termux.properties
-├── arch
-│   ├── README.md
-│   ├── bspwm
-│   ├── compton.conf
-│   ├── i3
-│   ├── packages.sh
-│   ├── polybar
-│   ├── sxhkd
-│   ├── urxvt
-│   ├── xinitrc
-│   └── xresources
-├── emacs.d
-│   ├── emacs.el
-│   ├── emacs.org
-│   ├── init.el
-│   ├── snippets
-│   └── unused.org
-├── firefox
-│   ├── README.md
-│   ├── sync.sh
-│   ├── userChrome.css
-│   └── userContent.css
-├── install
-├── latexmkrc
-├── ledgerrc
-├── macOS
-│   ├── brew.sh
-│   ├── com.googlecode.iterm2.plist
-│   ├── dotfiles.sh
-│   ├── macOS.sh
-│   ├── miscellaneous.sh
-│   └── shell.sh
-├── neomutt
-│   ├── cache
-│   ├── dracula.muttrc
-│   ├── neomuttrc
-│   ├── personal
-│   └── work
-├── nvim
-│   ├── autoload
-│   ├── init.vim
-│   ├── local_bundles.vim
-│   ├── local_init.vim
-│   ├── plugged
-│   └── session
-├── ranger
-│   ├── commands.py
-│   ├── commands_full.py
-│   ├── plugins
-│   ├── rc.conf
-│   ├── rifle.conf
-│   └── scope.sh
-├── tmux.conf
-├── weechat.conf
-└── zsh
-    ├── async.zsh
-    ├── pure.zsh
-    └── zshrc
+    .
+    ├── README.md
+    ├── android
+    │   ├── README.md
+    │   ├── install
+    │   ├── packages.sh
+    │   └── termux.properties
+    ├── arch
+    │   ├── README.md
+    │   ├── bspwm
+    │   ├── compton.conf
+    │   ├── i3
+    │   ├── packages.sh
+    │   ├── polybar
+    │   ├── sxhkd
+    │   ├── urxvt
+    │   ├── xinitrc
+    │   └── xresources
+    ├── emacs.d
+    │   ├── emacs.el
+    │   ├── emacs.org
+    │   ├── init.el
+    │   ├── snippets
+    │   └── unused.org
+    ├── firefox
+    │   ├── README.md
+    │   ├── sync.sh
+    │   ├── userChrome.css
+    │   └── userContent.css
+    ├── install
+    ├── latexmkrc
+    ├── ledgerrc
+    ├── macOS
+    │   ├── brew.sh
+    │   ├── com.googlecode.iterm2.plist
+    │   ├── dotfiles.sh
+    │   ├── macOS.sh
+    │   ├── miscellaneous.sh
+    │   └── shell.sh
+    ├── neomutt
+    │   ├── cache
+    │   ├── dracula.muttrc
+    │   ├── neomuttrc
+    │   ├── personal
+    │   └── work
+    ├── nvim
+    │   ├── autoload
+    │   ├── init.vim
+    │   ├── local_bundles.vim
+    │   ├── local_init.vim
+    │   ├── plugged
+    │   └── session
+    ├── ranger
+    │   ├── commands.py
+    │   ├── commands_full.py
+    │   ├── plugins
+    │   ├── rc.conf
+    │   ├── rifle.conf
+    │   └── scope.sh
+    ├── tmux.conf
+    ├── weechat.conf
+    └── zsh
+        ├── async.zsh
+        ├── pure.zsh
+        └── zshrc
