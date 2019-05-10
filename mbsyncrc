@@ -1,0 +1,164 @@
+IMAPAccount work
+# Address to connect to
+Host imap.gmail.com
+Port 993
+User <user>
+Pass <pass>
+# To store the password in an encrypted file use PassCmd instead of Pass
+# PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"
+#
+AuthMechs LOGIN
+# Use SSL
+SSLType IMAPS
+# The following line should work. If get certificate errors, uncomment the two following lines and read the "Troubleshooting" section.
+#CertificateFile /etc/ssl/certs/ca-certificates.crt
+#CertificateFile ~/.cert/imap.gmail.com.pem
+#CertificateFile ~/.cert/Equifax_Secure_CA.pem
+
+IMAPStore work-remote
+Account work
+
+MaildirStore work-local
+Subfolders Verbatim
+# The trailing "/" is important
+Path ~/.mail/work/
+Inbox ~/.mail/work/INBOX
+
+# CONNECTIONS SPECIFY LINKS BETWEEN REMOTE AND LOCAL FOLDERS
+#
+# CONNECTIONS ARE SPECIFIED USING PATTERNS, WHICH MATCH REMOTE MAIl
+# FOLDERS. SOME COMMONLY USED PATTERS INCLUDE:
+#
+# 1 "*" TO MATCH EVERYTHING
+# 2 "!DIR" TO EXCLUDE "DIR"
+# 3 "DIR" TO MATCH DIR
+
+Channel work-inbox
+Master :work-remote:
+Slave :work-local:
+Patterns "INBOX"
+Create Both
+Expunge Both
+SyncState *
+
+Channel work-trash
+Master :work-remote:"[Gmail]/Trash"
+Slave :work-local:"Trash"
+Create Both
+Expunge Both
+SyncState *
+
+Channel work-sent
+Master :work-remote:"[Gmail]/Sent Mail"
+Slave :work-local:"Sent"
+Create Both
+Expunge Both
+SyncState *
+
+Channel work-drafts
+Master :work-remote:"[Gmail]/Drafts"
+Slave :work-local:"Drafts"
+Create Both
+Expunge Both
+SyncState *
+
+#Channel work-all
+#Master :work-remote:"[Gmail]/All Mail"
+#Slave :work-local:"All Mail"
+#Create Both
+#Expunge Both
+#SyncState *
+
+# Channel work-starred
+# Master :work-remote:"[Gmail]/Starred"
+# Slave :work-local:"Starred"
+# Create Both
+# Expunge Both
+# SyncState *
+
+# GROUPS PUT TOGETHER CHANNELS, SO THAT WE CAN INVOKE
+# MBSYNC ON A GROUP TO SYNC ALL CHANNELS
+#
+# FOR INSTANCE: "mbsync gmail" GETS MAIL FROM
+# "gmail-inbox", "gmail-sent", and "gmail-trash"
+#
+Group work
+Channel work-inbox
+Channel work-sent
+Channel work-drafts
+Channel work-trash
+#Channel work-all
+#Channel work-starred
+
+#============================================================
+# Account 2
+#============================================================
+
+# ACCOUNT INFORMATION
+IMAPAccount personal
+# Address to connect to
+Host outlook.office365.com
+Port 993
+User <user>
+Pass <pass>
+AuthMechs LOGIN
+SSLType IMAPS
+SSLVersions TLSv1.2
+#CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+# THEN WE SPECIFY THE LOCAL AND REMOTE STORAGE
+# - THE REMOTE STORAGE IS WHERE WE GET THE MAIL FROM (E.G., THE
+#   SPECIFICATION OF AN IMAP ACCOUNT)
+# - THE LOCAL STORAGE IS WHERE WE STORE THE EMAIL ON OUR COMPUTER
+
+# REMOTE STORAGE (USE THE IMAP ACCOUNT SPECIFIED ABOVE)
+IMAPStore personal-remote
+Account personal
+
+# LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p ~/Maildir/acc2-gmail)
+MaildirStore personal-local
+Path ~/.mail/personal/
+Inbox ~/.mail/personal/INBOX
+
+# CONNECTIONS SPECIFY LINKS BETWEEN REMOTE AND LOCAL FOLDERS
+#
+# CONNECTIONS ARE SPECIFIED USING PATTERNS, WHICH MATCH REMOTE MAIl
+# FOLDERS. SOME COMMONLY USED PATTERS INCLUDE:
+#
+# 1 "*" TO MATCH EVERYTHING
+# 2 "!DIR" TO EXCLUDE "DIR"
+# 3 "DIR" TO MATCH DIR
+
+Channel personal-inbox
+Master :personal-remote:
+Slave :personal-local:
+Patterns "INBOX"
+Create Both
+Expunge Both
+SyncState *
+
+Channel personal-trash
+Master :personal-remote:"Deleted"
+Slave :personal-local:"Deleted"
+Create Both
+Expunge Both
+SyncState *
+
+Channel personal-sent
+Master :personal-remote:"Sent"
+Slave :personal-local:"Sent"
+Create Both
+Expunge Both
+SyncState *
+
+
+# GROUPS PUT TOGETHER CHANNELS, SO THAT WE CAN INVOKE
+# MBSYNC ON A GROUP TO SYNC ALL CHANNELS
+#
+# FOR INSTANCE: "mbsync gmail" GETS MAIL FROM
+# "gmail-inbox", "gmail-sent", and "gmail-trash"
+#
+Group personal
+Channel personal-inbox
+Channel personal-sent
+Channel personal-trash
