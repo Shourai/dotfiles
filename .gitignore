@@ -28,6 +28,7 @@ emacs.el
 custom.el
 package-quickstart.el
 transient/
+org-gcal
 
 # Org-mode
 .org-id-locations

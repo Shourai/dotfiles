@@ -48,6 +48,10 @@ Reported on 2017-03-04: https://debbugs.gnu.org/cgi/bugreport.cgi?bug=25967
    While this ought to work, I found that you need to put this in the `init.el`
    file instead.
 
+   I also want to load some custom variables which I don't want to share publicly.
+    #+BEGIN_SRC emacs-lisp
+    (load-file "~/.custom_variables")
+    #+END_SRC
 ** Setting up the Load Path
 
    Extra packages not available via the package manager go in my
@@ -778,7 +782,6 @@ Some nice intstructions can be found here
   (use-package mu4e
       :defer t
       :init
-    (load-file "~/.mail_variables")
     (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
     (require 'mu4e)
       :config
@@ -803,8 +806,7 @@ Some nice intstructions can be found here
 	      (:flags . 6)
 	      (:size . 6)
 	      (:from-or-to . 25) ;; Determined using mu4e-user-mail-address-list
-	      (:subject . nil))))
-
+	      (:subject . nil)))
   (setq mu4e-context-policy 'pick-first
 	mu4e-compose-context-policy 'always-ask
 	mu4e-contexts
@@ -832,9 +834,23 @@ Some nice intstructions can be found here
       :vars personal_variables )))
 
  (set-face-attribute 'mu4e-highlight-face nil :foreground "sienna1" :weight 'bold :inherit nil)
-
+)
 #+END_SRC
 
+* Calendar
+#+BEGIN_SRC emacs-lisp
+  (use-package org-gcal
+      :ensure t
+      :defer t
+      :init
+      :hook (org-agenda-mode . (lambda () (org-gcal-sync) ))
+      :bind
+      :config
+  (setq org-gcal-client-id client_id
+        org-gcal-client-secret client_secret
+	org-gcal-file-alist file_alist
+	org-agenda-files agenda_files))
+#+END_SRC
 * Custom Functions
 
 Insert the result of some Emacs Lisp expression at point.
