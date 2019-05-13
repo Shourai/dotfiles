@@ -285,6 +285,7 @@ It does not automatically fill the line but only gives a visual indication.
    #+BEGIN_SRC emacs-lisp
      (use-package helm-ag
      :ensure t
+     :after helm
      :defer t)
    #+END_SRC
 
@@ -483,7 +484,8 @@ This package emulates [[https://github.com/tpope/vim-surround][surround.vim by T
   #+BEGIN_SRC emacs-lisp
     (use-package evil-replace-with-register
     :ensure t
-    :defer t
+    :defer 2
+    ;:bind (("gR" . evil-replace-with-register))
     :config
     (setq evil-replace-with-register-key (kbd "gr"))
     (evil-replace-with-register-install))
@@ -690,15 +692,13 @@ A major mode for editing files in the format used by the [[https://github.com/le
    #+BEGIN_SRC emacs-lisp
      (use-package ledger-mode
        :ensure t
-       :defer t)
-   #+END_SRC
-
-  Set `C-c $` to insert `€` symbol.
-   #+BEGIN_SRC emacs-lisp
+       :defer t
+       :config
+     ; set `C-c $` to insert `€` symbol.
      (with-eval-after-load 'ledger-mode
        ;(define-key ledger-mode-map (kbd "C-c $") "€")
        (define-key ledger-mode-map (kbd "C-c $") (lambda () (interactive) (insert "€")))
-       (define-key ledger-mode-map (kbd "C-c c") 'ledger-mode-clean-buffer))
+       (define-key ledger-mode-map (kbd "C-c c") 'ledger-mode-clean-buffer)))
    #+END_SRC
 
 * Markdown
@@ -728,13 +728,14 @@ A major mode for editing Markdown-formatted text.
   Using emacs' built-in ERC for IRC.
    #+BEGIN_SRC emacs-lisp
      (use-package erc-hl-nicks
-         :ensure t
-         :after erc
-         :config
-         ; Align nicknames
-         (setq erc-fill-function `erc-fill-static
-               erc-fill-static-center 16
-               erc-prompt "❯❯ "))  ;; Set the ERC prompt
+	 :ensure t
+         :defer t
+	 :after erc
+	 :config
+	 ; Align nicknames
+	 (setq erc-fill-function `erc-fill-static
+	       erc-fill-static-center 16
+	       erc-prompt "❯❯ "))  ;; Set the ERC prompt
    #+END_SRC
 
 * PDF
@@ -779,77 +780,82 @@ Some nice intstructions can be found here
   https://www.macs.hw.ac.uk/~rs46/posts/2014-01-13-mu4e-email-client.html
 
 #+BEGIN_SRC emacs-lisp
-  (use-package mu4e
-      :defer t
-      :init
-    (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
-    (require 'mu4e)
-      :config
-    (with-eval-after-load 'mu4e (require 'evil-collection-mu4e) (evil-collection-mu4e-setup))
-    (setq mu4e-maildir "~/.mail"
-	  mu4e-get-mail-command "/usr/local/bin/mbsync -aV"
-	  mail-user-agent 'mu4e-user-agent
-	  ;; rename files when moving, needed for mbsync
-	  mu4e-change-filenames-when-moving t
-	  mu4e-update-interval 600
-	  mu4e-confirm-quit nil
-	  mu4e-headers-date-format "%d/%m/%Y %H:%M"
-	  mu4e-attachment-dir  "~/Downloads"
-	  message-kill-buffer-on-exit t
-	  mu4e-compose-format-flowed t
-	  message-send-mail-function  'message-send-mail-with-sendmail
-	  mu4e-sent-messages-behavior 'delete
-	  sendmail-program "/usr/local/bin/msmtp"
-	  mu4e-view-show-addresses t
-	  mu4e-headers-fields
-	    '((:date . 16)
-	      (:flags . 6)
-	      (:size . 6)
-	      (:from-or-to . 25) ;; Determined using mu4e-user-mail-address-list
-	      (:subject . nil)))
-  (setq mu4e-context-policy 'pick-first
-	mu4e-compose-context-policy 'always-ask
-	mu4e-contexts
-    (list
-     (make-mu4e-context
-      :name "work" ;;for acc1-gmail
-      :enter-func (lambda () (mu4e-message "Entering context work"))
-      :leave-func (lambda () (mu4e-message "Leaving context work"))
-      :match-func (lambda (msg)
-	    (when msg
-	  (mu4e-message-contact-field-matches
-	   msg '(:from :to :cc :bcc) workmail)))
-      ;; Stored in personal file
-      :vars work_variables)
+    (use-package mu4e
+        :load-path "/usr/local/share/emacs/site-lisp/mu/mu4e"
+	:commands mu4e
+	:defer 2
+	:init
+	:config
+      (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
+      (require 'mu4e)
+      (with-eval-after-load 'mu4e (require 'evil-collection-mu4e) (evil-collection-mu4e-setup))
+      (setq mu4e-maildir "~/.mail"
+	    mu4e-get-mail-command "/usr/local/bin/mbsync -aV"
+	    mail-user-agent 'mu4e-user-agent
+	    ;; rename files when moving, needed for mbsync
+	    mu4e-change-filenames-when-moving t
+	    mu4e-update-interval 600
+	    mu4e-confirm-quit nil
+	    mu4e-headers-date-format "%d/%m/%Y %H:%M"
+	    mu4e-attachment-dir  "~/Downloads"
+	    message-kill-buffer-on-exit t
+	    mu4e-compose-format-flowed t
+	    message-send-mail-function  'message-send-mail-with-sendmail
+	    mu4e-sent-messages-behavior 'delete
+	    sendmail-program "/usr/local/bin/msmtp"
+	    mu4e-view-show-addresses t
+	    mu4e-headers-fields
+	      '((:date . 16)
+		(:flags . 6)
+		(:size . 6)
+		(:from-or-to . 25) ;; Determined using mu4e-user-mail-address-list
+		(:subject . nil)))
+    (setq mu4e-context-policy 'pick-first
+	  mu4e-compose-context-policy 'always-ask
+	  mu4e-contexts
+      (list
+       (make-mu4e-context
+	:name "work" ;;for acc1-gmail
+	:enter-func (lambda () (mu4e-message "Entering context work"))
+	:leave-func (lambda () (mu4e-message "Leaving context work"))
+	:match-func (lambda (msg)
+	      (when msg
+	    (mu4e-message-contact-field-matches
+	     msg '(:from :to :cc :bcc) workmail)))
+	;; Stored in personal file
+	:vars work_variables)
 
-     (make-mu4e-context
-      :name "personal" ;;for acc2-gmail
-      :enter-func (lambda () (mu4e-message "Entering context personal"))
-      :leave-func (lambda () (mu4e-message "Leaving context personal"))
-      :match-func (lambda (msg)
-	    (when msg
-	  (mu4e-message-contact-field-matches
-	   msg '(:from :to :cc :bcc) personalmail)))
-      ;; Stored in personal file
-      :vars personal_variables )))
+       (make-mu4e-context
+	:name "personal" ;;for acc2-gmail
+	:enter-func (lambda () (mu4e-message "Entering context personal"))
+	:leave-func (lambda () (mu4e-message "Leaving context personal"))
+	:match-func (lambda (msg)
+	      (when msg
+	    (mu4e-message-contact-field-matches
+	     msg '(:from :to :cc :bcc) personalmail)))
+	;; Stored in personal file
+	:vars personal_variables )))
 
- (set-face-attribute 'mu4e-highlight-face nil :foreground "sienna1" :weight 'bold :inherit nil)
-)
+   (set-face-attribute 'mu4e-highlight-face nil :foreground "sienna1" :weight 'bold :inherit nil)
+  )
 #+END_SRC
 
 * Calendar
 #+BEGIN_SRC emacs-lisp
-  (use-package org-gcal
-      :ensure t
-      :defer t
-      :init
-      :hook (org-agenda-mode . (lambda () (org-gcal-sync) ))
-      :bind
-      :config
-  (setq org-gcal-client-id client_id
-        org-gcal-client-secret client_secret
-	org-gcal-file-alist file_alist
-	org-agenda-files agenda_files))
+    (use-package org-gcal
+	:ensure t
+	:defer t
+	:init
+	:hook ((org-agenda-mode . (lambda () (org-gcal-sync))))
+	:bind
+	:config
+    (setq org-gcal-client-id client_id
+	  org-gcal-client-secret client_secret
+	  org-gcal-file-alist file_alist
+	  org-agenda-files agenda_files)
+  (setq org-capture-templates
+  '(("a" "Appointment" entry (file agenda_loc)
+  "*  %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n"))))
 #+END_SRC
 * Custom Functions
 
