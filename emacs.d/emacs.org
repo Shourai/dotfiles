@@ -166,22 +166,15 @@ The auto-saves directory is not automatically created so we have to do it explic
   columns and 40 rows. Also the windows open at 100 pixels from the top and left.
 
   #+BEGIN_SRC emacs-lisp
-    (add-hook 'after-make-frame-functions (lambda (frame) (when (display-graphic-p frame) (scroll-bar-mode -1))))
+    ;(add-hook 'after-make-frame-functions (lambda (frame) (when (display-graphic-p frame) (scroll-bar-mode -1))))
     (scroll-bar-mode -1)
     (tool-bar-mode -1)
     (menu-bar-mode -1)
     (blink-cursor-mode -1)
-    (setq default-frame-alist
-      '(
-	(top . 100)
-	(left . 100)
-	(width . 130) ; character
-	(height . 40) ; lines
-	))
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
     (add-to-list 'default-frame-alist '(ns-appearance . dark)) ;; assuming you are using a dark theme
-    (setq ns-use-proxy-icon nil) ;; Remove icon in the titlebar
-    (setq frame-title-format nil) ;; Remove filename in the titlebar
+    (setq ns-use-proxy-icon nil ;; Remove icon in the titlebar
+          frame-title-format nil) ;; Remove filename in the titlebar
   #+END_SRC
 
 
@@ -192,12 +185,12 @@ The auto-saves directory is not automatically created so we have to do it explic
 
    #+BEGIN_SRC emacs-lisp
      (use-package which-key
-        :ensure t
-        :defer 5
-        :delight
-        :config
-        (which-key-mode)
-        (setq which-key-idle-delay 0.5))
+	:ensure t
+	:defer 5
+	:delight
+        :custom (which-key-idle-delay 0.5)
+	:config
+	(which-key-mode))
    #+END_SRC
 
 ** Line numbering
@@ -209,30 +202,26 @@ The auto-saves directory is not automatically created so we have to do it explic
    #+END_SRC
 
 ** Theme
-[[https://github.com/hlissner/emacs-doom-themes][Doom theme]]
+[[https://github.com/hlissner/emacs-doom-themes][Doom theme]] \\
+Using [[https://github.com/seagle0128/doom-modeline][Doom modeline]] as it is quite minimalistic plus a lot faster than spaceline.
     #+BEGIN_SRC emacs-lisp
         (use-package doom-themes
         :ensure t
         :init
         :config
-        (load-theme 'doom-one t)
-        )
-    #+END_SRC
+        (load-theme 'doom-one t))
 
-Using [[https://github.com/seagle0128/doom-modeline][Doom modeline]] as it is quite minimalistic plus a lot faster than spaceline.
-    #+BEGIN_SRC emacs-lisp
       (use-package doom-modeline
           :ensure t
           :defer t
           :hook (after-init . doom-modeline-init)
-          :config
-          (setq doom-modeline-height 10))
+          :custom (doom-modeline-height 10))
     #+END_SRC
 
 
 Highlight text that crosses over the 80 column mark in whitespace mode.
 It does not automatically fill the line but only gives a visual indication.
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle no
     (setq-default
     whitespace-line-column 80
     whitespace-style       '(face lines-tail trailing empty))
@@ -297,7 +286,8 @@ Helm interface for company-mode
     #+END_SRC
 
 ** Projectile
-   [[https://github.com/bbatsov/projectile][Projectile]] is a project interaction library for Emacs.
+   [[https://github.com/bbatsov/projectile][Projectile]] is a project interaction library for Emacs. \\
+   Helm-projectile adds helm integration to projectile.
 
    #+BEGIN_SRC emacs-lisp
      (use-package projectile
@@ -319,11 +309,7 @@ Helm interface for company-mode
             ("C-c p s a" . helm-projectile-ack)
             ("C-c p s s" . helm-projectile-ag))
      :config (projectile-mode 1))
-   #+END_SRC
 
-   Add helm integration to projectile.
-
-   #+BEGIN_SRC emacs-lisp
      (use-package helm-projectile
      :ensure t
      :after (projectile)
@@ -472,7 +458,7 @@ This package emulates [[https://github.com/tpope/vim-surround][surround.vim by T
 ** Multiple Cursors
  Multiple cursors for evil mode. \\
  Keybindings are in the [[https://github.com/gabesoft/evil-mc/blob/master/evil-mc.el][evil-mc.el]].
-  #+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp :tangle no
     (use-package evil-mc
     :ensure t
     :defer t)
@@ -525,8 +511,7 @@ This package emulates [[https://github.com/tpope/vim-surround][surround.vim by T
      (use-package anzu
        :ensure t
        :defer t
-       :config
-       (setq anzu-cons-mode-line-p nil))
+       :custom (anzu-cons-mode-line-p nil))
    #+END_SRC
 
 ** Ag
@@ -536,7 +521,7 @@ This package emulates [[https://github.com/tpope/vim-surround][surround.vim by T
        :ensure t
        :defer t
        :commands ag
-       :config (setq ag-highlight-search t))
+       :custom (ag-highlight-search t))
    #+END_SRC
 
 * Latex
@@ -598,6 +583,7 @@ Open PDFs with pdf-tools.
 	TeX-view-program-selection '((output-pdf "PDF Tools"))
 	TeX-source-correlate-start-server t)
 #+END_SRC
+
 * Python
   Elpy is an Emacs package to bring powerful Python editing to Emacs. It
   combines and configures a number of other packages, both written in Emacs Lisp
@@ -640,33 +626,28 @@ Open PDFs with pdf-tools.
     #+END_SRC
 
 * Org mode
-The following is for syntax highlighting the code source blocks inside org mode.
+The following is for syntax highlighting the code source blocks inside org mode. \\
+And adding basic logging to keep track of when a certain TODO item was finished.
 
   #+BEGIN_SRC emacs-lisp
     (setq org-confirm-babel-evaluate nil
           org-src-fontify-natively   t
-          org-src-tab-acts-natively  t)
+          org-src-tab-acts-natively  t
+          org-log-done 'time)
   #+END_SRC
 
-  Use UTF-8 bullets for org lists
+  Use UTF-8 bullets for org lists and add Evil bindings for org mode.
+
    #+BEGIN_SRC emacs-lisp
      (use-package org-bullets
        :ensure t
        :hook (org-mode . org-bullets-mode))
-   #+END_SRC
 
-  Evil bindings for org mode
-   #+BEGIN_SRC emacs-lisp
      (use-package evil-org
        :ensure t
        :defer t
        :delight
        :hook (org-mode . evil-org-mode))
-   #+END_SRC
-
-The most basic logging is to keep track of when a certain TODO item was finished.
-   #+BEGIN_SRC emacs-lisp
-    (setq org-log-done 'time)
    #+END_SRC
 
 * Magit
@@ -678,9 +659,7 @@ The most basic logging is to keep track of when a certain TODO item was finished
        :defer t
        :bind (("C-x g" . magit-status))
        :config  (require 'evil-magit))
-   #+END_SRC
 
-   #+BEGIN_SRC emacs-lisp
      (use-package evil-magit
        :ensure t
        :defer t)
@@ -843,6 +822,15 @@ Some nice intstructions can be found here
 #+END_SRC
 
 * Calendar
+  Viewing my google calendar I use [[https://github.com/kidd/org-gcal.el][org-gcal]].
+  This package offers
+
+   - Fetch google calendar event
+   - Post/edit org element
+   - Sync between Org and Gcal
+
+  A good starting point would be https://cestlaz.github.io/posts/using-emacs-26-gcal/
+
 #+BEGIN_SRC emacs-lisp
     (use-package org-gcal
 	:ensure t
@@ -859,6 +847,7 @@ Some nice intstructions can be found here
   '(("a" "Appointment" entry (file agenda_loc)
   "*  %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n"))))
 #+END_SRC
+
 * Custom Functions
 
 Insert the result of some Emacs Lisp expression at point.
