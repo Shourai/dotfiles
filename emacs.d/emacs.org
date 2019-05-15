@@ -750,10 +750,12 @@ according to this post https://github.com/politza/pdf-tools/issues/480#issuecomm
      (use-package pdf-tools
 	 :ensure t
 	 :defer t
-         :mode (("\\.pdf$" . pdf-view-mode))
+	 :mode (("\\.pdf$" . pdf-view-mode))
 	 :init
 	 (pdf-loader-install)
 	 :config
+	; See https://github.com/politza/pdf-tools/issues/480
+	 (setenv "PKG_CONFIG_PATH" "/usr/local/lib/pkgconfig:/usr/local/Cellar/libffi/3.2.1/lib/pkgconfig")
 	 (with-eval-after-load 'pdf-view (require 'evil-collection-pdf) (evil-collection-pdf-setup))
 	 (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
    #+END_SRC
