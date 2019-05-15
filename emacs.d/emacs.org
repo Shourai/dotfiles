@@ -141,7 +141,6 @@ The auto-saves directory is not automatically created so we have to do it explic
 
     #+BEGIN_SRC emacs-lisp
       (setq package-archives '(("gnu"       . "https://elpa.gnu.org/packages/")
-                               ("marmalade" . "https://marmalade-repo.org/packages/")
                                ("melpa"     . "https://melpa.org/packages/")
                                ("org"       . "https://orgmode.org/elpa/")))
     #+END_SRC
@@ -620,7 +619,8 @@ Open PDFs with pdf-tools.
   For it to work in virtualenvs: `pip3 install ipython`.
   #+BEGIN_SRC emacs-lisp
     (setq python-shell-interpreter "ipython"
-          python-shell-interpreter-args "-i --simple-prompt")
+          python-shell-interpreter-args "-i --simple-prompt"
+          elpy-shell-echo-output nil) ; Temporary fix for issue: https://github.com/jorgenschaefer/elpy/issues/1550
   #+END_SRC
 
   This is used as an workaround for the following issue [[https://github.com/jorgenschaefer/elpy/issues/887]]
