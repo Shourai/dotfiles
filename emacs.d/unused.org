@@ -179,6 +179,15 @@ Since we already use smartparens, use that for highlighting.
     (evil-escape-mode t))
 #+END_SRC
 
+** Multiple Cursors
+ Multiple cursors for evil mode. \\
+ Keybindings are in the [[https://github.com/gabesoft/evil-mc/blob/master/evil-mc.el][evil-mc.el]].
+  #+BEGIN_SRC emacs-lisp :tangle no
+    (use-package evil-mc
+    :ensure t
+    :defer t)
+  #+END_SRC
+
 ** Custom settings
 Prevent the visual selection overriding the system clipboard.
 This is useful if when using `viwp`, which does not work otherwise.
@@ -298,6 +307,22 @@ Set custom program to open pdf, dvi and html
  #+BEGIN_SRC emacs-lisp :tangle no
    (setq pyvenv-virtualenvwrapper-python "python3")
  #+END_SRC
+
+  This is used as an workaround for the following issue [[https://github.com/jorgenschaefer/elpy/issues/887]]
+  #+BEGIN_SRC emacs-lisp :tangle no
+    (setq python-shell-completion-native-enable nil)
+  #+END_SRC
+
+  Emacs IPython Notebook (EIN)
+  Some jupyter server args error, will have to fix later and allow tangling
+    #+BEGIN_SRC emacs-lisp :tangle no
+      (use-package ein
+      :ensure t
+      :defer t
+      :config
+      (setq ein:completion-backend (quote ein:use-company-backend))
+            ein:jupyter-server-args (list "--no-browser"))
+    #+END_SRC
 
 * Undo and Redo
   The ultimate undo history visualizer.

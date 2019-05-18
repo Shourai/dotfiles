@@ -78,20 +78,22 @@ Reported on 2017-03-04: https://debbugs.gnu.org/cgi/bugreport.cgi?bug=25967
    fill-column 80                                       ; Set width for automatic line breaks
    help-window-select t                                 ; Focus new help windows when opened
    inhibit-startup-screen t                             ; Disable start-up screen
-   initial-scratch-message ""                           ; Empty the initial *scratch* buffer
+   initial-scratch-message nil                          ; Empty the initial *scratch* buffer
    load-prefer-newer t                                  ; Prefers the newest version of a file
    select-enable-clipboard t                            ; Merge system's and Emacs' clipboard
-   tab-width 4                                          ; Set width for tabs
-   indent-tabs-mode nil                                 ; Use spaces to indent instead of tabs
    inhibit-startup-screen t                             ; Disable start-up screen
    display-time-24hr-format  t                          ; Display time in 24 hour format
    display-time-day-and-date t                          ; Display date
-   display-time-format " %H:%M | %a %d %B"               ; Format the time string
+   display-time-format " %H:%M | %a %d %B"              ; Format the time string
    display-time-default-load-average nil                ; Don't display load average
    vc-follow-symlinks t                                 ; Always follow the symlinks
    ring-bell-function 'ignore                           ; Disable audio notifications
-   mode-require-final-newline nil                       ; Don't put newline at the end of file when saving
+   mode-require-final-newline t                         ; Put newline at the end of file when saving
    view-read-only t)                                    ; Always open read-only buffers in view-mode
+  (setq-default
+   indent-tabs-mode nil                                 ; Use spaces to indent instead of tabs
+   tab-width 4                                          ; Set width for tabs
+   dired-listing-switches "-alh")                       ;Add file sizes in human-readable units (KB, MB, etc) to dired buffers.
   (cd "~/")                                             ; Move to the user directory
   (column-number-mode 1)                                ; Show the column number
   (display-time-mode 1)                                 ; Enable time in the mode-line
@@ -457,14 +459,6 @@ This package emulates [[https://github.com/tpope/vim-surround][surround.vim by T
     (global-evil-surround-mode 1))
   #+END_SRC
 
-** Multiple Cursors
- Multiple cursors for evil mode. \\
- Keybindings are in the [[https://github.com/gabesoft/evil-mc/blob/master/evil-mc.el][evil-mc.el]].
-  #+BEGIN_SRC emacs-lisp :tangle no
-    (use-package evil-mc
-    :ensure t
-    :defer t)
-  #+END_SRC
 
 ** Replace with register
   Port of [[http://www.vim.org/scripts/script.php?script_id=2703][Replace With Register]].
@@ -590,18 +584,20 @@ Open PDFs with pdf-tools.
   Elpy is an Emacs package to bring powerful Python editing to Emacs. It
   combines and configures a number of other packages, both written in Emacs Lisp
   as well as Python.
-    #+BEGIN_SRC emacs-lisp
-      (use-package elpy
-      :ensure t
-      :after (python)
-      :mode ("\\.py\\'" . python-mode)
-      :interpreter ("python" . python-mode)
-      :hook ((python-mode . elpy-mode))
-      :delight highlight-indentation-mode
-      :config
-      (setq python-indent-offset 4
-            elpy-company-post-completion-function 'elpy-company-post-complete-parens))
-    #+END_SRC
+  #+BEGIN_SRC emacs-lisp
+    (use-package elpy
+    :ensure t
+    :after (python)
+    :mode ("\\.py\\'" . python-mode)
+    :interpreter ("python" . python-mode)
+    :hook ((python-mode . elpy-mode))
+    :delight highlight-indentation-mode
+    :config
+    (setq python-indent-offset 4
+          elpy-company-post-completion-function 'elpy-company-post-complete-parens)
+    (when (load "flycheck" t t)
+    (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))))
+  #+END_SRC
 
   Use ipython console.
   For it to work in virtualenvs: `pip3 install ipython`.
@@ -610,22 +606,6 @@ Open PDFs with pdf-tools.
           python-shell-interpreter-args "-i --simple-prompt"
           elpy-shell-echo-output nil) ; Temporary fix for issue: https://github.com/jorgenschaefer/elpy/issues/1550
   #+END_SRC
-
-  This is used as an workaround for the following issue [[https://github.com/jorgenschaefer/elpy/issues/887]]
-    #+BEGIN_SRC emacs-lisp :tangle no
-    (setq python-shell-completion-native-enable nil)
-    #+END_SRC
-
-  Emacs IPython Notebook (EIN)
-  Some jupyter server args error, will have to fix later and allow tangling
-    #+BEGIN_SRC emacs-lisp :tangle no
-      (use-package ein
-      :ensure t
-      :defer t
-      :config
-      (setq ein:completion-backend (quote ein:use-company-backend))
-            ein:jupyter-server-args (list "--no-browser"))
-    #+END_SRC
 
 * Org mode
 The following is for syntax highlighting the code source blocks inside org mode. \\
