@@ -1,6 +1,6 @@
 # Install python 3 libraries
 
-if [[ "$(uname)" = "Darwin" ]]; then
+if [ "$(uname)" = "Darwin" ]; then
 
     # Install python packages
     pip3 install numpy
@@ -15,16 +15,16 @@ if [[ "$(uname)" = "Darwin" ]]; then
     pip3 install neovim
 
     #Symlink python3 to python
-    pypath=$(greadlink -f $(brew --prefix)/bin/python3)
-    pippath=$(greadlink -f $(brew --prefix)/bin/pip3)
-    ln -sf $pypath $(brew --prefix)/bin/python
-    ln -sf $pippath $(brew --prefix)/bin/pip
+    pypath=$(greadlink -f "$(brew --prefix)"/bin/python3)
+    pippath=$(greadlink -f "$(brew --prefix)"/bin/pip3)
+    ln -sf "$pypath" "$(brew --prefix)"/bin/python
+    ln -sf "$pippath" "$(brew --prefix)"/bin/pip
 
     echo "Manually install fzf keybindings with"
     echo "/usr/local/opt/fzf/install"
     bash /usr/local/opt/fzf/install
 
-elif [ "$(uname)" = "Linux"]; then
+elif [ "$(uname)" = "Linux" ]; then
 
     # Install python packages
     pip3 install --user numpy

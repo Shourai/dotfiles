@@ -1,6 +1,6 @@
 # Install AUR helper
 git clone https://aur.archlinux.org/yay.git
-cd yay
+cd yay || exit
 makepkg -si --noconfirm
 
 # update package list
