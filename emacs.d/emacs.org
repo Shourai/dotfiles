@@ -48,9 +48,7 @@ Reported on 2017-03-04: https://debbugs.gnu.org/cgi/bugreport.cgi?bug=25967
    While this ought to work, I found that you need to put this in the `init.el`
    file instead.
 
-   I also want to load some custom variables which I don't want to share publicly.
     #+BEGIN_SRC emacs-lisp
-    (load-file "~/.custom_variables")
     #+END_SRC
 ** Setting up the Load Path
 
@@ -63,9 +61,13 @@ Reported on 2017-03-04: https://debbugs.gnu.org/cgi/bugreport.cgi?bug=25967
 
 ** Personal Information
 
+   I also want to load some custom variables which I don't want to share publicly.
    #+BEGIN_SRC emacs-lisp
-     (setq user-full-name "Shourai"
-     user-mail-address "mail@shourai.net")
+(if (file-exists-p "~/.custom_variables")
+    (load-file "~/.custom_variables")
+    (message "Custom variable file not found"))
+      (setq user-full-name "Shourai"
+      user-mail-address "mail@shourai.net")
    #+END_SRC
 
 * Better Defaults
