@@ -27,6 +27,7 @@ brew install mpv
 brew install neovim
 # brew install pandoc
 brew install python
+brew install shellcheck
 brew install tmux
 brew install tree
 # brew install vim
