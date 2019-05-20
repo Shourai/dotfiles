@@ -132,9 +132,17 @@ alt + shift + {comma,period}
     pactl set-sink-volume @DEFAULT_SINK@ {-5%,+5%}
 
 # show bar on key press
-super + space
+super + shift + p
     polybar-msg cmd show
 
 # hide bar on key release
-@super + shift + space
+@super + ctrl + p
     polybar-msg cmd hide
+
+
+#
+# Chords to open programs
+#
+
+super + space ; {f,c,b}
+	{firefox, chromium, brave --incognito}
