@@ -264,7 +264,11 @@ It does not automatically fill the line but only gives a visual indication.
             ("M-y" . helm-show-kill-ring)
             ("C-c h" . helm-command-prefix)
             :map helm-command-map  ;; using prefix C-c h-...
-            ("o" . helm-occur))
+            ("o" . helm-occur)
+            :map helm-map
+            ("<tab>" . helm-execute-persistent-action) ; rebind tab to run persistent action
+            ("TAB" . helm-execute-persistent-action) ; rebind tab to run persistent action
+            ("C-z" . helm-select-action))
      :config
      (require 'helm-config)
      (helm-mode 1)
