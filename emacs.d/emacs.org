@@ -619,7 +619,8 @@ And adding basic logging to keep track of when a certain TODO item was finished.
     (setq org-confirm-babel-evaluate nil
           org-src-fontify-natively   t
           org-src-tab-acts-natively  t
-          org-log-done 'time)
+          org-log-done 'time
+          org-directory "~/.org")
   #+END_SRC
 
   Use UTF-8 bullets for org lists and add Evil bindings for org mode.
@@ -832,6 +833,47 @@ Some nice intstructions can be found here
   (setq org-capture-templates
   '(("a" "Appointment" entry (file agenda_loc)
   "*  %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n"))))
+#+END_SRC
+
+* Blogging
+[[https://ox-hugo.scripter.co/][ox-hugo]] is an Org exporter backend that exports Org to [[https://gohugo.io/][Hugo]]-compatible
+Markdown ([[https://github.com/russross/blackfriday][Blackfriday]]) and also generates the front-matter (in TOML or
+YAML format).
+Also add an org-capture template to make blogging easier.
+  #+BEGIN_SRC emacs-lisp
+    (use-package ox-hugo
+        :ensure t
+        :defer t
+        :commands org-hugo-export-wim-to-md
+        :config
+    (with-eval-after-load 'org-capture
+    (defun org-hugo-new-subtree-post-capture-template ()
+      "Returns `org-capture' template string for new Hugo post.
+    See `org-capture-templates' for more information."
+      (let* (;; http://www.holgerschurig.de/en/emacs-blog-from-org-to-hugo/
+             (date (format-time-string (org-time-stamp-format :long :inactive) (org-current-time)))
+             (title (read-from-minibuffer "Post Title: ")) ;Prompt to enter the post title
+             (fname (org-hugo-slug title)))
+        (mapconcat #'identity
+                   `(
+                     ,(concat "* " title)
+                     ":PROPERTIES:"
+                     ,(concat ":EXPORT_FILE_NAME: " fname)
+                     ":EXPORT_DESCRIPTION: "
+                     ,(concat ":EXPORT_DATE: " date) ;Enter current date and time
+                     ":END:"
+                     "%?\n")                ;Place the cursor here finally
+                   "\n")))
+
+      (add-to-list 'org-capture-templates
+                   '("h"                ;`org-capture' binding + h
+                     "Hugo post"
+                     entry
+                     ;; It is assumed that below file is present in `org-directory'
+                     ;; and that it has a "Blog Ideas" heading. It can even be a
+                     ;; symlink pointing to the actual location of all-posts.org!
+                     (file+olp "blog.org" "Blog")
+                     (function org-hugo-new-subtree-post-capture-template)))))
 #+END_SRC
 
 * Custom Functions
