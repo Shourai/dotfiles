@@ -3,13 +3,12 @@
 sxhkd &
 imwheel -b 45 &
 
-xrandr --output VGA1 --auto --left-of HDMI1
 xrandr --output HDMI1 --auto
-xrandr --output HDMI2 --auto --right-of HDMI1
+xrandr --output HDMI2 --auto --left-of HDMI1
 
 feh --bg-fill ~/.config/bspwm/bg.jpg
 
-if pgrep -x "xautolock" > /dev/null; then
+if pgrep -x "flashfocus" > /dev/null; then
     killall flashfocus
 else
     flashfocus &
@@ -25,13 +24,12 @@ if pgrep -x "xautolock" > /dev/null; then
     killall xautolock
 else
     xautolock -time 10 -locker "betterlockscreen -l dim" \
-        -killtime 10 -killer "systemctl suspend" \
-        -corners 000- &
+        #-killtime 10 -killer "systemctl suspend" \
+        #-corners 000- &
 fi
 
-bspc monitor VGA1 -d 1 2 3 4
-bspc monitor HDMI1 -d 5 6 7 8
-bspc monitor HDMI2 -d 9 10 11 12
+bspc monitor HDMI1 -d 7 8 9 10 11 12
+bspc monitor HDMI2 -d 1 2 3 4 5 6
 
 bspc config border_width         1
 bspc config window_gap           10
