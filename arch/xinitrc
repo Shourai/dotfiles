@@ -25,7 +25,7 @@ setxkbmap -option ctrl:nocaps
 # feh --bg-fill ~/.config/bspwm/bg.jpg
 
 # Start dropbox in background
-( ( sleep 2 && /usr/bin/dropbox ) & )
+# ( ( sleep 2 && /usr/bin/dropbox ) & )
 
 # Execute i3 windows manager
 exec bspwm

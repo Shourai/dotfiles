@@ -23,7 +23,7 @@ fi
 if pgrep -x "xautolock" > /dev/null; then
     killall xautolock
 else
-    xautolock -time 10 -locker "betterlockscreen -l dim" \
+    xautolock -time 10 -locker "betterlockscreen -l dim" & #\
         #-killtime 10 -killer "systemctl suspend" \
         #-corners 000- &
 fi
