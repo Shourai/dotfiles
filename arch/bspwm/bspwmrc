@@ -9,23 +9,25 @@ xrandr --output HDMI2 --auto --left-of HDMI1
 feh --bg-fill ~/.config/bspwm/bg.jpg
 
 if pgrep -x "flashfocus" > /dev/null; then
-    killall flashfocus
+    kill $(pgrep "flashfocus")
+    wait $(pgrep "flashfocus")
 else
     flashfocus &
 fi
 
 if pgrep -x "compton" > /dev/null; then
-    killall compton
+    kill $(pgrep "compton")
+    wait $(pgrep "compton")
 else
     compton -b
 fi
 
-if pgrep -x "xautolock" > /dev/null; then
-    killall xautolock
+if pgrep -x "xidlehook" > /dev/null; then
+    kill $(pgrep "xidlehook")
+    wait $(pgrep "xidlehook")
 else
-    xautolock -time 10 -locker "betterlockscreen -l dim" & #\
-        #-killtime 10 -killer "systemctl suspend" \
-        #-corners 000- &
+    xidlehook  --not-when-fullscreen --not-when-audio \
+        --timer normal 600 "betterlockscreen -l dim" "" &
 fi
 
 bspc monitor HDMI1 -d 7 8 9 10 11 12
