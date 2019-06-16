@@ -27,7 +27,8 @@ if pgrep -x "xidlehook" > /dev/null; then
     wait $(pgrep "xidlehook")
 else
     xidlehook  --not-when-fullscreen --not-when-audio \
-        --timer normal 600 "betterlockscreen -l dim" "" &
+        --timer primary 600 "betterlockscreen -l dim" "" \
+        --timer normal 900 "systemctl suspend" "" &
 fi
 
 bspc monitor HDMI1 -d 7 8 9 10 11 12
