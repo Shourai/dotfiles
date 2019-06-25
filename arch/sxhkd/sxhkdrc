@@ -146,3 +146,7 @@ super + shift + p
 
 super + space ; {f,c,b}
 	{firefox, chromium, brave --incognito}
+
+# set keyboard rate
+super + x
+      xset r rate 200 100
