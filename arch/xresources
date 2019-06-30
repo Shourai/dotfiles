@@ -1,5 +1,9 @@
 xterm.termName: xterm-256color
-emacs.font: Fira Code:style=Regular:size=14
+emacs.font: DejaVu Sans Mono:size=14
+
+!! Switch back to Fira when it supports italics
+!!emacs.font: Fira Code:style=Regular:size=14
+
 URxvt.scrollBar: false
 URxvt.font: xft:DejaVu Sans Mono:size=10
 URxvt*transparent: true

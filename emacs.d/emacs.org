@@ -166,8 +166,7 @@ The auto-saves directory is not automatically created so we have to do it explic
 
   I like a minimal setup when working on code, therefore I disable the toolbar and scroll bar. \\
   In daemon mode `scroll-bar-mode -1` does not work, therefore I have a workaround. \\
-  And if it detects I'm using a GUI I set the frame to be the size of 130
-  columns and 40 rows. Also the windows open at 100 pixels from the top and left.
+  Also set the font.
 
   #+BEGIN_SRC emacs-lisp
     ;(add-hook 'after-make-frame-functions (lambda (frame) (when (display-graphic-p frame) (scroll-bar-mode -1))))
@@ -179,6 +178,7 @@ The auto-saves directory is not automatically created so we have to do it explic
     (add-to-list 'default-frame-alist '(ns-appearance . dark)) ;; assuming you are using a dark theme
     (setq ns-use-proxy-icon nil ;; Remove icon in the titlebar
           frame-title-format nil) ;; Remove filename in the titlebar
+    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-11" ))
   #+END_SRC
 
 
