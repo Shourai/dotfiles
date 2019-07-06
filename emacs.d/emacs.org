@@ -178,7 +178,7 @@ The auto-saves directory is not automatically created so we have to do it explic
     (add-to-list 'default-frame-alist '(ns-appearance . dark)) ;; assuming you are using a dark theme
     (setq ns-use-proxy-icon nil ;; Remove icon in the titlebar
           frame-title-format nil) ;; Remove filename in the titlebar
-    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-11" ))
+    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10" ))
   #+END_SRC
 
 
@@ -219,7 +219,8 @@ Using [[https://github.com/seagle0128/doom-modeline][Doom modeline]] as it is qu
           :ensure t
           :defer t
           :hook (after-init . doom-modeline-init)
-          :custom (doom-modeline-height 10))
+          :custom (doom-modeline-height 18)
+          :custom-face (mode-line ((t (:height 1.0)))))
     #+END_SRC
 
 
