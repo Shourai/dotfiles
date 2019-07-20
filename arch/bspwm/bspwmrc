@@ -1,7 +1,6 @@
 #! /bin/sh
 
 sxhkd &
-imwheel -b 45 &
 
 xrandr --output HDMI1 --auto
 xrandr --output HDMI2 --auto --left-of HDMI1
