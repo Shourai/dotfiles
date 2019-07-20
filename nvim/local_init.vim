@@ -2,6 +2,7 @@
 au FocusLost * silent! :wa
 set autowriteall
 set relativenumber
+set clipboard+=unnamedplus
 
 " Colorscheme settings
 let g:airline_powerline_fonts = 1
