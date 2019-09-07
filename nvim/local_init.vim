@@ -6,8 +6,9 @@ set clipboard+=unnamedplus
 
 " Colorscheme settings
 let g:airline_powerline_fonts = 1
-colorscheme onedark
 let g:airline_theme='onedark'
+colorscheme onedark
+hi Normal guibg=NONE ctermbg=NONE
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
