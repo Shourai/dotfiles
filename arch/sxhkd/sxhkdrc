@@ -127,6 +127,10 @@ super + {Left,Down,Up,Right}
 alt + shift + x
     betterlockscreen -l dim
 
+# hibernate
+ctrl + alt + shift + x
+    systemctl suspend
+
 # Volume controls
 alt + shift + {comma,period}
     pactl set-sink-volume @DEFAULT_SINK@ {-5%,+5%}
