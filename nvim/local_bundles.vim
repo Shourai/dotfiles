@@ -7,3 +7,5 @@ Plug 'joshdick/onedark.vim'
 
 " Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+Plug 'christoomey/vim-tmux-navigator'
