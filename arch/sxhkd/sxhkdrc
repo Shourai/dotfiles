@@ -3,11 +3,8 @@
 #
 
 # terminal emulator
-super + Return
-	st
-
-super + shift + Return
-	urxvt
+super + {_, shift + } Return
+	{st, urxvt}
 
 # program launcher
 super + d
@@ -153,7 +150,7 @@ ctrl + alt + shift + x
     systemctl suspend
 
 # Volume controls
-alt + shift + {comma,period}
+alt + shift + {comma, period}
     pactl set-sink-volume @DEFAULT_SINK@ {-5%,+5%}
 
 # show bar on key press
@@ -163,7 +160,6 @@ super + shift + p
 # hide bar on key release
 @super + ctrl + p
     polybar-msg cmd hide
-
 
 #
 # Chords to open programs
