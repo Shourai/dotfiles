@@ -590,4 +590,9 @@ decrement-number() {
 zle -N decrement-number
 
 ## Add additional colors to ls
-eval `dircolors -b ~/.zsh/LS_COLORS`
+if [ "$(uname)" = "Darwin" ]
+then
+    eval `gdircolors -b ~/.zsh/LS_COLORS`
+else
+    eval `dircolors -b ~/.zsh/LS_COLORS`
+fi
