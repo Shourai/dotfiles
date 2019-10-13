@@ -588,3 +588,6 @@ decrement-number() {
 	CURSOR=$((pos + $#newnum - 2))
 }
 zle -N decrement-number
+
+## Add additional colors to ls
+eval `dircolors -b ~/.zsh/LS_COLORS`

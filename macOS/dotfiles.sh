@@ -7,6 +7,7 @@ ln -sf ~/Documents/github/dotfiles/zsh/zshrc ~/.zshrc
 mkdir -p ~/.zsh/functions
 ln -sf ~/Documents/github/dotfiles/zsh/pure.zsh ~/.zsh/functions/prompt_pure_setup
 ln -sf ~/Documents/github/dotfiles/zsh/async.zsh ~/.zsh/functions/async
+ln -sf ~/Documents/github/dotfiles/zsh/LS_COLORS ~/.zsh/LS_COLORS
 
 ln -sf ~/Documents/github/dotfiles/emacs.d ~/.emacs.d
 ln -sf ~/Documents/github/dotfiles/weechat.conf ~/.weechat.conf
