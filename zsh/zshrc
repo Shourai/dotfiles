@@ -588,9 +588,3 @@ decrement-number() {
 	CURSOR=$((pos + $#newnum - 2))
 }
 zle -N decrement-number
-
-precmd() {
-    pwd > /tmp/whereami
-}
-
-cd $(cat /tmp/whereami)
