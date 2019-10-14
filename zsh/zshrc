@@ -31,9 +31,12 @@ export PATH="$PATH:$HOME/.local/bin"
 
 # Colorize output, add file type indicator, and put sizes in human readable format
 if [[ "$(uname)" = "Darwin" ]]; then
-    alias ls='ls -GFh'
-    alias ll='ls -GFhl'
-    alias la='ls -GFha'
+    alias ls='gls -Fh --color=always'
+    alias ll='gls -Fhl --color=always'
+    alias la='gls -Fha --color=always'
+#    alias ls='ls -GFh'
+#    alias ll='ls -GFhl'
+#    alias la='ls -GFha'
 else
     alias ls='ls -Fh --color=always'
     alias ll='ls -Fhl --color=always'
