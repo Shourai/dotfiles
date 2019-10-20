@@ -43,29 +43,36 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | s
 
 ## Directory Listing
     .
-    ├── README.md
     ├── android
-    │   ├── README.md
     │   ├── install
     │   ├── packages.sh
+    │   ├── README.md
     │   └── termux.properties
     ├── arch
-    │   ├── README.md
     │   ├── bspwm
     │   ├── compton.conf
     │   ├── i3
     │   ├── packages.sh
     │   ├── polybar
+    │   ├── README.md
     │   ├── sxhkd
     │   ├── urxvt
     │   ├── xinitrc
     │   └── xresources
     ├── emacs.d
+    │   ├── auto-save-list
+    │   ├── custom.el
+    │   ├── elpa
     │   ├── emacs.el
     │   ├── emacs.org
     │   ├── init.el
+    │   ├── network-security.data
+    │   ├── projectile-bookmarks.eld
+    │   ├── recentf
     │   ├── snippets
-    │   └── unused.org
+    │   ├── transient
+    │   ├── unused.org
+    │   └── url
     ├── firefox
     │   ├── README.md
     │   ├── sync.sh
@@ -81,6 +88,8 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | s
     │   ├── macOS.sh
     │   ├── miscellaneous.sh
     │   └── shell.sh
+    ├── mbsyncrc
+    ├── msmtprc
     ├── neomutt
     │   ├── cache
     │   ├── dracula.muttrc
@@ -95,15 +104,17 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | s
     │   ├── plugged
     │   └── session
     ├── ranger
-    │   ├── commands.py
     │   ├── commands_full.py
+    │   ├── commands.py
     │   ├── plugins
     │   ├── rc.conf
     │   ├── rifle.conf
     │   └── scope.sh
+    ├── README.md
     ├── tmux.conf
     ├── weechat.conf
     └── zsh
         ├── async.zsh
+        ├── LS_COLORS
         ├── pure.zsh
         └── zshrc
