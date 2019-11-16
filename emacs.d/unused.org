@@ -275,6 +275,31 @@ Set custom program to open pdf, dvi and html
 #+END_SRC
 
 * Python
+  Elpy is an Emacs package to bring powerful Python editing to Emacs. It
+  combines and configures a number of other packages, both written in Emacs Lisp
+  as well as Python.
+  #+BEGIN_SRC emacs-lisp :tangle no
+    (use-package elpy
+    :ensure t
+    :after (python)
+    :mode ("\\.py\\'" . python-mode)
+    :interpreter ("python" . python-mode)
+    :hook ((python-mode . elpy-mode))
+    :delight highlight-indentation-mode
+    :config
+    (setq python-indent-offset 4
+          elpy-company-post-completion-function 'elpy-company-post-complete-parens)
+    (when (load "flycheck" t t)
+    (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))))
+  #+END_SRC
+
+  Use ipython console.
+  For it to work in virtualenvs: `pip3 install ipython`.
+  #+BEGIN_SRC emacs-lisp :tangle no
+    (setq python-shell-interpreter "ipython"
+          python-shell-interpreter-args "-i --simple-prompt"
+          elpy-shell-echo-output nil) ; Temporary fix for issue: https://github.com/jorgenschaefer/elpy/issues/1550
+  #+END_SRC
   Company-mode completion back-end for Python JEDI.
   #+BEGIN_SRC emacs-lisp :tangle no
     (defun my/python-mode-hook ()
