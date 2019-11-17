@@ -760,7 +760,12 @@ Also add an org-capture template to make blogging easier.
   #+BEGIN_SRC emacs-lisp
     (use-package lsp-mode
     :hook (python-mode . lsp)
-    :commands lsp)
+    :commands lsp
+    :custom (lsp-prefer-flymake nil)
+            (lsp-pyls-configuration-sources ["flake8"])
+        ; (lsp-ui-flycheck-enable t)
+            (lsp-pyls-plugins-pylint-enabled nil)
+            (lsp-pyls-plugins-pycodestyle-enabled t))
 
     (use-package lsp-ui
     :hook ((lsp-mode . lsp-ui-mode)
@@ -769,8 +774,10 @@ Also add an org-capture template to make blogging easier.
     (use-package company-lsp :commands company-lsp)
     (use-package helm-lsp :commands helm-lsp-workspace-symbol)
     (use-package pyvenv :ensure t)
-    (use-package flycheck :ensure t)
-    (setq lsp-prefer-flymake nil)
+    (use-package flycheck
+                 :ensure t
+                 :config
+                 :custom (flycheck-python-flake8-executable "flake8"))
   #+END_SRC
 
 * Custom Functions
