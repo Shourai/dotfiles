@@ -1,6 +1,3 @@
-# Set keyboard repeat rate
-xset r rate 200 30
-
 # Load .xresources for xterm colour scheme
 xrdb ~/.xresources
 
