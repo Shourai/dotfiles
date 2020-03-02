@@ -143,5 +143,4 @@ internal_UUIDs.txt
 
 # neomutt
 neomutt/cache
-neomutt/personal
-neomutt/work
+neomutt/profile.*

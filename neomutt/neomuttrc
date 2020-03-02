@@ -1,9 +1,7 @@
-# Source work and personal account
-folder-hook 'personal' 'source ~/.config/neomutt/personal'
-folder-hook 'work' 'source ~/.config/neomutt/work'
-
 # default account
-source personal
+source profile.1
+folder-hook $folder "source ~/.config/neomutt/profile.1"
+folder-hook $folder "source ~/.config/neomutt/profile.2"
 
 # Activate caching, as it can greatly improve speed
 set header_cache = "~/.config/neomutt/cache/headers"
@@ -12,9 +10,12 @@ set header_cache_backend = lmdb
 
 # Sidebar mappings
 set sidebar_visible = yes
-set sidebar_width = 20
+set sidebar_width = 25
 set sidebar_short_path = yes
 set sidebar_next_new_wrap = yes
+set sidebar_folder_indent = yes
+set sidebar_indent_string = "  "
+set sidebar_delim_chars="/"
 set sidebar_format = '%B%?F? [%F]?%* %?N?%N/? %?S?%S?'
 
 # General settings
@@ -63,5 +64,5 @@ bind pager k   previous-line
 bind pager j next-line
 
 bind index g noop
-macro index gt1 '<sync-mailbox><enter-command>source ~/.config/neomutt/personal<enter><change-folder>!<enter>'
-macro index gt2 '<sync-mailbox><enter-command>source ~/.config/neomutt/work<enter><change-folder>!<enter>'
+macro index gt1 '<sync-mailbox><enter-command>source ~/.config/neomutt/profile.1<enter><change-folder>!<enter>'
+macro index gt2 '<sync-mailbox><enter-command>source ~/.config/neomutt/profile.2<enter><change-folder>!<enter>'
