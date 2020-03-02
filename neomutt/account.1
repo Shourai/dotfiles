@@ -1,0 +1,16 @@
+# Setting up mail accounts
+
+set imap_user=mail@provider.tld
+set imap_pass=password
+set folder="imaps://mail@provider.tld@imaps_url.tld:993"
+set spoolfile= $folder
+
+account-hook $folder "set imap_user=mail@provider.tld imap_pass=password"
+
+named-mailboxes "mail@provider.tld" "=somename"
+named-mailboxes " Inbox" "=Inbox"
+named-mailboxes " Sent" "=Sent"
+named-mailboxes " Archive" "=Archive"
+named-mailboxes " Drafts" "=Drafts"
+named-mailboxes " Deleted" "=Deleted"
+#mailboxes =Inbox =Sent =Archive =Drafts =Deleted
