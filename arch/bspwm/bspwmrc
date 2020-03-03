@@ -16,11 +16,11 @@ else
     flashfocus &
 fi
 
-if pgrep -x "compton" > /dev/null; then
-    kill $(pgrep "compton")
-    wait $(pgrep "compton")
+if pgrep -x "picom" > /dev/null; then
+    kill $(pgrep "picom")
+    wait $(pgrep "picom")
 else
-    compton -b
+    picom -b
 fi
 
 if pgrep -x "xidlehook" > /dev/null; then

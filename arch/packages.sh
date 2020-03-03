@@ -18,16 +18,18 @@ sudo pacman -S htop --noconfirm
 # sudo pacman -S i3-gaps --noconfirm
 # sudo pacman -S i3blocks --noconfirm
 sudo pacman -S bspwm
-sudo pacman -S ledger --noconfirm
+#sudo pacman -S ledger --noconfirm
 sudo pacman -S mpv --noconfirm
 sudo pacman -S neovim --noconfirm
 sudo pacman -S openssh --noconfirm
-sudo pacman -S pavucontrol --noconfirm
+#sudo pacman -S pavucontrol --noconfirm
+sudo pacman -S picom --noconfirm
 sudo pacman -S pulseaudio --noconfirm
 sudo pacman -S python-pip --noconfirm
 sudo pacman -S python3 --noconfirm
-sudo pacman -S rxvt-unicode --noconfirm
+#sudo pacman -S rxvt-unicode --noconfirm
 sudo pacman -S sysstat --noconfirm
+sudo pacman -S sxhkd --noconfirm
 sudo pacman -S the_silver_searcher --noconfirm
 sudo pacman -S tmux --noconfirm
 sudo pacman -S ttf-dejavu --noconfirm
@@ -41,7 +43,6 @@ sudo pacman -S zsh-autosuggestions --noconfirm
 sudo pacman -S zsh-syntax-highlighting --noconfirm
 yay -S otf-font-awesome --noconfirm
 yay -S betterlockscreen --noconfirm
-yay -S compton-git --noconfirm # Change to community version when up to date?
 yay -S flashfocus-git --noconfirm
 yay -S polybar --noconfirm
 # sudo pacman -S alsa-utils --noconfirm

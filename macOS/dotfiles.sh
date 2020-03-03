@@ -32,7 +32,7 @@ if [ "$(uname)" = "Linux" ]; then
     ln -sf ~/Documents/github/dotfiles/arch/xresources ~/.xresources
     ln -sf ~/Documents/github/dotfiles/arch/i3 ~/.config/
     ln -sf ~/Documents/github/dotfiles/arch/urxvt ~/.urxvt
-    ln -sf ~/Documents/github/dotfiles/arch/compton.conf ~/.config
+    ln -sf ~/Documents/github/dotfiles/arch/picom.conf ~/.config
     ln -sf ~/Documents/github/dotfiles/arch/bspwm ~/.config
     ln -sf ~/Documents/github/dotfiles/arch/sxhkd ~/.config
     ln -sf ~/Documents/github/dotfiles/arch/polybar ~/.config
