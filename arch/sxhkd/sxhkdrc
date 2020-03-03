@@ -109,21 +109,15 @@ super + shift + bracket{left,right}
 # preselect
 #
 
-# preselect the direction
-super + ctrl + {h,j,k,l}
-	bspc node -p {west,south,north,east}
+# Preselect the direction or insert again to cancel the preselection.
+# This enters the manual tiling mode that splits the currently focused
+# window.
+super + alt + {h,j,k,l}
+	bspc node --presel-dir '~{west,south,north,east}'
 
 # preselect the ratio
 super + ctrl + {1-9}
 	bspc node -o 0.{1-9}
-
-# cancel the preselection for the focused node
-super + ctrl + space
-	bspc node -p cancel
-
-# cancel the preselection for the focused desktop
-super + ctrl + shift + space
-	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
 #
 # move/resize
@@ -136,7 +130,7 @@ super + ctrl + shift + space
 # such as MATE and Xfce).  I have not set the script to resize floating
 # windows because: (i) I do not use them and if I do I do not want to
 # change their dimensions, and (ii) to keep the script concise.
-super + alt + {h,j,k,l}
+super + ctrl + {h,j,k,l}
 	bspwm_resize {west,south,north,east} 50
 
 # move a floating window
