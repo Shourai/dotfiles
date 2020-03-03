@@ -36,4 +36,5 @@ if [ "$(uname)" = "Linux" ]; then
     ln -sf ~/Documents/github/dotfiles/arch/bspwm ~/.config
     ln -sf ~/Documents/github/dotfiles/arch/sxhkd ~/.config
     ln -sf ~/Documents/github/dotfiles/arch/polybar ~/.config
+    ln -sf ~/Documents/github/dotfiles/arch/fontconfig ~/.config
 fi
