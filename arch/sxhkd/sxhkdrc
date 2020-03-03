@@ -129,13 +129,15 @@ super + ctrl + shift + space
 # move/resize
 #
 
-# expand a window by moving one of its side outward
+# Expand or contract node in the given direction.
+#
+# For floating windows one can use Alt + Right Mouse click to
+# drag/resize in the given direction (this works in other DEs as well,
+# such as MATE and Xfce).  I have not set the script to resize floating
+# windows because: (i) I do not use them and if I do I do not want to
+# change their dimensions, and (ii) to keep the script concise.
 super + alt + {h,j,k,l}
-	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
-
-# contract a window by moving one of its side inward
-super + alt + shift + {h,j,k,l}
-	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+	bspwm_resize {west,south,north,east} 50
 
 # move a floating window
 super + {Left,Down,Up,Right}
