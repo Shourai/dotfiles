@@ -53,11 +53,13 @@ if [ "$(uname)" = "Darwin" ]; then
 fi
 
 # Additional installations
-if [ "$(uname)" = "Darwin" ]; then
+echo "Do you wish to install additional python packages?"
+read answer
+
+if [ "$answer" != "${answer#[Yy]}" ] ;then
     sh ~/Documents/github/dotfiles/macOS/miscellaneous.sh
-elif [ -f /etc/arch-release ]; then
-    echo "Installing python packages as --user"
-    sh ~/Documents/github/dotfiles/macOS/miscellaneous.sh
+else
+    echo "Skipping python packages"
 fi
 
 echo "Success! Reboot the machine for the changes to take effect"
