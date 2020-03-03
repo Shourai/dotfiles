@@ -1,7 +1,7 @@
 # default account
 source profile.1
-folder-hook $folder "source ~/.config/neomutt/profile.1"
-folder-hook $folder "source ~/.config/neomutt/profile.2"
+folder-hook "profile\.1" "source ~/.config/neomutt/profile.1"
+folder-hook "profile\.2" "source ~/.config/neomutt/profile.2"
 
 # Activate caching, as it can greatly improve speed
 set header_cache = "~/.config/neomutt/cache/headers"
