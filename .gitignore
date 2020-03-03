@@ -22,6 +22,7 @@ tags
 *.elc
 auto-save-list
 /emacs.d/request
+/emacs.d/.lsp*
 tramp
 .\#*
 emacs.el
