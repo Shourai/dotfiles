@@ -17,7 +17,7 @@ xinput set-button-map $ID 1 2 3 4 5 6 7 8 9 8 9 12 13 14 15 16 17 18 19 20  #Set
 xset r rate 200 100
 
 # Remap caps to control
-setxkbmap -option ctrl:nocaps
+setxkbmap -option 'ctrl:nocaps,altwin:swap_lalt_lwin'
 
 # Wallpaper
 # feh --bg-fill ~/.config/bspwm/bg.jpg
