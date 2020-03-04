@@ -20,8 +20,8 @@ elif [ -f /etc/arch-release ]; then
 fi
 
 # Setup git
-git config --global user.name "Shourai"
-git config --global user.email "10200748+Shourai@users.noreply.github.com"
+git -C ~/Documents/github/dotfiles config user.name "Shourai"
+git -C ~/Documents/github/dotfiles config user.email "10200748+Shourai@users.noreply.github.com"
 
 # Clone respository
 git clone https://github.com/Shourai/dotfiles.git ~/Documents/github/dotfiles
