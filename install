@@ -19,12 +19,13 @@ elif [ -f /etc/arch-release ]; then
     sudo pacman -S git --noconfirm
 fi
 
-# Setup git
-git -C ~/Documents/github/dotfiles config user.name "Shourai"
-git -C ~/Documents/github/dotfiles config user.email "10200748+Shourai@users.noreply.github.com"
 
 # Clone respository
 git clone https://github.com/Shourai/dotfiles.git ~/Documents/github/dotfiles
+
+# Setup git
+git -C ~/Documents/github/dotfiles config user.name "Shourai"
+git -C ~/Documents/github/dotfiles config user.email "10200748+Shourai@users.noreply.github.com"
 
 # Change git repo from https to SSH
 git -C ~/Documents/github/dotfiles remote set-url origin git@github.com:Shourai/dotfiles.git
