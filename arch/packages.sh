@@ -46,6 +46,3 @@ yay -S betterlockscreen --noconfirm
 yay -S flashfocus-git --noconfirm
 yay -S polybar --noconfirm
 # sudo pacman -S alsa-utils --noconfirm
-
-# Do a cleanup
-sudo pacman -Sc --noconfirm

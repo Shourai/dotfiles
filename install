@@ -63,4 +63,13 @@ else
     echo "Skipping python packages"
 fi
 
+echo "Doing cleanup"
+if [ "$(uname)" = "Darwin" ]; then
+    # Install brew packages
+    echo "Darwin cleanup"
+elif [ -f /etc/arch-release ]; then
+    echo "Cleaning up pacman cache"
+    sudo pacman -Sc --noconfirm
+fi
+
 echo "Success! Reboot the machine for the changes to take effect"
