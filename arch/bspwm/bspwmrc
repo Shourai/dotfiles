@@ -30,7 +30,12 @@ bspc config border_width         1
 bspc config focus_follows_pointer true
 
 # Set up background
-feh --bg-fill ~/.config/bspwm/bg.jpg
+if [ -f ~/Documents/wallpapers/bg.jpg]
+then
+    feh --bg-fill ~/Documents/wallpapers/bg.jpg
+else
+    feh --bg-fill ~/.config/bspwm/bg.jpg
+fi
 
 # Initialize flashfocus
 if pgrep -x "flashfocus" > /dev/null; then
