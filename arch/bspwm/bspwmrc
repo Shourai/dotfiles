@@ -30,7 +30,7 @@ bspc config border_width         1
 bspc config focus_follows_pointer true
 
 # Set up background
-if [ -f ~/Documents/wallpapers/bg.jpg]
+if [ -f ~/Documents/wallpapers/bg.jpg ]
 then
     feh --bg-fill ~/Documents/wallpapers/bg.jpg
 else
