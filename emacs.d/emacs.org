@@ -664,6 +664,16 @@ A major mode for editing Markdown-formatted text.
                     markdown-split-window-direction 'right ))
    #+END_SRC
 
+   #+BEGIN_SRC emacs-lisp
+     (use-package yaml-mode
+       :ensure t
+       :commands (markdown-mode gfm-mode)
+       :mode (
+              ("\\.yaml\\'" . yaml-mode)
+              ("\\.yml\\'" . yaml-mode))
+       :config)
+   #+END_SRC
+
 * IRC
   Using emacs' built-in ERC for IRC.
    #+BEGIN_SRC emacs-lisp
