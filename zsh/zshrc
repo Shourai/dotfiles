@@ -108,6 +108,9 @@ alias calw="gcalcli calw --military"
 alias calm="gcalcli calm --military"
 alias agenda="gcalcli agenda --details location --details length --military"
 
+## feh
+alias feh="feh --auto-zoom --scale-down"
+
 # ------------------------------------------------------------------------------
 # - General Configurations                                                     -
 # ------------------------------------------------------------------------------
