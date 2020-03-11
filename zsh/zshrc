@@ -116,6 +116,29 @@ mkcd() { mkdir -p "$@" && cd "$@"; }      # Create a directory and cd to it afte
 emc() { command emacsclient -n -c -a '' "$@" & } # use `emc <file>` to open file in emacsclient, start daemon if not running
 # emacs() { command emacs "$@" & }
 
+
+# ------------------------------------------------------------------------------
+# - Syntax highlighting package                                                -
+# ------------------------------------------------------------------------------
+
+if [[ "$(uname)" = "Darwin" ]]; then
+    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [ -f /etc/arch-release ]; then
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+# ------------------------------------------------------------------------------
+# - Autosuggestion package
+# ------------------------------------------------------------------------------
+
+if [[ "$(uname)" = "Darwin" ]]; then
+    source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+elif [ -f /etc/arch-release ]; then
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+fi
+
+
 # ------------------------------------------------------------------------------
 # - Autocompletion settings                                                    -
 # ------------------------------------------------------------------------------
@@ -323,26 +346,6 @@ bindkey -M vicmd "^V" edit-command-line
 # Have ctrl-a work as it does in Vim.
 bindkey -M vicmd "^X" decrement-number
 
-# ------------------------------------------------------------------------------
-# - Syntax highlighting package                                                -
-# ------------------------------------------------------------------------------
-
-if [[ "$(uname)" = "Darwin" ]]; then
-    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [ -f /etc/arch-release ]; then
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
-# ------------------------------------------------------------------------------
-# - Autosuggestion package
-# ------------------------------------------------------------------------------
-
-if [[ "$(uname)" = "Darwin" ]]; then
-    source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-elif [ -f /etc/arch-release ]; then
-    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-fi
 
 # ------------------------------------------------------------------------------
 # - fasd                                                                       -
