@@ -37,30 +37,17 @@ else
     feh --bg-fill ~/.config/bspwm/bg.jpg
 fi
 
-# Initialize flashfocus
-if pgrep -x "flashfocus" > /dev/null; then
-    kill $(pgrep "flashfocus")
-    wait $(pgrep "flashfocus")
-else
-    flashfocus &
-fi
+flashfocus &
+picom -b
 
-# Initialize picom (Compton alternative)
-if pgrep -x "picom" > /dev/null; then
-    kill $(pgrep "picom")
-    wait $(pgrep "picom")
-else
-    picom -b
-fi
-
-# Initialize xidlehookl
+## Initialize xidlehookl
 if pgrep -x "xidlehook" > /dev/null; then
     kill $(pgrep "xidlehook")
     wait $(pgrep "xidlehook")
 else
     xidlehook  --not-when-fullscreen --not-when-audio \
-        --timer primary 600 "betterlockscreen -l dim" "" \
-        --timer normal 900 "systemctl suspend" "" &
+        --timer 600 "betterlockscreen -l dim" "" \
+        --timer 900 "systemctl suspend" "" &
 fi
 
 # Launch polybar
