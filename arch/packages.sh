@@ -30,6 +30,7 @@ sudo pacman -S neovim --noconfirm
 sudo pacman -S openssh --noconfirm
 sudo pacman -S picom --noconfirm
 sudo pacman -S pulseaudio --noconfirm
+sudo pacman -S pulsemixer --noconfirm
 sudo pacman -S python-pip --noconfirm
 sudo pacman -S python3 --noconfirm
 sudo pacman -S sxhkd --noconfirm
