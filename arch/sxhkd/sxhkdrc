@@ -167,3 +167,8 @@ super + space ; {f,c,b}
 # set keyboard rate
 super + x
       xset r rate 200 100
+
+
+# Screenshot area and save to clipboard
+ctrl + alt + s
+    maim -s | xclip -selection clipboard -t image/png
