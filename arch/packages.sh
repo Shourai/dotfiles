@@ -49,6 +49,7 @@ yay -S otf-font-awesome --noconfirm
 yay -S betterlockscreen --noconfirm
 yay -S flashfocus-git --noconfirm
 yay -S polybar --noconfirm
+yay -S xidlehook --noconfirm
 
 git clone https://github.com/Shourai/st.git ~/Documents/github/st
 cd ~/Documents/github/st
