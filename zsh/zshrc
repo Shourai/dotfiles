@@ -1,25 +1,3 @@
-########## Syntax highlighting package from brew ##########
-
-# ------------------------------------------------------------------------------
-# - Syntax highlighting package                                                -
-# ------------------------------------------------------------------------------
-if [[ "$(uname)" = "Darwin" ]]; then
-    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [ -f /etc/arch-release ]; then
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
-# ------------------------------------------------------------------------------
-# - Syntax highlighting package                                                -
-# ------------------------------------------------------------------------------
-
-if [[ "$(uname)" = "Darwin" ]]; then
-    source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-elif [ -f /etc/arch-release ]; then
-    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-fi
-
 # ------------------------------------------------------------------------------
 # - Path Config                                                                -
 # ------------------------------------------------------------------------------
@@ -43,6 +21,7 @@ else
     alias la='ls -Fha --color=always'
     alias open='xdg-open'
 fi
+
 alias ..='cd ../'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -85,28 +64,6 @@ alias grv='git remote -v'
 alias gsb='git status -sb'
 alias gss='git status -s'
 alias gst='git status'
-
-## Virtualenv
-alias venv="workon"
-alias venv.exit="deactivate"
-alias venv.ls="lsvirtualenv"
-alias venv.show="showvirtualenv"
-alias venv.init="mkvirtualenv"
-alias venv.rm="rmvirtualenv"
-alias venv.switch="workon"
-alias venv.add="add2virtualenv"
-alias venv.cd="cdproject"
-alias venv.cdsp="cdsitepackages"
-alias venv.cdenv="cdvirtualenv"
-alias venv.lssp="lssitepackages"
-alias venv.proj="mkproject"
-alias venv.setproj="setvirtualenvproject"
-alias venv.wipe="wipeenv"
-
-## gcalcli
-alias calw="gcalcli calw --military"
-alias calm="gcalcli calm --military"
-alias agenda="gcalcli agenda --details location --details length --military"
 
 # ------------------------------------------------------------------------------
 # - General Configurations                                                     -
@@ -277,11 +234,15 @@ bindkey -M viins "^B" backward-char
 # Have i_ctrl-f work as i_ctrl-f does in emacs.
 bindkey -M viins "^F" forward-char
 
+# !!!!
+# Uncomment and activate the functions later in the file
+# !!!!
+
 # Prepend "sudo ".  This does not have a Vim parallel.
-bindkey "^S" prepend-sudo
+#bindkey "^S" prepend-sudo
 
 # Prepend "vim ".  This does not have a Vim parallel.
-bindkey "^V" prepend-vim
+#bindkey "^V" prepend-vim
 
 # Have i_ctrl-u work as it does in Vim.
 bindkey -M viins "^U" backward-kill-line
@@ -360,8 +321,30 @@ bindkey -M vicmd "^V" edit-command-line
 bindkey -M vicmd "^X" decrement-number
 
 # ------------------------------------------------------------------------------
+# - Syntax highlighting package                                                -
+# ------------------------------------------------------------------------------
+
+if [[ "$(uname)" = "Darwin" ]]; then
+    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [ -f /etc/arch-release ]; then
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+# ------------------------------------------------------------------------------
+# - Autosuggestion package
+# ------------------------------------------------------------------------------
+
+if [[ "$(uname)" = "Darwin" ]]; then
+    source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+elif [ -f /etc/arch-release ]; then
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+fi
+
+# ------------------------------------------------------------------------------
 # - fasd                                                                       -
 # ------------------------------------------------------------------------------
+#
 # initialize fasd
 eval "$(fasd --init auto)"
 
@@ -375,20 +358,6 @@ alias v='f -e nvim' # quick opening files with neovim
 # ------------------------------------------------------------------------------
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.fzf/shell/key-bindings.zsh ] && source ~/.fzf/shell/key-bindings.zsh
-
-# ------------------------------------------------------------------------------
-# - Virtualenvwrapper settings                                                 -
-# ------------------------------------------------------------------------------
-
-if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-    export VIRTUAL_ENV_DISABLE_PROMPT=1
-    export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-    export WORKON_HOME=$HOME/.virtualenvs
-    export PROJECT_HOME=$HOME/Documents/Python-Projects
-    source /usr/local/bin/virtualenvwrapper.sh
-fi
-
-
 
 # ------------------------------------------------------------------------------
 # - Neomutt setting                                                            -
@@ -408,24 +377,24 @@ stty discard undef
 # the "Key Bindings" section.
 
 # Prepend "sudo" to the command line if it is not already there.
-prepend-sudo() {
-	if ! echo "$BUFFER" | grep -q "^sudo "
-	then
-		BUFFER="sudo $BUFFER"
-		CURSOR+=5
-	fi
-}
-zle -N prepend-sudo
-
-# Prepend "vim" to the command line if it is not already there.
-prepend-vim() {
-	if ! echo "$BUFFER" | grep -q "^vim "
-	then
-		BUFFER="vim $BUFFER"
-		CURSOR+=5
-	fi
-}
-zle -N prepend-vim
+# prepend-sudo() {
+# 	if ! echo "$BUFFER" | grep -q "^sudo "
+# 	then
+# 		BUFFER="sudo $BUFFER"
+# 		CURSOR+=5
+# 	fi
+# }
+# zle -N prepend-sudo
+# 
+# # Prepend "vim" to the command line if it is not already there.
+# prepend-vim() {
+# 	if ! echo "$BUFFER" | grep -q "^vim "
+# 	then
+# 		BUFFER="vim $BUFFER"
+# 		CURSOR+=5
+# 	fi
+# }
+# zle -N prepend-vim
 
 # Delete all characters between a pair of characters.  Mimics Vim's "di" text
 # object functionality.
@@ -593,7 +562,10 @@ decrement-number() {
 }
 zle -N decrement-number
 
-## Add additional colors to ls
+# ==============================================================================
+# = Add additional colors to ls
+# ==============================================================================
+
 if [ "$(uname)" = "Darwin" ]
 then
     eval `gdircolors -b ~/.zsh/LS_COLORS`
@@ -601,4 +573,8 @@ else
     eval `dircolors -b ~/.zsh/LS_COLORS`
 fi
 
+
+# ==============================================================================
+# = Run keychain so ssh-agent is shared between shells
+# ==============================================================================
 eval $(keychain --eval --quiet --noask ~/.ssh/work)
