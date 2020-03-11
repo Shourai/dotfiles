@@ -22,6 +22,7 @@ sudo pacman -S fasd --noconfirm
 sudo pacman -S feh --noconfirm
 sudo pacman -S fzf --noconfirm
 sudo pacman -S htop --noconfirm
+sudo pacman -S keychain --noconfirm
 sudo pacman -S mesa --noconfirm
 sudo pacman -S mpv --noconfirm
 sudo pacman -S neovim --noconfirm

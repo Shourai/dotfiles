@@ -65,6 +65,9 @@ alias gsb='git status -sb'
 alias gss='git status -s'
 alias gst='git status'
 
+## feh
+alias feh="feh --auto-zoom --scale-down"
+
 # ------------------------------------------------------------------------------
 # - General Configurations                                                     -
 # ------------------------------------------------------------------------------
