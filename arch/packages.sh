@@ -7,11 +7,9 @@ makepkg -si --noconfirm
 sudo pacman -Syu --noconfirm
 
 # Install packages
-# sudo pacman -S alsa-utils --noconfirm
 # sudo pacman -S i3-gaps --noconfirm
 # sudo pacman -S i3blocks --noconfirm
 # sudo pacman -S ledger --noconfirm
-# sudo pacman -S pavucontrol --noconfirm
 # sudo pacman -S rxvt-unicode --noconfirm
 sudo pacman -S acpi --noconfirm
 sudo pacman -S archey3 --noconfirm
