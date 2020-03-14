@@ -62,6 +62,8 @@ bind pager gg  top
 bind pager G   bottom
 bind pager k   previous-line
 bind pager j next-line
+bind index l display-message
+bind pager h exit
 
 bind index g noop
 macro index gt1 '<sync-mailbox><enter-command>source ~/.config/neomutt/profile.1<enter><change-folder>!<enter>'
