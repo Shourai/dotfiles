@@ -54,12 +54,8 @@ module-margin-left = 1
 module-margin-right = 2
 
 font-0 = "DejaVu Sans:style=Book:pixelsize=10;1"
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
-font-3 = "Font Awesome 5 Free:style=Regular:pixelsize=10;1"
-font-4 = "Font Awesome 5 Free:style=Solid:pixelsize=10;1"
-font-5 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;1"
-
+font-1 = siji:pixelsize=10;1
+font-2 = "icomoon\-feather:pixelsize=10;1"
 
 modules-left = bspwm
 modules-center =
@@ -110,7 +106,7 @@ interval = 25
 
 mount-0 = /
 
-label-mounted =   %percentage_used%%
+label-mounted =  %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
@@ -146,7 +142,7 @@ label-empty-padding = 2
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
+format-prefix = " "
 ;format-prefix-foreground = ${colors.foreground-alt}
 ;format-underline = #f90000
 label = %percentage:2%%
@@ -154,7 +150,7 @@ label = %percentage:2%%
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+format-prefix = " "
 ;format-prefix-foreground = ${colors.foreground-alt}
 ;format-underline = #4bffdc
 label = %percentage_used%%
@@ -167,20 +163,15 @@ interval = 1.0
 format-connected = <ramp-signal> <label-connected>
 ;format-connected-underline = #9f78e1
 ;label-connected = %essid% down: %downspeed% up: %upspeed%
-label-connected = %downspeed%  %upspeed%
+label-connected =  %downspeed%  %upspeed%
 
-format-disconnected =
+format-disconnected = 
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = ${colors.foreground-alt}
+ramp-signal-0 = 
 
 [module/eth]
 type = internal/network
@@ -208,7 +199,7 @@ date-alt = " %Y-%m-%d"
 time = %H:%M
 time-alt = %H:%M:%S
 
-format-prefix = 
+format-prefix = 
 ;format-prefix-foreground = ${colors.foreground-alt}
 ;format-underline = #0a6cf5
 
@@ -217,29 +208,14 @@ label = %date% %time%
 [module/pulseaudio]
 type = internal/pulseaudio
 
-format-volume = <label-volume> <bar-volume>
-label-volume =  %percentage%%
-label-volume-foreground = ${root.foreground}
+format-volume = <ramp-volume> <label-volume>
 
-label-muted = 🔇 muted
+label-muted =  muted
 label-muted-foreground = #666
 
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
 
 [module/alsa]
 type = internal/alsa
