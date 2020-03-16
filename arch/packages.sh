@@ -35,7 +35,6 @@ sudo pacman -S sxhkd --noconfirm
 sudo pacman -S sysstat --noconfirm
 sudo pacman -S the_silver_searcher --noconfirm
 sudo pacman -S tmux --noconfirm
-sudo pacman -S ttf-dejavu --noconfirm
 sudo pacman -S xclip --noconfirm
 sudo pacman -S xorg --noconfirm
 sudo pacman -S xorg-backlight --noconfirm
@@ -43,7 +42,6 @@ sudo pacman -S xorg-xinit --noconfirm
 sudo pacman -S zsh --noconfirm
 sudo pacman -S zsh-autosuggestions --noconfirm
 sudo pacman -S zsh-syntax-highlighting --noconfirm
-yay -S otf-font-awesome --noconfirm
 yay -S betterlockscreen --noconfirm
 yay -S flashfocus-git --noconfirm
 yay -S polybar --noconfirm

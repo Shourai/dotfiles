@@ -51,9 +51,10 @@ padding-left = 0
 padding-right = 2
 
 module-margin-left = 1
-module-margin-right = 2
+module-margin-right = 1
 
-font-0 = "DejaVu Sans:style=Book:pixelsize=10;1"
+#font-0 = "DejaVu Sans:style=Book:pixelsize=10;1"
+font-0 = "Source Code Pro:style=Semibold:pixelsize=10;1"
 font-1 = siji:pixelsize=10;1
 font-2 = "icomoon\-feather:pixelsize=10;1"
 
@@ -122,18 +123,18 @@ label-unfocused = %name%
 label-focused = %name%
 label-focused-background = ${colors.background-trans}
 label-focused-underline= ${colors.primary}
-label-focused-padding = 2
+label-focused-padding = 1
 
 label-occupied = %name%
-label-occupied-padding = 2
+label-occupied-padding = 1
 
 label-urgent = %name%!
 label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
+label-urgent-padding = 1
 
 label-empty = %name%
 label-empty-foreground = ${colors.foreground-alt}
-label-empty-padding = 2
+label-empty-padding = 1
 
 ; Separator in between workspaces
 ; label-separator = |
