@@ -7,13 +7,14 @@ makepkg -si --noconfirm
 sudo pacman -Syu --noconfirm
 
 # Install packages
+# sudo pacman -S acpi --noconfirm
 # sudo pacman -S i3-gaps --noconfirm
 # sudo pacman -S i3blocks --noconfirm
 # sudo pacman -S ledger --noconfirm
 # sudo pacman -S rxvt-unicode --noconfirm
-sudo pacman -S acpi --noconfirm
-sudo pacman -S archey3 --noconfirm
-sudo pacman -S bspwm
+# sudo pacman -S sysstat --noconfirm
+
+sudo pacman -S bspwm --noconfirm
 sudo pacman -S dmenu --noconfirm
 sudo pacman -S emacs --noconfirm
 sudo pacman -S fasd --noconfirm
@@ -32,21 +33,24 @@ sudo pacman -S pulsemixer --noconfirm
 sudo pacman -S python-pip --noconfirm
 sudo pacman -S python3 --noconfirm
 sudo pacman -S sxhkd --noconfirm
-sudo pacman -S sysstat --noconfirm
 sudo pacman -S the_silver_searcher --noconfirm
 sudo pacman -S tmux --noconfirm
 sudo pacman -S xclip --noconfirm
-sudo pacman -S xorg --noconfirm
-sudo pacman -S xorg-backlight --noconfirm
+sudo pacman -S xorg-server --noconfirm
+sudo pacman -S xorg-apps --noconfirm
 sudo pacman -S xorg-xinit --noconfirm
 sudo pacman -S zsh --noconfirm
 sudo pacman -S zsh-autosuggestions --noconfirm
 sudo pacman -S zsh-syntax-highlighting --noconfirm
-yay -S betterlockscreen --noconfirm
+yay -S betterlockscreen-git --noconfirm
 yay -S flashfocus-git --noconfirm
-yay -S polybar --noconfirm
+yay -S polybar-git --noconfirm
 yay -S xidlehook --noconfirm
 
+# Install terminal emulator
 git clone https://github.com/Shourai/st.git ~/Documents/github/st
 cd ~/Documents/github/st
 sudo make install
+
+# Copy fonts
+cp ~/Documents/github/dotfiles/arch/fonts/* /usr/share/fonts/TTF/
