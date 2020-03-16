@@ -25,6 +25,12 @@ in `packages.sh`, are all the packages I use.
 
 ## Installation
 Here I have my configuration for a clean setup.
+The only thing that would be handy is to create your user and add it to the `wheel` group.
+```
+useradd -m -G wheel [username]
+```
+Be sure to allow the wheel group to run sudo commands via `visudo`
+
 Basically run the `install` after cloning this repository.
 Or run the following cURL command:
 ```
@@ -42,6 +48,7 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | s
 ## Improvements
 
 ## Directory Listing
+
     .
     ├── android
     │   ├── install
@@ -50,9 +57,11 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | s
     │   └── termux.properties
     ├── arch
     │   ├── bspwm
-    │   ├── compton.conf
+    │   ├── fontconfig
+    │   ├── fonts
     │   ├── i3
     │   ├── packages.sh
+    │   ├── picom.conf
     │   ├── polybar
     │   ├── README.md
     │   ├── sxhkd
@@ -66,18 +75,11 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | s
     │   ├── emacs.el
     │   ├── emacs.org
     │   ├── init.el
-    │   ├── network-security.data
     │   ├── projectile-bookmarks.eld
     │   ├── recentf
     │   ├── snippets
     │   ├── transient
-    │   ├── unused.org
-    │   └── url
-    ├── firefox
-    │   ├── README.md
-    │   ├── sync.sh
-    │   ├── userChrome.css
-    │   └── userContent.css
+    │   └── unused.org
     ├── install
     ├── latexmkrc
     ├── ledgerrc
@@ -91,11 +93,9 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | s
     ├── mbsyncrc
     ├── msmtprc
     ├── neomutt
-    │   ├── cache
+    │   ├── account.1
     │   ├── dracula.muttrc
-    │   ├── neomuttrc
-    │   ├── personal
-    │   └── work
+    │   └── neomuttrc
     ├── nvim
     │   ├── autoload
     │   ├── init.vim
@@ -103,13 +103,6 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | s
     │   ├── local_init.vim
     │   ├── plugged
     │   └── session
-    ├── ranger
-    │   ├── commands_full.py
-    │   ├── commands.py
-    │   ├── plugins
-    │   ├── rc.conf
-    │   ├── rifle.conf
-    │   └── scope.sh
     ├── README.md
     ├── tmux.conf
     ├── weechat.conf
@@ -118,3 +111,4 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | s
         ├── LS_COLORS
         ├── pure.zsh
         └── zshrc
+
