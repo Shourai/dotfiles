@@ -57,7 +57,7 @@ fi
 
 # Additional installations
 echo "Do you wish to install additional python packages?"
-read answer
+read -r answer
 
 if [ "$answer" != "${answer#[Yy]}" ] ;then
     sh ~/Documents/github/dotfiles/macOS/miscellaneous.sh
