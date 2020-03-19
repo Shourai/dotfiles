@@ -32,6 +32,7 @@ sudo pacman -S pulseaudio --noconfirm
 sudo pacman -S pulsemixer --noconfirm
 sudo pacman -S python-pip --noconfirm
 sudo pacman -S python3 --noconfirm
+sudo pacman -S shellcheck --noconfirm
 sudo pacman -S sxhkd --noconfirm
 sudo pacman -S the_silver_searcher --noconfirm
 sudo pacman -S tmux --noconfirm
@@ -49,7 +50,7 @@ yay -S xidlehook --noconfirm
 
 # Install terminal emulator
 git clone https://github.com/Shourai/st.git ~/Documents/github/st
-cd ~/Documents/github/st
+cd ~/Documents/github/st || exit
 sudo make install
 
 # Copy fonts
