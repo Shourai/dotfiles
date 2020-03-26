@@ -178,7 +178,7 @@ The auto-saves directory is not automatically created so we have to do it explic
     (add-to-list 'default-frame-alist '(ns-appearance . dark)) ;; assuming you are using a dark theme
     (setq ns-use-proxy-icon nil ;; Remove icon in the titlebar
           frame-title-format nil) ;; Remove filename in the titlebar
-    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10" ))
+    ;(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10" ))
   #+END_SRC
 
 
@@ -355,8 +355,8 @@ Helm interface for company-mode
      :init
      :config
      (global-company-mode 1)
-     (setq company-idle-delay  0.1 ; company delay until suggestions are shown
-	   company-minimum-prefix-length 2
+     (setq company-idle-delay  0.0 ; company delay until suggestions are shown
+	   company-minimum-prefix-length 1
 	   company-show-numbers t
 	   company-tooltip-align-annotations t))
    #+END_SRC
@@ -769,7 +769,9 @@ Also add an org-capture template to make blogging easier.
   Testing LSP mode for python
   #+BEGIN_SRC emacs-lisp
     (use-package lsp-mode
-    :hook (python-mode . lsp)
+    :hook ((python-mode . lsp)
+           (python-mode . flycheck-mode)
+           (lsp-mode . lsp-enable-which-key-integration))
     :commands lsp
     :custom (lsp-prefer-flymake nil)
             (lsp-pyls-configuration-sources ["flake8"])
@@ -778,8 +780,7 @@ Also add an org-capture template to make blogging easier.
             (lsp-pyls-plugins-pycodestyle-enabled t))
 
     (use-package lsp-ui
-    :hook ((lsp-mode . lsp-ui-mode)
-           (python-mode . flycheck-mode))
+    :hook ((lsp-mode . lsp-ui-mode))
     :commands lsp-ui-mode)
     (use-package company-lsp :commands company-lsp)
     (use-package helm-lsp :commands helm-lsp-workspace-symbol)
