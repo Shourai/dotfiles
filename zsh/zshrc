@@ -584,3 +584,12 @@ fi
 # = Run keychain so ssh-agent is shared between shells
 # ==============================================================================
 eval $(keychain --eval --quiet --noask ~/.ssh/work)
+
+
+
+# ==============================================================================
+# = GPG agent settings
+# ==============================================================================
+# As mendated by the manpage of gpg-agent
+GPG_TTY=$(tty)
+export GPG_TTY
