@@ -583,7 +583,8 @@ fi
 # ==============================================================================
 # = Run keychain so ssh-agent is shared between shells
 # ==============================================================================
-eval $(keychain --eval --quiet --noask ~/.ssh/work)
+#eval $(keychain --eval --quiet --noask ~/.ssh/work)
+eval $(keychain --eval --quiet --noask --agents ssh,gpg)
 
 
 
