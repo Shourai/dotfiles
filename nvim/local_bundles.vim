@@ -10,3 +10,5 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpop/vim-fugitive'
+
+Plug 'tmux-plugins/vim-tmux-focus-events'
