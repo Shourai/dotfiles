@@ -8,7 +8,9 @@ set clipboard+=unnamedplus
 let g:airline_powerline_fonts = 1
 let g:airline_theme='onedark'
 colorscheme onedark
-hi Normal guibg=NONE ctermbg=NONE
+
+" Set transparant background vim
+"hi Normal guibg=NONE ctermbg=NONE
 
 " Show replace as you type
 set inccommand=nosplit
