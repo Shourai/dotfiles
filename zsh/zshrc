@@ -584,7 +584,8 @@ fi
 # = Run keychain so ssh-agent is shared between shells
 # ==============================================================================
 #eval $(keychain --eval --quiet --noask ~/.ssh/work)
-eval $(keychain --eval --quiet --noask --agents ssh,gpg)
+# If the command keychain is found and executable, evaluate it;
+[ -x "$(command -v keychain)" ] && eval $(keychain --eval --quiet --noask --agents ssh,gpg)
 
 
 
