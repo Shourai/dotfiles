@@ -184,6 +184,7 @@ The auto-saves directory is not automatically created so we have to do it explic
 
 ** Which key
    [[https://github.com/justbur/emacs-which-key][Which key]] allows for a contextualized completion of emacs commands
+max
    shown in the mini-buffer. \\
    It's really helpful if you can't remember the next keypress.
 
@@ -281,9 +282,8 @@ It does not automatically fill the line but only gives a visual indication.
   `helm-ag.el` provides interfaces of [[https://github.com/ggreer/the_silver_searcher][The Silver Searcher]] with helm.
    #+BEGIN_SRC emacs-lisp
      (use-package helm-ag
-     :ensure t
-     :after helm
-     :defer t)
+       :ensure t
+       :defer t)
    #+END_SRC
 
 Helm interface for company-mode
@@ -341,24 +341,27 @@ Helm interface for company-mode
 ** Company Mode
    Modular in-buffer completion framework for Emacs.
    #+BEGIN_SRC emacs-lisp
-     (use-package company
-     :ensure t
-     :delight
-     :defer 2
-     :bind (("C-," . company-complete-common)
-	    ("C-c y" . company-yasnippet)
-           :map company-active-map
-                ("M-n" . nil)
-                ("M-p" . nil)
-                ("C-n" . #'company-select-next)
-                ("C-p" . #'company-select-previous))
-     :init
-     :config
-     (global-company-mode 1)
-     (setq company-idle-delay  0.0 ; company delay until suggestions are shown
-	   company-minimum-prefix-length 1
-	   company-show-numbers t
-	   company-tooltip-align-annotations t))
+      (use-package company
+      :ensure t
+      :delight
+      :defer 2
+      :bind (("C-," . company-complete-common)
+             ("C-c y" . company-yasnippet)
+            :map company-active-map
+                 ("M-n" . nil)
+                 ("M-p" . nil)
+                 ("C-n" . #'company-select-next)
+                 ("C-p" . #'company-select-previous))
+      :init
+      :config
+     ; Don't override company-active-map keybindings with evil keybindings
+     (add-to-list 'evil-intercept-maps '(company-active-map . nil))
+     (add-to-list 'evil-overriding-maps '(company-active-map . nil))
+      (global-company-mode 1)
+      (setq company-idle-delay  0.0 ; company delay until suggestions are shown
+        company-minimum-prefix-length 2
+        company-show-numbers t
+        company-tooltip-align-annotations t))
    #+END_SRC
 
    Add quickhelp for company mode
@@ -769,26 +772,63 @@ Also add an org-capture template to make blogging easier.
   Testing LSP mode for python
   #+BEGIN_SRC emacs-lisp
     (use-package lsp-mode
-    :hook ((python-mode . lsp)
-           (python-mode . flycheck-mode)
-           (lsp-mode . lsp-enable-which-key-integration))
-    :commands lsp
-    :custom (lsp-prefer-flymake nil)
-            (lsp-pyls-configuration-sources ["flake8"])
-        ; (lsp-ui-flycheck-enable t)
-            (lsp-pyls-plugins-pylint-enabled nil)
-            (lsp-pyls-plugins-pycodestyle-enabled t))
+      :ensure t
+      :defer t
+      :hook ((python-mode . lsp)
+             (python-mode . flycheck-mode)
+             (lsp-mode . lsp-enable-which-key-integration))
+      :commands lsp
+      :custom
+      (lsp-pyls-configuration-sources ["flake8"])
+      (lsp-pyls-plugins-pylint-enabled nil)
+      (lsp-pyls-plugins-pycodestyle-enabled t)
+      (lsp-signature-render-documentation nil)
+      (lsp-signature-auto-activate nil))
 
     (use-package lsp-ui
-    :hook ((lsp-mode . lsp-ui-mode))
-    :commands lsp-ui-mode)
-    (use-package company-lsp :commands company-lsp)
-    (use-package helm-lsp :commands helm-lsp-workspace-symbol)
-    (use-package pyvenv :ensure t)
+      :ensure t
+      :defer t
+      :after (lsp-mode flycheck)
+      :custom
+      (lsp-ui-doc-enable nil)
+      (lsp-ui-doc-use-childframe t)
+      (lsp-ui-doc-position 'top)
+      (lsp-ui-doc-include-signature t)
+      (lsp-ui-sideline-enable nil)
+      (lsp-ui-flycheck-enable t)
+      (lsp-ui-flycheck-list-position 'right)
+      (lsp-ui-flycheck-live-reporting t)
+      (lsp-ui-peek-enable t)
+      (lsp-ui-peek-list-width 60)
+      (lsp-ui-peek-peek-height 25))
+
+
+    (use-package company-lsp
+      :ensure t
+      :defer t
+      :after company
+      :config
+      (push 'company-lsp company-backends)
+
+      ;; Disable client-side cache because the LSP server does a better job.
+      (setq company-lsp-async t
+            company-lsp-cache-candidates 'auto))
+
+    (use-package helm-lsp
+      :ensure t
+      :defer t
+      :commands helm-lsp-workspace-symbol)
+
+    (use-package pyvenv
+      :ensure t
+      :defer t
+      :ensure t)
+
     (use-package flycheck
-                 :ensure t
-                 :config
-                 :custom (flycheck-python-flake8-executable "flake8"))
+      :ensure t
+      :defer t
+      :config
+      :custom (flycheck-python-flake8-executable "flake8"))
   #+END_SRC
 
 * Custom Functions
