@@ -365,6 +365,9 @@ alias v='f -e nvim' # quick opening files with neovim
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.fzf/shell/key-bindings.zsh ] && source ~/.fzf/shell/key-bindings.zsh
 
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+
 # ------------------------------------------------------------------------------
 # - Neomutt setting                                                            -
 # ------------------------------------------------------------------------------
