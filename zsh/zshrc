@@ -368,6 +368,13 @@ alias v='f -e nvim' # quick opening files with neovim
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 
+if [ -x "$(command -v fd)" ]
+then
+    export FZF_DEFAULT_COMMAND='fd --type f'
+    export FZF_CTRL_T_COMMAND="fd --type f"
+    export FZF_ALT_C_COMMAND="fd --type d"
+fi
+
 # ------------------------------------------------------------------------------
 # - Neomutt setting                                                            -
 # ------------------------------------------------------------------------------
