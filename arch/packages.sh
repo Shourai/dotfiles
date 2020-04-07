@@ -18,6 +18,7 @@ sudo pacman -S bspwm --noconfirm
 sudo pacman -S dmenu --noconfirm
 sudo pacman -S emacs --noconfirm
 sudo pacman -S fasd --noconfirm
+sudo pacman -S fd --noconfirm
 sudo pacman -S feh --noconfirm
 sudo pacman -S fzf --noconfirm
 sudo pacman -S htop --noconfirm
