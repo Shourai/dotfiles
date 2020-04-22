@@ -65,6 +65,7 @@ alias grv='git remote -v'
 alias gsb='git status -sb'
 alias gss='git status -s'
 alias gst='git status'
+alias lg='lazygit'
 
 ## feh
 alias feh="feh --auto-zoom --scale-down"
