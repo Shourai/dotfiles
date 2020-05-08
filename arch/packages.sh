@@ -55,4 +55,4 @@ cd ~/Documents/github/st || exit
 sudo make install
 
 # Copy fonts
-cp ~/Documents/github/dotfiles/arch/fonts/* /usr/share/fonts/TTF/
+cp ~/Documents/github/dotfiles/arch/fonts/* ~/.local/share/fonts/
