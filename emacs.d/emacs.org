@@ -650,6 +650,7 @@ A major mode for editing Markdown-formatted text.
    #+BEGIN_SRC emacs-lisp
      (use-package markdown-mode
        :ensure t
+       :defer t
        :commands (markdown-mode gfm-mode)
        :mode (("README\\.md\\'" . gfm-mode)
               ("\\.md\\'" . markdown-mode)
@@ -670,6 +671,7 @@ A major mode for editing Markdown-formatted text.
    #+BEGIN_SRC emacs-lisp
      (use-package yaml-mode
        :ensure t
+       :defer t
        :commands (markdown-mode gfm-mode)
        :mode (
               ("\\.yaml\\'" . yaml-mode)
@@ -779,6 +781,7 @@ Also add an org-capture template to make blogging easier.
              (lsp-mode . lsp-enable-which-key-integration))
       :commands lsp
       :custom
+      (python-indent-guess-indent-offset nil)
       (lsp-pyls-configuration-sources ["flake8"])
       (lsp-pyls-plugins-pylint-enabled nil)
       (lsp-pyls-plugins-pycodestyle-enabled t)
