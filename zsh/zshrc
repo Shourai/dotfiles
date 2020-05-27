@@ -238,34 +238,32 @@ zle -N zle-keymap-select  # When vi mode changes
 # - insert_mode_(key bindings)                                                 -
 # ------------------------------------------------------------------------------
 
-bindkey -M viins '^A'    beginning-of-line
-bindkey -M viins '^E'    end-of-line
-bindkey -M viins '^K'    kill-line
-# bindkey -M viins "^T"    transpose-words
-# bindkey -M viins '^R'    history-incremental-pattern-search-backward
-# bindkey -M viins '^S'    history-incremental-pattern-search-forward
-bindkey -M viins '^P'    up-line-or-history
-bindkey -M viins '^N'    down-line-or-history
-bindkey -M viins '^Y'    yank
-bindkey -M viins '^B'    backward-char
-bindkey -M viins '^F'    forward-char
-bindkey -M viins '^W'    backward-kill-word
-bindkey -M viins '^U'    backward-kill-line
-bindkey -M viins '^H'    backward-delete-char
+bindkey -M viins '^a'    beginning-of-line
+bindkey -M viins '^e'    end-of-line
+bindkey -M viins '^k'    kill-line
+# bindkey -M viins "^t"    transpose-words
+# bindkey -M viins '^r'    history-incremental-pattern-search-backward
+# bindkey -M viins '^s'    history-incremental-pattern-search-forward
+bindkey -M viins '^p'    up-line-or-history
+bindkey -M viins '^n'    down-line-or-history
+bindkey -M viins '^y'    yank
+bindkey -M viins '^b'    backward-char
+bindkey -M viins '^f'    forward-char
+bindkey -M viins '^w'    backward-kill-word
+bindkey -M viins '^u'    backward-kill-line
+bindkey -M viins '^h'    backward-delete-char
 bindkey -M viins '^?'    backward-delete-char
 bindkey -M viins '^_'    undo
-bindkey -M viins '^X^R'  redisplay
+bindkey -M viins '^x^r'  redisplay
 bindkey -M viins '\eOH'  beginning-of-line                 # Home
 bindkey -M viins '\eOF'  end-of-line                       # End
 bindkey -M viins '\e[2~' overwrite-mode                    # Insert
-bindkey -M viins '\eF'   forward-word                      # Alt-f
-bindkey -M viins '\eB'   backward-word                     # Alt-b
-bindkey -M viins '\eD'   kill-word                         # Alt-d
+bindkey -M viins '\ef'   forward-word                      # Alt-f
+bindkey -M viins '\eb'   backward-word                     # Alt-b
+bindkey -M viins '\ed'   kill-word                         # Alt-d
 bindkey -M viins '\e^h'  backward-kill-word                # Alt-backspace
 bindkey -M viins '\e^?'  backward-kill-word                # Alt-backspace
 bindkey -M viins '\e.'   insert-last-word
-bindkey -M viins "^[[A" history-substring-search-up
-bindkey -M viins "^[[B" history-substring-search-down
 
 # Display _completion_help for creating completion functions.  This does not
 # have a Vim parallel.
