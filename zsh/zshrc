@@ -238,29 +238,42 @@ zle -N zle-keymap-select  # When vi mode changes
 # - insert_mode_(key bindings)                                                 -
 # ------------------------------------------------------------------------------
 
-# Have i_backspace work as it does in Vim.
-bindkey -M viins "^?" backward-delete-char
+bindkey -M viins '^A'    beginning-of-line
+bindkey -M viins '^E'    end-of-line
+bindkey -M viins '^K'    kill-line
+# bindkey -M viins "^T"    transpose-words
+# bindkey -M viins '^R'    history-incremental-pattern-search-backward
+# bindkey -M viins '^S'    history-incremental-pattern-search-forward
+bindkey -M viins '^P'    up-line-or-history
+bindkey -M viins '^N'    down-line-or-history
+bindkey -M viins '^Y'    yank
+bindkey -M viins '^B'    backward-char
+bindkey -M viins '^F'    forward-char
+bindkey -M viins '^W'    backward-kill-word
+bindkey -M viins '^U'    backward-kill-line
+bindkey -M viins '^H'    backward-delete-char
+bindkey -M viins '^?'    backward-delete-char
+bindkey -M viins '^_'    undo
+bindkey -M viins '^X^R'  redisplay
+bindkey -M viins '\eOH'  beginning-of-line                 # Home
+bindkey -M viins '\eOF'  end-of-line                       # End
+bindkey -M viins '\e[2~' overwrite-mode                    # Insert
+bindkey -M viins '\eF'   forward-word                      # Alt-f
+bindkey -M viins '\eB'   backward-word                     # Alt-b
+bindkey -M viins '\eD'   kill-word                         # Alt-d
+bindkey -M viins '\e^h'  backward-kill-word                # Alt-backspace
+bindkey -M viins '\e^?'  backward-kill-word                # Alt-backspace
+bindkey -M viins '\e.'   insert-last-word
+bindkey -M viins "^[[A" history-substring-search-up
+bindkey -M viins "^[[B" history-substring-search-down
 
-# Have i_ctrl-h work as it does in Vim.
-bindkey -M viins "^H" backward-delete-char
+# Display _completion_help for creating completion functions.  This does not
+# have a Vim parallel.
+bindkey -M viins "^X^H" _complete_help
 
-# Have i_ctrl-a work as it does in Vim.
-bindkey -M viins "^A" beginning-of-line
-
-# Have i_ctrl-e work as it does in Vim.
-bindkey -M viins "^E" end-of-line
-
-# Have i_ctrl-p work as c_ctrl-p does in Vim.
-bindkey -M viins "^P" up-line-or-history
-
-# Have i_ctrl-n work as c_ctrl-n does in Vim.
-bindkey -M viins "^N" down-line-or-history
-
-# Have i_ctrl-b work as i_ctrl-b does in emacs.
-bindkey -M viins "^B" backward-char
-
-# Have i_ctrl-f work as i_ctrl-f does in emacs.
-bindkey -M viins "^F" forward-char
+# attempt to complete line based on history, roughly as i_ctrl-x_ctrl-l does in
+# Vim.
+bindkey -M viins "^X^L" history-incremental-search-backward
 
 # !!!!
 # Uncomment and activate the functions later in the file
@@ -271,30 +284,6 @@ bindkey -M viins "^F" forward-char
 
 # Prepend "vim ".  This does not have a Vim parallel.
 #bindkey "^V" prepend-vim
-
-# Have i_ctrl-u work as it does in Vim.
-bindkey -M viins "^U" backward-kill-line
-
-# Have i_ctrl-w work as it does in Vim.
-bindkey -M viins "^W" backward-kill-word
-
-# Display _completion_help for creating completion functions.  This does not
-# have a Vim parallel.
-bindkey -M viins "^X^H" _complete_help
-
-# attempt to complete line based on history, roughly as i_ctrl-x_ctrl-l does in
-# Vim.
-bindkey -M viins "^X^L" history-incremental-search-backward
-
-# Cut the contents of the line and paste immediately when the next prompt
-# appears.  This does not have a clean Vim parallel.
-bindkey -M viins "^Y" push-line
-
-# Exchange the current word with the one before it.
-# bindkey -M viins "^T" transpose-words
-
-# Re-enable incremental search from emacs mode (it is useful).
-# bindkey "^r" history-incremental-search-backward
 
 
 # ------------------------------------------------------------------------------
