@@ -149,6 +149,9 @@ ctrl + alt + shift + x
 alt + shift + {comma, period}
     pactl set-sink-volume @DEFAULT_SINK@ {-5%,+5%}
 
+alt + shift + m
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
+
 # show bar on key press
 super + shift + p
     polybar-msg cmd show
