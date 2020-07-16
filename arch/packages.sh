@@ -26,6 +26,7 @@ sudo pacman -S keychain --noconfirm
 sudo pacman -S maim --noconfirm
 sudo pacman -S mpv --noconfirm
 sudo pacman -S neovim --noconfirm
+sudo pacman -S nnn --noconfirm
 sudo pacman -S openssh --noconfirm
 sudo pacman -S picom --noconfirm
 sudo pacman -S pulseaudio --noconfirm
@@ -43,6 +44,7 @@ sudo pacman -S zsh --noconfirm
 sudo pacman -S zsh-autosuggestions --noconfirm
 sudo pacman -S zsh-syntax-highlighting --noconfirm
 yay -S betterlockscreen-git --noconfirm
+yay -S lazygit-git --noconfirm
 yay -S flashfocus-git --noconfirm
 yay -S polybar-git --noconfirm
 yay -S xidlehook --noconfirm
