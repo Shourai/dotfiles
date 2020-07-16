@@ -30,6 +30,7 @@ custom.el
 package-quickstart.el
 transient/
 org-gcal
+eshell/
 
 # Org-mode
 .org-id-locations
