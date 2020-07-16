@@ -24,7 +24,6 @@ sudo pacman -S fzf --noconfirm
 sudo pacman -S htop --noconfirm
 sudo pacman -S keychain --noconfirm
 sudo pacman -S maim --noconfirm
-sudo pacman -S mesa --noconfirm
 sudo pacman -S mpv --noconfirm
 sudo pacman -S neovim --noconfirm
 sudo pacman -S openssh --noconfirm
@@ -39,7 +38,6 @@ sudo pacman -S the_silver_searcher --noconfirm
 sudo pacman -S tmux --noconfirm
 sudo pacman -S xclip --noconfirm
 sudo pacman -S xorg-server --noconfirm
-sudo pacman -S xorg-apps --noconfirm
 sudo pacman -S xorg-xinit --noconfirm
 sudo pacman -S zsh --noconfirm
 sudo pacman -S zsh-autosuggestions --noconfirm
