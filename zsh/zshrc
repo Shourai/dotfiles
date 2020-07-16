@@ -16,9 +16,9 @@ if [[ "$(uname)" = "Darwin" ]]; then
 #    alias ll='ls -GFhl'
 #    alias la='ls -GFha'
 else
-    alias ls='ls -Fh --color=always'
-    alias ll='ls -Fhl --color=always'
-    alias la='ls -Fha --color=always'
+    alias ls='ls -v -Fh --color=always'
+    alias ll='ls -v -Fhl --color=always'
+    alias la='ls -v -Fha --color=always'
     alias open='xdg-open'
 fi
 
