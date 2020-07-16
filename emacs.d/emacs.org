@@ -443,7 +443,7 @@ The dictionaries have to be installed via `brew install aspell`.
       :after evil
       :ensure t
       :init
-      ; (with-eval-after-load 'dired (require 'evil-collection-dired) (evil-collection-dired-setup))
+      (evil-collection-init 'dired)
       :config)
     #+END_SRC
 
