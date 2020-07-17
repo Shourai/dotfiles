@@ -4,11 +4,11 @@
 MONITORS=($(xrandr --listmonitors | awk ' NR > 1 {ORS=" "; print $NF }'))
 
 xrandr --output ${MONITORS[0]} --auto
-xrandr --output ${MONITORS[1]} --auto --left-of ${MONITORS[0]}
+xrandr --output ${MONITORS[1]} --auto --right-of ${MONITORS[0]}
 
 # Set up bspwm
-bspc monitor ${MONITORS[0]} -d 7 8 9 10 11 12
-bspc monitor ${MONITORS[1]} -d 1 2 3 4 5 6
+bspc monitor ${MONITORS[0]} -d 1 2 3 4 5 6
+bspc monitor ${MONITORS[1]} -d 7 8 9 10 11 12
 
 bspc config window_gap           10
 
