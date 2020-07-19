@@ -11,7 +11,10 @@ ln -sf ~/Documents/github/dotfiles/zsh/LS_COLORS ~/.zsh/LS_COLORS
 
 ln -sf ~/Documents/github/dotfiles/emacs.d ~/.emacs.d
 ln -sf ~/Documents/github/dotfiles/nvim ~/.config/nvim
-ln -sf ~/Documents/github/dotfiles/tmux.conf ~/.tmux.conf
+
+if [ "$(uname)" = "Darwin" ]; then
+ln -sf ~/Documents/github/dotfiles/tmux/tmux.conf ~/.tmux.conf
+fi
 
 echo "Do you wish to add ledgerrc, latexmkrc and ranger? (y/n)"
 read answer
@@ -39,4 +42,5 @@ if [ "$(uname)" = "Linux" ]; then
     ln -sf ~/Documents/github/dotfiles/arch/fontconfig ~/.config
     ln -sf ~/Documents/github/dotfiles/arch/fonts ~/.local/share
     ln -sf ~/Documents/github/dotfiles/arch/bspwm/scripts/bspwm_resize ~/.local/bin
+    ln -sf ~/Documents/github/dotfiles/tmux ~/.config/tmux
 fi
