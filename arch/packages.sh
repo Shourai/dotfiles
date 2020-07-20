@@ -57,6 +57,3 @@ sudo make install
 git clone https://github.com/Shourai/scroll.git ~/Documents/github/scroll
 cd ~/Documents/github/scroll || exit
 sudo make install
-
-# Copy fonts
-cp ~/Documents/github/dotfiles/arch/fonts/* ~/.local/share/fonts/
