@@ -139,7 +139,7 @@ super + {Left,Down,Up,Right}
 
 # lockscreen
 alt + shift + x
-    betterlockscreen -l dim
+    betterlockscreen --lock
 
 # hibernate
 ctrl + alt + shift + x
