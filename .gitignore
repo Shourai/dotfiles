@@ -23,6 +23,8 @@ tags
 auto-save-list
 /emacs.d/request
 /emacs.d/.lsp*
+/emacs/request
+/emacs/.lsp*
 tramp
 .\#*
 emacs.el
@@ -45,6 +47,7 @@ eshell/
 
 # elpa packages
 emacs.d/elpa/
+emacs/elpa/*
 
 # reftex files
 *.rel
