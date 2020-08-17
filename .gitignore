@@ -24,6 +24,7 @@ auto-save-list
 /emacs.d/request
 /emacs.d/.lsp*
 /emacs/request
+/emacs/elpa/
 /emacs/.lsp*
 tramp
 .\#*
