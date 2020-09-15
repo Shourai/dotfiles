@@ -1,0 +1,65 @@
+
+Introduction:
+-------------
+
+Likhan is an Unicode Opentype font for Bengali. It has glyphs for 
+english characters as well, but using it for that is probably not a good 
+idea. More details about the font, especially regarding the origins, are 
+(currently) available through
+
+http://www.stat.wisc.edu/~deepayan/Bengali
+
+The actual font, along with Pfaedit sources should be available, among 
+other places, from 
+
+http://www.stat.wisc.edu/~deepayan/Bengali/WebPage/Font/Likhan/
+
+It is possible that the versions put up there will be more recent.
+
+Several other Bengali Opentype fonts, most designed by better 
+typographers than me, are available from the Free Bangla Fonts project
+(http://www.nongnu.org/freebangfont/).
+
+
+
+
+Copyright:
+---------
+
+The Latin glyphs here have been stolen from the GNU Free Fonts project 
+(http://www.nongnu.org/freefont) and are copylefted by the Free Softare 
+Foundation (http://www.fsf.org). The other glyphs are designed from 
+scratch by me and are hence copylefted by me :)
+
+
+
+Usage:
+------
+
+Using such a font as this to its full potential requires a text layout 
+system capable of recognizing unicode (which most modern software does 
+well enough) and reordering and combining characters according to 
+instructions laid out in the unicode specification and the open type 
+layout tables in the font. Sufficiently recent versions of Microsoft 
+Windows can do this using the Uniscribe layout engine; in GNU/Linux, the 
+Pango project is catching up (latest versions needed), and Yudit is 
+another choice.
+
+
+
+Bugs:
+-----
+
+This version of Likhan is based on the Template Font we have been working
+on (see the FBF site/mailing list archives). We would appreciate reports 
+of any bugs to our lists.
+
+
+Modification and Redistribution:
+--------------------------------
+
+Likhan is released under the GNU GPL (see the COPYING file), and you are 
+free to modify and distribute Likhan under its terms.
+
+Last modified: 2003-05-12
+
