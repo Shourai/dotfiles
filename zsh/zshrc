@@ -586,11 +586,12 @@ fi
 # If the command keychain is found and executable, evaluate it;
 [ -x "$(command -v keychain)" ] && eval $(keychain --eval --quiet --noask --agents ssh,gpg)
 
-
-
 # ==============================================================================
 # = GPG agent settings
 # ==============================================================================
 # As mendated by the manpage of gpg-agent
 GPG_TTY=$(tty)
 export GPG_TTY
+
+# Disable software flow control where ctrl+s freezes the terminal
+stty -ixon
