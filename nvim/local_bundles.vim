@@ -9,6 +9,4 @@ Plug 'joshdick/onedark.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'tpope/vim-fugitive'
-
 Plug 'tmux-plugins/vim-tmux-focus-events'
