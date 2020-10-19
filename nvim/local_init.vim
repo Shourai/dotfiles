@@ -28,6 +28,16 @@ set cursorline
 set tabstop=2
 set shiftwidth=2
 
+" CoC settings
+let g:coc_explorer_global_presets = {
+\   'floating': {
+\     'position': 'floating',
+\     'open-action-strategy': 'sourceWindow',
+\   }}
+
+nmap <space>fe :CocCommand explorer --preset floating<CR>
+nmap <space>e :CocCommand explorer<CR>
+
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
