@@ -24,8 +24,9 @@ bspc rule -a Screenkey manage=off
 
 # Color settings
 bspc config focused_border_color "#536AB5"
+#bspc config active_border_color "#222D32"
 bspc config normal_border_color "#222D32"
-bspc config border_width         1
+bspc config border_width         2
 
 bspc config focus_follows_pointer true
 
