@@ -28,6 +28,14 @@ set cursorline
 set tabstop=2
 set shiftwidth=2
 
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+
+" Delimitemate settings
+let delimitMate_expand_cr = 2
+imap <C-j> <Plug>delimitMateS-Tab
+imap <C-l> <Plug>delimitMateJumpMany
+
 " CoC settings
 let g:coc_explorer_global_presets = {
 \   'floating': {
@@ -37,6 +45,21 @@ let g:coc_explorer_global_presets = {
 
 nmap <space>fe :CocCommand explorer --preset floating<CR>
 nmap <space>e :CocCommand explorer<CR>
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Use <C-f> to confirm completion
+" NOTE: Use command ':verbose imap <C-f>' to make sure tab is not mapped by
+" other plugins
+inoremap <expr> <C-f> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+
+" tmux settings
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
