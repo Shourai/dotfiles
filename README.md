@@ -34,7 +34,7 @@ Be sure to allow the wheel group to run sudo commands via `visudo`
 Basically run the `install` after cloning this repository.
 Or run the following cURL command:
 ```
-curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | sh
+curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | bash
 ```
 
 ## Future reference
