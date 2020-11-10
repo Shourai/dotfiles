@@ -1,0 +1,35 @@
+[alias]
+  a = add
+  aa = add --all
+  b = branch
+  ba = branch -a
+  bd = branch -d
+  c = commit -v
+  ca = commit -v -a
+  cam = commit -a -m
+  cb = checkout -b
+  cm = checkout master
+  cd = checkout develop
+  cmsg = commit -m
+  co = checkout
+  d = diff
+  ds = diff --staged
+  f = fetch
+  l = pull
+  m = merge
+  mom = merge origin/master
+  p = push
+  pv = push -v
+  r = remote
+  ra = remote add
+  rv = remote -v
+  sb = status -sb
+  ss = status -s
+  st = status
+  lg = log --graph --date=relative --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ad)%Creset' -20
+
+[user]
+	name = Shourai
+	email = 10200748+Shourai@users.noreply.github.com
+
+

@@ -1,7 +1,6 @@
 # Link dotfiles
 
 mkdir -p ~/.config
-#ln -sf ~/Documents/github/dotfiles/nvim/init.vim ~/.vimrc
 ln -sf ~/Documents/github/dotfiles/zsh/zshrc ~/.zshrc
 
 mkdir -p ~/.zsh/functions
@@ -12,6 +11,7 @@ ln -sf ~/Documents/github/dotfiles/zsh/LS_COLORS ~/.zsh/LS_COLORS
 ln -sf ~/Documents/github/dotfiles/emacs ~/.config/emacs
 ln -sf ~/Documents/github/dotfiles/nvim ~/.config/nvim
 ln -sf ~/Documents/github/dotfiles/tmux ~/.config/tmux
+ln -sf ~/Documents/github/dotfiles/git ~/.config
 
 echo "Do you wish to add ledgerrc, latexmkrc and ranger? (y/n)"
 read answer
