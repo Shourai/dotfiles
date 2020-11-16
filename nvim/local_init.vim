@@ -58,6 +58,8 @@ endif
 " other plugins
 inoremap <expr> <C-f> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
+" folding config
+set foldlevelstart=2
 
 " tmux settings
 
