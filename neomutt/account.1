@@ -1,22 +1,22 @@
 # imap settings
-set imap_user=mail@domain.com
-set imap_pass=password
-set folder="imaps://mail@domain.com@imaps_domain.com:993"
+set imap_user=mail@domain.com # edit this
+set imap_pass=password # edit this
+set folder="imaps://$imap_user@imaps_domain.com:993"
 set spoolfile= +Inbox
 set postponed= +Drafts
 set record= +Sent
 set trash= +Deleted
 
 # smtp settings
-set realname = "Foo"
-set from = "mail@domain.com"
-set smtp_url= "smtp://mail@domain.com@smtp_domain.com:587"
+set realname = "Foo" #edit this
+set from = "$imap_user"
+set smtp_url= "smtp://$imap_user@smtp_domain.com:587"
 set ssl_starttls = yes
-set smtp_pass=password
+set smtp_pass=$imap_pass
 
 # Mailboxes settings
 unmailboxes *
-named-mailboxes "mail@domain.com" "=mail"
+named-mailboxes "$imap_user" "=Notes"
 named-mailboxes " Inbox" "=Inbox"
 named-mailboxes " Sent" "=Sent"
 named-mailboxes " Archive" "=Archive"
