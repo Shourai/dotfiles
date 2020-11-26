@@ -46,6 +46,11 @@ let g:coc_explorer_global_presets = {
 nmap <space>fe :CocCommand explorer --preset floating<CR>
 nmap <space>e :CocCommand explorer<CR>
 
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
 " Use <c-space> to trigger completion.
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
