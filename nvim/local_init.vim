@@ -66,6 +66,10 @@ inoremap <expr> <C-f> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " folding config
 set foldlevelstart=2
 
+" golang settings
+" set tmpl files as gotexttmpl filetype
+autocmd BufNewFile,BufRead *.tmpl set ft=gotexttmpl
+
 " tmux settings
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
