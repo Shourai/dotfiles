@@ -18,6 +18,10 @@ set inccommand=nosplit
 " Change onedark's visual highlight
 hi Visual guibg=#626672
 
+" Split to right and bottom
+set splitbelow
+set splitright
+
 " So that I can see `` in markdown files
 let g:indentLine_fileTypeExclude = ['markdown']
 
