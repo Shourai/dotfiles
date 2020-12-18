@@ -542,17 +542,6 @@ decrement-number() {
 }
 zle -N decrement-number
 
-# ==============================================================================
-# = Add additional colors to ls
-# ==============================================================================
-
-if [ "$(uname)" = "Darwin" ]
-then
-    eval `gdircolors -b ~/.zsh/LS_COLORS`
-else
-    eval `dircolors -b ~/.zsh/LS_COLORS`
-fi
-
 
 # ==============================================================================
 # = Run keychain so ssh-agent is shared between shells
