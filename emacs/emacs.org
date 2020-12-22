@@ -179,6 +179,13 @@ The auto-saves directory is not automatically created so we have to do it explic
           frame-title-format nil) ;; Remove filename in the titlebar
     (setq default-frame-alist '((font . "Jetbrains Mono 10")))
 
+    ; Disable scroll bars when using emacsclient
+    (defun my/disable-scroll-bars (frame)
+    (modify-frame-parameters frame
+                            '((vertical-scroll-bars . nil)
+                                (horizontal-scroll-bars . nil))))
+    (add-hook 'after-make-frame-functions 'my/disable-scroll-bars)
+
   #+END_SRC
 
 
