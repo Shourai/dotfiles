@@ -169,7 +169,6 @@ The auto-saves directory is not automatically created so we have to do it explic
   Also set the font.
 
   #+BEGIN_SRC emacs-lisp
-    ;(add-hook 'after-make-frame-functions (lambda (frame) (when (display-graphic-p frame) (scroll-bar-mode -1))))
     (scroll-bar-mode -1)
     (tool-bar-mode -1)
     (menu-bar-mode -1)
@@ -178,7 +177,8 @@ The auto-saves directory is not automatically created so we have to do it explic
     (add-to-list 'default-frame-alist '(ns-appearance . dark)) ;; assuming you are using a dark theme
     (setq ns-use-proxy-icon nil ;; Remove icon in the titlebar
           frame-title-format nil) ;; Remove filename in the titlebar
-    ;(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10" ))
+    (setq default-frame-alist '((font . "Jetbrains Mono 10")))
+
   #+END_SRC
 
 
