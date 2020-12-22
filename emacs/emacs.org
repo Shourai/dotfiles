@@ -369,6 +369,11 @@ Helm interface for company-mode
         company-minimum-prefix-length 2
         company-show-numbers t
         company-tooltip-align-annotations t))
+
+    (use-package company-box
+    :after company
+    :diminish
+    :hook (company-mode . company-box-mode))
    #+END_SRC
 
    Add quickhelp for company mode
