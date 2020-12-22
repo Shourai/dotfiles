@@ -905,6 +905,11 @@ do (especially in the long-running `emacsclient`).
    Before you can build this on a new system, make sure that you put
    the cursor over any of these properties, and hit: =C-c C-c=
 
+   Local variables is used to tangle the file on save.
+
 #+DESCRIPTION: A literate programming version of my Emacs Initialization script, loaded by the .emacs file.
 #+PROPERTY:    header-args:sh  :tangle no
 #+PROPERTY:    header-args:emacs-lisp  :tangle yes
+# Local Variables:
+# eval: (add-hook 'after-save-hook (lambda ()(org-babel-tangle)) nil t)
+# End:
