@@ -785,6 +785,10 @@ Also add an org-capture template to make blogging easier.
 * Language Server Protocol
   Testing LSP mode for python
   #+BEGIN_SRC emacs-lisp
+    (use-package python-mode
+    :ensure t
+    :hook (python-mode . lsp-deferred))
+
     (use-package lsp-mode
       :ensure t
       :defer t
