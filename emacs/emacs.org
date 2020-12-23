@@ -548,7 +548,7 @@ When a latex file is loaded, let it load visual-line, flyspell, math-mode and re
 It's also necessary (at least on a mac) to add the path with the latex bin files.
 
 For synctex to work https://www.gnu.org/software/auctex/manual/auctex/I_002fO-Correlation.html
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp tangle:no
   (use-package tex
   :ensure auctex
   :mode ("\\.tex\\'" . LaTeX-mode)
@@ -566,7 +566,7 @@ For synctex to work https://www.gnu.org/software/auctex/manual/auctex/I_002fO-Co
 
 
 Add LatexMk support to AUCTeX
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle no
       (use-package auctex-latexmk
       :ensure t
       :hook (LaTeX-mode . auctex-latexmk-setup)
@@ -579,7 +579,7 @@ Add LatexMk support to AUCTeX
     #+END_SRC
 
 Add company support to AUCTeX
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle no
       (use-package company-auctex
         :ensure t
         :after (auctex company)
@@ -588,13 +588,13 @@ Add company support to AUCTeX
 
 Insert braces after typing <^> and <_> in math mode.
 Autocomplete dollar sign.
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (setq TeX-electric-sub-and-superscript 1)
 ;; (setq TeX-electric-math (cons "$" "$"))
 #+END_SRC
 
 Open PDFs with pdf-tools.
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (setq TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))
 	TeX-view-program-selection '((output-pdf "PDF Tools"))
 	TeX-source-correlate-start-server t)
