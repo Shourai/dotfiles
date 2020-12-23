@@ -10,7 +10,6 @@
 (setq gc-cons-threshold (* 50 1000 1000))
 
 (require 'package)
-(setq package-enable-at-startup nil)
 (setq package-quickstart t)
 (add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/"))
