@@ -14,7 +14,7 @@ ln -sf ~/Documents/github/dotfiles/tmux ~/.config/tmux
 ln -sf ~/Documents/github/dotfiles/git ~/.config
 
 echo "Do you wish to add ledgerrc, latexmkrc and ranger? (y/n)"
-read answer
+read -r answer
 
 if [ "$answer" != "${answer#[Yy]}" ] ;then
     ln -sf ~/Documents/github/dotfiles/ledgerrc ~/.ledgerrc
