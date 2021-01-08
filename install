@@ -61,16 +61,6 @@ if [ "$(uname)" = "Darwin" ]; then
     sh ~/Documents/github/dotfiles/macOS/macOS.sh
 fi
 
-# Additional installations
-echo "Do you wish to install additional python packages?"
-read -r answer
-
-if [ "$answer" != "${answer#[Yy]}" ] ;then
-    sh ~/Documents/github/dotfiles/macOS/miscellaneous.sh
-else
-    echo "Skipping python packages"
-fi
-
 echo "Doing cleanup"
 if [ "$(uname)" = "Darwin" ]; then
     # Install brew packages
