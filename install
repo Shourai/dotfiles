@@ -48,7 +48,13 @@ fi
 bash ~/Documents/github/dotfiles/arch/dotfiles.sh
 
 # Change shell to zsh
-sh ~/Documents/github/dotfiles/macOS/shell.sh
+if [ "$(uname)" = "Darwin" ] && ! grep -Fq "$(brew --prefix)/bin/zsh" /etc/shells
+then
+    echo "$(brew --prefix)/bin/zsh" | sudo tee -a /etc/shells
+    chsh -s "$(brew --prefix)"/bin/zsh
+else
+    chsh -s "$(command -v zsh)"
+fi
 
 # macOS changes
 if [ "$(uname)" = "Darwin" ]; then
