@@ -40,21 +40,21 @@ brew install zsh-autosuggestions
 ##################################################
 # Install cask packages
 ##################################################
-brew cask install 1password
-brew cask install bettertouchtool
-brew cask install calibre
-brew cask install emacs
-brew cask install homebrew/cask-versions/firefox-beta
-brew cask install istat-menus
-brew cask install iterm2
-brew cask install mpv
-# brew cask install skim
-brew cask install the-unarchiver
-brew cask install transmission
-brew cask install homebrew/cask-fonts/font-dejavu-sans-mono-for-powerline
-# brew cask install arduino
-# brew cask install libreoffice
-# brew cask install tunnelblick
+brew install --cask 1password
+brew install --cask bettertouchtool
+brew install --cask calibre
+brew install --cask emacs
+brew install --cask homebrew/cask-versions/firefox-beta
+brew install --cask istat-menus
+brew install --cask iterm2
+brew install --cask mpv
+# brew install --cask skim
+brew install --cask the-unarchiver
+brew install --cask transmission
+brew install --cask homebrew/cask-fonts/font-dejavu-sans-mono-for-powerline
+# brew install --cask arduino
+# brew install --cask libreoffice
+# brew install --cask tunnelblick
 
 ##################################################
 # Clean up brew and cask
