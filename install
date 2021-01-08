@@ -45,7 +45,7 @@ elif [ -f /etc/arch-release ]; then
 fi
 
 # Link dotfiles
-sh ~/Documents/github/dotfiles/macOS/dotfiles.sh
+bash ~/Documents/github/dotfiles/arch/dotfiles.sh
 
 # Change shell to zsh
 sh ~/Documents/github/dotfiles/macOS/shell.sh
