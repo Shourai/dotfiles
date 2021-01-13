@@ -802,9 +802,7 @@ Also add an org-capture template to make blogging easier.
       (lsp-pyls-plugins-pylint-enabled nil)
       (lsp-pyls-plugins-pycodestyle-enabled t)
       (lsp-signature-render-documentation nil)
-      (lsp-signature-auto-activate nil)
-      :custom-face
-      (lsp-headerline-breadcrumb-separator-face ((t (:foreground "gray")))))
+      (lsp-signature-auto-activate nil))
 
     (use-package lsp-ui
       :ensure t
