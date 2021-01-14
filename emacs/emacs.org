@@ -850,7 +850,12 @@ Also add an org-capture template to make blogging easier.
       :config
       :custom (flycheck-python-flake8-executable "flake8"))
   #+END_SRC
+  #+begin_src emacs-lisp
+    (use-package go-mode
+    :ensure t
+    :hook (go-mode . lsp-deferred))
 
+  #+end_src
 * Custom Functions
 
 Insert the result of some Emacs Lisp expression at point.
