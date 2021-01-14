@@ -371,6 +371,7 @@ Helm interface for company-mode
         company-tooltip-align-annotations t))
 
     (use-package company-box
+    :ensure t
     :after company
     :diminish
     :hook (company-mode . company-box-mode))
