@@ -431,7 +431,6 @@ The dictionaries have to be installed via `brew install aspell`.
   #+BEGIN_SRC emacs-lisp
     (use-package evil
     :ensure t
-    :delight undo-tree-mode
     :defer t ;; only works if evil-mode lies in ~:config~
     :bind (("C-z" . turn-on-evil-mode)
            ("C-x C-z" . turn-off-evil-mode)
@@ -442,11 +441,19 @@ The dictionaries have to be installed via `brew install aspell`.
     (setq evil-want-integration t ;; This is optional since it's already set to t by default.
           evil-want-keybinding nil
           evil-vsplit-window-right t
-          evil-split-window-below t)
+          evil-split-window-below t
+          evil-undo-system 'undo-fu) ;; Needed to undo-redo
     ;; (setq evil-want-C-u-scroll t) ;; This does not play nicely when having to use `C-u M-x` commands
     :config
     (evil-mode t))
   #+END_SRC
+
+In emacs version <28, evil supports undo-tree and undo-fu. These packages need to be installed seperately.
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package undo-fu
+      :ensure t)
+    #+END_SRC
 
     This is a collection of Evil bindings for the parts of Emacs that Evil does not
     cover properly by default, such as help-mode, M-x calendar, Eshell and more.
