@@ -164,8 +164,8 @@ super + shift + p
 # Chords to open programs
 #
 
-super + space ; {f,c,b}
-	{firefox, chromium, brave --incognito}
+super + space ; {f,c,b,i}
+	{firefox, chromium, brave --incognito, chromium --incognito}
 
 # set keyboard rate
 super + x
