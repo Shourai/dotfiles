@@ -51,11 +51,6 @@ if [ -f /etc/arch-release ]; then
     chsh -s "$(command -v zsh)"
 fi
 
-# macOS changes
-if [ "$(uname)" = "Darwin" ]; then
-    sh ~/Documents/github/dotfiles/macOS/macOS.sh
-fi
-
 # Cleanup
 echo "Doing cleanup"
 if [ "$(uname)" = "Darwin" ]; then
