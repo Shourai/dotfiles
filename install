@@ -34,7 +34,6 @@ git -C ~/Documents/github/dotfiles remote set-url origin git@github.com:Shourai/
 
 # Wait for a little while before continuing
 echo "We are now installing the needed packages and setting the desired configuration."
-sleep 3
 
 if [ "$(uname)" = "Darwin" ]; then
     # Install brew packages
