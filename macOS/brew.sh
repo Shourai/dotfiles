@@ -2,7 +2,7 @@
 # Run latest version of brew
 ##################################################
 brew update
-brew upgrade -all
+brew upgrade
 
 ##################################################
 # Opt-out of homebrew analytics
