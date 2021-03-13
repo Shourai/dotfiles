@@ -21,7 +21,7 @@ brew install fzf
 brew install gnu-sed
 brew install gnutls
 brew install htop
-brew install ledger
+# brew install ledger
 # brew install markdown
 brew install mpv
 brew install neovim
@@ -42,15 +42,15 @@ brew install zsh-autosuggestions
 ##################################################
 brew install --cask 1password
 brew install --cask bettertouchtool
-brew install --cask calibre
-brew install --cask emacs
+# brew install --cask calibre
+# brew install --cask emacs
 brew install --cask homebrew/cask-versions/firefox-beta
-brew install --cask istat-menus
+# brew install --cask istat-menus
 brew install --cask iterm2
-brew install --cask mpv
+# brew install --cask mpv
 # brew install --cask skim
-brew install --cask the-unarchiver
-brew install --cask transmission
+# brew install --cask the-unarchiver
+# brew install --cask transmission
 brew install --cask homebrew/cask-fonts/font-dejavu-sans-mono-for-powerline
 # brew install --cask arduino
 # brew install --cask libreoffice
