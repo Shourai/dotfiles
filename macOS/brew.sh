@@ -51,7 +51,7 @@ brew install --cask iterm2
 # brew install --cask skim
 # brew install --cask the-unarchiver
 # brew install --cask transmission
-brew install --cask homebrew/cask-fonts/font-dejavu-sans-mono-for-powerline
+brew install --cask font-sf-mono-for-powerline
 # brew install --cask arduino
 # brew install --cask libreoffice
 # brew install --cask tunnelblick
