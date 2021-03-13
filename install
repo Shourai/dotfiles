@@ -37,7 +37,7 @@ echo "We are now installing the needed packages and setting the desired configur
 
 if [ "$(uname)" = "Darwin" ]; then
     # Install brew packages
-    sh ~/Documents/github/dotfiles/macOS/brew.sh
+    bash ~/Documents/github/dotfiles/macOS/brew.sh
 elif [ -f /etc/arch-release ]; then
     # Install pacman packages
     bash ~/Documents/github/dotfiles/arch/packages.sh
