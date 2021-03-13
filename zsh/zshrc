@@ -108,9 +108,10 @@ fi
 
 if [[ "$(uname)" = "Darwin" ]]; then
     source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#808080'
 elif [ -f /etc/arch-release ]; then
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#808080'
 fi
 
 
