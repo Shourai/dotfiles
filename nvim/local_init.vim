@@ -68,7 +68,10 @@ endif
 inoremap <expr> <C-f> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " folding config
-set foldlevelstart=2
+set foldlevelstart=10
+
+" yaml settings
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " golang settings
 " set tmpl files as gotexttmpl filetype
