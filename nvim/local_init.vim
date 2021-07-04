@@ -22,7 +22,7 @@ hi Visual guibg=#626672
 set splitbelow
 set splitright
 
-" So that I can see `` in markdown files
+" So that `` is displayed in markdown files
 let g:indentLine_fileTypeExclude = ['markdown']
 
 set smarttab
@@ -40,33 +40,6 @@ let delimitMate_expand_cr = 2
 imap <C-j> <Plug>delimitMateS-Tab
 imap <C-l> <Plug>delimitMateJumpMany
 
-" CoC settings
-let g:coc_explorer_global_presets = {
-\   'floating': {
-\     'position': 'floating',
-\     'open-action-strategy': 'sourceWindow',
-\   }}
-
-nmap <space>fe :CocCommand explorer --preset floating<CR>
-nmap <space>e :CocCommand explorer<CR>
-
-autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" Use <C-f> to confirm completion
-" NOTE: Use command ':verbose imap <C-f>' to make sure tab is not mapped by
-" other plugins
-inoremap <expr> <C-f> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
 " folding config
 set foldlevelstart=10
 
@@ -76,6 +49,39 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 " golang settings
 " set tmpl files as gotexttmpl filetype
 autocmd BufNewFile,BufRead *.tmpl set ft=gotexttmpl
+
+" Telescope keybindings
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
+" Lsp key bindings
+" NOTE: Use command ':verbose imap <C-f>' to make sure tab is not mapped by other plugins
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> <C-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> K     <cmd>Lspsaga hover_doc<CR>
+nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> <C-p> <cmd>Lspsaga diagnostic_jump_prev<CR>
+nnoremap <silent> <C-n> <cmd>Lspsaga diagnostic_jump_next<CR>
+nnoremap <silent> gf    <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> gn    <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> ga    <cmd>Lspsaga code_action<CR>
+xnoremap <silent> ga    <cmd>Lspsaga range_code_action<CR>
+nnoremap <silent> gs    <cmd>Lspsaga signature_help<CR>
+
+lua <<EOF
+require("lsp")
+require("completion")
+require("telescope")
+require("treesitter")
+EOF
+
+" vim ledger settings
+nmap <C-c><C-a> :call ledger#transaction_date_set(line('.'), "auxiliary")
 
 " tmux settings
 
