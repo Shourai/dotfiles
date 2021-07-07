@@ -17,5 +17,8 @@ return require('packer').startup(function()
   -- Theme
   use 'NTBBloodbath/doom-one.nvim'
   use 'navarasu/onedark.nvim'
+
+  -- Autopairs
+  use 'windwp/nvim-autopairs'
 end)
 
