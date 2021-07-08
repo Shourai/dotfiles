@@ -143,6 +143,7 @@ ranger/history
 nvim/plugged
 nvim/autoload
 nvim/session
+packer_compiled.lua
 
 ### Firefox ###
 internal_UUIDs.txt
