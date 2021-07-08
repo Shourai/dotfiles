@@ -29,3 +29,5 @@ wo.relativenumber = true -- set relative numbered lines
 
 cmd("autocmd FocusLost * silent! :wa") -- write file when focus is lost
 o.autowriteall = true -- write the contents of the file when jumping between jumppoints
+
+cmd("autocmd BufWritePost plugins.lua PackerCompile") -- automatically run PackerCompile when changes to plugins.lua has been made
