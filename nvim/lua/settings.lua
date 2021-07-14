@@ -6,7 +6,7 @@ local bo = vim.bo
 
 -- Settings --
 o.backup = false -- don't create backup file
-o.clipboard = "unnamedplus" -- allow neovim to access the system clipboard
+o.clipboard = "unnamed,unnamedplus" -- allow neovim to access the system clipboard
 o.completeopt = "menuone,noselect"
 wo.conceallevel = 0 -- so that `` is visible in markdown files
 bo.fileencoding = "utf-8" -- the encoding written to a file
