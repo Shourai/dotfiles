@@ -6,6 +6,7 @@ return require('packer').startup(function()
   -- LSP and completion
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-compe'
+  use 'ray-x/lsp_signature.nvim'
 
   -- Telescope
   use {
