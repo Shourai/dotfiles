@@ -27,6 +27,10 @@ return require('packer').startup(function()
   -- Easy align
   use 'junegunn/vim-easy-align'
 
+  -- Useful plugins
+  use 'tpope/vim-commentary'
+  use 'tpope/vim-surround'
+
   -- Tmux
   use {
     "aserowy/tmux.nvim",
