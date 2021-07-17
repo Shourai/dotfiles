@@ -30,6 +30,15 @@ return require('packer').startup(function()
   -- Useful plugins
   use 'tpope/vim-commentary'
   use 'tpope/vim-surround'
+  use 'airblade/vim-gitgutter'
+
+  -- Modeline
+  use {
+    'glepnir/galaxyline.nvim',
+    branch = 'main',
+    config = function() require'statusline' end,
+    requires = {'kyazdani42/nvim-web-devicons', opt = true}
+  }
 
   -- Tmux
   use {
@@ -40,4 +49,4 @@ return require('packer').startup(function()
         resize = { enable_default_keybindings = true } })
       end
     }
-end)
+  end)
