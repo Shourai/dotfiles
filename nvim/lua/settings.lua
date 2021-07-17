@@ -26,6 +26,7 @@ wo.cursorline = true -- highlight the current line
 wo.number = true  -- set numbered lines
 wo.relativenumber = true -- set relative numbered lines
 o.termguicolors = true -- Enables 24 bit RGB colors in the TUI
+o.inccommand = "nosplit"
 
 cmd("autocmd FocusLost * silent! :wa") -- write file when focus is lost
 o.autowriteall = true -- write the contents of the file when jumping between jumppoints
