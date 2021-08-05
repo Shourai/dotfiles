@@ -30,7 +30,15 @@ return require('packer').startup(function()
   -- Useful plugins
   use 'tpope/vim-commentary'
   use 'tpope/vim-surround'
-  use 'airblade/vim-gitgutter'
+  use {
+  'lewis6991/gitsigns.nvim',
+  requires = {
+    'nvim-lua/plenary.nvim'
+  },
+  config = function()
+    require('gitsigns').setup()
+  end
+  }
 
   -- Modeline
   use {
