@@ -45,6 +45,7 @@ sudo pacman -S trash-cli --noconfirm
 sudo pacman -S xclip --noconfirm
 sudo pacman -S xorg-server --noconfirm
 sudo pacman -S xorg-xinit --noconfirm
+sudo pacman -S z --noconfirm
 sudo pacman -S zathura-pdf-mupdf --noconfirm
 sudo pacman -S zsh --noconfirm
 sudo pacman -S zsh-autosuggestions --noconfirm
