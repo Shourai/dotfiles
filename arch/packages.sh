@@ -13,13 +13,16 @@ sudo pacman -Syu --noconfirm
 # sudo pacman -S ledger --noconfirm
 # sudo pacman -S rxvt-unicode --noconfirm
 # sudo pacman -S sysstat --noconfirm
+# sudo pacman -S emacs --noconfirm
+# sudo pacman -S fasd --noconfirm
+# sudo pacman -S fd --noconfirm
+# sudo pacman -S pulseaudio --noconfirm
+# sudo pacman -S pulsemixer --noconfirm
+# sudo pacman -S the_silver_searcher --noconfirm
+# sudo pacman -S feh --noconfirm
 
 sudo pacman -S bspwm --noconfirm
 sudo pacman -S dmenu --noconfirm
-sudo pacman -S emacs --noconfirm
-sudo pacman -S fasd --noconfirm
-sudo pacman -S fd --noconfirm
-sudo pacman -S feh --noconfirm
 sudo pacman -S fzf --noconfirm
 sudo pacman -S htop --noconfirm
 sudo pacman -S keychain --noconfirm
