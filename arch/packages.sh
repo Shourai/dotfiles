@@ -29,6 +29,7 @@ sudo pacman -S keychain --noconfirm
 sudo pacman -S maim --noconfirm
 sudo pacman -S mpv --noconfirm
 sudo pacman -S neovim --noconfirm
+sudo pacman -S nitrogen --noconfirm
 sudo pacman -S nnn --noconfirm
 sudo pacman -S openssh --noconfirm
 sudo pacman -S picom --noconfirm
