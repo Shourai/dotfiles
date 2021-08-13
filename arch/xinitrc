@@ -6,3 +6,6 @@ setxkbmap -option 'ctrl:nocaps,altwin:swap_lalt_lwin'
 
 # Execute i3 windows manager
 exec bspwm
+
+eval $(gnome-keyring-daemon --start)
+export SSH_AUTH_SOCK
