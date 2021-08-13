@@ -35,9 +35,11 @@ bspc config focus_follows_pointer true
 # Set up background
 if [ -f ~/Documents/wallpapers/bg.jpg ]
 then
-    feh --bg-fill ~/Documents/wallpapers/bg.jpg
+    nitrogen --force-setter=xinerama --head=0 --set-zoom-fill Documents/github/dotfiles/arch/bspwm/bg.jpg
+    nitrogen --force-setter=xinerama --head=1 --set-zoom-fill Documents/github/dotfiles/arch/bspwm/bg.jpg
 else
-    feh --bg-fill ~/.config/bspwm/bg.jpg
+    nitrogen --force-setter=xinerama --head=0 --set-zoom-fill Documents/github/dotfiles/arch/bspwm/bg.jpg
+    nitrogen --force-setter=xinerama --head=1 --set-zoom-fill Documents/github/dotfiles/arch/bspwm/bg.jpg
 fi
 
 flashfocus &
