@@ -57,7 +57,7 @@ return require('packer').startup(function()
           enable = true,
           redirect_to_clipboard = true,
           register_offset = 0,
-          sync_clipboard = true,
+          sync_clipboard = false,
           sync_deletes = true,
         },
         navigation = { enable_default_keybindings = true },
