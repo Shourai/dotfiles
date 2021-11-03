@@ -24,6 +24,7 @@ fi
 
 # Clone respository
 git clone https://github.com/Shourai/dotfiles.git ~/Documents/github/dotfiles
+git clone https://github.com/Shourai/nvim.git ~/Documents/github/nvim
 
 # Setup git
 git -C ~/Documents/github/dotfiles config user.name "Shourai"
@@ -31,6 +32,7 @@ git -C ~/Documents/github/dotfiles config user.email "10200748+Shourai@users.nor
 
 # Change git repo from https to SSH
 git -C ~/Documents/github/dotfiles remote set-url origin git@github.com:Shourai/dotfiles.git
+git -C ~/Documents/github/nvim remote set-url origin git@github.com:Shourai/nvim.git
 
 # Wait for a little while before continuing
 echo "We are now installing the needed packages and setting the desired configuration."
