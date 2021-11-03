@@ -1,6 +1,3 @@
--- Map leader to space
-vim.g.mapleader = ' '
-
 require('plugins')
 require('settings')
 require('keymappings')
