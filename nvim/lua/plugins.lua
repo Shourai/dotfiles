@@ -3,10 +3,21 @@ return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  -- LSP and completion
+  -- LSP
   use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/nvim-compe'
   use 'ray-x/lsp_signature.nvim'
+
+  -- Completion
+  use {
+      'hrsh7th/nvim-cmp',
+      requires = {
+          { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+          { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
+          { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
+          { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+          { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' }
+        }
+  }
 
   -- Telescope
   use {
