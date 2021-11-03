@@ -8,8 +8,8 @@ ln -sf ~/Documents/github/dotfiles/zsh/pure.zsh ~/.zsh/functions/prompt_pure_set
 ln -sf ~/Documents/github/dotfiles/zsh/async.zsh ~/.zsh/functions/async
 ln -sf ~/Documents/github/dotfiles/zsh/LS_COLORS ~/.zsh/LS_COLORS
 
+ln -sf ~/Documents/github/nvim ~/.config/nvim
 ln -sf ~/Documents/github/dotfiles/emacs ~/.config/emacs
-ln -sf ~/Documents/github/dotfiles/nvim ~/.config/nvim
 ln -sf ~/Documents/github/dotfiles/tmux ~/.config/tmux
 ln -sf ~/Documents/github/dotfiles/git ~/.config
 
