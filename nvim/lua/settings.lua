@@ -1,36 +1,32 @@
---- Helpers ---
-local cmd = vim.cmd
-local o = vim.o
-local wo = vim.wo
-local bo = vim.bo
-
 -- Settings --
-o.backup = false -- don't create backup file
-o.clipboard = "unnamed,unnamedplus" -- allow neovim to access the system clipboard
-o.completeopt = "menuone,noselect"
-wo.conceallevel = 0 -- so that `` is visible in markdown files
-bo.fileencoding = "utf-8" -- the encoding written to a file
-o.ignorecase = true -- ignore case in search pattern
-o.smartcase = true -- smart case
-o.mouse = "a" -- allow the mouse to be used in neovim
+-- See :h lua-vim-opt
 
-o.splitbelow = true -- force all horizontal splits to go below current window
-o.splitright = true -- force all vertical splits to go to the right of current window
+vim.opt.backup = false -- don't create backup file
+vim.opt.clipboard = "unnamed,unnamedplus" -- allow neovim to access the system clipboard
+vim.opt.completeopt = "menuone,noselect"
+vim.opt.conceallevel = 0 -- so that `` is visible in markdown files
+vim.opt.fileencoding = "utf-8" -- the encoding written to a file
+vim.opt.ignorecase = true -- ignore case in search pattern
+vim.opt.smartcase = true -- smart case
+vim.opt.mouse = "a" -- allow the mouse to be used in neovim
 
-bo.swapfile = false -- creates a swapfile
-bo.expandtab = true -- convert tabs to spaces
-bo.tabstop = 2
-bo.shiftwidth = 2
+vim.opt.splitbelow = true -- force all horizontal splits to go below current window
+vim.opt.splitright = true -- force all vertical splits to go to the right of current window
 
-wo.cursorline = true -- highlight the current line
-wo.number = true  -- set numbered lines
-wo.relativenumber = true -- set relative numbered lines
-o.termguicolors = true -- Enables 24 bit RGB colors in the TUI
-o.inccommand = "nosplit"
+vim.opt.swapfile = false -- creates a swapfile
+vim.opt.expandtab = true -- convert tabs to spaces
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
 
-cmd("autocmd FocusLost * silent! :wa") -- write file when focus is lost
-o.autowriteall = true -- write the contents of the file when jumping between jumppoints
+vim.opt.cursorline = true -- highlight the current line
+vim.opt.number = true  -- set numbered lines
+vim.opt.relativenumber = true -- set relative numbered lines
+vim.opt.termguicolors = true -- Enables 24 bit RGB colors in the TUI
+vim.opt.inccommand = "nosplit"
 
-bo.undofile = true
+vim.cmd("autocmd FocusLost * silent! :wa") -- write file when focus is lost
+vim.opt.autowriteall = true -- write the contents of the file when jumping between jumppoints
 
-cmd("autocmd BufWritePost plugins.lua PackerCompile") -- automatically run PackerCompile when changes to plugins.lua has been made
+vim.opt.undofile = true
+
+vim.cmd("autocmd BufWritePost plugins.lua PackerCompile") -- automatically run PackerCompile when changes to plugins.lua has been made
