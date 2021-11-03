@@ -1,32 +1,66 @@
 -- Settings --
--- See :h lua-vim-opt
 
-vim.opt.backup = false -- don't create backup file
-vim.opt.clipboard = "unnamed,unnamedplus" -- allow neovim to access the system clipboard
-vim.opt.completeopt = "menuone,noselect"
-vim.opt.conceallevel = 0 -- so that `` is visible in markdown files
-vim.opt.fileencoding = "utf-8" -- the encoding written to a file
-vim.opt.ignorecase = true -- ignore case in search pattern
-vim.opt.smartcase = true -- smart case
-vim.opt.mouse = "a" -- allow the mouse to be used in neovim
+-------------------------------------------------------------
+-- Neovim API aliases
+-----------------------------------------------------------
 
-vim.opt.splitbelow = true -- force all horizontal splits to go below current window
-vim.opt.splitright = true -- force all vertical splits to go to the right of current window
+local opt = vim.opt -- global/buffer/windows-scoped options, see :h lua-vim-opt
+local cmd = vim.cmd -- execute Vim commands
+local g   = vim.g   -- global variables
 
-vim.opt.swapfile = false -- creates a swapfile
-vim.opt.expandtab = true -- convert tabs to spaces
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
+-----------------------------------------------------------
+-- General
+-----------------------------------------------------------
+g.mapleader   = ' '                   -- map leader to space
+opt.mouse     = "a"                   -- allow the mouse to be used in neovim
+opt.clipboard = "unnamed,unnamedplus" -- allow neovim to access the system clipboard
+opt.swapfile  = false                 -- creates a swapfile
+opt.backup    = false                 -- don't create backup file
+opt.undofile  = true
 
-vim.opt.cursorline = true -- highlight the current line
-vim.opt.number = true  -- set numbered lines
-vim.opt.relativenumber = true -- set relative numbered lines
-vim.opt.termguicolors = true -- Enables 24 bit RGB colors in the TUI
-vim.opt.inccommand = "nosplit"
+-----------------------------------------------------------
+-- User Interface
+-----------------------------------------------------------
+opt.conceallevel   = 0       -- so that `` is visible in markdown files
+opt.fileencoding   = "utf-8" -- the encoding written to a file
+opt.ignorecase     = true    -- ignore case in search pattern
+opt.smartcase      = true    -- smart case
+opt.splitbelow     = true    -- force all horizontal splits to go below current window
+opt.splitright     = true    -- force all vertical splits to go to the right of current window
+opt.lazyredraw     = true
 
-vim.cmd("autocmd FocusLost * silent! :wa") -- write file when focus is lost
-vim.opt.autowriteall = true -- write the contents of the file when jumping between jumppoints
+opt.cursorline     = true    -- highlight the current line
+opt.number         = true    -- set numbered lines
+opt.relativenumber = true    -- set relative numbered lines
+opt.termguicolors  = true    -- Enables 24 bit RGB colors in the TUI
+opt.inccommand     = "nosplit"
 
-vim.opt.undofile = true
+-----------------------------------------------------------
+-- Tabs, indent
+-----------------------------------------------------------
+opt.expandtab   = true -- convert tabs to spaces
+opt.tabstop     = 2
+opt.shiftwidth  = 2
+opt.smartindent = true
 
-vim.cmd("autocmd BufWritePost plugins.lua PackerCompile") -- automatically run PackerCompile when changes to plugins.lua has been made
+-----------------------------------------------------------
+-- Autocompletion
+-----------------------------------------------------------
+-- insert mode completion options
+opt.completeopt = "menuone,noselect"
+
+-----------------------------------------------------------
+-- Misc
+-----------------------------------------------------------
+
+-- write file when focus is lost
+cmd("autocmd FocusLost * silent! :wa")
+
+-- write the contents of the file when jumping between jumppoints
+opt.autowriteall = true
+
+-- automatically run PackerCompile when changes to plugins.lua has been made
+cmd("autocmd BufWritePost plugins.lua PackerCompile")
+
+-- remove whitespace on save
+cmd [[au BufWritePre * :%s/\s\+$//e]]
