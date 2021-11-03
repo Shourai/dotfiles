@@ -27,9 +27,3 @@
   ss = status -s
   st = status
   lg = log --graph --date=relative --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ad)%Creset' -20
-
-[user]
-	name = Shourai
-	email = 10200748+Shourai@users.noreply.github.com
-
-
