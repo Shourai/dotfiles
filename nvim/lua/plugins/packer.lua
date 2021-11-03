@@ -8,14 +8,15 @@ return require('packer').startup(function()
   use 'ray-x/lsp_signature.nvim'
 
   -- Completion
+  use 'L3MON4D3/LuaSnip'
   use {
       'hrsh7th/nvim-cmp',
       requires = {
-          { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
-          { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
-          { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
-          { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
-          { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' }
+          { 'hrsh7th/cmp-buffer'},
+          { 'hrsh7th/cmp-nvim-lsp'},
+          { 'hrsh7th/cmp-nvim-lua'},
+          { 'hrsh7th/cmp-path'},
+          { 'hrsh7th/cmp-cmdline'}
         }
   }
 
@@ -53,9 +54,7 @@ return require('packer').startup(function()
 
   -- Modeline
   use {
-    'glepnir/galaxyline.nvim',
-    branch = 'main',
-    config = function() require'statusline' end,
+    'nvim-lualine/lualine.nvim',
     requires = {'kyazdani42/nvim-web-devicons', opt = true}
   }
 
