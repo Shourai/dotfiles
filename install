@@ -41,6 +41,9 @@ if [ "$(uname)" = "Darwin" ]; then
     # Install brew packages
     bash ~/Documents/github/dotfiles/macOS/brew.sh
 elif [ -f /etc/arch-release ]; then
+    # Install x-server keyboard-layout
+    sudo cp ~/Documents/github/dotfiles/arch/20-keyboard-layout.conf /etc/X11/xorg.conf.d/
+
     # Install pacman packages
     bash ~/Documents/github/dotfiles/arch/packages.sh
 fi
