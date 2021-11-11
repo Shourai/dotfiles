@@ -12,11 +12,5 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-# Set the typematic delay and rate for an active x server
-xset r rate 200 100
-
-# Remap caps to control
-setxkbmap -option 'ctrl:nocaps,altwin:swap_lalt_lwin'
-
 # Execute bspwm
 exec bspwm
