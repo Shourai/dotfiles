@@ -373,7 +373,7 @@ stty discard undef
 # 	fi
 # }
 # zle -N prepend-sudo
-# 
+#
 # # Prepend "vim" to the command line if it is not already there.
 # prepend-vim() {
 # 	if ! echo "$BUFFER" | grep -q "^vim "
@@ -567,3 +567,10 @@ export GPG_TTY
 
 # Disable software flow control where ctrl+s freezes the terminal
 stty -ixon
+
+
+# ==============================================================================
+# = NNN settings
+# ==============================================================================
+
+export NNN_PLUG='p:preview-tabbed;d:dragdrop'
