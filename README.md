@@ -21,27 +21,19 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | b
 
 ## Directory Listing
     .
-    ├── android
-    │   ├── install
-    │   ├── packages.sh
-    │   ├── README.md
-    │   └── termux.properties
     ├── arch
     │   ├── 20-keyboard-layout.conf
     │   ├── bspwm
     │   ├── dotfiles.sh
     │   ├── fontconfig
     │   ├── fonts
-    │   ├── i3
     │   ├── mimeapps.list
     │   ├── packages.sh
     │   ├── picom.conf
     │   ├── polybar
     │   ├── README.md
     │   ├── sxhkd
-    │   ├── urxvt
-    │   ├── xinitrc
-    │   └── xresources
+    │   └── xinitrc
     ├── emacs
     │   ├── emacs.org
     │   ├── init.el
@@ -50,8 +42,6 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | b
     ├── git
     │   └── config
     ├── install
-    ├── latexmkrc
-    ├── ledgerrc
     ├── macOS
     │   ├── brew.sh
     │   ├── com.googlecode.iterm2.plist
@@ -60,14 +50,9 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | b
     │   ├── miscellaneous.sh
     │   ├── README.md
     │   └── SF-Mono-Powerline-Regular.otf
-    ├── neomutt
-    │   ├── account.1
-    │   ├── dracula.muttrc
-    │   └── neomuttrc
     ├── README.md
     ├── tmux
     │   └── tmux.conf
-    ├── weechat.conf
     └── zsh
         ├── async.zsh
         ├── pure.zsh
