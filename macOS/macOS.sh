@@ -1,89 +1,40 @@
-# macOS changes
+# Run latest version of brew
+brew update
+brew upgrade
 
-# Wipe all (default) app icons from the Dock
-# This is only really useful when setting up a new Mac, or if you don’t use
-# the Dock to launch apps.
-defaults write com.apple.dock persistent-apps -array
+# Opt-out of homebrew analytics
+brew analytics off
 
-# Set the dock's orientation to the right
-defaults write com.apple.dock orientation -string right
+# Install homebrew packages
+brew install bash
+brew install coreutils
+brew install fzf
+brew install gnu-sed
+brew install htop
+brew install lazygit
+brew install mpv
+brew install neovim
+brew install python
+brew install shellcheck
+brew install tmux
+brew install tree
+brew install zsh-syntax-highlighting
+brew install zsh-autosuggestions
 
-# Change the icon size to 30
-defaults write com.apple.dock tilesize -float 30
+# Install cask packages
+brew install --cask 1password
+brew install --cask homebrew/cask-versions/firefox-beta
+brew install --cask iterm2
+brew install --cask font-sf-mono-for-powerline
 
-# Enable dock autohide
-defaults write com.apple.dock autohide -bool true
+# Clean up brew and cask
+brew cleanup
 
-# Change the autohide delay
-defaults write com.apple.dock autohide-time-modifier -float 0.4
-defaults write com.apple.dock autohide-delay -float 0
+# Enable fzf keybindings
+bash /usr/local/opt/fzf/install
 
-# Show all file extensions
-defaults write -g AppleShowAllExtensions -bool true
+# Copy font to font library
+cp ~/Documents/github/dotfiles/macOS/SF-Mono-Powerline-Regular.otf ~/Library/Fonts
 
-# Disable smart quotes as they’re annoying when typing code
-defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-
-# Disable smart dashes as they’re annoying when typing code
-defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-
-# Require password immediately after sleep or screen saver begins
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
-
-# Disable Bluetooth
-sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int 0
-
-# Remove airplay icon in menubar
-defaults write com.apple.airplay showInMenuBarIfPresent -bool false
-
-# Hide recent tags in finder
-defaults write com.apple.finder ShowRecentTags -bool false
-
-# Enable tap to click
-defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-
-# Four finger vertical swipe enable
-defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerVertSwipeGesture -int 2
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerVertSwipeGesture -int 2
-
-# Three finger horizontal swipe disable
-defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 0
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 0
-
-# Enable three finger drag
-defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
-
-# Enable expose and mission control
-defaults write com.apple.dock showAppExposeGestureEnabled -bool true
-defaults write com.apple.dock showMissionControlGestureEnabled -bool true
-
-# Set tracking speed
-defaults write -g com.apple.trackpad.scaling -float 3.0
-
-# Set keyboard delay until repeat to short
-defaults write -g InitialKeyRepeat -int 15
-
-# Set keyboard keyrepeat to fast
-defaults write -g KeyRepeat -int 1
-
-# Disable reopen windows when logging back in
-defaults write com.apple.loginwindow TALLogoutSavesState -bool false
-
-# Disable Text input in status bar
-defaults write com.apple.TextInputMenu visible -bool false
-
-# Skim: turn off auto reload dialog, default to auto reload
-defaults write -app Skim SKAutoReloadFileUpdate -boolean true
-
-# Set iTerm2 preference folder
-defaults write -app iTerm PrefsCustomFolder "$HOME/Documents/github/dotfiles/macOS"
-
-# Disable the sound effects on boot
-# sudo nvram SystemAudioVolume=%00
-
-# Enable trim
-# Only needed if you have a mac without an official Apple SSD
-# sudo trimforce enable
+# Run settings script
+# bash ~/Documents/github/dotfiles/macOS/settings.sh
