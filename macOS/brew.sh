@@ -20,6 +20,7 @@ brew install fzf
 brew install htop
 # brew install ledger
 # brew install markdown
+brew install lazygit
 brew install mpv
 brew install neovim
 # brew install pandoc
