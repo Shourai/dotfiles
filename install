@@ -38,8 +38,8 @@ git -C ~/Documents/github/nvim remote set-url origin git@github.com:Shourai/nvim
 echo "We are now installing the needed packages and setting the desired configuration."
 
 if [ "$(uname)" = "Darwin" ]; then
-    # Install brew packages
-    bash ~/Documents/github/dotfiles/macOS/brew.sh
+    # Run macOS install script
+    bash ~/Documents/github/dotfiles/macOS/macOS.sh
 elif [ -f /etc/arch-release ]; then
     # Install x-server keyboard-layout
     sudo cp ~/Documents/github/dotfiles/arch/20-keyboard-layout.conf /etc/X11/xorg.conf.d/
