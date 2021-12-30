@@ -13,13 +13,10 @@ brew analytics off
 # Install homebrew packages
 ##################################################
 # brew install autojump
-brew install ag
 brew install bash
 brew install coreutils
-brew install fasd
 brew install fzf
-brew install gnu-sed
-brew install gnutls
+# brew install gnu-sed
 brew install htop
 # brew install ledger
 # brew install markdown
@@ -32,8 +29,7 @@ brew install tmux
 brew install tree
 # brew install vim
 # brew install weechat
-brew install wget
-brew install zsh
+# brew install wget
 brew install zsh-syntax-highlighting
 brew install zsh-autosuggestions
 
@@ -41,7 +37,7 @@ brew install zsh-autosuggestions
 # Install cask packages
 ##################################################
 brew install --cask 1password
-brew install --cask bettertouchtool
+# brew install --cask bettertouchtool
 # brew install --cask calibre
 # brew install --cask emacs
 brew install --cask homebrew/cask-versions/firefox-beta
