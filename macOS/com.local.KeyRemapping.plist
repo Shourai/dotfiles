@@ -11,12 +11,12 @@
         <string>--set</string>
         <string>{"UserKeyMapping":[
             {
-              "HIDKeyboardModifierMappingSrc": 0x700000035,
-              "HIDKeyboardModifierMappingDst": 0x700000031
-            },
-            {
               "HIDKeyboardModifierMappingSrc": 0x700000031,
               "HIDKeyboardModifierMappingDst": 0x700000028
+            },
+            {
+              "HIDKeyboardModifierMappingSrc": 0x700000035,
+              "HIDKeyboardModifierMappingDst": 0x700000031
             },
             {
               "HIDKeyboardModifierMappingSrc": 0x700000064,
