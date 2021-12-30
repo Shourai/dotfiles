@@ -4,14 +4,6 @@
 On Monterey permissions need to be granted to terminal to access the whole disk
 otherwise this script will fail.
 
-### Files
-in `brew.sh` are all brew packages I use.
-in `dotfiles.sh`, the dotfiles are symlinked to the home directory, this includes the dotfiles for Linux distros.
-in `shell.sh`, BASH gets replaced for ZSH, also for Linux distros.
-in `miscellaneous.sh` some packages are installed e.g. `matplotlib` for python3.
-Finally in `macOS.sh`, configurations to macOS are performed e.g.: keyboard repeat speed.
-
-
 ### Key remap
 Remapping a mac keyboard which is not in US layout
 
