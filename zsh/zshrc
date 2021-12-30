@@ -330,6 +330,7 @@ bindkey -M vicmd "^X" decrement-number
 #
 # initialize z
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+[[ -r "/usr/local/etc/profile.d/z.sh" ]] && source /usr/local/etc/profile.d/z.sh
 
 # ------------------------------------------------------------------------------
 # - Fuzzy completion for zsh by junegunn                                       -
