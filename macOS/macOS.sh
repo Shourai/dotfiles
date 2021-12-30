@@ -20,12 +20,12 @@ brew install tmux
 brew install tree
 brew install zsh-syntax-highlighting
 brew install zsh-autosuggestions
+brew install z
 
 # Install cask packages
 brew install --cask 1password
 brew install --cask homebrew/cask-versions/firefox-beta
 brew install --cask iterm2
-brew install --cask font-sf-mono-for-powerline
 
 # Clean up brew and cask
 brew cleanup
@@ -35,6 +35,10 @@ bash /usr/local/opt/fzf/install
 
 # Copy font to font library
 cp ~/Documents/github/dotfiles/macOS/SF-Mono-Powerline-Regular.otf ~/Library/Fonts
+
+# Copy keymaps
+mkdir -p ~/Library/LaunchAgents
+cp ~/Documents/github/dotfiles/macOS/com.local.KeyRemapping.plist ~/Library/LaunchAgents
 
 # Run settings script
 # bash ~/Documents/github/dotfiles/macOS/settings.sh
