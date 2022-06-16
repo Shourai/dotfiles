@@ -151,3 +151,6 @@ internal_UUIDs.txt
 # neomutt
 neomutt/cache
 neomutt/profile.*
+
+emacs/bookmarks
+emacs/org-roam.db
