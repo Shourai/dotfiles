@@ -645,7 +645,7 @@ And adding basic logging to keep track of when a certain TODO item was finished.
        :config  (require 'evil-magit))
 
      (use-package evil-magit
-       :ensure t
+       :ensure f
        :defer t)
    #+END_SRC
 
