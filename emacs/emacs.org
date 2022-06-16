@@ -831,7 +831,7 @@ Also add an org-capture template to make blogging easier.
 
 
     (use-package company-lsp
-      :ensure t
+      :ensure f
       :defer t
       :after company
       :config
