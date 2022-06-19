@@ -174,4 +174,4 @@ super + x
 
 # Screenshot area and save to clipboard
 ctrl + alt + s
-    maim -s | xclip -selection clipboard -t image/png
+    flameshot gui
