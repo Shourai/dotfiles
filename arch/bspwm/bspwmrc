@@ -45,7 +45,7 @@ fi
 flashfocus &
 picom -b
 
-## Initialize xidlehookl
+## Initialize xidlehook
 if pgrep -x "xidlehook" > /dev/null; then
     kill $(pgrep "xidlehook")
     wait $(pgrep "xidlehook")
@@ -60,3 +60,6 @@ $HOME/.config/polybar/launch.sh
 
 # Launch sxhkd
 sxhkd &
+
+# Start polkit agent
+lxpolkit &

@@ -15,5 +15,3 @@ fi
 # Execute bspwm
 exec bspwm
 
-# Start polkit agent
-exec /usr/bin/lxpolkit
