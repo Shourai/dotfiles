@@ -23,7 +23,6 @@ sudo pacman -Syu --noconfirm
 # sudo pacman -S maim --noconfirm
 
 sudo pacman -S bspwm --noconfirm
-sudo pacman -S dmenu --noconfirm
 sudo pacman -S flameshot --noconfirm
 sudo pacman -S fzf --noconfirm
 sudo pacman -S htop --noconfirm
@@ -40,6 +39,7 @@ sudo pacman -S pipewire --noconfirm
 sudo pacman -S pipewire-pulse --noconfirm
 sudo pacman -S python-pip --noconfirm
 sudo pacman -S python3 --noconfirm
+sudo pacman -S rofi --noconfirm
 sudo pacman -S shellcheck --noconfirm
 sudo pacman -S sxhkd --noconfirm
 sudo pacman -S tmux --noconfirm
