@@ -35,6 +35,7 @@ alias vi='\vim'
 alias vim='nvim'
 alias zshrc='vim ~/.zshrc'
 alias activate='source bin/activate'
+alias tx='tmuxinator'
 
 ## Git related
 alias g='git'
