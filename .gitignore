@@ -154,3 +154,6 @@ neomutt/profile.*
 
 emacs/bookmarks
 emacs/org-roam.db
+
+# tmux
+tmux/plugins
