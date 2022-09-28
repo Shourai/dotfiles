@@ -553,6 +553,10 @@ decrement-number() {
 zle -N decrement-number
 
 
+function sshf() {
+  ssh $(grep '^Host' ~/.ssh/* | grep -v '[?*]' | cut -d ' ' -f 2 | fzf)
+}
+
 # ==============================================================================
 # = Run keychain so ssh-agent is shared between shells
 # ==============================================================================
