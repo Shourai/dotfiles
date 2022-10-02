@@ -177,5 +177,5 @@ ctrl + alt + s
     flameshot gui
 
 # Launch qalc in rofi
-super + shift + question
+alt + space
     rofi -show calc -modi calc -snow-show-match -no-sort -no-persist-history
