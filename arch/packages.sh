@@ -62,6 +62,7 @@ yay -S xidlehook --noconfirm
 # Install terminal emulator
 git clone https://github.com/Shourai/st.git ~/Documents/github/st
 cd ~/Documents/github/st || exit
+git am patches/*
 sudo make install
 
 git clone https://github.com/Shourai/scroll.git ~/Documents/github/scroll
