@@ -580,3 +580,4 @@ stty -ixon
 # ==============================================================================
 
 export NNN_PLUG='p:preview-tabbed;d:dragdrop'
+export NNN_FIFO='/tmp/nnn.fifo'
