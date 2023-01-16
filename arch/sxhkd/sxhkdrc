@@ -178,4 +178,4 @@ ctrl + alt + s
 
 # Launch qalc in rofi
 alt + space
-    rofi -show calc -modi calc -snow-show-match -no-sort -no-persist-history
+    rofi -show calc -modi calc -no-show-match -no-sort
