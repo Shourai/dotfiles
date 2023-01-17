@@ -576,3 +576,8 @@ stty -ixon
 
 export NNN_PLUG='p:preview-tabbed;d:dragdrop'
 export NNN_FIFO='/tmp/nnn.fifo'
+
+# ==============================================================================
+# = zsh ssh settings
+# ==============================================================================
+source ~/.zsh/zsh-ssh/zsh-ssh.zsh
