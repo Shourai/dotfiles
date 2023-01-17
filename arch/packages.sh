@@ -61,6 +61,9 @@ yay -S polybar --noconfirm
 yay -S nsxiv --noconfirm
 yay -S xidlehook --noconfirm
 
+# Install zsh ssh plugin
+git clone https://github.com/sunlei/zsh-ssh ~/.zsh/zsh-ssh
+
 # Install terminal emulator
 git clone https://github.com/Shourai/st.git ~/Documents/github/st
 cd ~/Documents/github/st || exit
