@@ -43,7 +43,7 @@ else
 fi
 
 flashfocus &
-picom -b
+picom --vsync --daemon
 
 ## Initialize xidlehook
 if pgrep -x "xidlehook" > /dev/null; then
