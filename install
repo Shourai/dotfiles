@@ -58,10 +58,7 @@ fi
 
 # Cleanup
 echo "Doing cleanup"
-if [ "$(uname)" = "Darwin" ]; then
-    echo "Brew cleanup"
-    brew cleanup
-elif [ -f /etc/arch-release ]; then
+if [ -f /etc/arch-release ]; then
     echo "Cleaning up pacman cache"
     sudo pacman -Sc --noconfirm
 fi
