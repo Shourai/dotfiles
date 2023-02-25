@@ -54,8 +54,4 @@ cd ~/Documents/github/st || exit
 git apply patches/*
 sudo make install
 
-git clone https://github.com/Shourai/scroll.git ~/Documents/github/scroll
-cd ~/Documents/github/scroll || exit
-sudo make install
-
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
