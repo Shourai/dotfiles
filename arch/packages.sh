@@ -31,7 +31,6 @@ sudo pacman -S rofi-calc --noconfirm
 sudo pacman -S shellcheck --noconfirm
 sudo pacman -S sxhkd --noconfirm
 sudo pacman -S tmux --noconfirm
-sudo pacman -S trash-cli --noconfirm
 sudo pacman -S xclip --noconfirm
 sudo pacman -S xorg-server --noconfirm
 sudo pacman -S xorg-xinit --noconfirm
