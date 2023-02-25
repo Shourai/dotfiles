@@ -22,8 +22,8 @@ sudo pacman -S nitrogen --noconfirm
 sudo pacman -S nnn --noconfirm
 sudo pacman -S openssh --noconfirm
 sudo pacman -S picom --noconfirm
-sudo pacman -S pipewire --noconfirm
-sudo pacman -S pipewire-pulse --noconfirm
+#sudo pacman -S pipewire --noconfirm
+#sudo pacman -S pipewire-pulse --noconfirm
 sudo pacman -S python-pip --noconfirm
 sudo pacman -S python3 --noconfirm
 sudo pacman -S rofi --noconfirm
