@@ -43,7 +43,6 @@ yay -S betterlockscreen --noconfirm
 yay -S flashfocus --noconfirm
 yay -S polybar --noconfirm
 yay -S nsxiv --noconfirm
-yay -S xidlehook --noconfirm
 
 # Install zsh ssh plugin
 git clone https://github.com/sunlei/zsh-ssh ~/.zsh/zsh-ssh
