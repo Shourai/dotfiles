@@ -7,21 +7,6 @@ makepkg -si --noconfirm
 sudo pacman -Syu --noconfirm
 
 # Install packages
-# sudo pacman -S acpi --noconfirm
-# sudo pacman -S i3-gaps --noconfirm
-# sudo pacman -S i3blocks --noconfirm
-# sudo pacman -S ledger --noconfirm
-# sudo pacman -S rxvt-unicode --noconfirm
-# sudo pacman -S sysstat --noconfirm
-# sudo pacman -S emacs --noconfirm
-# sudo pacman -S fasd --noconfirm
-# sudo pacman -S fd --noconfirm
-# sudo pacman -S pulseaudio --noconfirm
-# sudo pacman -S pulsemixer --noconfirm
-# sudo pacman -S the_silver_searcher --noconfirm
-# sudo pacman -S feh --noconfirm
-# sudo pacman -S maim --noconfirm
-
 sudo pacman -S bat --noconfirm
 sudo pacman -S bspwm --noconfirm
 sudo pacman -S exa --noconfirm
