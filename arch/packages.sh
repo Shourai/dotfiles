@@ -10,6 +10,7 @@ sudo pacman -Syu --noconfirm
 sudo pacman -S bat --noconfirm
 sudo pacman -S bspwm --noconfirm
 sudo pacman -S exa --noconfirm
+sudo pacman -S fd --noconfirm
 sudo pacman -S flameshot --noconfirm
 sudo pacman -S fzf --noconfirm
 sudo pacman -S htop --noconfirm
