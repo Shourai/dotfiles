@@ -28,6 +28,7 @@ sudo pacman -S python-pip --noconfirm
 sudo pacman -S python3 --noconfirm
 sudo pacman -S rofi --noconfirm
 sudo pacman -S rofi-calc --noconfirm
+sudo pacman -S rsync --noconfirm
 sudo pacman -S shellcheck --noconfirm
 sudo pacman -S sxhkd --noconfirm
 sudo pacman -S tmux --noconfirm
