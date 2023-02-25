@@ -26,3 +26,9 @@ if [ "$(uname)" = "Linux" ]; then
     ln -sf ~/Documents/github/dotfiles/arch/fonts ~/.local/share
     ln -sf ~/Documents/github/dotfiles/arch/bspwm/scripts/bspwm_resize ~/.local/bin
 fi
+
+if [ -f /etc/arch-release ]; then
+    # Install x-server keyboard-layout
+    sudo rsync -a ~/Documents/github/dotfiles/arch/20-keyboard-layout.conf /etc/X11/xorg.conf.d/
+fi
+
