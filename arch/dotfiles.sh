@@ -4,9 +4,8 @@ mkdir -p ~/.config
 mkdir -p ~/.local/bin
 mkdir -p ~/.local/share
 
-ln -sf ~/Documents/github/dotfiles/zsh/zshrc ~/.zshrc
-
 mkdir -p ~/.zsh/functions
+ln -sf ~/Documents/github/dotfiles/zsh/zshrc ~/.zshrc
 ln -sf ~/Documents/github/dotfiles/zsh/pure.zsh ~/.zsh/functions/prompt_pure_setup
 ln -sf ~/Documents/github/dotfiles/zsh/async.zsh ~/.zsh/functions/async
 ln -sf ~/Documents/github/dotfiles/zsh/LS_COLORS ~/.zsh/LS_COLORS
