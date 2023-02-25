@@ -11,7 +11,7 @@ ln -sf ~/Documents/github/dotfiles/zsh/async.zsh ~/.zsh/functions/async
 ln -sf ~/Documents/github/dotfiles/zsh/LS_COLORS ~/.zsh/LS_COLORS
 
 ln -sf ~/Documents/github/nvim ~/.config/nvim
-ln -sf ~/Documents/github/dotfiles/tmux ~/.config/tmux
+ln -sf ~/Documents/github/dotfiles/tmux/tmux.conf ~/.config/tmux
 ln -sf ~/Documents/github/dotfiles/git ~/.config
 
 if [ "$(uname)" = "Linux" ]; then
