@@ -29,7 +29,6 @@ sudo pacman -S python3 --noconfirm
 sudo pacman -S rofi --noconfirm
 sudo pacman -S rofi-calc --noconfirm
 sudo pacman -S rsync --noconfirm
-sudo pacman -S shellcheck --noconfirm
 sudo pacman -S sxhkd --noconfirm
 sudo pacman -S tmux --noconfirm
 sudo pacman -S xclip --noconfirm
@@ -42,8 +41,9 @@ sudo pacman -S zsh-autosuggestions --noconfirm
 sudo pacman -S zsh-syntax-highlighting --noconfirm
 yay -S betterlockscreen --noconfirm
 yay -S flashfocus --noconfirm
-yay -S polybar --noconfirm
 yay -S nsxiv --noconfirm
+yay -S polybar --noconfirm
+yay -S shellcheck-bin --noconfirm
 
 # Install zsh ssh plugin
 git clone https://github.com/sunlei/zsh-ssh ~/.zsh/zsh-ssh
