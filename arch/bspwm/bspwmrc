@@ -46,11 +46,7 @@ flashfocus &
 picom --vsync --daemon
 
 ## Initialize xidlehook
-if pgrep -x "xautolock" > /dev/null; then
-    kill $(pgrep "xautolock")
-else
-    xautolock -time 900 -locker "systemctl suspend" &
-fi
+xautolock -time 15 -locker "systemctl suspend" &
 
 # Launch polybar
 $HOME/.config/polybar/launch.sh
