@@ -20,40 +20,34 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | b
 ```
 
 ## Directory Listing
-    .
-    ├── arch
-    │   ├── 20-keyboard-layout.conf
-    │   ├── bspwm
-    │   ├── dotfiles.sh
-    │   ├── fontconfig
-    │   ├── fonts
-    │   ├── mimeapps.list
-    │   ├── packages.sh
-    │   ├── picom.conf
-    │   ├── polybar
-    │   ├── README.md
-    │   ├── sxhkd
-    │   └── xinitrc
-    ├── emacs
-    │   ├── emacs.org
-    │   ├── init.el
-    │   ├── snippets
-    │   └── unused.org
-    ├── git
-    │   └── config
-    ├── install
-    ├── macOS
-    │   ├── brew.sh
-    │   ├── com.googlecode.iterm2.plist
-    │   ├── com.local.KeyRemapping.plist
-    │   ├── macOS.sh
-    │   ├── miscellaneous.sh
-    │   ├── README.md
-    │   └── SF-Mono-Powerline-Regular.otf
-    ├── README.md
-    ├── tmux
-    │   └── tmux.conf
-    └── zsh
-        ├── async.zsh
-        ├── pure.zsh
-        └── zshrc
+```
+.
+├── arch
+│   ├── 20-keyboard-layout.conf
+│   ├── bspwm
+│   ├── dotfiles.sh
+│   ├── fontconfig
+│   ├── fonts
+│   ├── mimeapps.list
+│   ├── packages.sh
+│   ├── picom.conf
+│   ├── polybar
+│   ├── README.md
+│   ├── rofi
+│   ├── sxhkd
+│   └── xinitrc
+├── git
+│   └── config
+├── install
+├── macOS
+│   ├── com.googlecode.iterm2.plist
+│   ├── com.local.KeyRemapping.plist
+│   ├── macOS.sh
+│   ├── README.md
+│   ├── settings.sh
+│   └── SF-Mono-Powerline-Regular.otf
+├── README.md
+├── tmux
+│   └── tmux.conf
+└── zshrc
+```
