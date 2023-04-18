@@ -46,6 +46,10 @@ yay -S nsxiv --noconfirm
 yay -S polybar --noconfirm
 yay -S shellcheck-bin --noconfirm
 
+# Install zsh pure prompt
+mkdir -p "$HOME/.zsh"
+git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+
 # Install zsh ssh plugin
 git clone https://github.com/sunlei/zsh-ssh ~/.zsh/zsh-ssh
 
