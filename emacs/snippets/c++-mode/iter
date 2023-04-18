@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name : for each begin() to end()
-# key: iter
-# --
-for (${1:type}::iterator it = ${2:map}begin(); it != $2end(); ++it) {
-  $0
-}

@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# key: upart
-# group: math
-# --
-\frac{\partial g^{${1:upper indices}}}{\partial x^{${2:upper index}}}$0
