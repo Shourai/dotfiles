@@ -36,7 +36,6 @@ sudo pacman -S tree --noconfirm
 sudo pacman -S xclip --noconfirm
 sudo pacman -S xorg-server --noconfirm
 sudo pacman -S xorg-xinit --noconfirm
-sudo pacman -S z --noconfirm
 sudo pacman -S zathura-pdf-mupdf --noconfirm
 sudo pacman -S zsh --noconfirm
 sudo pacman -S zsh-autosuggestions --noconfirm
@@ -46,6 +45,9 @@ yay -S flashfocus --noconfirm
 yay -S nsxiv --noconfirm
 yay -S polybar --noconfirm
 yay -S shellcheck-bin --noconfirm
+
+# Install z.lua
+git clone https://github.com/skywind3000/z.lua.git ~/Documents/github/z.lua
 
 # Install zsh pure prompt
 mkdir -p "$HOME/.zsh"
