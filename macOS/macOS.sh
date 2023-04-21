@@ -12,6 +12,7 @@ brew install fzf
 brew install gnu-sed
 brew install htop
 brew install lazygit
+brew install lua
 brew install mpv
 brew install neovim
 brew install python
@@ -20,7 +21,9 @@ brew install tmux
 brew install tree
 brew install zsh-syntax-highlighting
 brew install zsh-autosuggestions
-brew install z
+
+# Install z.lua
+git clone https://github.com/skywind3000/z.lua.git ~/Documents/github/z.lua
 
 # Install cask packages
 brew install --cask 1password
