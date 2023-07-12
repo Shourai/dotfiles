@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + {_, shift + } Return
-	{st, urxvt}
+	{st, st -e tmux}
 
 # program launcher
 super + d
