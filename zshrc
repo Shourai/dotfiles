@@ -98,7 +98,7 @@ emc() { command emacsclient -n -c -a '' "$@" & } # use `emc <file>` to open file
 # ------------------------------------------------------------------------------
 
 if [[ "$(uname)" = "Darwin" ]]; then
-    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 elif [ -f /etc/arch-release ]; then
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
@@ -108,7 +108,7 @@ fi
 # ------------------------------------------------------------------------------
 
 if [[ "$(uname)" = "Darwin" ]]; then
-    source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#808080'
 elif [ -f /etc/arch-release ]; then
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
