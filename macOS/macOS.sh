@@ -22,9 +22,6 @@ brew install tree
 brew install zsh-syntax-highlighting
 brew install zsh-autosuggestions
 
-# Install z.lua
-git clone https://github.com/skywind3000/z.lua.git ~/Documents/github/z.lua
-
 # Install cask packages
 brew install --cask 1password
 brew install --cask homebrew/cask-versions/firefox-beta

@@ -46,16 +46,6 @@ yay -S nsxiv --noconfirm
 yay -S polybar --noconfirm
 yay -S shellcheck-bin --noconfirm
 
-# Install z.lua
-git clone https://github.com/skywind3000/z.lua.git ~/Documents/github/z.lua
-
-# Install zsh pure prompt
-mkdir -p "$HOME/.zsh"
-git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
-
-# Install zsh ssh plugin
-git clone https://github.com/sunlei/zsh-ssh ~/.zsh/zsh-ssh
-
 # Install terminal emulator
 git clone https://github.com/Shourai/st.git ~/Documents/github/st
 cd ~/Documents/github/st || exit
