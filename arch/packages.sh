@@ -14,7 +14,6 @@ sudo pacman -S fd --noconfirm
 sudo pacman -S flameshot --noconfirm
 sudo pacman -S fzf --noconfirm
 sudo pacman -S htop --noconfirm
-sudo pacman -S keychain --noconfirm
 sudo pacman -S lazygit --noconfirm
 sudo pacman -S lua --noconfirm
 sudo pacman -S mpv --noconfirm

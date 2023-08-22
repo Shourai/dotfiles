@@ -559,7 +559,7 @@ zle -N decrement-number
 # ==============================================================================
 #eval $(keychain --eval --quiet --noask ~/.ssh/work)
 # If the command keychain is found and executable, evaluate it;
-[ -x "$(command -v keychain)" ] && eval $(keychain --eval --quiet --noask --agents ssh,gpg)
+#[ -x "$(command -v keychain)" ] && eval $(keychain --eval --quiet --noask --agents ssh,gpg)
 
 # ==============================================================================
 # = GPG agent settings
