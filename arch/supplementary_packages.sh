@@ -5,7 +5,7 @@ sudo pacman -S npm --noconfirm
 sudo pacman -S seahorse --noconfirm
 yay -S 1password --noconfirm
 yay -S brave-bin --noconfirm
-
+yay -S dragon-drop-git --noconfirm
 
 # Add nnn plugins
 sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
