@@ -30,3 +30,6 @@
 [user]
 	name = Shourai
 	email = 10200748+Shourai@users.noreply.github.com
+
+[includeIf "gitdir:~/Documents/gitea/**/.git"]
+  path = ~/Documents/gitea/gitconfig-gitea
