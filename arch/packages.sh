@@ -16,6 +16,7 @@ sudo pacman -S fzf --noconfirm
 sudo pacman -S htop --noconfirm
 sudo pacman -S keychain --noconfirm
 sudo pacman -S lazygit --noconfirm
+sudo pacman -S lua --noconfirm
 sudo pacman -S mpv --noconfirm
 sudo pacman -S neovim --noconfirm
 sudo pacman -S nitrogen --noconfirm
