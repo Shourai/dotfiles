@@ -165,7 +165,7 @@ super + shift + p
 #
 
 super + space ; {f,c,b,i}
-	{firefox, chromium, brave-beta --incognito, chromium --incognito}
+	{firefox, chromium, brave --incognito, chromium --incognito}
 
 # set keyboard rate
 super + x
