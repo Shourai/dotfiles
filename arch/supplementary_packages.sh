@@ -1,5 +1,4 @@
 # Install supplementary packages
-sudo pacman -S buku --noconfirm
 sudo pacman -S chromium --noconfirm
 sudo pacman -S firefox --noconfirm
 sudo pacman -S man --noconfirm
@@ -9,6 +8,7 @@ sudo pacman -S seahorse --noconfirm
 sudo pacman -S syncthing --noconfirm
 yay -S 1password --noconfirm
 yay -S brave-bin --noconfirm
+yay -S buku --noconfirm
 yay -S dragon-drop-git --noconfirm
 
 # Add nnn plugins
