@@ -30,6 +30,7 @@ sudo pacman -S python3 --noconfirm
 sudo pacman -S rofi --noconfirm
 sudo pacman -S rofi-calc --noconfirm
 sudo pacman -S rsync --noconfirm
+sudo pacman -S slurp --noconfirm
 sudo pacman -S swayidle --noconfirm
 sudo pacman -S swaylock --noconfirm
 sudo pacman -S tmux --noconfirm
