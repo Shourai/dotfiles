@@ -1,0 +1,9 @@
+border-width = 0
+outline-width = 0
+result-spacing = 25
+num-results = 5
+font = monospace
+background-color = #000A
+width = 640
+height = 480
+corner-radius = 60
