@@ -1,4 +1,5 @@
-timeout 300 'swaylock -f'
-timeout 400 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'
-timeout 600 'systemctl suspend'
+timeout 10 'if pgrep swaylock; then hyprctl dispatch dpms off; fi' resume 'hyprctl dispatch dpms on' # Turn screen off after 10 seconds of locking
+timeout 600 'swaylock -f'
+timeout 700 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'
+timeout 1000 'systemctl suspend'
 before-sleep 'swaylock -f'
