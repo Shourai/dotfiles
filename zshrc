@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------
 # - Path Config                                                                -
 # ------------------------------------------------------------------------------
-export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$HOME/.local/bin:$HOME/go/bin/:$PATH"
+export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$HOME/.local/bin:$HOME/go/bin/:$PATH"
 
 # ------------------------------------------------------------------------------
 # - Aliases                                                                    -
