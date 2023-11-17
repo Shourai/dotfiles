@@ -24,7 +24,8 @@ brew install zsh-autosuggestions
 
 # Install cask packages
 brew install --cask 1password
-brew install --cask homebrew/cask-versions/firefox-beta
+brew install --cask firefox-developer-edition
+brew install --cask google-chrome-dev
 brew install --cask iterm2
 
 # Clean up brew and cask
