@@ -34,8 +34,9 @@ brew cleanup
 # Enable fzf keybindings
 bash /usr/local/opt/fzf/install
 
-# Copy font to font library
-cp ~/Documents/github/dotfiles/macOS/SF-Mono-Powerline-Regular.otf ~/Library/Fonts
+# Add font
+brew tap shaunsingh/SFMono-Nerd-Font-Ligaturized
+brew install --cask font-sf-mono-nerd-font-ligaturized
 
 # Copy keymaps
 mkdir -p ~/Library/LaunchAgents
