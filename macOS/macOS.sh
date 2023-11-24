@@ -32,7 +32,7 @@ brew install --cask iterm2
 brew cleanup
 
 # Enable fzf keybindings
-bash /usr/local/opt/fzf/install
+bash $(brew --prefix)/opt/fzf/install --key-bindings --completion --no-update-rc
 
 # Add font
 brew tap shaunsingh/SFMono-Nerd-Font-Ligaturized
