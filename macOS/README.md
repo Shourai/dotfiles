@@ -1,11 +1,8 @@
 # MacOS
 
-### Note
-On Monterey permissions need to be granted to terminal to access the whole disk
-otherwise this script will fail.
-
 ### Key remap
 Remapping a mac keyboard which is not in US layout
+See also: https://github.com/amarsyla/hidutil-key-remapping-generator
 
 Move `com.local.KeyRemapping.plist` to `~/Library/LaunchAgents/com.local.KeyRemapping.plist`.
 
