@@ -5,6 +5,9 @@ brew upgrade
 # Opt-out of homebrew analytics
 brew analytics off
 
+# Access to alternate versions of Casks
+brew tap homebrew/cask-versions
+
 # Install homebrew packages
 brew install bash
 brew install coreutils
