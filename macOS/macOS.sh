@@ -32,7 +32,7 @@ brew install --cask iterm2
 brew install --cask mpv
 
 # Clean up brew and cask
-brew cleanup
+brew cleanup --prune=all
 
 # Enable fzf keybindings
 bash $(brew --prefix)/opt/fzf/install --key-bindings --completion --no-update-rc
