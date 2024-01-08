@@ -14,6 +14,7 @@ brew install coreutils
 brew install fzf
 brew install gnu-sed
 brew install htop
+brew install iproute2mac
 brew install lazygit
 brew install lua
 brew install neovim
