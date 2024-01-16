@@ -92,30 +92,6 @@ mkcd() { mkdir -p "$@" && cd "$@"; }      # Create a directory and cd to it afte
 emc() { command emacsclient -n -c -a '' "$@" & } # use `emc <file>` to open file in emacsclient, start daemon if not running
 # emacs() { command emacs "$@" & }
 
-
-# ------------------------------------------------------------------------------
-# - Syntax highlighting package                                                -
-# ------------------------------------------------------------------------------
-
-if [[ "$(uname)" = "Darwin" ]]; then
-    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [ -f /etc/arch-release ]; then
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
-# ------------------------------------------------------------------------------
-# - Autosuggestion package
-# ------------------------------------------------------------------------------
-
-if [[ "$(uname)" = "Darwin" ]]; then
-    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#808080'
-elif [ -f /etc/arch-release ]; then
-    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#808080'
-fi
-
-
 # ------------------------------------------------------------------------------
 # - Autocompletion settings                                                    -
 # ------------------------------------------------------------------------------
@@ -588,3 +564,25 @@ export NNN_FIFO='/tmp/nnn.fifo'
 # = zsh ssh settings
 # ==============================================================================
 source ~/.zsh/zsh-ssh/zsh-ssh.zsh
+
+# ------------------------------------------------------------------------------
+# - Syntax highlighting package                                                -
+# ------------------------------------------------------------------------------
+
+if [[ "$(uname)" = "Darwin" ]]; then
+    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [ -f /etc/arch-release ]; then
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+# ------------------------------------------------------------------------------
+# - Autosuggestion package
+# ------------------------------------------------------------------------------
+
+if [[ "$(uname)" = "Darwin" ]]; then
+    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#808080'
+elif [ -f /etc/arch-release ]; then
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#808080'
+fi
