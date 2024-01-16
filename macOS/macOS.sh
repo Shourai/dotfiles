@@ -5,15 +5,18 @@ brew upgrade
 # Opt-out of homebrew analytics
 brew analytics off
 
+# Access to alternate versions of Casks
+brew tap homebrew/cask-versions
+
 # Install homebrew packages
 brew install bash
 brew install coreutils
 brew install fzf
 brew install gnu-sed
 brew install htop
+brew install iproute2mac
 brew install lazygit
 brew install lua
-brew install mpv
 brew install neovim
 brew install python
 brew install shellcheck
@@ -27,9 +30,10 @@ brew install --cask 1password
 brew install --cask firefox-developer-edition
 brew install --cask google-chrome-dev
 brew install --cask iterm2
+brew install --cask mpv
 
 # Clean up brew and cask
-brew cleanup
+brew cleanup --prune=all
 
 # Enable fzf keybindings
 bash $(brew --prefix)/opt/fzf/install --key-bindings --completion --no-update-rc
