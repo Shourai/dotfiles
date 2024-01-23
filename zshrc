@@ -292,18 +292,6 @@ bindkey -M vicmd "^X" decrement-number
 
 
 # ------------------------------------------------------------------------------
-# - fasd                                                                       -
-# ------------------------------------------------------------------------------
-#
-# initialize fasd
-#eval "$(fasd --init auto)"
-
-# custom fasd aliases
-#alias e='f -e "emacsclient -n -c"' # quick opening files with emacs
-#alias p='f -e python3' # quick opening files with python3
-#alias v='f -e nvim' # quick opening files with neovim
-
-# ------------------------------------------------------------------------------
 # - z                                                                       -
 # ------------------------------------------------------------------------------
 #
