@@ -30,19 +30,14 @@ alias /='cd /'
 alias ~='cd ~'
 alias cp='cp -iv'
 alias mkdir='mkdir -pv'
-alias emd='emacs --daemon'
 alias vi='\vim'
 alias vim='nvim'
 alias zshrc='vim ~/.zshrc'
-alias activate='source bin/activate'
 alias tx='tmuxinator'
 
 ## Git related
 alias g='git'
 alias lg='lazygit'
-
-## feh
-alias feh="feh --auto-zoom --scale-down"
 
 # ------------------------------------------------------------------------------
 # - General Configurations                                                     -
