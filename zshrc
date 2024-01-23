@@ -226,17 +226,6 @@ bindkey -M viins "^X^H" _complete_help
 # Vim.
 bindkey -M viins "^X^L" history-incremental-search-backward
 
-# !!!!
-# Uncomment and activate the functions later in the file
-# !!!!
-
-# Prepend "sudo ".  This does not have a Vim parallel.
-#bindkey "^S" prepend-sudo
-
-# Prepend "vim ".  This does not have a Vim parallel.
-#bindkey "^V" prepend-vim
-
-
 # ------------------------------------------------------------------------------
 # - normal_mode_(key_bindings)                                                 -
 # ------------------------------------------------------------------------------
