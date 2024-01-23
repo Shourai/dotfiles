@@ -269,13 +269,6 @@ then
 fi
 
 # ==============================================================================
-# = Run keychain so ssh-agent is shared between shells
-# ==============================================================================
-#eval $(keychain --eval --quiet --noask ~/.ssh/work)
-# If the command keychain is found and executable, evaluate it;
-#[ -x "$(command -v keychain)" ] && eval $(keychain --eval --quiet --noask --agents ssh,gpg)
-
-# ==============================================================================
 # = GPG agent settings
 # ==============================================================================
 # As mendated by the manpage of gpg-agent
