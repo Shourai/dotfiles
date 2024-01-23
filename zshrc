@@ -268,16 +268,6 @@ then
     export FZF_ALT_C_COMMAND="fd --type d"
 fi
 
-# ==============================================================================
-# = GPG agent settings
-# ==============================================================================
-# As mendated by the manpage of gpg-agent
-GPG_TTY=$(tty)
-export GPG_TTY
-
-# Disable software flow control where ctrl+s freezes the terminal
-stty -ixon
-
 
 # ==============================================================================
 # = z.lua settings
