@@ -252,6 +252,8 @@ then
     export FZF_ALT_C_COMMAND="fd --type d"
 fi
 
+export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
+export FZF_CTRL_T_OPTS=" --preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 
 # ==============================================================================
 # = z.lua settings
