@@ -174,14 +174,6 @@ bindkey -M viins '\e^h'  backward-kill-word                # Alt-backspace
 bindkey -M viins '\e^?'  backward-kill-word                # Alt-backspace
 bindkey -M viins '\e.'   insert-last-word
 
-# Display _completion_help for creating completion functions.  This does not
-# have a Vim parallel.
-bindkey -M viins "^X^H" _complete_help
-
-# attempt to complete line based on history, roughly as i_ctrl-x_ctrl-l does in
-# Vim.
-bindkey -M viins "^X^L" history-incremental-search-backward
-
 # ------------------------------------------------------------------------------
 # - normal_mode_(key_bindings)                                                 -
 # ------------------------------------------------------------------------------
