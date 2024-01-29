@@ -12,9 +12,6 @@ if [[ "$(uname)" = "Darwin" ]]; then
     alias ls='gls -Fh --color=always'
     alias ll='gls -Fhl --color=always'
     alias la='gls -Fha --color=always'
-#    alias ls='ls -GFh'
-#    alias ll='ls -GFhl'
-#    alias la='ls -GFha'
 else
     alias ls='ls -v -Fh --color=always'
     alias ll='ls -v -Fhl --color=always'
