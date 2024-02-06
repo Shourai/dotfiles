@@ -44,7 +44,7 @@ brew install --cask font-sf-mono-nerd-font-ligaturized
 
 # Copy keymaps
 mkdir -p ~/Library/LaunchAgents
-cp ~/Documents/github/dotfiles/macOS/com.local.KeyRemapping.plist ~/Library/LaunchAgents
+cp ~/Documents/github/dotfiles/macOS/com.local.KeyRemapping.plist /Library/LaunchDaemons
 
 # Run settings script
 # bash ~/Documents/github/dotfiles/macOS/settings.sh
