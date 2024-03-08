@@ -30,7 +30,7 @@ brew install --cask 1password
 brew install --cask firefox-developer-edition
 brew install --cask google-chrome-dev
 brew install --cask iterm2
-brew install --cask mpv
+brew install --cask iina
 
 # Clean up brew and cask
 brew cleanup --prune=all
