@@ -34,6 +34,7 @@ sudo pacman -S swayidle --noconfirm
 sudo pacman -S swaylock --noconfirm
 sudo pacman -S tmux --noconfirm
 sudo pacman -S tree --noconfirm
+sudo pacman -S unzip --noconfirm
 sudo pacman -S waybar --noconfirm
 sudo pacman -S wl-clipboard --noconfirm
 sudo pacman -S wofi --noconfirm
