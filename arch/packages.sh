@@ -28,6 +28,7 @@ sudo pacman -S polkit --noconfirm
 sudo pacman -S python-pip --noconfirm
 sudo pacman -S python3 --noconfirm
 sudo pacman -S rsync --noconfirm
+sudo pacman -S seahorse --noconfirm
 sudo pacman -S slurp --noconfirm
 sudo pacman -S swayidle --noconfirm
 sudo pacman -S swaylock --noconfirm
