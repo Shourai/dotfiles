@@ -31,7 +31,7 @@ sudo pacman -S rsync --noconfirm
 sudo pacman -S seahorse --noconfirm
 sudo pacman -S slurp --noconfirm
 sudo pacman -S swayidle --noconfirm
-sudo pacman -S swaylock --noconfirm
+#sudo pacman -S swaylock --noconfirm
 sudo pacman -S tmux --noconfirm
 sudo pacman -S tree --noconfirm
 sudo pacman -S unzip --noconfirm
@@ -43,6 +43,7 @@ sudo pacman -S zathura-pdf-mupdf --noconfirm
 sudo pacman -S zsh --noconfirm
 sudo pacman -S zsh-autosuggestions --noconfirm
 sudo pacman -S zsh-syntax-highlighting --noconfirm
+yay -S swaylock-effects-git --noconfirm
 yay -S shellcheck-bin --noconfirm
 
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
