@@ -36,6 +36,7 @@ sudo pacman -S tree --noconfirm
 sudo pacman -S waybar --noconfirm
 sudo pacman -S wl-clipboard --noconfirm
 sudo pacman -S wofi --noconfirm
+sudo pacman -S xdg-utils --noconfirm
 sudo pacman -S zathura-pdf-mupdf --noconfirm
 sudo pacman -S zsh --noconfirm
 sudo pacman -S zsh-autosuggestions --noconfirm
