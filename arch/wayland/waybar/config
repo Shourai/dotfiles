@@ -1,9 +1,11 @@
 {
-    "margin-top": 6,
-    "margin-left": 10,
+    // General Settings
+    "layer": "top",
+    "margin-top": 0,
     "margin-bottom": 0,
-    "margin-right": 10,
-    "spacing": 5, // Gaps between modules (4px)
+    "margin-left": 0,
+    "margin-right": 0,
+    "spacing": 4,
 
     "layer": "top",
     "modules-left": ["hyprland/workspaces"],
