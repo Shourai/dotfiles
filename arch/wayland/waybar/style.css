@@ -247,7 +247,7 @@ window#waybar.empty #window {
 #memory,
 #cpu,
 #language {
-  margin: 0px;
+  margin: 5px;
   padding: 0px;
   font-size: 14px;
   color: @iconcolor;
