@@ -25,6 +25,7 @@ sudo pacman -S openssh --noconfirm
 sudo pacman -S pipewire --noconfirm
 sudo pacman -S pipewire-pulse --noconfirm
 sudo pacman -S polkit --noconfirm
+sudo pacman -S polkit-gnome --noconfirm
 sudo pacman -S python-pip --noconfirm
 sudo pacman -S python3 --noconfirm
 sudo pacman -S rsync --noconfirm
