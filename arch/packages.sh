@@ -14,6 +14,8 @@ sudo pacman -S fd --noconfirm
 sudo pacman -S fzf --noconfirm
 sudo pacman -S htop --noconfirm
 sudo pacman -S hyprland --noconfirm
+sudo pacman -S hyprlock --noconfirm
+sudo pacman -S hypridle --noconfirm
 sudo pacman -S hyprpaper --noconfirm
 sudo pacman -S lazygit --noconfirm
 sudo pacman -S lua --noconfirm
