@@ -17,6 +17,7 @@
 
     "clock": {
         "format": "{:%H:%M} ",
+        "format-alt": "{:%A %B %d %Y (%R)}  ",
         "tooltip": true,
         "tooltip-format": "{:%A %B %d %Y}"
     },
