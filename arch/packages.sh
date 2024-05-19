@@ -12,6 +12,7 @@ sudo pacman -S bat --noconfirm
 sudo pacman -S eza --noconfirm
 sudo pacman -S fd --noconfirm
 sudo pacman -S fzf --noconfirm
+sudo pacman -S grim --noconfirm
 sudo pacman -S htop --noconfirm
 sudo pacman -S hyprland --noconfirm
 sudo pacman -S hyprlock --noconfirm
