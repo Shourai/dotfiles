@@ -47,29 +47,60 @@ window#waybar {
  * Workspaces 
  * ----------------------------------------------------- */
 
+@define-color workspacesbackground1 #000000;
+@define-color workspacesbackground2 #222222;
+@define-color textcolor1 #FFFFFF;
+@define-color textcolor2 #FFFFFF;
+
 #workspaces {
-  margin: 3px 7px 3px 3px;
+  background: @workspacesbackground1;
+  margin: 2px 1px 3px 1px;
+  padding: 0px 1px;
+  border-radius: 15px;
   border: 0px;
-  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  opacity: 0.8;
+  font-size: 16px;
   color: @textcolor1;
 }
 
 #workspaces button {
+  padding: 0px 5px;
+  margin: 4px 3px;
+  border-radius: 15px;
   border: 0px;
-  margin: 4px 5px 4px 0px;
-  padding: 0px 4px 0px 4px;
-  color: @textcolor3;
-  transition: all 0.5s ease-in-out;
+  color: @textcolor1;
+  background-color: @workspacesbackground2;
+  transition: all 0.3s ease-in-out;
+  opacity: 0.9;
+}
+
+#workspaces button.empty {
+  padding: 0px 5px;
+  margin: 4px 3px;
+  border-radius: 15px;
+  border: 0px;
+  color: @textcolor1;
+  background-color: @workspacesbackground2;
+  transition: all 0.3s ease-in-out;
+  opacity: 0.4;
 }
 
 #workspaces button.active {
-  color: @textcolor3;
+  color: @textcolor1;
+  background: @workspacesbackground2;
+  border-radius: 15px;
+  min-width: 40px;
+  transition: all 0.3s ease-in-out;
+  opacity: 1;
 }
 
 #workspaces button:hover {
   color: @textcolor1;
   background: @workspacesbackground2;
   border-radius: 15px;
+  opacity: 0.7;
 }
 
 /* -----------------------------------------------------
