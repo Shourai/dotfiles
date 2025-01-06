@@ -9,6 +9,7 @@ brew analytics off
 brew tap homebrew/cask-versions
 
 # Install homebrew packages
+brew install 1password-cli
 brew install bash
 brew install coreutils
 brew install fzf
@@ -18,17 +19,21 @@ brew install iproute2mac
 brew install lazygit
 brew install lua
 brew install neovim
+brew install npm
+brew install openconnect
 brew install python
 brew install shellcheck
 brew install tmux
 brew install tree
+brew install yazi
 brew install zsh-syntax-highlighting
 brew install zsh-autosuggestions
 
 # Install cask packages
 brew install --cask 1password
-brew install --cask firefox-developer-edition
-brew install --cask google-chrome-dev
+brew install --cask nikitabobko/tap/aerospace
+brew install --cask firefox@developer-edition
+brew install --cask google-chrome@dev
 brew install --cask ghostty
 brew install --cask iina
 
