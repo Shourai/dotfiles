@@ -7,7 +7,7 @@ mkdir -p ~/.local/share
 ln -sf ~/Documents/github/dotfiles/zshrc ~/.zshrc
 
 ln -sf ~/Documents/github/nvim ~/.config/nvim
-ln -sf ~/Documents/github/dotfiles/tmux/tmux.conf ~/.config/tmux
+ln -sf ~/Documents/github/dotfiles/tmux/tmux.conf ~/.config/tmux.conf
 ln -sf ~/Documents/github/dotfiles/git ~/.config
 
 if [ "$(uname)" = "Linux" ]; then
