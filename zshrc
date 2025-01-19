@@ -220,9 +220,9 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 export FZF_CTRL_T_OPTS=" --preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 
 # ==============================================================================
-# = z.lua settings
+# = zoxide settings
 # ==============================================================================
-eval "$(lua ~/Documents/github/z.lua/z.lua --init zsh enhanced once echo)"
+eval "$(zoxide init zsh)"
 
 # ==============================================================================
 # = NNN settings
