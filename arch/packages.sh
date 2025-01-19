@@ -9,11 +9,11 @@ sudo pacman -Syu --noconfirm
 # Install packages
 sudo pacman -S alacritty --noconfirm
 sudo pacman -S bat --noconfirm
+sudo pacman -S btop --noconfirm
 sudo pacman -S eza --noconfirm
 sudo pacman -S fd --noconfirm
 sudo pacman -S fzf --noconfirm
 sudo pacman -S grim --noconfirm
-sudo pacman -S htop --noconfirm
 sudo pacman -S hyprland --noconfirm
 sudo pacman -S hyprlock --noconfirm
 sudo pacman -S hypridle --noconfirm
