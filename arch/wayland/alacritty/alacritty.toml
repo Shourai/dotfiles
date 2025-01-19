@@ -1,4 +1,3 @@
-import = ["/home/serenity/.config/alacritty/themes/theme.toml"]
 
 [colors.primary]
 background = "#272727"
@@ -37,3 +36,6 @@ opacity = 0.6
 [window.padding]
 x = 5
 y = 5
+
+[general]
+import = ["/home/serenity/.config/alacritty/themes/theme.toml"]
