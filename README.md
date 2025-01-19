@@ -1,15 +1,18 @@
 # Configuration for macOS with dotfiles
 
 ## Overview
+
 This repository bootstraps everything I need from a clean install of macOS Monterey or Arch Linux.
 
 ## Installation
+
 Here I have my configuration for a clean setup.
 The only thing that would be handy is to create your user and add it to the `wheel` group.
 
 ```
 useradd -m -G wheel [username]
 ```
+
 Be sure to allow the wheel group to run sudo commands via `visudo`
 
 Basically run the `install` after cloning this repository.
@@ -20,6 +23,7 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | b
 ```
 
 ## Directory Listing
+
 ```
 .
 ├── arch
@@ -51,3 +55,20 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | b
 │   └── tmux.conf
 └── zshrc
 ```
+
+### Useful cli packages
+
+- bat
+- eza
+- fd
+- ripgrep
+- yazi
+- tmux
+- erdtree
+- mtr
+- gping
+- netop
+- pandoc
+- termshark
+- sshs
+- zoxide
