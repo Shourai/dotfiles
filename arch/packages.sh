@@ -19,7 +19,6 @@ sudo pacman -S hyprlock --noconfirm
 sudo pacman -S hypridle --noconfirm
 sudo pacman -S hyprpaper --noconfirm
 sudo pacman -S lazygit --noconfirm
-sudo pacman -S lua --noconfirm
 sudo pacman -S mpv --noconfirm
 sudo pacman -S neovim --noconfirm
 sudo pacman -S nnn --noconfirm
