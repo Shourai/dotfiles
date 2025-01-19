@@ -7,17 +7,19 @@ export PATH="/opt/homebrew/bin:/opt/homebrew/opt/gnu-sed/libexec/gnubin:$HOME/.l
 # - Aliases                                                                    -
 # ------------------------------------------------------------------------------
 
-# Colorize output, add file type indicator, and put sizes in human readable format
-if [[ "$(uname)" = "Darwin" ]]; then
-    alias ls='gls -Fh --color=always'
-    alias ll='gls -Fhl --color=always'
-    alias la='gls -Fha --color=always'
-else
-    alias ls='ls -v -Fh --color=always'
-    alias ll='ls -v -Fhl --color=always'
-    alias la='ls -v -Fha --color=always'
-    alias open='xdg-open'
-fi
+# alias ls to eza
+# general use
+alias ls='eza --icons'
+alias l='eza --long --binary --git --icons'
+alias ll='eza --long --binary --grid --git --icons'
+alias llm='eza --long --binary --grid --git --sort=modified'
+alias la='eza --long --binary --header --group --accessed --created --time-style=long-iso --git --icons'
+
+# specialty views
+alias lS='eza -1'
+alias lt='eza --tree --level=2'
+
+alias cat='bat --paging=never'
 
 alias ..='cd ../'
 alias ...='cd ../..'
@@ -223,6 +225,11 @@ export FZF_CTRL_T_OPTS=" --preview 'bat -n --color=always {}' --bind 'ctrl-/:cha
 # = zoxide settings
 # ==============================================================================
 eval "$(zoxide init zsh)"
+
+# ==============================================================================
+# = Bat settings
+# ==============================================================================
+export BAT_THEME="Coldark-Dark"
 
 # ==============================================================================
 # = NNN settings
