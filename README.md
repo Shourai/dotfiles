@@ -59,16 +59,17 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | b
 ### Useful cli packages
 
 - bat
+- erdtree
 - eza
 - fd
-- ripgrep
-- yazi
-- tmux
-- erdtree
-- mtr
 - gping
+- lazygit
+- mtr
 - netop
 - pandoc
-- termshark
+- ripgrep
 - sshs
+- termshark
+- tmux
+- yazi
 - zoxide
