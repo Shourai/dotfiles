@@ -59,10 +59,14 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | b
 ### Useful cli packages
 
 - bat
+- btop
 - erdtree
 - eza
 - fd
+- fzf
 - gping
+- jq
+- jless
 - lazygit
 - mtr
 - netop
