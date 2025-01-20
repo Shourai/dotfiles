@@ -15,6 +15,8 @@ brew install bat
 brew install coreutils
 brew install erdtree
 brew install eza
+brew install fd
+brew install ripgrep
 brew install fzf
 brew install gnu-sed
 brew install htop
