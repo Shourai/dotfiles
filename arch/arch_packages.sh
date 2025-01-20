@@ -29,6 +29,14 @@ sudo pacman -S wl-clipboard --noconfirm
 sudo pacman -S wofi --noconfirm
 sudo pacman -S xdg-utils --noconfirm
 sudo pacman -S zathura-pdf-mupdf --noconfirm
+
+
+FILE="packages"
+
+while read -r line; do
+    brew install "$line"
+done <"$FILE"
+
 yay -S swaylock-effects-git --noconfirm
 yay -S shellcheck-bin --noconfirm
 
