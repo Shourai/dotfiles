@@ -12,26 +12,25 @@ brew tap homebrew/cask-versions
 brew install 1password-cli
 brew install bash
 brew install bat
+brew install btop
 brew install coreutils
 brew install erdtree
 brew install eza
 brew install fd
-brew install ripgrep
 brew install fzf
 brew install gnu-sed
-brew install btop
 brew install iproute2mac
 brew install lazygit
-brew install lua
 brew install neovim
 brew install npm
 brew install openconnect
 brew install python
+brew install ripgrep
 brew install shellcheck
 brew install tmux
 brew install yazi
-brew install zsh-syntax-highlighting
 brew install zsh-autosuggestions
+brew install zsh-syntax-highlighting
 
 # Install cask packages
 brew install --cask 1password
