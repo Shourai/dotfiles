@@ -9,6 +9,7 @@ ln -sf ~/Documents/github/dotfiles/zshrc ~/.zshrc
 ln -sf ~/Documents/github/nvim ~/.config/nvim
 ln -sf ~/Documents/github/dotfiles/tmux/tmux.conf ~/.config/tmux.conf
 ln -sf ~/Documents/github/dotfiles/git ~/.config
+ln -sf ~/Documents/github/dotfiles/yazi ~/.config
 
 if [ "$(uname)" = "Linux" ]; then
     rm ~/.config/hypr
