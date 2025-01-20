@@ -11,6 +11,7 @@ brew tap homebrew/cask-versions
 # Install homebrew packages
 brew install 1password-cli
 brew install bash
+brew install bat
 brew install coreutils
 brew install fzf
 brew install gnu-sed
