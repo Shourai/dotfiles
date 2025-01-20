@@ -13,6 +13,7 @@ brew install 1password-cli
 brew install bash
 brew install bat
 brew install coreutils
+brew install eza
 brew install fzf
 brew install gnu-sed
 brew install htop
