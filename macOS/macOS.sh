@@ -5,9 +5,6 @@ brew upgrade
 # Opt-out of homebrew analytics
 brew analytics off
 
-# Access to alternate versions of Casks
-brew tap homebrew/cask-versions
-
 # Install homebrew packages
 brew install 1password-cli
 brew install coreutils
