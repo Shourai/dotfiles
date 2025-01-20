@@ -19,7 +19,7 @@ brew install fd
 brew install ripgrep
 brew install fzf
 brew install gnu-sed
-brew install htop
+brew install btop
 brew install iproute2mac
 brew install lazygit
 brew install lua
