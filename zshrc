@@ -9,11 +9,11 @@ export PATH="/opt/homebrew/bin:/opt/homebrew/opt/gnu-sed/libexec/gnubin:$HOME/.l
 
 # alias ls to eza
 # general use
-alias ls='eza --icons'
-alias l='eza --long --binary --git --icons'
-alias ll='eza --long --binary --grid --git --icons'
+alias ls='eza --icons=auto'
+alias l='eza --long --binary --git --icons=auto'
+alias ll='eza --long --binary --grid --git --icons=auto'
 alias llm='eza --long --binary --grid --git --sort=modified'
-alias la='eza --long --binary --header --group --accessed --created --time-style=long-iso --git --icons'
+alias la='eza --long --binary --header --group --accessed --created --time-style=long-iso --git --icons=auto'
 
 # specialty views
 alias lS='eza -1'
