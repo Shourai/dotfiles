@@ -94,7 +94,7 @@ fi
 # - Custom functions                                                           -
 # ------------------------------------------------------------------------------
 mkcd() { mkdir -p "$@" && cd "$@"; }      # Create a directory and cd to it afterwards
-emc() { command emacsclient -n -c -a '' "$@" & } # use `emc <file>` to open file in emacsclient, start daemon if not running
+# emc() { command emacsclient -n -c -a '' "$@" & } # use `emc <file>` to open file in emacsclient, start daemon if not running
 # emacs() { command emacs "$@" & }
 
 # ------------------------------------------------------------------------------
