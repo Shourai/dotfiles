@@ -34,6 +34,10 @@ alias vim='nvim'
 alias zshrc='vim ~/.zshrc'
 alias tx='tmuxinator'
 
+# Wireguard
+alias wgup='wg-quick up'
+alias wgdown='wg-quick down'
+
 ## Git related
 alias g='git'
 alias lg='lazygit'
