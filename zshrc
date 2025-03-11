@@ -263,11 +263,10 @@ fi
 
 if [[ "$(uname)" = "Darwin" ]]; then
     source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#808080'
 elif [ -f /etc/arch-release ]; then
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#808080'
 fi
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#808080'
 
 # Disable software flow control where ctrl+s freezes the terminal
 stty -ixon
