@@ -157,3 +157,7 @@ emacs/org-roam.db
 
 # tmux
 tmux/plugins
+
+# zsh
+.zsh_history
+.zcompdump

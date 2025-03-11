@@ -1,0 +1,139 @@
+# ----------------------------------------
+# - Environmental variables              -
+# ----------------------------------------
+
+# Set XDG directories
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$XDG_CONFIG_HOME/local/share"
+export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
+
+# Set Editor
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+# zsh
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export HISTFILE="$ZDOTDIR/.zsh_history" # History filepath
+export HISTSIZE=10000                   # Maximum events for internal history
+export SAVEHIST=10000                   # Maximum events in history file
+
+
+# ----------------------------------------
+# - Navigation                           -
+# ----------------------------------------
+
+setopt AUTO_CD              # Go to folder path without using cd.
+setopt AUTO_PUSHD           # Push the old directory onto the stack on cd.
+setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
+setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
+setopt CORRECT              # Spelling correction
+setopt CDABLE_VARS          # Change directory to a path stored in a variable.
+setopt EXTENDED_GLOB        # Use extended globbing syntax.
+
+# ----------------------------------------
+# - History                              -
+# ----------------------------------------
+
+setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
+setopt HIST_IGNORE_DUPS          # Do not record an event that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete an old recorded event if a new event is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a previously found event.
+setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
+setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
+
+# ----------------------------------------
+# - Aliases                              -
+# ----------------------------------------
+
+source $ZDOTDIR/aliases
+
+# ----------------------------------------
+# - Keymap                               -
+# ----------------------------------------
+
+# Set emacs keymap
+bindkey -e
+
+# ----------------------------------------
+# - Completion                           -
+# ----------------------------------------
+
+autoload -U compinit; compinit
+
+# Allow you to select in a menu
+zstyle ':completion:*' menu select
+
+# Colors for files and directory
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# ----------------------------------------
+# - Visual settings                      -
+# ----------------------------------------
+
+fpath+=($HOME/.zsh/pure)
+autoload -U promptinit; promptinit
+zstyle :prompt:pure:path color 147
+zstyle :prompt:pure:prompt:success color blue
+prompt pure
+
+# ----------------------------------------
+# - Zsh settings                         -
+# ----------------------------------------
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+[ -f ~/.fzf/shell/key-bindings.zsh ] && source ~/.fzf/shell/key-bindings.zsh
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+
+if [ -x "$(command -v fd)" ]
+then
+    export FZF_DEFAULT_COMMAND='fd --type f'
+    export FZF_CTRL_T_COMMAND="fd --type f"
+    export FZF_ALT_C_COMMAND="fd --type d"
+fi
+
+export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
+export FZF_CTRL_T_OPTS=" --preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+
+# ----------------------------------------
+# - zoxide settings                      -
+# ----------------------------------------
+
+eval "$(zoxide init zsh)"
+
+# ----------------------------------------
+# = Bat settings                         -
+# ----------------------------------------
+
+export BAT_THEME="Coldark-Dark"
+
+# ----------------------------------------
+# - zsh ssh settings                     -
+# ----------------------------------------
+
+source ~/.zsh/zsh-ssh/zsh-ssh.zsh
+
+# ----------------------------------------
+# - Syntax highlighting package          -
+# ----------------------------------------
+
+if [[ "$(uname)" = "Darwin" ]]; then
+    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [ -f /etc/arch-release ]; then
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+# ----------------------------------------
+# - Autosuggestion package               -
+# ----------------------------------------
+
+if [[ "$(uname)" = "Darwin" ]]; then
+    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+elif [ -f /etc/arch-release ]; then
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#808080'
