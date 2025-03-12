@@ -80,6 +80,19 @@ zstyle :prompt:pure:prompt:success color blue
 prompt pure
 
 # ----------------------------------------
+# - Path settings                        -
+# ----------------------------------------
+
+# Add homebrew to path
+if [[ "$(uname)" = "Darwin" ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# Add .local/bin to path
+export PATH="$HOME/.local/bin/:$PATH"
+
+
+# ----------------------------------------
 # - Zsh settings                         -
 # ----------------------------------------
 
