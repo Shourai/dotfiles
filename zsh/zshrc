@@ -73,7 +73,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # - Visual settings                      -
 # ----------------------------------------
 
-fpath+=($HOME/.zsh/pure)
+fpath+=($HOME/.config/zsh/pure)
 autoload -U promptinit; promptinit
 zstyle :prompt:pure:path color 147
 zstyle :prompt:pure:prompt:success color blue
@@ -128,7 +128,7 @@ export BAT_THEME="Coldark-Dark"
 # - zsh ssh settings                     -
 # ----------------------------------------
 
-source ~/.zsh/zsh-ssh/zsh-ssh.zsh
+source ~/.config/zsh/zsh-ssh/zsh-ssh.zsh
 
 # ----------------------------------------
 # - Syntax highlighting package          -

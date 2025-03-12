@@ -55,10 +55,10 @@ fi
 
 # Install zsh pure prompt
 mkdir -p "$HOME/.zsh"
-git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+git clone https://github.com/sindresorhus/pure.git "$HOME/.config/zsh/pure"
 
 # Install zsh ssh plugin
-git clone https://github.com/sunlei/zsh-ssh ~/.zsh/zsh-ssh
+git clone https://github.com/sunlei/zsh-ssh ~/.config/zsh/zsh-ssh
 
 # Cleanup
 echo "Doing cleanup"
