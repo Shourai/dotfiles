@@ -3,16 +3,22 @@
 ##############################
 
 # Eza
-alias ls='eza --icons=auto'
-alias l='eza --long --binary --git --icons=auto'
-alias ll='eza --long --binary --grid --git --icons=auto'
-alias llm='eza --long --binary --grid --git --sort=modified'
-alias la='eza --long --binary --header --group --accessed --created --time-style=long-iso --git --icons=auto'
-alias lS='eza -1'
-alias lt='eza --tree --level=2'
+if command -v eza &>/dev/null
+then
+  alias ls='eza --icons=auto'
+  alias l='eza --long --binary --git --icons=auto'
+  alias ll='eza --long --binary --grid --git --icons=auto'
+  alias llm='eza --long --binary --grid --git --sort=modified'
+  alias la='eza --long --binary --header --group --accessed --created --time-style=long-iso --git --icons=auto'
+  alias lS='eza -1'
+  alias lt='eza --tree --level=2'
+fi
 
 # bat
-alias cat='bat --paging=never'
+if command -v bat &>/dev/null
+then
+  alias cat='bat --paging=never'
+fi
 
 # cd
 alias ..='cd ../'
