@@ -20,6 +20,9 @@ export SAVEHIST=10000                   # Maximum events in history file
 # less
 export LESSHISTFILE=-
 
+# eza
+export EZA_COLORS='xx=37'
+
 # ----------------------------------------
 # - Navigation                           -
 # ----------------------------------------
