@@ -4,7 +4,6 @@ mkdir -p ~/.config
 mkdir -p ~/.local/bin
 mkdir -p ~/.local/share
 
-ln -sf ~/Documents/github/dotfiles/zsh/zshrc ~/.zshrc
 ln -sf ~/Documents/github/dotfiles/zsh ~/.config/zsh
 
 ln -sf ~/Documents/github/nvim ~/.config/nvim
