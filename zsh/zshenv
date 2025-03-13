@@ -1,0 +1,30 @@
+# ----------------------------------------
+# - Environmental variables              -
+# ----------------------------------------
+
+# Set XDG directories
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$XDG_CONFIG_HOME/local/share"
+export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
+
+# Set Editor
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+# less
+export LESSHISTFILE=-
+
+# eza
+export EZA_COLORS='xx=37'
+
+# ----------------------------------------
+# - Path settings                        -
+# ----------------------------------------
+
+# Add homebrew to path
+if [[ "$(uname)" = "Darwin" ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# Add .local/bin to path
+export PATH="$HOME/.local/bin/:$PATH"

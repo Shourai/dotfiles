@@ -2,26 +2,10 @@
 # - Environmental variables              -
 # ----------------------------------------
 
-# Set XDG directories
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$XDG_CONFIG_HOME/local/share"
-export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
-
-# Set Editor
-export EDITOR="nvim"
-export VISUAL="nvim"
-
 # zsh
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-export HISTFILE="$ZDOTDIR/history" # History filepath
-export HISTSIZE=10000                   # Maximum events for internal history
-export SAVEHIST=10000                   # Maximum events in history file
-
-# less
-export LESSHISTFILE=-
-
-# eza
-export EZA_COLORS='xx=37'
+export HISTFILE="$ZDOTDIR/history"  # History filepath
+export HISTSIZE=10000               # Maximum events for internal history
+export SAVEHIST=10000               # Maximum events in history file
 
 # ----------------------------------------
 # - Navigation                           -
@@ -83,19 +67,6 @@ autoload -U promptinit; promptinit
 zstyle :prompt:pure:path color 147
 zstyle :prompt:pure:prompt:success color blue
 prompt pure
-
-# ----------------------------------------
-# - Path settings                        -
-# ----------------------------------------
-
-# Add homebrew to path
-if [[ "$(uname)" = "Darwin" ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-# Add .local/bin to path
-export PATH="$HOME/.local/bin/:$PATH"
-
 
 # ----------------------------------------
 # - Zsh settings                         -
