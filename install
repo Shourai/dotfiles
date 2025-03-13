@@ -61,7 +61,7 @@ git clone https://github.com/sindresorhus/pure.git "$HOME/.config/zsh/pure"
 git clone https://github.com/sunlei/zsh-ssh ~/.config/zsh/zsh-ssh
 
 # Setup zprofile
-echo 'export ZDOTDIR="$HOME/.config/zsh"' | sudo tee -a /etc/zprofile
+echo 'export ZDOTDIR="$HOME/.config/zsh"' | sudo tee -a /etc/zshenv
 
 # Cleanup
 echo "Doing cleanup"
