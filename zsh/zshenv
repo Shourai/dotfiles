@@ -16,15 +16,3 @@ export LESSHISTFILE=-
 
 # eza
 export EZA_COLORS='xx=37'
-
-# ----------------------------------------
-# - Path settings                        -
-# ----------------------------------------
-
-# Add homebrew to path
-if [[ "$(uname)" = "Darwin" ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-# Add .local/bin to path
-export PATH="$HOME/.local/bin/:$PATH"
