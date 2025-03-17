@@ -81,14 +81,10 @@ zstyle :prompt:pure:prompt:success color blue
 prompt pure
 
 # ----------------------------------------
-# - Zsh settings                         -
+# - FZF settings                         -
 # ----------------------------------------
 
 source <(fzf --zsh)
-
-[ -f ~/.fzf/shell/key-bindings.zsh ] && source ~/.fzf/shell/key-bindings.zsh
-[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
-[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 
 if [ -x "$(command -v fd)" ]
 then
