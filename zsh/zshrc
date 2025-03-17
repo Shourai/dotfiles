@@ -93,7 +93,7 @@ then
     export FZF_ALT_C_COMMAND="fd --type d"
 fi
 
-export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
+export FZF_ALT_C_OPTS="--preview 'eza --tree --level=3 --colour=always --icons {}'"
 export FZF_CTRL_T_OPTS=" --preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 
 # ----------------------------------------
