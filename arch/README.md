@@ -18,3 +18,8 @@ Install Arch linux using the `archinstall` script.
 
 ### Change systemd-boot timeout
 <https://github.com/Shourai/til/blob/master/linux/systemd-boot-timeout.md>
+
+### Allow for hardware acceleration
+<https://wiki.archlinux.org/title/Hardware_video_acceleration>
+HD Graphics series starting from Broadwell (2014) and newer (e.g. Intel Arc) are supported by `intel-media-driver`.
+
