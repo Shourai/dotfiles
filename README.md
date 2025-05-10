@@ -1,21 +1,13 @@
-# Configuration for macOS with dotfiles
+# Configuration for arch linux and macOS with dotfiles
 
 ## Overview
 
-This repository bootstraps everything I need from a clean install of macOS Monterey or Arch Linux.
+This repository bootstraps everything I need from a clean install of macOS or Arch Linux.
 
 ## Installation
+Installing arch linux is quite easy using `archinstall`.
 
-Here I have my configuration for a clean setup.
-The only thing that would be handy is to create your user and add it to the `wheel` group.
-
-```
-useradd -m -G wheel [username]
-```
-
-Be sure to allow the wheel group to run sudo commands via `visudo`
-
-Basically run the `install` after cloning this repository.
+After installation run the `install` after cloning this repository.
 Or run the following cURL command:
 
 ```
@@ -25,35 +17,42 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | b
 ## Directory Listing
 
 ```
-.
-├── arch
-│   ├── 20-keyboard-layout.conf
-│   ├── bspwm
-│   ├── dotfiles.sh
-│   ├── fontconfig
-│   ├── fonts
-│   ├── mimeapps.list
-│   ├── packages.sh
-│   ├── picom.conf
-│   ├── polybar
-│   ├── README.md
-│   ├── rofi
-│   ├── sxhkd
-│   └── xinitrc
-├── git
-│   └── config
-├── install
-├── macOS
-│   ├── com.googlecode.iterm2.plist
-│   ├── com.local.KeyRemapping.plist
-│   ├── macOS.sh
-│   ├── README.md
-│   ├── settings.sh
-│   └── SF-Mono-Powerline-Regular.otf
-├── README.md
-├── tmux
-│   └── tmux.conf
-└── zshrc
+dotfiles
+ ├─ README.md
+ ├─ install
+ ├─ arch
+ │  ├─ supplementary_packages.sh
+ │  ├─ arch_packages.sh
+ │  ├─ packages
+ │  ├─ fontconfig
+ │  ├─ fonts
+ │  ├─ README.md
+ │  ├─ dotfiles.sh
+ │  └─ wayland
+ ├─ zsh
+ │  ├─ aliases
+ │  ├─ zshenv
+ │  └─ zshrc
+ ├─ yazi
+ │  ├─ package.toml
+ │  ├─ yazi.toml
+ │  ├─ keymap.toml
+ │  ├─ theme.toml
+ │  └─ flavors
+ ├─ ghostty
+ │  └─ config
+ ├─ macOS
+ │  ├─ aerospace.toml
+ │  ├─ README.md
+ │  ├─ settings.sh
+ │  ├─ macOS.sh
+ │  ├─ com.googlecode.iterm2.plist
+ │  └─ com.local.KeyRemapping.plist
+ ├─ git
+ │  ├─ config
+ │  └─ gitconfig_personal
+ └─ tmux
+    └─ tmux.conf
 ```
 
 ### Useful cli packages
