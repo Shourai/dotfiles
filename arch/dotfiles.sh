@@ -10,10 +10,10 @@ ln -sf ~/Documents/github/nvim ~/.config/nvim
 ln -sf ~/Documents/github/dotfiles/tmux/tmux.conf ~/.config/tmux/tmux.conf
 ln -sf ~/Documents/github/dotfiles/git ~/.config
 ln -sf ~/Documents/github/dotfiles/yazi ~/.config
+ln -sf ~/Documents/github/dotfiles/ghostty/ ~/.config
 
 if [ "$(uname)" = "Linux" ]; then
     rm ~/.config/hypr
-    ln -sf ~/Documents/github/dotfiles/arch/wayland/alacritty ~/.config
     ln -sf ~/Documents/github/dotfiles/arch/wayland/hypr ~/.config
     ln -sf ~/Documents/github/dotfiles/arch/wayland/swayidle ~/.config
     ln -sf ~/Documents/github/dotfiles/arch/wayland/swaylock ~/.config
