@@ -7,7 +7,7 @@ mkdir -p ~/.local/share
 ln -sf ~/Documents/github/dotfiles/zsh ~/.config/zsh
 
 ln -sf ~/Documents/github/nvim ~/.config/nvim
-ln -sf ~/Documents/github/dotfiles/tmux ~/.config
+ln -sf ~/Documents/github/dotfiles/tmux/tmux.conf ~/.config/tmux/tmux.conf
 ln -sf ~/Documents/github/dotfiles/git ~/.config
 ln -sf ~/Documents/github/dotfiles/yazi ~/.config
 
