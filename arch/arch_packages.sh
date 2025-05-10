@@ -30,11 +30,10 @@ sudo pacman -S wofi --noconfirm
 sudo pacman -S xdg-utils --noconfirm
 sudo pacman -S zathura-pdf-mupdf --noconfirm
 
-
-FILE="packages"
+FILE="$HOME/Documents/github/dotfiles/arch/packages"
 
 while read -r line; do
-    brew install "$line"
+    sudo pacman -S "$line" --noconfirm
 done <"$FILE"
 
 yay -S swaylock-effects-git --noconfirm
