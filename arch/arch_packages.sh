@@ -31,6 +31,9 @@ sudo pacman -S wl-clipboard --noconfirm
 sudo pacman -S xdg-utils --noconfirm
 sudo pacman -S zathura-pdf-mupdf --noconfirm
 
+# Fonts
+sudo pacman -S noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans --noconfirm
+
 FILE="$HOME/Documents/github/dotfiles/arch/packages"
 
 while read -r line; do
