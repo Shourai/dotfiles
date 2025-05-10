@@ -13,6 +13,7 @@ sudo pacman -S hyprland --noconfirm
 sudo pacman -S hyprlock --noconfirm
 sudo pacman -S hypridle --noconfirm
 sudo pacman -S hyprpaper --noconfirm
+sudo pacman -S libqalculate --noconfirm # Calculator functionaly for walker 
 sudo pacman -S mpv --noconfirm
 sudo pacman -S openssh --noconfirm
 sudo pacman -S pipewire --noconfirm
@@ -24,9 +25,9 @@ sudo pacman -S slurp --noconfirm
 sudo pacman -S swayidle --noconfirm
 #sudo pacman -S swaylock --noconfirm
 sudo pacman -S unzip --noconfirm
+sudo pacman -S walker --noconfirm
 sudo pacman -S waybar --noconfirm
 sudo pacman -S wl-clipboard --noconfirm
-sudo pacman -S wofi --noconfirm
 sudo pacman -S xdg-utils --noconfirm
 sudo pacman -S zathura-pdf-mupdf --noconfirm
 
