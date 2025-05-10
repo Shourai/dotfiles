@@ -18,7 +18,7 @@ sudo pacman -S openssh --noconfirm
 sudo pacman -S pipewire --noconfirm
 sudo pacman -S pipewire-pulse --noconfirm
 sudo pacman -S polkit --noconfirm
-sudo pacman -S polkit-gnome --noconfirm
+sudo pacman -S hyprpolkitagent --noconfirm
 sudo pacman -S seahorse --noconfirm
 sudo pacman -S slurp --noconfirm
 sudo pacman -S swayidle --noconfirm
