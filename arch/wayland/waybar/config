@@ -9,18 +9,16 @@
 
     "layer": "top",
     "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["clock"],
-    "modules-right": ["network","pulseaudio","memory","cpu"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": ["pulseaudio", "clock"],
     "sway/window": {
         "max-length": 50
     },
 
-    "clock": {
-        "format": "{:%H:%M} ",
-        "format-alt": "{:%A %B %d %Y (%R)}  ",
-        "tooltip": true,
-        "tooltip-format": "{:%A %B %d %Y}"
-    },
+  "clock": {
+    "format": "  {:%a %d %b  %H:%M} ",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
     "cpu": {
       "interval": 10,
       "format": "{usage}%  󰍛",
@@ -40,9 +38,9 @@
     },
     "pulseaudio": {
         "scroll-step": 5,
-        "format": "{volume}%  {icon}",
+        "format": "{icon}  {volume}%",
         "format-bluetooth": "{volume}% {icon}",
-        "format-muted": "muted ",
+        "format-muted": "",
         "format-icons": {
             "headphones": "",
             "handsfree": "",
