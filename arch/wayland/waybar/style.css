@@ -48,59 +48,40 @@ window#waybar {
  * ----------------------------------------------------- */
 
 @define-color workspacesbackground1 #000000;
-@define-color workspacesbackground2 #222222;
-@define-color textcolor1 #FFFFFF;
+@define-color workspacesbackground2 #333333;
+@define-color textcolor1 #CCCCCC;
 @define-color textcolor2 #FFFFFF;
 
 #workspaces {
-  background: @workspacesbackground1;
-  margin: 2px 1px 3px 1px;
-  padding: 0px 1px;
-  border-radius: 15px;
-  border: 0px;
-  font-weight: bold;
-  font-style: normal;
-  opacity: 0.8;
-  font-size: 16px;
-  color: @textcolor1;
+  padding-left: 8px;
+  padding-right: 8px;
+  border: 2px solid #000;
+}
+
+#workspaces * {
+  font-size: 0px;
 }
 
 #workspaces button {
-  padding: 0px 5px;
-  margin: 4px 3px;
-  border-radius: 15px;
-  border: 0px;
-  color: @textcolor1;
   background-color: @workspacesbackground2;
-  transition: all 0.3s ease-in-out;
-  opacity: 0.9;
-}
-
-#workspaces button.empty {
-  padding: 0px 5px;
-  margin: 4px 3px;
-  border-radius: 15px;
-  border: 0px;
-  color: @textcolor1;
-  background-color: @workspacesbackground2;
-  transition: all 0.3s ease-in-out;
-  opacity: 0.4;
+  border-radius: 100%;
+  min-height: 14px;
+  min-width: 14px;
+  margin: 5px 8px;
+  padding: 0px;
+  transition: all 0.5s cubic-bezier(.55, -0.68, .48, 1.68);
+  box-shadow: rgba(0, 0, 0, 0.288) 2px 2px 5px 2px;
 }
 
 #workspaces button.active {
-  color: @textcolor1;
-  background: @workspacesbackground2;
-  border-radius: 15px;
-  min-width: 40px;
-  transition: all 0.3s ease-in-out;
-  opacity: 1;
+  background: @textcolor1;
+  border-radius: 1rem;
+  padding: 0rem 10px;
+  background-size: 400% 400%;
 }
 
 #workspaces button:hover {
-  color: @textcolor1;
-  background: @workspacesbackground2;
-  border-radius: 15px;
-  opacity: 0.7;
+  background-color: @textcolor1;
 }
 
 /* -----------------------------------------------------
