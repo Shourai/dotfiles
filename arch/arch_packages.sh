@@ -42,5 +42,6 @@ done <"$FILE"
 
 yay -S swaylock-effects-git --noconfirm
 yay -S shellcheck-bin --noconfirm
+yay -S dragon-drop --noconfirm
 
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm

@@ -5,6 +5,9 @@
 [mgr]
 
 keymap = [
+  # dragon-drop
+  { on = "<C-x>", run = ''' shell 'dragon-drop --all-compact --and-exit --icon-only --on-top "$@"' ''' },
+
 	{ on = "<Esc>", run = "escape",             desc = "Exit visual mode, clear selected, or cancel search" },
 	{ on = "<C-[>", run = "escape",             desc = "Exit visual mode, clear selected, or cancel search" },
 	{ on = "q",     run = "quit",               desc = "Quit the process" },
