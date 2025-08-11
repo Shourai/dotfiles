@@ -150,6 +150,7 @@ alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 alt-shift-semicolon = 'mode service'
+alt-space = 'mode applications'
 
 [workspace-to-monitor-force-assignment]
 1 = 'main'                     
@@ -189,3 +190,9 @@ shift-down = ['volume set 0', 'mode main']
 [[on-window-detected]]
     if.app-id = 'com.bambulab.bambu-studio'
     run = 'layout floating'
+
+# Enter application mode to start apps
+[mode.applications.binding]
+f = ['exec-and-forget open -n /Applications/"Firefox Developer Edition.app"','mode main']
+c = ['exec-and-forget open -n /Applications/"Google Chrome Dev.app"','mode main']
+o = ['exec-and-forget open -n /Applications/"Obsidian.app"','mode main']
