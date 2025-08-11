@@ -94,6 +94,7 @@ outer.right =      8
 #'''
 
 alt-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
+alt-shift-enter = 'exec-and-forget open -n /Applications/Ghostty.app --args -e tmux'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-slash = 'layout tiles horizontal vertical'
