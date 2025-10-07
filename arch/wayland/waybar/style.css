@@ -1,28 +1,18 @@
-/*
- * __        __          _                  ____  _         _       
- * \ \      / /_ _ _   _| |__   __ _ _ __  / ___|| |_ _   _| | ___  
- *  \ \ /\ / / _` | | | | '_ \ / _` | '__| \___ \| __| | | | |/ _ \ 
- *   \ V  V / (_| | |_| | |_) | (_| | |     ___) | |_| |_| | |  __/ 
- *    \_/\_/ \__,_|\__, |_.__/ \__,_|_|    |____/ \__|\__, |_|\___| 
- *                 |___/                              |___/         
- *  
- * by Stephan Raabe (2023) 
- * ----------------------------------------------------- 
-*/
-
 /* -----------------------------------------------------
  * Import Pywal colors 
  * ----------------------------------------------------- */
 /* @import 'style-light.css'; */
-@define-color backgroundlight #FFFFFF;
-@define-color backgrounddark #FFFFFF;
-@define-color workspacesbackground1 #FFFFFF;
-@define-color workspacesbackground2 #CCCCCC;
-@define-color bordercolor #FFFFFF;
-@define-color textcolor1 #000000;
-@define-color textcolor2 #000000;
-@define-color textcolor3 #FFFFFF;
-@define-color iconcolor #FFFFFF;
+@define-color textcolor #FFFFFF;
+@define-color background 	#272e33;
+@define-color background-alt 	#414b50;
+@define-color foreground 	#d3c6aa; 
+@define-color foreground-alt 	#272e33;
+@define-color red 		#e67e80;
+@define-color green 		#a7c080;
+@define-color yellow 		#dbbc7f;
+@define-color blue 		#7fbbb3;
+@define-color magenta 		#d699b6;
+@define-color cyan 		#83c092;
 
 /* -----------------------------------------------------
  * General 
@@ -31,57 +21,56 @@
 * {
   font-family: "Fira Sans semibold", FontAwesome, Roboto, Helvetica, Arial,
     sans-serif;
-  border: none;
-  border-radius: 0px;
+  font-size: 15px
 }
 
 window#waybar {
-  background-color: rgba(0, 0, 0, 0.4);
-  border-bottom: 0px solid #ffffff;
-  /* color: #FFFFFF; */
-  transition-property: background-color;
-  transition-duration: 0.5s;
+  background: transparent;
 }
 
 /* -----------------------------------------------------
  * Workspaces 
  * ----------------------------------------------------- */
 
-@define-color workspacesbackground1 #000000;
-@define-color workspacesbackground2 #333333;
-@define-color textcolor1 #CCCCCC;
-@define-color textcolor2 #FFFFFF;
-
 #workspaces {
-  padding-left: 8px;
-  padding-right: 8px;
-  border: 2px solid #000;
+    background: transparent;
+    margin: 5px 0px;
+    color: @foreground;
 }
-
-#workspaces * {
-  font-size: 0px;
-}
-
 #workspaces button {
-  background-color: @workspacesbackground2;
-  border-radius: 100%;
-  min-height: 14px;
-  min-width: 14px;
-  margin: 5px 8px;
-  padding: 0px;
-  transition: all 0.5s cubic-bezier(.55, -0.68, .48, 1.68);
-  box-shadow: rgba(0, 0, 0, 0.288) 2px 2px 5px 2px;
+    font-weight: normal;
+    padding: 0px 5px;
+    margin: 0px 5px;
+    border-radius: 20px;
+    color: gray;
+    background: @background-alt;
+    transition: all 0.3s ease-in-out;
 }
 
 #workspaces button.active {
-  background: @textcolor1;
-  border-radius: 1rem;
-  padding: 0rem 10px;
-  background-size: 400% 400%;
+    font-weight: bold;
+    background-color: @cyan;
+    color: @foreground-alt;
+    border-radius: 20px;
+    min-width: 50px;
+    transition: all 0.3s ease-in-out;
 }
 
 #workspaces button:hover {
-  background-color: @textcolor1;
+    font-weight: bold;
+    background-color: @blue;
+    color: @foreground-alt;
+    border-radius: 20px;
+    min-width: 50px;
+}
+
+#workspaces button.urgent {
+    font-weight: bold;
+    background-color: @red;
+    color: @foreground-alt;
+    border-radius: 20px;
+    min-width: 50px;
+    transition: all 0.3s ease-in-out;
 }
 
 /* -----------------------------------------------------
@@ -97,7 +86,7 @@ tooltip {
 }
 
 tooltip label {
-  color: @textcolor2;
+  color: @white;
 }
 
 /* -----------------------------------------------------
@@ -108,147 +97,11 @@ tooltip label {
   margin: 0px 15px 0px 0px;
   border-radius: 12px;
   color: @textcolor;
-  font-size: 14px;
   font-weight: normal;
 }
 
 window#waybar.empty #window {
   background-color: transparent;
-}
-
-/* -----------------------------------------------------
- * Modules
- * ----------------------------------------------------- */
-
-.modules-left > widget:first-child > #workspaces {
-  margin-left: 0;
-}
-
-.modules-right > widget:last-child > #workspaces {
-  margin-right: 0;
-}
-
-/* -----------------------------------------------------
- * Custom Quicklinks
- * ----------------------------------------------------- */
-
-#custom-brave,
-#custom-browser,
-#custom-keybindings,
-#custom-outlook,
-#custom-filemanager,
-#custom-teams,
-#custom-chatgpt,
-#custom-calculator,
-#custom-windowsvm,
-#custom-cliphist,
-#custom-wallpaper,
-#custom-settings,
-#custom-wallpaper,
-#custom-system,
-#custom-waybarthemes {
-  margin-right: 23px;
-  font-size: 14px;
-  font-weight: bold;
-  color: @iconcolor;
-}
-
-#custom-settings {
-  margin-right: 15px;
-}
-
-#custom-chatgpt {
-  margin-right: 15px;
-  background-image: url("../assets/ai-icon-20.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  padding-right: 23px;
-}
-
-#custom-waybarthemes,
-#custom-system {
-  margin-right: 15px;
-}
-
-#custom-ml4w-welcome {
-  margin-right: 15px;
-  background-image: url("../assets/ml4w-icon-20.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  padding-right: 24px;
-}
-
-/* -----------------------------------------------------
- * Idle Inhibator
- * ----------------------------------------------------- */
-
-#idle_inhibitor {
-  margin-right: 15px;
-  font-size: 16px;
-  font-weight: bold;
-  color: @iconcolor;
-}
-
-#idle_inhibitor.activated {
-  margin-right: 15px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #dc2f2f;
-}
-
-/* -----------------------------------------------------
- * Custom Modules
- * ----------------------------------------------------- */
-
-#custom-appmenuicon {
-  font-size: 20px;
-  color: @textcolor;
-  margin: 0px 15px 0px 10px;
-}
-
-/* -----------------------------------------------------
- * Custom Exit
- * ----------------------------------------------------- */
-
-#custom-exit {
-  margin: 0px 20px 0px 0px;
-  padding: 0px;
-  font-size: 16px;
-  color: @iconcolor;
-}
-
-/* -----------------------------------------------------
- * Custom Updates
- * ----------------------------------------------------- */
-
-#custom-updates {
-  font-size: 14px;
-  color: @textcolor;
-  border-radius: 15px;
-  margin: 0px 15px 0px 0px;
-}
-
-#custom-updates.green {
-}
-
-#custom-updates.yellow {
-  color: #ff9a3c;
-}
-
-#custom-updates.red {
-  color: #dc2f2f;
-}
-
-/* -----------------------------------------------------
- * Custom Youtube
- * ----------------------------------------------------- */
-
-#custom-youtube {
-  background-color: @backgroundlight;
-  font-size: 14px;
-  color: @textcolor2;
-  border-radius: 15px;
-  margin: 0px 15px 0px 0px;
 }
 
 /* -----------------------------------------------------
@@ -261,7 +114,6 @@ window#waybar.empty #window {
 #language {
   margin: 5px;
   padding: 0px;
-  font-size: 14px;
   color: @iconcolor;
 }
 
@@ -274,9 +126,8 @@ window#waybar.empty #window {
  * ----------------------------------------------------- */
 
 #clock {
-  font-size: 15px;
   color: @textcolor;
-  margin: 0px 15px 0px 0px;
+  padding: 0px 15px 0px 0px;
 }
 
 /* -----------------------------------------------------
@@ -284,7 +135,6 @@ window#waybar.empty #window {
  * ----------------------------------------------------- */
 
 #pulseaudio {
-  font-size: 14px;
   color: @textcolor;
   border-radius: 15px;
   margin: 0px 15px 0px 0px;
@@ -299,7 +149,6 @@ window#waybar.empty #window {
  * ----------------------------------------------------- */
 
 #network {
-  font-size: 14px;
   color: @textcolor;
   border-radius: 15px;
   margin: 0px 15px 0px 0px;
@@ -320,7 +169,6 @@ window#waybar.empty #window {
 #bluetooth,
 #bluetooth.on,
 #bluetooth.connected {
-  font-size: 14px;
   color: @textcolor;
   border-radius: 15px;
   margin: 10px 15px 10px 0px;
@@ -330,65 +178,4 @@ window#waybar.empty #window {
   background-color: transparent;
   padding: 0px;
   margin: 0px;
-}
-
-/* -----------------------------------------------------
- * Battery
- * ----------------------------------------------------- */
-
-#battery {
-  font-size: 14px;
-  color: @textcolor;
-  border-radius: 15px;
-  margin: 10px 15px 10px 0px;
-}
-
-#battery.charging,
-#battery.plugged {
-  color: @textcolor;
-}
-
-@keyframes blink {
-  to {
-    background-color: @backgroundlight;
-    color: @textcolor2;
-  }
-}
-
-#battery.critical:not(.charging) {
-  color: #f53c3c;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
-/* -----------------------------------------------------
- * Tray
- * ----------------------------------------------------- */
-
-#tray {
-  margin: 0px 10px 0px 0px;
-}
-
-#tray > .passive {
-  -gtk-icon-effect: dim;
-}
-
-#tray > .needs-attention {
-  -gtk-icon-effect: highlight;
-  background-color: #eb4d4b;
-}
-
-/* -----------------------------------------------------
- * Other
- * ----------------------------------------------------- */
-
-label:focus {
-  background-color: #000000;
-}
-
-#backlight {
-  background-color: #90b1b1;
 }
