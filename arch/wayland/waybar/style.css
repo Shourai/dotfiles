@@ -51,7 +51,6 @@ window#waybar {
     font-weight: bold;
     background-color: @cyan;
     color: @foreground-alt;
-    border-radius: 20px;
     min-width: 50px;
     transition: all 0.3s ease-in-out;
 }
@@ -60,7 +59,7 @@ window#waybar {
     font-weight: bold;
     background-color: @blue;
     color: @foreground-alt;
-    border-radius: 20px;
+    border-color: black;
     min-width: 50px;
 }
 
@@ -68,7 +67,6 @@ window#waybar {
     font-weight: bold;
     background-color: @red;
     color: @foreground-alt;
-    border-radius: 20px;
     min-width: 50px;
     transition: all 0.3s ease-in-out;
 }
