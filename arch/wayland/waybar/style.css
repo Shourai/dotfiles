@@ -177,3 +177,10 @@ window#waybar.empty #window {
   padding: 0px;
   margin: 0px;
 }
+
+/* -----------------------------------------------------
+ * Hyprland submaps
+ * ----------------------------------------------------- */
+#submap {
+  color: @textcolor
+}
