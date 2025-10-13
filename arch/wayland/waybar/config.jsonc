@@ -37,7 +37,7 @@
       "scroll-step": 5,
       "format": "{icon}  {volume}%",
       "format-bluetooth": "{volume}% {icon}",
-      "format-muted": "",
+      "format-muted": "",
       "format-icons": {
         "headphones": "",
         "handsfree": "",
@@ -45,9 +45,11 @@
         "phone": "",
         "portable": "",
         "car": "",
-        "default": ["", ""]
+        "default": ["","","", ""]
       },
       "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+      "max-volume": 150,
+
     },
     // Workspaces
     "hyprland/workspaces": {
