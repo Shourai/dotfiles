@@ -28,6 +28,10 @@ HD Graphics series starting from Broadwell (2014) and newer (e.g. Intel Arc) are
 ### Modify LUKS iter time
 
 <https://github.com/Shourai/til/blob/master/linux/modify-luks-iter-time.md>
+The default `iter-time` is set to 10 seconds:
+
+- <https://github.com/archlinux/archinstall/blob/master/archinstall/lib/luks.py#L100>
+- <https://github.com/archlinux/archinstall/blob/master/archinstall/lib/models/device.py#L22>
 
 ### Makepkg compression
 
