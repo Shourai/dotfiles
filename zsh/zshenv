@@ -1,4 +1,14 @@
 # ----------------------------------------
+# - Platform detection                   -
+# ----------------------------------------
+
+if [[ "$(uname)" = "Darwin" ]]; then
+  export IS_DARWIN=1
+elif [ -f /etc/arch-release ]; then
+  export IS_ARCH=1
+fi
+
+# ----------------------------------------
 # - Environmental variables              -
 # ----------------------------------------
 
@@ -23,4 +33,18 @@ if [[ "$(uname)" = "Darwin" ]]; then
 else
   export SSH_AUTH_SOCK=~/.1password/agent.sock
 fi
+
+# ----------------------------------------
+# - Path settings                        -
+# ----------------------------------------
+
+# Add homebrew to path
+if [[ -n "$IS_DARWIN" ]]; then
+  if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  fi
+fi
+
+# Add .local/bin to path
+export PATH="$HOME/.local/bin/:$PATH"
 

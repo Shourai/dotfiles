@@ -1,14 +1,4 @@
 # ----------------------------------------
-# - Platform detection                   -
-# ----------------------------------------
-
-if [[ "$(uname)" = "Darwin" ]]; then
-  export IS_DARWIN=1
-elif [ -f /etc/arch-release ]; then
-  export IS_ARCH=1
-fi
-
-# ----------------------------------------
 # - Environmental variables              -
 # ----------------------------------------
 
@@ -44,18 +34,6 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks from each command l
 setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
 
 # ----------------------------------------
-# - Path settings                        -
-# ----------------------------------------
-
-# Add homebrew to path
-if [[ -n "$IS_DARWIN" ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-# Add .local/bin to path
-export PATH="$HOME/.local/bin/:$PATH"
-
-# ----------------------------------------
 # - Aliases                              -
 # ----------------------------------------
 
@@ -74,10 +52,11 @@ bindkey -e
 
 # Fast compinit
 autoload -Uz compinit
-for dump in "$ZDOTDIR"/.zcompdump(N.mh+24); do
+if [[ ! -f "$ZDOTDIR"/.zcompdump || -n "$ZDOTDIR"/.zcompdump(N.mh+24) ]]; then
   compinit
-done
-compinit -C
+else
+  compinit -C
+fi
 
 setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
 
@@ -97,7 +76,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # - Visual settings                      -
 # ----------------------------------------
 
-fpath+=($HOME/.config/zsh/pure)
+fpath+=($ZDOTDIR/pure)
 autoload -U promptinit; promptinit
 zstyle :prompt:pure:path color 147
 zstyle :prompt:pure:prompt:success color blue
