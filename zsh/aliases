@@ -5,13 +5,11 @@
 # Eza
 if command -v eza &>/dev/null
 then
-  alias ls='eza --icons=auto'
-  alias l='eza --long --binary --git --icons=auto'
-  alias ll='eza --long --binary --grid --git --icons=auto'
-  alias llm='eza --long --binary --grid --git --sort=modified'
-  alias la='eza --long --binary --header --group --accessed --created --time-style=long-iso --git --icons=auto'
-  alias lS='eza -1'
-  alias lt='eza --tree --level=2'
+  alias ls='eza --icons=auto --group-directories-first'
+  alias l='eza --long --icons=auto --group-directories-first'
+  alias ll='eza --long --all --icons=auto --group-directories-first --git'
+  alias lll='eza --long --all --header --group --icons=auto --group-directories-first --git'
+  alias lt='eza --tree --level=2 --icons=auto'
 fi
 
 # bat
