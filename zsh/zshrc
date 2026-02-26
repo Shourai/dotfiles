@@ -64,8 +64,11 @@ bindkey -e
 
 autoload -U compinit; compinit
 
-# Allow you to select in a menu
+# UI: Enable the arrow-key selection menu
 zstyle ':completion:*' menu select
+
+# LOGIC: Try specific scripts first, then fallback to --help parsing
+zstyle ':completion:*' completer _complete _gnu_generic _ignored
 
 # Colors for files and directory
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
