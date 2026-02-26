@@ -109,15 +109,25 @@ prompt pure
 
 source <(fzf --zsh)
 
-if [ -x "$(command -v fd)" ]
-then
-    export FZF_DEFAULT_COMMAND='fd --type f'
-    export FZF_CTRL_T_COMMAND="fd --type f"
-    export FZF_ALT_C_COMMAND="fd --type d"
+if [ -x "$(command -v fd)" ]; then
+    export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND="fd --type d --strip-cwd-prefix --hidden --follow --exclude .git"
 fi
 
-export FZF_ALT_C_OPTS="--preview 'eza --tree --level=3 --colour=always --icons {}'"
-export FZF_CTRL_T_OPTS=" --preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+# Minimalist UI & Layout
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border=none --info=inline"
+
+# Dynamic Preview (Eza for directories, Bat for files)
+_fzf_preview_cmd='if [ -d {} ]; then eza --tree --level=3 --color=always --icons=always {}; else bat --style=numbers --color=always --line-range :500 {}; fi'
+
+export FZF_ALT_C_OPTS="--preview 'eza --tree --level=3 --color=always --icons=always {}'"
+export FZF_CTRL_T_OPTS="--preview '$_fzf_preview_cmd' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+
+# Git Helpers
+gf() { local file; file=$(git ls-files | fzf --prompt "Git Files> ") && [ -n "$file" ] && ${EDITOR:-nvim} "$file" }
+gb() { local branch; branch=$(git branch -a --color=always | grep -v "/HEAD" | fzf --ansi --prompt "Branches> " | sed "s/.* //" | sed "s#remotes/origin/##") && [ -n "$branch" ] && git checkout "$branch" }
+gh() { local commit; commit=$(git log --oneline --color=always | fzf --ansi --prompt "History> " | awk '{print $1}') && [ -n "$commit" ] && git show "$commit" }
 
 # ----------------------------------------
 # - zoxide settings                      -
