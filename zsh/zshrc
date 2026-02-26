@@ -79,6 +79,8 @@ for dump in "$ZDOTDIR"/.zcompdump(N.mh+24); do
 done
 compinit -C
 
+setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
+
 # UI: Enable the arrow-key selection menu
 zstyle ':completion:*' menu select
 
