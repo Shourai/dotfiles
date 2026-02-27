@@ -64,7 +64,7 @@ setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
 zstyle ':completion:*' menu select
 
 # LOGIC: Case-insensitive (all), partial-word, and then substring completion
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 # LOGIC: Try specific scripts first, then fallback to --help parsing
 zstyle ':completion:*' completer _complete _gnu_generic _ignored
