@@ -148,3 +148,18 @@ fi
 
 # Autosuggestion style
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#808080'
+
+# ----------------------------------------
+# - Path settings                        -
+# ----------------------------------------
+
+# Add homebrew to path
+if [[ -n "$IS_DARWIN" ]]; then
+  if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  fi
+fi
+
+# Add .local/bin to path
+export PATH="$HOME/.local/bin/:$PATH"
+
