@@ -1,7 +1,7 @@
 theme = One Half Dark
 #palette = 0=#626262
 #palette = 8=#8f8f8f
-font-size = 12
+font-size = 14
 font-family = "Liga SFMono Nerd Font"
 clipboard-write = allow
 background-opacity = 0.7
