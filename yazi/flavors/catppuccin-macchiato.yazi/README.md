@@ -13,7 +13,7 @@
 ## 🎨 Installation
 
 ```sh
-ya pack -a yazi-rs/flavors:catppuccin-macchiato
+ya pkg add yazi-rs/flavors:catppuccin-macchiato
 ```
 
 ## ⚙️ Usage
@@ -22,8 +22,6 @@ Set the content of your `theme.toml` to enable it as your _dark_ flavor:
 
 ```toml
 [flavor]
-use = "catppuccin-macchiato"
-# For upcoming Yazi 0.4 (nightly version):
 dark = "catppuccin-macchiato"
 ```
 
