@@ -36,6 +36,9 @@ alias tx='tmuxinator'
 alias wgup='wg-quick up'
 alias wgdown='wg-quick down'
 
-## Git
+# Git
 alias g='git'
 alias lg='lazygit'
+
+# Arch
+ alias pkg-clean="pacman -Qetq | fzf -m --preview 'pacman -Qi {}' | xargs -o -r sudo pacman -Runs"
