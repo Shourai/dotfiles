@@ -308,6 +308,11 @@ hl.bind("ALT + SHIFT + M", hl.dsp.exec_cmd("pactl set-sink-mute @DEFAULT_SINK@ t
 hl.bind("ALT + SHIFT + period", hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ +5%"))
 hl.bind("ALT + SHIFT + comma", hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ -5%"))
 
+-- Go to the next active workspace on the current monitor
+hl.bind(mainMod .. " + bracketright", hl.dsp.focus({ workspace = "m+1" }))
+
+-- Go to the previous active workspace on the current monitor
+hl.bind(mainMod .. " + bracketleft", hl.dsp.focus({ workspace = "m-1" }))
 
 hl.bind("ALT+ CTRL + Q", hl.dsp.exec_cmd("hyprlock"))
 hl.bind("ALT + CTRL + S", hl.dsp.exec_cmd("grim -g '$(slurp -d)' - | wl-copy"))
