@@ -5,3 +5,4 @@ font-size = 14
 font-family = "Liga SFMono Nerd Font"
 clipboard-write = allow
 background-opacity = 0.7
+macos-option-as-alt = left
