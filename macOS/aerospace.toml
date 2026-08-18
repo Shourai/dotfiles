@@ -200,12 +200,14 @@ up = 'volume up'
 shift-down = ['volume set 0', 'mode main']
 
 [[on-window-detected]]
-    if.app-id = 'com.autodesk.fusion360'
-    run = 'layout floating'
+if.app-id = 'com.autodesk.fusion360'
+run = [] # empty array means 'noop' (no operation)
+check-further-callbacks = false
 
 [[on-window-detected]]
-    if.app-id = 'com.bambulab.bambu-studio'
-    run = 'layout floating'
+if.app-id = 'com.bambulab.bambu-studio'
+run = [] # empty array means 'noop' (no operation)
+check-further-callbacks = false
 
 # Enter application mode to start apps
 [mode.applications.binding]
