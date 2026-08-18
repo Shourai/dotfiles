@@ -27,9 +27,15 @@ export LESSHISTFILE=-
 # eza
 export EZA_COLORS='xx=37'
 
-# 1password SSH_AUTH_SOCK
+# SSH_AUTH_SOCK for 1Password and bitwarden
 if [[ "$(uname)" = "Darwin" ]]; then
-  export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+  # Check if the Bitwarden socket file exists
+  if [[ -S "$HOME/.bitwarden-ssh-agent.sock" ]]; then
+    export SSH_AUTH_SOCK="$HOME/.bitwarden-ssh-agent.sock"
+  else
+    export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+  fi
 else
-  export SSH_AUTH_SOCK=~/.1password/agent.sock
+  # Linux fallback
+  export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
 fi
