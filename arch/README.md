@@ -1,6 +1,45 @@
 # Arch Linux
 
-Install Arch linux using the `archinstall` script.
+Install Arch Linux with `archinstall`, then run `install` from the repo root.
+
+## Desktop
+
+Hyprland on Wayland, started from TTY1 by `zsh/.zprofile`. `setup/link.sh` links `wayland/hypr`
+to `~/.config/hypr` and `wayland/waybar` to `~/.config/waybar`.
+
+| File                     | What it does                                                    |
+|--------------------------|-----------------------------------------------------------------|
+| `hypr/hyprland.lua`      | monitors (this desktop: DP-2 + DP-3), look, input, keys, rules  |
+| `hypr/hypridle.conf`     | lock after 5 min, screen off after 5.5 min                       |
+| `hypr/hyprlock.conf`     | lock screen (font: Inter, from `inter-font`)                    |
+| `hypr/hyprpaper.conf`    | wallpaper (`hypr/wallpaper.png`)                                |
+| `waybar/config.jsonc`    | bar: workspaces, window title, submap, volume, clock            |
+| `waybar/style.css`       | bar styles                                                      |
+
+Hyprland reloads `hyprland.lua` on save. Check it first with
+`Hyprland --verify-config -c ~/.config/hypr/hyprland.lua`. Reload waybar with `killall -SIGUSR2 waybar`.
+
+### Keys
+
+`SUPER` is the main modifier.
+
+| Keys                               | What it does                                       |
+|------------------------------------|----------------------------------------------------|
+| `SUPER+Return` / `SUPER+SHIFT+Return` | ghostty / ghostty with tmux                      |
+| `SUPER+D`                          | launcher (walker)                                  |
+| `SUPER+E`                          | yazi in ghostty                                    |
+| `SUPER+W`                          | close window                                       |
+| `SUPER+V` / `SUPER+P` / `SUPER+T`  | float / pseudo-tile / toggle split direction       |
+| `SUPER+H/J/K/L`                    | focus left / down / up / right                     |
+| `SUPER+SHIFT+H/J/K/L`              | move window left / down / up / right               |
+| `SUPER+1..0` / `SUPER+SHIFT+1..0`  | go to / move window to workspace 1-10              |
+| `SUPER+[` / `SUPER+]`              | previous / next workspace on this monitor          |
+| `SUPER+S` / `SUPER+SHIFT+S`        | show scratchpad / move window to scratchpad        |
+| `SUPER+Space`, then `f` / `b` / `c` | Firefox Dev / Brave incognito / Chromium incognito |
+| `SUPER+M`                          | exit Hyprland                                      |
+| `ALT+CTRL+Q`                       | lock screen                                        |
+| `ALT+CTRL+S`                       | screenshot of a selected area to the clipboard     |
+| `ALT+SHIFT+M` / `.` / `,`          | mute / volume up / volume down                     |
 
 ## After installation
 
@@ -8,7 +47,7 @@ Install Arch linux using the `archinstall` script.
 
 <https://github.com/Shourai/til/blob/master/linux/authentication-delay.md>
 
-### Increase login attemps
+### Increase login attempts
 
 <https://github.com/Shourai/til/blob/master/linux/increase_login_attempts.md>
 

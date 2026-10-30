@@ -169,8 +169,5 @@ yazi/plugins/
 .zcompdump
 zsh/history
 
-# fontconfig cache id
-arch/fonts/.uuid
-
 # link.sh backups
 *.bak-*

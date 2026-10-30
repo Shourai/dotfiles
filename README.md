@@ -77,7 +77,7 @@ dotfiles
  ├─ lazygit/config.yml -> ~/.config/lazygit/config.yml
  ├─ yazi/            -> ~/.config/yazi (see yazi/README.md)
  ├─ ghostty/         -> ~/.config/ghostty (config.ghostty + linux/macos.ghostty via os.ghostty)
- ├─ arch/            Arch only: Hyprland, waybar, fontconfig, fonts, post-install notes
+ ├─ arch/            Arch only: Hyprland, hypridle, hyprlock, hyprpaper, waybar, post-install notes
  └─ macos/           macOS only: AeroSpace, key remap, defaults.sh, notes
 ```
 

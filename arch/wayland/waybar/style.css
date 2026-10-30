@@ -1,101 +1,91 @@
-/* -----------------------------------------------------
- * Import Pywal colors 
- * ----------------------------------------------------- */
-/* @import 'style-light.css'; */
-@define-color textcolor #FFFFFF;
-@define-color background 	#272e33;
-@define-color background-alt 	#414b50;
-@define-color foreground 	#d3c6aa; 
-@define-color foreground-alt 	#272e33;
-@define-color red 		#e67e80;
-@define-color green 		#a7c080;
-@define-color yellow 		#dbbc7f;
-@define-color blue 		#7fbbb3;
-@define-color magenta 		#d699b6;
-@define-color cyan 		#83c092;
+/* waybar styles. Apply changes: killall -SIGUSR2 waybar */
 
 /* -----------------------------------------------------
- * General 
+ * Colours (Everforest)
+ * ----------------------------------------------------- */
+@define-color textcolor      #FFFFFF;
+@define-color background     #272e33;
+@define-color background-alt #414b50;
+@define-color foreground     #d3c6aa;
+@define-color foreground-alt #272e33;
+@define-color red            #e67e80;
+@define-color blue           #7fbbb3;
+@define-color cyan           #83c092;
+
+/* -----------------------------------------------------
+ * General
  * ----------------------------------------------------- */
 
 * {
-  font-family: "Fira Sans semibold", FontAwesome, Roboto, Helvetica, Arial,
-    sans-serif;
-  font-size: 15px
+  /* ttf-jetbrains-mono-nerd, includes the icons */
+  font-family: "JetBrainsMono Nerd Font", sans-serif;
+  font-size: 15px;
 }
 
 window#waybar {
   background: transparent;
 }
 
-/* -----------------------------------------------------
- * Workspaces 
- * ----------------------------------------------------- */
-
-#workspaces {
-    background: transparent;
-    margin: 5px 0px;
-    color: @foreground;
-}
-#workspaces button {
-    font-weight: normal;
-    padding: 0px 5px;
-    margin: 0px 5px;
-    border-radius: 20px;
-    color: gray;
-    background: @background-alt;
-    transition: all 0.3s ease-in-out;
-}
-
-#workspaces button.active {
-    font-weight: bold;
-    background-color: @cyan;
-    color: @foreground-alt;
-    min-width: 50px;
-    transition: all 0.3s ease-in-out;
-}
-
-#workspaces button:hover {
-    font-weight: bold;
-    background-color: @blue;
-    color: @foreground-alt;
-    border-color: black;
-    min-width: 50px;
-}
-
-#workspaces button.urgent {
-    font-weight: bold;
-    background-color: @red;
-    color: @foreground-alt;
-    min-width: 50px;
-    transition: all 0.3s ease-in-out;
-}
-
-/* -----------------------------------------------------
- * Tooltips
- * ----------------------------------------------------- */
-
 tooltip {
   border-radius: 10px;
-  background-color: @backgroundlight;
+  background-color: @background;
   opacity: 0.8;
   padding: 20px;
   margin: 0px;
 }
 
 tooltip label {
-  color: @white;
+  color: @textcolor;
 }
 
 /* -----------------------------------------------------
- * Window
+ * Workspaces
+ * ----------------------------------------------------- */
+
+#workspaces {
+  background: transparent;
+  margin: 5px 0px;
+  color: @foreground;
+}
+
+#workspaces button {
+  font-weight: normal;
+  padding: 0px 5px;
+  margin: 0px 5px;
+  border-radius: 20px;
+  color: gray;
+  background: @background-alt;
+  transition: all 0.3s ease-in-out;
+}
+
+#workspaces button.active {
+  font-weight: bold;
+  background-color: @cyan;
+  color: @foreground-alt;
+  min-width: 50px;
+}
+
+#workspaces button:hover {
+  font-weight: bold;
+  background-color: @blue;
+  color: @foreground-alt;
+  min-width: 50px;
+}
+
+#workspaces button.urgent {
+  font-weight: bold;
+  background-color: @red;
+  color: @foreground-alt;
+  min-width: 50px;
+}
+
+/* -----------------------------------------------------
+ * Window title
  * ----------------------------------------------------- */
 
 #window {
   margin: 0px 15px 0px 0px;
-  border-radius: 12px;
   color: @textcolor;
-  font-weight: normal;
 }
 
 window#waybar.empty #window {
@@ -103,84 +93,19 @@ window#waybar.empty #window {
 }
 
 /* -----------------------------------------------------
- * Hardware Group
+ * Right: submap, audio, clock
  * ----------------------------------------------------- */
 
-#disk,
-#memory,
-#cpu,
-#language {
-  margin: 5px;
-  padding: 0px;
-  color: @iconcolor;
-}
-
-#language {
-  margin-right: 10px;
-}
-
-/* -----------------------------------------------------
- * Clock
- * ----------------------------------------------------- */
-
+#submap,
+#pulseaudio,
 #clock {
   color: @textcolor;
-  padding: 0px 15px 0px 0px;
 }
-
-/* -----------------------------------------------------
- * Pulseaudio
- * ----------------------------------------------------- */
 
 #pulseaudio {
-  color: @textcolor;
-  border-radius: 15px;
   margin: 0px 15px 0px 0px;
 }
 
-#pulseaudio.muted {
-  color: @textcolor;
-}
-
-/* -----------------------------------------------------
- * Network
- * ----------------------------------------------------- */
-
-#network {
-  color: @textcolor;
-  border-radius: 15px;
-  margin: 0px 15px 0px 0px;
-}
-
-#network.ethernet {
-  color: @textcolor;
-}
-
-#network.wifi {
-  color: @textcolor;
-}
-
-/* -----------------------------------------------------
- * Bluetooth
- * ----------------------------------------------------- */
-
-#bluetooth,
-#bluetooth.on,
-#bluetooth.connected {
-  color: @textcolor;
-  border-radius: 15px;
-  margin: 10px 15px 10px 0px;
-}
-
-#bluetooth.off {
-  background-color: transparent;
-  padding: 0px;
-  margin: 0px;
-}
-
-/* -----------------------------------------------------
- * Hyprland submaps
- * ----------------------------------------------------- */
-#submap {
-  color: @textcolor
+#clock {
+  padding: 0px 15px 0px 0px;
 }

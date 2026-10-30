@@ -22,10 +22,8 @@ link "$NVIM_CONFIG"                 "$HOME/.config/nvim"                # separa
 
 # Arch Linux
 if is_arch; then
-  link "$DOTFILES/arch/wayland/hypr"   "$HOME/.config/hypr"
-  link "$DOTFILES/arch/wayland/waybar" "$HOME/.config/waybar"
-  link "$DOTFILES/arch/fontconfig"     "$HOME/.config/fontconfig"
-  link "$DOTFILES/arch/fonts"          "$HOME/.local/share/fonts"
+  link "$DOTFILES/arch/wayland/hypr"     "$HOME/.config/hypr"
+  link "$DOTFILES/arch/wayland/waybar"   "$HOME/.config/waybar"
   link "$DOTFILES/ghostty/linux.ghostty" "$DOTFILES/ghostty/os.ghostty"  # per-OS ghostty settings
 fi
 
