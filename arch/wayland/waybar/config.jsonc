@@ -12,13 +12,14 @@
     "hyprland/workspaces": {
         "format": "{name}",
         "on-click": "activate",
-        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"r-1\" })'",
-        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"r+1\" })'",
+        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"m-1\" })'",
+        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"m+1\" })'",
         "all-outputs": false
     },
 
     "hyprland/window": {
         "format": "{}",
+        "max-length": 80,
         "separate-outputs": true
     },
 
@@ -37,8 +38,8 @@
         "format-muted": "",
         "format-icons": {
             "headphones": "",
-            "handsfree": "",
-            "headset": "",
+            "handsfree": "󰋎",
+            "headset": "󰋎",
             "phone": "",
             "portable": "",
             "car": "",

@@ -1,6 +1,7 @@
 -- Hyprland config (Lua), linked to ~/.config/hypr/hyprland.lua
 -- Wiki: https://wiki.hypr.land/Configuring/Start/
--- Check after editing: Hyprland --verify-config -c ~/.config/hypr/hyprland.lua
+-- Hyprland reloads this file on save. To check a change first, edit a copy and run
+-- `Hyprland --verify-config -c <copy>`; after saving, `hyprctl configerrors` lists problems.
 
 
 ------------------
@@ -226,9 +227,9 @@ end
 hl.bind(mainMod .. " + bracketright", hl.dsp.focus({ workspace = "m+1" }))
 hl.bind(mainMod .. " + bracketleft", hl.dsp.focus({ workspace = "m-1" }))
 
--- Scroll through existing workspaces with mainMod + scroll
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+-- Scroll through workspaces on this monitor with mainMod + scroll (like mainMod + [ ])
+hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "m+1" }))
+hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "m-1" }))
 
 -- Scratchpad (special workspace)
 hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))

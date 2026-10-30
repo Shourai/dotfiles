@@ -90,7 +90,8 @@ alt-leftSquareBracket = 'workspace prev'
 alt-rightSquareBracket = 'workspace next'
 
 alt-tab = 'workspace-back-and-forth'
-alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+alt-shift-tab = 'move-node-to-monitor --wrap-around next'   # move the window to the other monitor
+                                                              # (workspaces are pinned, so they can't move)
 
 # Modes (defined below)
 alt-shift-semicolon = 'mode service'
@@ -147,7 +148,11 @@ o = ['exec-and-forget open -n /Applications/"Obsidian.app"', 'mode main']
 
 # CAD / 3D-printing apps open as floating windows
 [[on-window-detected]]
-if.app-id = 'com.autodesk.fusion360'
+if.app-id = 'com.autodesk.fusion'      # Autodesk Fusion (current name)
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.autodesk.fusion360'   # Fusion 360 (older versions)
 run = 'layout floating'
 
 [[on-window-detected]]

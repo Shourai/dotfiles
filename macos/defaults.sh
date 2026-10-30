@@ -31,9 +31,6 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
-# Disable Bluetooth
-sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int 0
-
 # Remove airplay icon in menubar
 defaults write com.apple.airplay showInMenuBarIfPresent -bool false
 
@@ -75,8 +72,12 @@ defaults write com.apple.loginwindow TALLogoutSavesState -bool false
 # Disable Text input in status bar
 defaults write com.apple.TextInputMenu visible -bool false
 
-# iTerm2 (not installed by setup; settings kept as a backup): load its settings from this folder
-defaults write -app iTerm PrefsCustomFolder "$HOME/Documents/github/dotfiles/macos"
+# iTerm2 (not installed by setup; settings kept as a backup): if it's installed,
+# load its settings from this folder
+if [ -d /Applications/iTerm.app ]; then
+  defaults write com.googlecode.iterm2 PrefsCustomFolder "$HOME/Documents/github/dotfiles/macos"
+  defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
+fi
 
 # Disable the sound effects on boot
 # sudo nvram SystemAudioVolume=%00
@@ -85,5 +86,6 @@ defaults write -app iTerm PrefsCustomFolder "$HOME/Documents/github/dotfiles/mac
 # Only needed if you have a mac without an official Apple SSD
 # sudo trimforce enable
 
-# Restart the apps whose settings changed so they take effect now
+# Dock, Finder and the menu bar pick up their settings now; trackpad and keyboard
+# settings take effect after logging out and back in
 killall Dock Finder SystemUIServer 2>/dev/null || true
