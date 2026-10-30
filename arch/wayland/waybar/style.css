@@ -3,7 +3,7 @@
 /* -----------------------------------------------------
  * Colours: One Dark (same palette as onedark.nvim)
  * ----------------------------------------------------- */
-@define-color textcolor      #abb2bf;
+@define-color textcolor      #dcdfe4; /* ghostty's One Half Dark text: bar is transparent, needs contrast */
 @define-color background     #282c34;
 @define-color background-alt #393f4a;
 @define-color foreground     #abb2bf;
