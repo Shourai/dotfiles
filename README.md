@@ -71,7 +71,7 @@ dotfiles
  ├─ install          bootstrap script (see above)
  ├─ setup/           arch.sh, macos.sh, link.sh, zsh.sh, lib.sh
  ├─ packages/        package lists per package manager
- ├─ zsh/             -> ~/.config/zsh
+ ├─ zsh/             -> ~/.config/zsh (dotted files, see zsh/README.md)
  ├─ tmux/tmux.conf   -> ~/.config/tmux/tmux.conf (tpm installs itself on first start)
  ├─ git/             -> ~/.config/git
  ├─ yazi/            -> ~/.config/yazi

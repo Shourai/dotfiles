@@ -158,7 +158,7 @@ emacs/org-roam.db
 # tmux
 tmux/plugins
 
-# zsh
+# zsh: old location of history and completion cache (now in ~/.local/state and ~/.cache)
 .zcompdump
 zsh/history
 

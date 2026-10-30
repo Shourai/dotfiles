@@ -27,10 +27,9 @@ alias /='cd /'
 alias ~='cd ~'
 alias cp='cp -iv'
 alias mkdir='mkdir -pv'
-alias vi='\vim'
+alias vi='nvim'
 alias vim='nvim'
-alias zshrc='vim ~/.zshrc'
-alias tx='tmuxinator'
+alias zshrc='$EDITOR $ZDOTDIR/.zshrc'
 
 # Wireguard
 alias wgup='wg-quick up'
@@ -40,5 +39,7 @@ alias wgdown='wg-quick down'
 alias g='git'
 alias lg='lazygit'
 
-# Arch
- alias pkg-clean="pacman -Qetq | fzf -m --preview 'pacman -Qi {}' | xargs -o -r sudo pacman -Runs"
+# Arch: pick explicitly installed packages to remove
+if [[ -n "$IS_ARCH" ]]; then
+  alias pkg-clean="pacman -Qetq | fzf -m --preview 'pacman -Qi {}' | xargs -o -r sudo pacman -Runs"
+fi
