@@ -63,10 +63,6 @@ download = [
 	{ run = "ya emit download --open %S", desc = "Download and open" },
 	{ run = "ya emit download %S",        desc = "Download" },
 ]
-trash = [
-	{ run = "ya pub trash-restore --list %S", desc = "Restore selected files" },
-	{ run = "ya pub trash-empty --list %S",   desc = "Empty trash bin" },
-]
 
 [open]
 rules = [
@@ -86,8 +82,6 @@ rules = [
 	{ mime = "inode/empty", use = [ "edit", "reveal" ] },
 	# Virtual file system
 	{ mime = "vfs/{absent,stale}", use = "download" },
-	# Trash
-	{ mime = "trash/**", use = [ "open", "trash" ] },
 	# Fallback
 	{ url = "*", use = [ "open", "reveal" ] },
 ]
@@ -108,14 +102,11 @@ fetchers = [
 	# MIME-type
 	{ url = "*/",         run = "mime.dir",    prio = "high", group = "mime" },
 	{ url = "local://*",  run = "mime.local",  prio = "high", group = "mime" },
-	{ url = "trash://*",  run = "mime.trash",  prio = "high", group = "mime" },
 	{ url = "remote://*", run = "mime.remote", prio = "high", group = "mime" },
 ]
 spotters = [
 	# Multi-file
 	{ mime = "multi/*", run = "multi" },
-	# Trash
-	{ mime = "trash/**", run = "trash" },
 	# Folder
 	{ url = "*/", run = "folder" },
 	# Code
@@ -146,8 +137,6 @@ preloaders = [
 	# Font
 	{ mime = "font/*", run = "font" },
 	{ mime = "application/ms-opentype", run = "font" },
-	# Trash
-	{ mime = "trash/**", run = "trash" },
 ]
 previewers = [
 	{ url = "*/", run = "folder" },
@@ -179,8 +168,6 @@ previewers = [
 	{ mime = "inode/empty", run = "empty" },
 	# Virtual file system
 	{ mime = "vfs/*", run = "vfs" },
-	# Trash
-	{ mime = "trash/**", run = "trash" },
 	# Error
 	{ mime = "null/*", run = "null" },
 	# Fallback
@@ -226,10 +213,6 @@ shell_origin = "top-center"
 shell_offset = [ 0, 2, 50, 3 ]
 
 [confirm]
-# trash
-trash_title 	= "Trash {n} selected file{s}?"
-trash_origin	= "center"
-trash_offset	= [ 0, 0, 70, 20 ]
 
 # delete
 delete_title 	= "Permanently delete {n} selected file{s}?"
