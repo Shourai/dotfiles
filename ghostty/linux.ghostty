@@ -1,0 +1,7 @@
+# Linux-only ghostty settings, loaded from config.ghostty (via os.ghostty)
+
+# ttf-jetbrains-mono-nerd in packages/pacman.txt
+font-family = "JetBrainsMono Nerd Font"
+
+# No GTK header bar; Hyprland tiles the windows
+gtk-titlebar = false

@@ -1,0 +1,7 @@
+# macOS-only ghostty settings, loaded from config.ghostty (via os.ghostty)
+
+# Homebrew cask in packages/cask.txt
+font-family = "Liga SFMono Nerd Font"
+
+# Left Option acts as Alt (for tmux and shell keys); right Option still types special characters
+macos-option-as-alt = left

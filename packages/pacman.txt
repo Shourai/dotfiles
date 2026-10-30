@@ -32,6 +32,7 @@ seahorse
 zathura-pdf-mupdf
 
 # Fonts
+ttf-jetbrains-mono-nerd   # ghostty (see ghostty/linux.ghostty)
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji

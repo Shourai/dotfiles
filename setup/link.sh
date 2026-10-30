@@ -26,11 +26,13 @@ if is_arch; then
   link "$DOTFILES/arch/wayland/waybar" "$HOME/.config/waybar"
   link "$DOTFILES/arch/fontconfig"     "$HOME/.config/fontconfig"
   link "$DOTFILES/arch/fonts"          "$HOME/.local/share/fonts"
+  link "$DOTFILES/ghostty/linux.ghostty" "$DOTFILES/ghostty/os.ghostty"  # per-OS ghostty settings
 fi
 
 # macOS
 if is_macos; then
   link "$DOTFILES/macos/aerospace.toml" "$HOME/.config/aerospace/aerospace.toml"
+  link "$DOTFILES/ghostty/macos.ghostty" "$DOTFILES/ghostty/os.ghostty"  # per-OS ghostty settings
 fi
 
 # Clean up links to configs that were removed from the repo

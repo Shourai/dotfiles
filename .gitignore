@@ -155,6 +155,9 @@ neomutt/profile.*
 emacs/bookmarks
 emacs/org-roam.db
 
+# ghostty: per-OS link created by setup/link.sh
+ghostty/os.ghostty
+
 # tmux
 tmux/plugins
 
