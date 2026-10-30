@@ -154,7 +154,7 @@ eval "$(zoxide init zsh)"
 # - Bat settings                         -
 # ----------------------------------------
 
-export BAT_THEME="OneHalfDark"  # also used by delta; matches ghostty
+export BAT_THEME="OneHalfDark"  # matches ghostty
 
 # ----------------------------------------
 # - Plugins                              -

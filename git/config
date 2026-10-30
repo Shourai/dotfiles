@@ -34,22 +34,6 @@
   enabled = true           # remember conflict resolutions and reuse them
 
 # ----------------------------------------
-# - Pager: delta                         -
-# ----------------------------------------
-
-[core]
-  pager = delta
-
-[interactive]
-  diffFilter = delta --color-only
-
-[delta]
-  navigate = true          # n / N to jump between files
-  dark = true
-  line-numbers = true
-  side-by-side = true
-
-# ----------------------------------------
 # - Aliases                              -
 # ----------------------------------------
 

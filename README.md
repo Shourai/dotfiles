@@ -72,7 +72,7 @@ One Dark everywhere, using the palette of nvim's `onedark.nvim` (`dark` style).
 |-------------------|----------------------------------------------------------------------------|
 | ghostty           | `theme = One Half Dark` in `ghostty/config.ghostty` (same background and accents) |
 | yazi, lazygit, fzf, eza, pure prompt | no theme of their own: they use the terminal's colours  |
-| bat, delta        | `BAT_THEME="OneHalfDark"` in `zsh/.zshrc`                                  |
+| bat               | `BAT_THEME="OneHalfDark"` in `zsh/.zshrc`                                  |
 | tmux              | `od_*` colours in `tmux/tmux.conf`                                         |
 | waybar            | `@define-color` lines in `arch/wayland/waybar/style.css`                   |
 | Hyprland borders  | `col` in `arch/wayland/hypr/hyprland.lua`                                  |

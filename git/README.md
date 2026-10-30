@@ -5,7 +5,7 @@ so there is no `~/.gitconfig`.
 
 | File                  | In the repo | Contains                                                 |
 |-----------------------|-------------|----------------------------------------------------------|
-| `config`              | yes         | settings, delta pager, aliases, identity per folder      |
+| `config`              | yes         | settings, aliases, identity per folder                   |
 | `gitconfig_personal`  | yes         | name and email for repos in `~/Documents/github/`        |
 | `gitconfig_work`      | **no**      | name and email for repos in `~/Documents/gitlab/` (gitignored, create it per machine) |
 
@@ -34,7 +34,6 @@ To set up the work identity on a machine, create `~/.config/git/gitconfig_work`:
 | `fetch.prune`               | branches deleted on the remote disappear locally on fetch           |
 | `merge.conflictStyle zdiff3`| conflict markers show the original text between `\|\|\|\|\|\|\|` and `=======` |
 | `rerere.enabled`            | a conflict you resolved once is resolved the same way next time     |
-| `core.pager = delta`        | needs `git-delta` (in `packages/common.txt`); `n`/`N` jump between files |
 
 ## Aliases
 
