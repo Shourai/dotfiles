@@ -7,4 +7,5 @@ ghostty
 google-chrome@dev
 iina
 nikitabobko/tap/aerospace
+obsidian
 shaunsingh/SFMono-Nerd-Font-Ligaturized/font-sf-mono-nerd-font-ligaturized

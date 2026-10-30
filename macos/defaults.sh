@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# macOS changes
+# macOS system settings. Run with `install --defaults` or `setup/macos.sh --defaults`.
+# Finding the key for a setting: see macos/README.md.
 
 # Wipe all (default) app icons from the Dock
 defaults write com.apple.dock persistent-apps -array
@@ -74,10 +75,7 @@ defaults write com.apple.loginwindow TALLogoutSavesState -bool false
 # Disable Text input in status bar
 defaults write com.apple.TextInputMenu visible -bool false
 
-# Skim: turn off auto reload dialog, default to auto reload
-defaults write -app Skim SKAutoReloadFileUpdate -boolean true
-
-# Set iTerm2 preference folder
+# iTerm2 (not installed by setup; settings kept as a backup): load its settings from this folder
 defaults write -app iTerm PrefsCustomFolder "$HOME/Documents/github/dotfiles/macos"
 
 # Disable the sound effects on boot
@@ -86,3 +84,6 @@ defaults write -app iTerm PrefsCustomFolder "$HOME/Documents/github/dotfiles/mac
 # Enable trim
 # Only needed if you have a mac without an official Apple SSD
 # sudo trimforce enable
+
+# Restart the apps whose settings changed so they take effect now
+killall Dock Finder SystemUIServer 2>/dev/null || true
