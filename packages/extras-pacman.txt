@@ -1,0 +1,6 @@
+# Optional Arch packages, installed with `install --extras` (or `setup/arch.sh --extras`).
+
+chromium
+firefox-developer-edition
+man-db
+syncthing

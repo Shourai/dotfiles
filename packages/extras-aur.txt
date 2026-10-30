@@ -1,0 +1,5 @@
+# Optional AUR packages, installed with `install --extras` (or `setup/arch.sh --extras`).
+
+1password
+brave-bin
+buku

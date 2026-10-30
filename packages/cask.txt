@@ -1,0 +1,10 @@
+# macOS Homebrew casks (GUI apps and fonts).
+# Casks from a third-party tap use the full 'user/tap/name' form; brew taps it automatically.
+
+1password
+firefox@developer-edition
+ghostty
+google-chrome@dev
+iina
+nikitabobko/tap/aerospace
+shaunsingh/SFMono-Nerd-Font-Ligaturized/font-sf-mono-nerd-font-ligaturized

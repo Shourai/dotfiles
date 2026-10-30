@@ -1,0 +1,13 @@
+# Arch-only packages from the AUR (installed with yay).
+
+dragon-drop
+shellcheck-bin
+
+# Launcher: walker + elephant data providers
+walker
+elephant
+elephant-calc
+elephant-clipboard
+elephant-desktopapplications
+elephant-providerlist
+elephant-symbols

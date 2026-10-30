@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # macOS changes
 
 # Wipe all (default) app icons from the Dock
@@ -77,7 +78,7 @@ defaults write com.apple.TextInputMenu visible -bool false
 defaults write -app Skim SKAutoReloadFileUpdate -boolean true
 
 # Set iTerm2 preference folder
-defaults write -app iTerm PrefsCustomFolder "$HOME/Documents/github/dotfiles/macOS"
+defaults write -app iTerm PrefsCustomFolder "$HOME/Documents/github/dotfiles/macos"
 
 # Disable the sound effects on boot
 # sudo nvram SystemAudioVolume=%00

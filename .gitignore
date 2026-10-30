@@ -160,6 +160,10 @@ tmux/plugins
 
 # zsh
 .zcompdump
-zsh/pure
-zsh/zsh-ssh
 zsh/history
+
+# fontconfig cache id
+arch/fonts/.uuid
+
+# link.sh backups
+*.bak-*

@@ -1,61 +1,86 @@
-# Configuration for arch linux and macOS with dotfiles
+# dotfiles
 
-## Overview
+Configuration for Arch Linux and macOS. One command takes a clean install to a working setup,
+and running it again brings an existing machine up to date.
 
-This repository bootstraps everything I need from a clean install of macOS or Arch Linux.
+## Install
 
-## Installation
-Installing arch linux is quite easy using `archinstall`.
+On a fresh machine (Arch: install with `archinstall` first):
 
-After installation run the `install` after cloning this repository.
-Or run the following cURL command:
-
-```
-curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/master/install | bash
+```sh
+curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/main/install | bash
 ```
 
-## Directory Listing
+With flags:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/main/install | bash -s -- --extras
+```
+
+On a machine that already has the repo:
+
+```sh
+~/Documents/github/dotfiles/install [--extras] [--defaults] [--dry-run]
+```
+
+| Flag         | What it does                                                    |
+|--------------|-----------------------------------------------------------------|
+| `--extras`   | Also install the optional packages in `packages/extras-*.txt`   |
+| `--defaults` | Also apply the macOS system settings in `macos/defaults.sh`     |
+| `--dry-run`  | Print what would change without changing anything               |
+
+The repo must live at `~/Documents/github/dotfiles`; the scripts and some configs assume that path.
+
+## What `install` does
+
+1. Installs git (Homebrew first on macOS).
+2. Clones this repo and [nvim](https://github.com/Shourai/nvim) to `~/Documents/github/` and
+   switches their remotes to SSH.
+3. Runs the scripts in `setup/`, in this order:
+
+| Script            | What it does                                                                  |
+|-------------------|-------------------------------------------------------------------------------|
+| `setup/arch.sh`   | Arch: `pacman -Syu`, installs yay, then the pacman and AUR package lists      |
+| `setup/macos.sh`  | macOS: Homebrew formulae and casks, the key remap, `--defaults`               |
+| `setup/link.sh`   | Symlinks the configs into `~/.config`                                         |
+| `setup/zsh.sh`    | Sets `ZDOTDIR` in `/etc/zshenv`, makes zsh the login shell, clones plugins    |
+
+Every script can also be run on its own and is safe to rerun. Shared helpers are in `setup/lib.sh`.
+
+## Common tasks
+
+**Add a package**: add a line to the right list in `packages/`, then run `setup/arch.sh` or `setup/macos.sh`.
+
+| List                | Installed with                                 |
+|---------------------|------------------------------------------------|
+| `common.txt`        | pacman and Homebrew (same name on both)        |
+| `pacman.txt`        | pacman (Arch only)                             |
+| `aur.txt`           | yay (Arch only)                                |
+| `brew.txt`          | `brew install` (macOS only)                    |
+| `cask.txt`          | `brew install --cask` (macOS only)             |
+| `extras-*.txt`      | the same managers, only with `--extras`        |
+
+**Add a config**: put it in the repo, add a `link` line to `setup/link.sh`, then run `setup/link.sh`.
+If something already exists at the target, it is moved to `<name>.bak-<date>` first.
+Links to configs that were removed from the repo are cleaned up automatically.
+
+## Layout
 
 ```
 dotfiles
- ├─ README.md
- ├─ install
- ├─ arch
- │  ├─ supplementary_packages.sh
- │  ├─ arch_packages.sh
- │  ├─ packages
- │  ├─ fontconfig
- │  ├─ fonts
- │  ├─ README.md
- │  ├─ dotfiles.sh
- │  └─ wayland
- ├─ zsh
- │  ├─ aliases
- │  ├─ zshenv
- │  └─ zshrc
- ├─ yazi
- │  ├─ package.toml
- │  ├─ yazi.toml
- │  ├─ keymap.toml
- │  ├─ theme.toml
- │  └─ flavors
- ├─ ghostty
- │  └─ config
- ├─ macOS
- │  ├─ aerospace.toml
- │  ├─ README.md
- │  ├─ settings.sh
- │  ├─ macOS.sh
- │  ├─ com.googlecode.iterm2.plist
- │  └─ com.local.KeyRemapping.plist
- ├─ git
- │  ├─ config
- │  └─ gitconfig_personal
- └─ tmux
-    └─ tmux.conf
+ ├─ install          bootstrap script (see above)
+ ├─ setup/           arch.sh, macos.sh, link.sh, zsh.sh, lib.sh
+ ├─ packages/        package lists per package manager
+ ├─ zsh/             -> ~/.config/zsh
+ ├─ tmux/tmux.conf   -> ~/.config/tmux/tmux.conf (tpm installs itself on first start)
+ ├─ git/             -> ~/.config/git
+ ├─ yazi/            -> ~/.config/yazi
+ ├─ ghostty/         -> ~/.config/ghostty
+ ├─ arch/            Arch only: Hyprland, waybar, fontconfig, fonts, post-install notes
+ └─ macos/           macOS only: AeroSpace, key remap, defaults.sh, notes
 ```
 
-### Useful cli packages
+## Useful CLI tools
 
 - bat
 - btop

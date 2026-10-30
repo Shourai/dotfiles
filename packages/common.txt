@@ -1,0 +1,21 @@
+# Packages with the same name on pacman (Arch) and Homebrew (macOS).
+# One package per line; text after '#' is ignored.
+
+bash
+bat
+btop
+erdtree
+eza
+fd
+fzf
+lazygit
+neovim
+python
+ripgrep
+rsync
+tmux
+yazi
+zoxide
+zsh
+zsh-autosuggestions
+zsh-syntax-highlighting

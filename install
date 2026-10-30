@@ -1,77 +1,90 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Bootstrap a fresh Arch Linux or macOS machine, or bring an existing one up to date.
+# Safe to rerun.
+#
+#   curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/main/install | bash -s -- [flags]
+#   ~/Documents/github/dotfiles/install [flags]
+#
+#   --extras     also install the optional packages (packages/extras-*.txt)
+#   --defaults   also apply macOS system settings (macos/defaults.sh)
+#   --dry-run    print what would change without changing anything
+#
+# Steps: install git -> clone dotfiles and nvim -> packages -> links -> zsh.
+# Each step is also its own script in setup/ and can be run on its own.
 
-# Go to root directory
-cd ~ || exit
+set -euo pipefail
 
-# Ask for the administrator password upfront
-if [ "$(uname)" = "Darwin" ]; then
+DOTFILES="$HOME/Documents/github/dotfiles"
+NVIM_CONFIG="$HOME/Documents/github/nvim"
+
+# This file runs before the repo is cloned, so it can't use setup/lib.sh yet
+info() { printf '\033[1;34m==>\033[0m %s\n' "$*"; }
+die()  { printf '\033[1;31merror:\033[0m %s\n' "$*" >&2; exit 1; }
+run()  { if [ "${DRY_RUN:-0}" = 1 ]; then printf '  \033[2m[dry-run]\033[0m %s\n' "$*"; else "$@"; fi; }
+
+# Clone one of my GitHub repos, unless it is already there
+clone() {
+  local name="$1" dir="$2"
+  if [ -d "$dir/.git" ]; then
+    echo "  $dir already exists"
+  else
+    run git clone --quiet "https://github.com/Shourai/$name.git" "$dir"
+    # Cloned over https (no SSH key needed yet); push over SSH from now on
+    run git -C "$dir" remote set-url origin "git@github.com:Shourai/$name.git"
+  fi
+}
+
+# Wrapped in main so bash reads the whole file before running it (needed for curl | bash)
+main() {
+  # Flags are checked here and passed on to the setup scripts
+  DRY_RUN=0
+  for arg in "$@"; do
+    case "$arg" in
+      --dry-run) DRY_RUN=1 ;;
+      --extras|--defaults) ;;
+      -h|--help) sed -n '2,13p' "$0" 2>/dev/null | sed 's/^# \{0,1\}//'; exit 0 ;;
+      *) die "unknown option: $arg (see --help)" ;;
+    esac
+  done
+
+  if [ "$(uname)" = "Darwin" ]; then
+    os=macos
+  elif [ -f /etc/arch-release ]; then
+    os=arch
+  else
+    die "unsupported system: only Arch Linux and macOS"
+  fi
+
+  # Ask for the password once and keep sudo alive until this script exits
+  if [ "$DRY_RUN" = 0 ]; then
     sudo -v
-fi
+    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+  fi
 
-# Keep-alive: update existing `sudo` time stamp until `install.sh` has finished
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+  info "Installing git"
+  if [ "$os" = macos ]; then
+    # Homebrew installs the Xcode command line tools, which include git
+    if ! command -v brew >/dev/null 2>&1; then
+      run env NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    fi
+    [ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+    run brew install git
+  else
+    run sudo pacman -Syu --needed --noconfirm git
+  fi
 
-if [ "$(uname)" = "Darwin" ]; then
-    # Install brew
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    # Install git
-    brew install git
-elif [ -f /etc/arch-release ]; then
-    # Install git
-    sudo pacman -S git --noconfirm
-fi
+  info "Cloning repositories"
+  clone dotfiles "$DOTFILES"
+  clone nvim "$NVIM_CONFIG"
 
+  # The setup scripts come from the clone; in a dry run on a fresh machine there is none yet
+  [ -d "$DOTFILES/setup" ] || die "$DOTFILES/setup not found (dry run on a fresh machine?)"
 
-# Clone respository
-git clone https://github.com/Shourai/dotfiles.git ~/Documents/github/dotfiles
-git clone https://github.com/Shourai/nvim.git ~/Documents/github/nvim
+  bash "$DOTFILES/setup/$os.sh" "$@"
+  bash "$DOTFILES/setup/link.sh" "$@"
+  bash "$DOTFILES/setup/zsh.sh" "$@"
 
-# Setup git
-git -C ~/Documents/github/dotfiles config user.name "Shourai"
-git -C ~/Documents/github/dotfiles config user.email "10200748+Shourai@users.noreply.github.com"
+  info "Done! Reboot (or log out and back in) for everything to take effect."
+}
 
-# Change git repo from https to SSH
-git -C ~/Documents/github/dotfiles remote set-url origin git@github.com:Shourai/dotfiles.git
-git -C ~/Documents/github/nvim remote set-url origin git@github.com:Shourai/nvim.git
-
-# Wait for a little while before continuing
-echo "We are now installing the needed packages and setting the desired configuration."
-
-if [ "$(uname)" = "Darwin" ]; then
-    # Run macOS install script
-    bash ~/Documents/github/dotfiles/macOS/macOS.sh
-elif [ -f /etc/arch-release ]; then
-    # Install pacman packages
-    bash ~/Documents/github/dotfiles/arch/arch_packages.sh
-fi
-
-# Link dotfiles
-bash ~/Documents/github/dotfiles/arch/dotfiles.sh
-
-# Change shell to zsh
-if [ -f /etc/arch-release ]; then
-    chsh -s "$(command -v zsh)"
-fi
-
-# Install zsh pure prompt
-mkdir -p "$HOME/.config/zsh"
-git clone https://github.com/sindresorhus/pure.git "$HOME/.config/zsh/pure"
-
-# Install zsh ssh plugin
-git clone https://github.com/sunlei/zsh-ssh ~/.config/zsh/zsh-ssh
-
-# Setup zprofile
-if [[ "$(uname)" = "Darwin" ]]; then
-  echo 'export ZDOTDIR="$HOME/.config/zsh"' | sudo tee -a /etc/zshenv
-else
-  echo 'export ZDOTDIR="$HOME/.config/zsh"' | sudo tee -a /etc/zsh/zshenv
-fi
-
-# Cleanup
-echo "Doing cleanup"
-if [ -f /etc/arch-release ]; then
-    echo "Cleaning up pacman cache"
-    sudo pacman -Sc --noconfirm
-fi
-
-echo "Success! Reboot the machine for the changes to take effect"
+main "$@"

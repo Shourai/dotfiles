@@ -4,7 +4,8 @@
 Remapping a mac keyboard which is not in US layout
 See also: https://github.com/amarsyla/hidutil-key-remapping-generator
 
-Move `com.local.KeyRemapping.plist` to `~/Library/LaunchAgents/com.local.KeyRemapping.plist`.
+`setup/macos.sh` copies `com.local.KeyRemapping.plist` to `~/Library/LaunchAgents/`; launchd applies it at every login.
+To apply it right away: `launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.local.KeyRemapping.plist`.
 
 
 | From                   | Keycode     | To                     | Keycode     |

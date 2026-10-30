@@ -1,0 +1,40 @@
+# Arch-only packages from the official repositories (pacman).
+
+# Terminal
+ghostty
+npm
+openssh
+unzip
+
+# Hyprland desktop
+hyprland
+hypridle
+hyprlock
+hyprpaper
+hyprpolkitagent
+polkit
+waybar
+libqalculate         # calculator for walker (elephant-calc)
+
+# Screenshots & clipboard
+grim
+slurp
+wl-clipboard
+xdg-utils
+
+# Audio
+pipewire
+pipewire-pulse
+
+# Apps
+mpv
+seahorse
+zathura-pdf-mupdf
+
+# Fonts
+noto-fonts
+noto-fonts-cjk
+noto-fonts-emoji
+ttf-dejavu
+ttf-liberation
+ttf-opensans

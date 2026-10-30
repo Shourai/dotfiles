@@ -47,6 +47,9 @@ fi
 # Add .local/bin to path
 export PATH="$HOME/.local/bin/:$PATH"
 
+# Plugins cloned by setup/zsh.sh
+ZSH_PLUGINS="$XDG_DATA_HOME/zsh/plugins"
+
 # ----------------------------------------
 # - Aliases                              -
 # ----------------------------------------
@@ -100,7 +103,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # - Visual settings                      -
 # ----------------------------------------
 
-fpath+=($ZDOTDIR/pure)
+fpath+=("$ZSH_PLUGINS/pure")
 autoload -U promptinit; promptinit
 zstyle :prompt:pure:path color 147
 zstyle :prompt:pure:prompt:success color blue
@@ -149,7 +152,7 @@ export BAT_THEME="Coldark-Dark"
 # ----------------------------------------
 
 # SSH settings
-source "$ZDOTDIR/zsh-ssh/zsh-ssh.zsh"
+source "$ZSH_PLUGINS/zsh-ssh/zsh-ssh.zsh"
 
 # Syntax highlighting & Autosuggestions
 if [[ -n "$IS_DARWIN" ]]; then
