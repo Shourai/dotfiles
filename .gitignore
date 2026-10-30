@@ -1,173 +1,23 @@
-Created by https://www.gitignore.io/api/vim,emacs,macos,osx,python,c++,c
+# Files that tools or setup create inside this repo's (linked) folders.
 
-### Vim ###
-# swap
-[._]*.s[a-w][a-z]
-[._]s[a-w][a-z]
-# session
-Session.vim
-# temporary
-.netrwhist
-*~
-# auto-generated tag files
-tags
-
-
-### Emacs ###
-# -*- mode: gitignore; -*-
-*~
-\#*\#
-/.emacs.desktop
-/.emacs.desktop.lock
-*.elc
-auto-save-list
-/emacs.d/request
-/emacs.d/.lsp*
-/emacs/request
-/emacs/elpa/
-/emacs/.lsp*
-tramp
-.\#*
-emacs.el
-custom.el
-package-quickstart.el
-transient/
-org-gcal
-eshell/
-
-# Org-mode
-.org-id-locations
-*_archive
-
-# flymake-mode
-*_flymake.*
-
-# eshell files
-/eshell/history
-/eshell/lastdir
-
-# elpa packages
-emacs.d/elpa/
-emacs/elpa/*
-
-# reftex files
-*.rel
-
-# AUCTeX auto folder
-/auto/
-
-# cask packages
-.cask/
-dist/
-
-# Flycheck
-flycheck_*.el
-
-# server auth directory
-/server/
-
-# projectiles files
-.projectile
-
-# recentf
-recentf
-
-# url folder
-emacs.d/url/
-
-# projectile files
-projectile.cache
-projectile-bookmarks.eld
-
-# misc
-network-security.data
-
-### macOS ###
-*.DS_Store
-.AppleDouble
-.LSOverride
-
-# Icon must end with two \r
-Icon
-
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
-
-### OSX ###
-*.DS_Store
-.AppleDouble
-.LSOverride
-
-# Icon must end with two \r
-Icon
-
-# Thumbnails
+# macOS Finder metadata
+.DS_Store
 ._*
 
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
-# Ranger
-ranger/bookmarks
-ranger/tagged
-ranger/history
-
-# Neovim
-nvim/plugged
-nvim/autoload
-nvim/session
-packer_compiled.lua
-
-### Firefox ###
-internal_UUIDs.txt
-
-# neomutt
-neomutt/cache
-neomutt/profile.*
-
-emacs/bookmarks
-emacs/org-roam.db
+# setup/link.sh: backups of files that were in the way of a link
+*.bak-*
 
 # ghostty: per-OS link created by setup/link.sh
 ghostty/os.ghostty
 
-# tmux
-tmux/plugins
+# git: work identity, created by hand on each machine (see git/README.md)
+git/gitconfig_work
 
 # yazi: installed by `ya pkg install` from yazi/package.toml
 yazi/flavors/
 yazi/plugins/
 
-# zsh: old location of history and completion cache (now in ~/.local/state and ~/.cache)
-.zcompdump
+# zsh: history and completion cache live in ~/.local/state and ~/.cache now.
+# Kept as a safety net: shell history can contain secrets.
 zsh/history
-
-# link.sh backups
-*.bak-*
+zsh/.zcompdump
