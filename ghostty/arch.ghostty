@@ -1,6 +1,7 @@
 # Arch-only ghostty settings (Hyprland desktop), loaded from config.ghostty (via os.ghostty)
 
-# noto-fonts in packages/pacman.txt; icons fall back to Symbols Nerd Font (ttf-nerd-fonts-symbols)
+# noto-fonts in packages/pacman.txt. Icons come from ghostty's built-in Nerd Font symbols
+# (ttf-nerd-fonts-symbols in pacman.txt is for waybar).
 font-family = "Noto Sans Mono"
 
 # No GTK header bar; Hyprland tiles the windows

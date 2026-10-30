@@ -73,6 +73,11 @@
 # - Identity per folder                  -
 # ----------------------------------------
 
+# Never guess a name/email (e.g. user@host.local on a Mac); outside the folders below,
+# git refuses to commit until an identity is set
+[user]
+  useConfigOnly = true
+
 [includeIf "gitdir:~/Documents/github/**"]
   path = ~/.config/git/gitconfig_personal
 

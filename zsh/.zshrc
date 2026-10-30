@@ -2,11 +2,18 @@
 # - Environmental variables              -
 # ----------------------------------------
 
-# zsh
+# History (not exported: other shells started from zsh, e.g. bash, would write into it)
 [[ -d "$XDG_STATE_HOME/zsh" ]] || command mkdir -p "$XDG_STATE_HOME/zsh"
-export HISTFILE="$XDG_STATE_HOME/zsh/history"  # History filepath
-export HISTSIZE=10000                          # Maximum events for internal history
-export SAVEHIST=10000                          # Maximum events in history file
+HISTFILE="$XDG_STATE_HOME/zsh/history"  # History filepath
+HISTSIZE=12000                          # Events in memory; above SAVEHIST so HIST_EXPIRE_DUPS_FIRST has room
+SAVEHIST=10000                          # Events in the history file
+
+# ghostty's shell integration (cursor, window title, prompt marks, ssh-terminfo/ssh-env).
+# ghostty can't load it by itself here, because the system zshenv sets ZDOTDIR. Not inside
+# tmux, where its ssh wrapper would report ghostty instead of tmux as the terminal.
+if [[ -n "$GHOSTTY_RESOURCES_DIR" && -z "$TMUX" ]]; then
+  source "$GHOSTTY_RESOURCES_DIR/shell-integration/zsh/ghostty-integration"
+fi
 
 # ----------------------------------------
 # - Navigation                           -
@@ -80,14 +87,16 @@ elif command -v dircolors &>/dev/null; then
   eval "$(dircolors -b)"
 fi
 
-# Fast compinit: full check at most once a day, otherwise trust the cache
+# Fast compinit: full check at most once a day, otherwise trust the cache.
+# (#q...) needs EXTENDED_GLOB (set above). A full compinit doesn't rewrite an unchanged
+# cache, so touch it, or the "once a day" check would run on every start after day one.
 autoload -Uz compinit
 [[ -d "$XDG_CACHE_HOME/zsh" ]] || command mkdir -p "$XDG_CACHE_HOME/zsh"
 zcompdump="$XDG_CACHE_HOME/zsh/zcompdump"
 if [[ -n $zcompdump(#qN.mh-24) ]]; then
   compinit -C -d "$zcompdump"
 else
-  compinit -d "$zcompdump"
+  compinit -d "$zcompdump" && touch "$zcompdump"
 fi
 unset zcompdump
 
@@ -112,11 +121,14 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # - Visual settings                      -
 # ----------------------------------------
 
-fpath+=("$ZSH_PLUGINS/pure")
-autoload -U promptinit; promptinit
-zstyle :prompt:pure:path color 147
-zstyle :prompt:pure:prompt:success color blue
-prompt pure
+# pure prompt, cloned by setup/zsh.sh (skipped if it isn't there yet)
+if [[ -d "$ZSH_PLUGINS/pure" ]]; then
+  fpath+=("$ZSH_PLUGINS/pure")
+  autoload -U promptinit; promptinit
+  zstyle :prompt:pure:path color 147
+  zstyle :prompt:pure:prompt:success color blue
+  prompt pure
+fi
 
 # ----------------------------------------
 # - FZF settings                         -
@@ -160,8 +172,8 @@ export BAT_THEME="OneHalfDark"  # matches ghostty
 # - Plugins                              -
 # ----------------------------------------
 
-# SSH settings
-source "$ZSH_PLUGINS/zsh-ssh/zsh-ssh.zsh"
+# SSH host completion from ~/.ssh/config, cloned by setup/zsh.sh
+[[ -r "$ZSH_PLUGINS/zsh-ssh/zsh-ssh.zsh" ]] && source "$ZSH_PLUGINS/zsh-ssh/zsh-ssh.zsh"
 
 # Autosuggestions & syntax highlighting (installed by the package manager)
 if [[ -n "$HOMEBREW_PREFIX" && -r "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then

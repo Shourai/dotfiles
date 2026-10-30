@@ -34,7 +34,7 @@ zathura-pdf-mupdf
 
 # Fonts
 inter-font                # hyprlock, waybar
-ttf-nerd-fonts-symbols    # icons in ghostty and waybar
+ttf-nerd-fonts-symbols    # icons in waybar (ghostty has them built in)
 noto-fonts                # incl. Noto Sans Mono for ghostty
 noto-fonts-cjk
 noto-fonts-emoji

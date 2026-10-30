@@ -9,7 +9,8 @@ font-size = 14
 mouse-scroll-multiplier = precision:0.1,discrete:0.5
 
 # Over SSH: install ghostty's terminfo on the server on first connect,
-# or fall back to TERM=xterm-256color if that fails
+# or fall back to TERM=xterm-256color if that fails.
+# The shell integration that does this is loaded from zsh/.zshrc (outside tmux only).
 shell-integration-features = ssh-terminfo,ssh-env
 
 # Per-OS settings (font, keyboard, window): os.ghostty is a link to arch.ghostty,

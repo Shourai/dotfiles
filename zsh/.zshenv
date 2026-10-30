@@ -2,11 +2,8 @@
 # - Platform detection                   -
 # ----------------------------------------
 
-if [[ "$OSTYPE" == darwin* ]]; then
-  export IS_DARWIN=1
-elif [[ -f /etc/arch-release ]]; then
-  export IS_ARCH=1
-fi
+# Used by .zshrc and aliases (not exported: only needed inside zsh)
+[[ -f /etc/arch-release ]] && IS_ARCH=1
 
 # ----------------------------------------
 # - Environmental variables              -
@@ -28,18 +25,15 @@ export LESSHISTFILE=-
 # eza
 export EZA_COLORS='xx=37'
 
-# SSH agent: the first running one of Bitwarden, 1Password (macOS), 1Password (Linux).
+# SSH agent: Bitwarden if it's running, otherwise 1Password. 1Password's socket is used
+# even before 1Password has started, so shells opened earlier work once it runs.
 # Skipped inside an SSH session so a forwarded agent keeps working.
 if [[ -z "$SSH_CONNECTION" ]]; then
-  for sock in \
-    "$HOME/.bitwarden-ssh-agent.sock" \
-    "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock" \
-    "$HOME/.1password/agent.sock"
-  do
-    if [[ -S "$sock" ]]; then
-      export SSH_AUTH_SOCK="$sock"
-      break
-    fi
-  done
-  unset sock
+  if [[ -S "$HOME/.bitwarden-ssh-agent.sock" ]]; then
+    export SSH_AUTH_SOCK="$HOME/.bitwarden-ssh-agent.sock"
+  elif [[ "$OSTYPE" == darwin* ]]; then
+    export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+  else
+    export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
+  fi
 fi
