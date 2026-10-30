@@ -6,3 +6,4 @@ font-family = "Liga SFMono Nerd Font"
 clipboard-write = allow
 background-opacity = 0.7
 macos-option-as-alt = left
+mouse-scroll-multiplier = precision:0.1,discrete:0.5
