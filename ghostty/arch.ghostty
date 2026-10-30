@@ -1,4 +1,4 @@
-# Linux-only ghostty settings, loaded from config.ghostty (via os.ghostty)
+# Arch-only ghostty settings (Hyprland desktop), loaded from config.ghostty (via os.ghostty)
 
 # noto-fonts in packages/pacman.txt; icons fall back to Symbols Nerd Font (ttf-nerd-fonts-symbols)
 font-family = "Noto Sans Mono"

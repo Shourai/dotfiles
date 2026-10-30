@@ -1,0 +1,7 @@
+# Ubuntu-only ghostty settings (GNOME desktop), loaded from config.ghostty (via os.ghostty)
+
+# Ubuntu's own monospace font (fonts-ubuntu, preinstalled on the desktop).
+# Icons come from ghostty's built-in Nerd Font symbols, so no icon font is needed.
+font-family = "Ubuntu Sans Mono"
+
+# Title bar stays on: GNOME doesn't tile, so it's how windows are moved and closed

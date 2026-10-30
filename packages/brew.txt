@@ -1,14 +1,10 @@
-# macOS-only Homebrew formulae.
+# Homebrew formulae on macOS and Ubuntu (Arch gets these from pacman.txt, under other names).
 
-1password-cli
-coreutils
-gnu-sed
-iproute2mac
-node                 # provides npm
-openconnect
+node                 # provides npm (Mason tools in nvim)
 shellcheck
+tree-sitter-cli      # the tree-sitter command; nvim-treesitter builds its parsers with it
 
-# yazi: archives, 'Show EXIF', 'Show media info' (names differ on pacman)
+# yazi: archives, 'Show EXIF', 'Show media info'
 exiftool
 media-info
 sevenzip

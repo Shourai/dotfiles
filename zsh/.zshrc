@@ -41,14 +41,14 @@ setopt HIST_VERIFY               # Do not execute immediately upon history expan
 # Keep PATH free of duplicates (e.g. in nested shells inside tmux)
 typeset -U path PATH
 
-# Add homebrew to path (Apple Silicon, then Intel)
-if [[ -n "$IS_DARWIN" ]]; then
-  if [[ -x /opt/homebrew/bin/brew ]]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-  elif [[ -x /usr/local/bin/brew ]]; then
-    eval "$(/usr/local/bin/brew shellenv)"
+# Add Homebrew to path: Apple Silicon, Intel Mac, Linux (Ubuntu)
+for brew in /opt/homebrew/bin/brew /usr/local/bin/brew /home/linuxbrew/.linuxbrew/bin/brew; do
+  if [[ -x "$brew" ]]; then
+    eval "$("$brew" shellenv)"
+    break
   fi
-fi
+done
+unset brew
 
 # Add .local/bin to path
 path=("$HOME/.local/bin" $path)
@@ -164,8 +164,8 @@ export BAT_THEME="OneHalfDark"  # matches ghostty
 source "$ZSH_PLUGINS/zsh-ssh/zsh-ssh.zsh"
 
 # Autosuggestions & syntax highlighting (installed by the package manager)
-if [[ -n "$IS_DARWIN" ]]; then
-  zsh_share="$HOMEBREW_PREFIX/share"
+if [[ -n "$HOMEBREW_PREFIX" && -r "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  zsh_share="$HOMEBREW_PREFIX/share"   # macOS, Ubuntu
 elif [[ -n "$IS_ARCH" ]]; then
   zsh_share="/usr/share/zsh/plugins"
 fi

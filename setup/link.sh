@@ -20,11 +20,16 @@ link "$DOTFILES/lazygit/config.yml" "$HOME/.config/lazygit/config.yml"  # file o
 link "$DOTFILES/tmux/tmux.conf"     "$HOME/.config/tmux/tmux.conf"      # file only: tpm puts plugins next to it
 link "$NVIM_CONFIG"                 "$HOME/.config/nvim"                # separate repo
 
-# Arch Linux
+# Arch Linux: Hyprland desktop
 if is_arch; then
   link "$DOTFILES/arch/wayland/hypr"     "$HOME/.config/hypr"
   link "$DOTFILES/arch/wayland/waybar"   "$HOME/.config/waybar"
-  link "$DOTFILES/ghostty/linux.ghostty" "$DOTFILES/ghostty/os.ghostty"  # per-OS ghostty settings
+  link "$DOTFILES/ghostty/arch.ghostty"  "$DOTFILES/ghostty/os.ghostty"  # per-OS ghostty settings
+fi
+
+# Ubuntu: GNOME desktop
+if is_ubuntu; then
+  link "$DOTFILES/ghostty/ubuntu.ghostty" "$DOTFILES/ghostty/os.ghostty"  # per-OS ghostty settings
 fi
 
 # macOS

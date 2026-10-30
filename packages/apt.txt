@@ -1,0 +1,21 @@
+# Ubuntu packages (apt), for Ubuntu 26.04 LTS with GNOME.
+# Only what Homebrew can't or shouldn't provide on Linux; all CLI tools come from
+# Homebrew (common.txt + brew.txt), like on macOS. See setup/ubuntu.sh.
+
+# Needed by Homebrew itself (and by nvim-treesitter to compile parsers)
+build-essential
+curl
+file
+git
+procps
+
+# GUI app: Homebrew only has ghostty as a macOS cask
+ghostty
+
+# Fallback shell: the login shell is Homebrew's zsh; if Homebrew ever breaks,
+# switch back with `sudo chsh -s /usr/bin/zsh $USER` (see README)
+zsh
+
+# Ubuntu Sans Mono for ghostty (see ghostty/ubuntu.ghostty); preinstalled on the desktop,
+# listed so the font is guaranteed. Icons come from ghostty's built-in Nerd Font symbols.
+fonts-ubuntu

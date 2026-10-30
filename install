@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Bootstrap a fresh Arch Linux or macOS machine, or bring an existing one up to date.
+# Bootstrap a fresh Arch Linux, Ubuntu or macOS machine, or bring an existing one up to date.
 # Safe to rerun.
 #
 #   curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/main/install | bash -s -- [flags]
@@ -51,8 +51,10 @@ main() {
     os=macos
   elif [ -f /etc/arch-release ]; then
     os=arch
+  elif grep -qx 'ID=ubuntu' /etc/os-release 2>/dev/null; then
+    os=ubuntu
   else
-    die "unsupported system: only Arch Linux and macOS"
+    die "unsupported system: only Arch Linux, Ubuntu and macOS"
   fi
 
   # Ask for the password once and keep sudo alive until this script exits
@@ -69,8 +71,11 @@ main() {
     fi
     [ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
     run brew install git
-  else
+  elif [ "$os" = arch ]; then
     run sudo pacman -Syu --needed --noconfirm git
+  else
+    run sudo apt-get update -q
+    run sudo apt-get install -y -q git
   fi
 
   info "Cloning repositories"

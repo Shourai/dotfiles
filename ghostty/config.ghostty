@@ -12,6 +12,6 @@ mouse-scroll-multiplier = precision:0.1,discrete:0.5
 # or fall back to TERM=xterm-256color if that fails
 shell-integration-features = ssh-terminfo,ssh-env
 
-# Per-OS settings (font, keyboard, window): os.ghostty is a link to linux.ghostty
-# or macos.ghostty, created by setup/link.sh. Loaded last, so it can override the above.
+# Per-OS settings (font, keyboard, window): os.ghostty is a link to arch.ghostty,
+# ubuntu.ghostty or macos.ghostty, created by setup/link.sh. Loaded last, so it can override the above.
 config-file = ?os.ghostty

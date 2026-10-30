@@ -12,26 +12,46 @@ PLUGINS="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins"
 
 info "Setting up zsh"
 
-# ZDOTDIR in the system-wide zshenv, so $HOME needs no .zshenv
-if is_macos; then
-  zshenv=/etc/zshenv
+# Which zsh to use as login shell: Homebrew's on Ubuntu (newest), the system one
+# elsewhere (macOS ships /bin/zsh, Arch /usr/bin/zsh)
+BREW_PREFIX=/home/linuxbrew/.linuxbrew
+if is_ubuntu && [ -x "$BREW_PREFIX/bin/zsh" ]; then
+  zsh_path="$BREW_PREFIX/bin/zsh"
 else
-  zshenv=/etc/zsh/zshenv
-fi
-if grep -qs 'ZDOTDIR' "$zshenv"; then
-  ok "ZDOTDIR already set in $zshenv"
-else
-  run sudo sh -c "echo 'export ZDOTDIR=\"\$HOME/.config/zsh\"' >> $zshenv"
-  ok "set ZDOTDIR in $zshenv"
+  zsh_path="$(command -v zsh || true)"
 fi
 
-# Login shell (macOS already defaults to zsh)
-zsh_path="$(command -v zsh || true)"
+# ZDOTDIR in the system-wide zshenv, so $HOME needs no .zshenv.
+# Which file depends on how zsh was built: macOS and Homebrew's zsh read /etc/zshenv,
+# zsh from pacman or apt reads /etc/zsh/zshenv.
+set_zdotdir() {
+  local file="$1"
+  if grep -qs 'ZDOTDIR' "$file"; then
+    ok "ZDOTDIR already set in $file"
+  else
+    run sudo sh -c "mkdir -p '$(dirname "$file")' && echo 'export ZDOTDIR=\"\$HOME/.config/zsh\"' >> '$file'"
+    ok "set ZDOTDIR in $file"
+  fi
+}
+if is_macos; then
+  set_zdotdir /etc/zshenv
+else
+  set_zdotdir /etc/zsh/zshenv
+  if [ "$zsh_path" = "$BREW_PREFIX/bin/zsh" ]; then
+    set_zdotdir /etc/zshenv
+  fi
+fi
+
+# Login shell
 if [ -z "$zsh_path" ]; then
   warn "zsh is not installed, skipping login shell"
-elif [ "$(basename "${SHELL:-}")" = "zsh" ]; then
-  ok "login shell is already zsh"
+elif is_macos && [ "$(basename "${SHELL:-}")" = "zsh" ]; then
+  ok "login shell is already zsh"   # macOS default
+elif [ "$(getent passwd "$USER" | cut -d: -f7)" = "$zsh_path" ]; then
+  ok "login shell is already $zsh_path"
 else
+  # chsh only accepts shells listed in /etc/shells
+  grep -qx "$zsh_path" /etc/shells || run sudo sh -c "echo '$zsh_path' >> /etc/shells"
   run sudo chsh -s "$zsh_path" "$USER"
   ok "login shell set to $zsh_path"
 fi

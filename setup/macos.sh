@@ -22,7 +22,7 @@ run brew analytics off
 run brew update
 run brew upgrade
 
-lists_brew="$PACKAGES/common.txt $PACKAGES/brew.txt"
+lists_brew="$PACKAGES/common.txt $PACKAGES/brew.txt $PACKAGES/brew-macos.txt"
 lists_cask="$PACKAGES/cask.txt"
 if [ "$EXTRAS" = 1 ]; then
   lists_brew="$lists_brew $PACKAGES/extras-brew.txt"

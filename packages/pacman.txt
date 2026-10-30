@@ -4,6 +4,7 @@
 ghostty
 npm
 openssh
+tree-sitter-cli           # nvim-treesitter builds its parsers with it
 unzip
 
 # Hyprland desktop
