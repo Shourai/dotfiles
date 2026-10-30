@@ -32,9 +32,9 @@ seahorse
 zathura-pdf-mupdf
 
 # Fonts
-inter-font                # hyprlock
-ttf-jetbrains-mono-nerd   # ghostty (see ghostty/linux.ghostty)
-noto-fonts
+inter-font                # hyprlock, waybar
+ttf-nerd-fonts-symbols    # icons in ghostty and waybar
+noto-fonts                # incl. Noto Sans Mono for ghostty
 noto-fonts-cjk
 noto-fonts-emoji
 ttf-dejavu

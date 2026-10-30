@@ -17,8 +17,8 @@
  * ----------------------------------------------------- */
 
 * {
-  /* ttf-jetbrains-mono-nerd, includes the icons */
-  font-family: "JetBrainsMono Nerd Font", sans-serif;
+  /* Text: Inter (inter-font, same as hyprlock). Icons: Symbols Nerd Font (ttf-nerd-fonts-symbols) */
+  font-family: "Inter", "Symbols Nerd Font", sans-serif;
   font-size: 15px;
 }
 
