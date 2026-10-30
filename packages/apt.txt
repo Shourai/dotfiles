@@ -12,10 +12,8 @@ procps
 # GUI app: Homebrew only has ghostty as a macOS cask
 ghostty
 
-# Fallback shell: the login shell is Homebrew's zsh; if Homebrew ever breaks,
-# switch back with `sudo chsh -s /usr/bin/zsh $USER` (see README)
+# Fallback shell (the login shell is Homebrew's zsh; see the Ubuntu section in README.md)
 zsh
 
-# Ubuntu Sans Mono for ghostty (see ghostty/ubuntu.ghostty); preinstalled on the desktop,
-# listed so the font is guaranteed. Icons come from ghostty's built-in Nerd Font symbols.
+# Ubuntu Sans Mono for ghostty (see ghostty/ubuntu.ghostty); preinstalled on the desktop
 fonts-ubuntu

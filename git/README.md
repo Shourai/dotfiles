@@ -15,7 +15,8 @@ There is no global `user.name`/`user.email`. The identity depends on where the r
 
 - `~/Documents/github/**` -> `gitconfig_personal`
 - `~/Documents/gitlab/**` -> `gitconfig_work`
-- anywhere else -> no identity; git refuses to commit until you set one, so nothing is committed under the wrong name.
+- anywhere else -> no identity; git refuses to commit until you set one (`user.useConfigOnly`
+  stops git from guessing one such as `user@host.local`), so nothing is committed under the wrong name.
 
 To set up the work identity on a machine, create `~/.config/git/gitconfig_work`:
 
@@ -34,6 +35,7 @@ To set up the work identity on a machine, create `~/.config/git/gitconfig_work`:
 | `fetch.prune`               | branches deleted on the remote disappear locally on fetch           |
 | `merge.conflictStyle zdiff3`| conflict markers show the original text between `\|\|\|\|\|\|\|` and `=======` |
 | `rerere.enabled`            | a conflict you resolved once is resolved the same way next time     |
+| `user.useConfigOnly`        | never guess a name/email; see Identity per folder                   |
 
 ## Aliases
 

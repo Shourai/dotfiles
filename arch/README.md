@@ -1,31 +1,39 @@
 # Arch Linux
 
-Install Arch Linux with `archinstall`, then run `install` from the repo root.
+Install Arch Linux with `archinstall` (no desktop profile, no display manager), log in on TTY1 and
+run the `curl ... | bash` command from the main README. Hyprland then starts on every TTY1 login
+(`zsh/.zprofile`). The browsers used by `SUPER+Space` come from `--extras`.
 
 ## Desktop
 
-Hyprland on Wayland, started from TTY1 by `zsh/.zprofile`. `setup/link.sh` links `wayland/hypr`
-to `~/.config/hypr` and `wayland/waybar` to `~/.config/waybar`.
+`setup/link.sh` links `wayland/hypr` to `~/.config/hypr` and `wayland/waybar` to `~/.config/waybar`.
 
 | File                     | What it does                                                    |
 |--------------------------|-----------------------------------------------------------------|
-| `hypr/hyprland.lua`      | monitors (this desktop: DP-2 + DP-3), look, input, keys, rules  |
+| `hypr/hyprland.lua`      | monitors, autostart, look, input, keys, window rules            |
 | `hypr/hypridle.conf`     | lock after 5 min, screen off after 5.5 min                       |
 | `hypr/hyprlock.conf`     | lock screen (font: Inter, from `inter-font`)                    |
 | `hypr/hyprpaper.conf`    | wallpaper (`hypr/wallpaper.png`)                                |
 | `waybar/config.jsonc`    | bar: workspaces, window title, submap, volume, clock            |
-| `waybar/style.css`       | bar styles                                                      |
+| `waybar/style.css`       | bar fonts and colours (text Inter, icons Symbols Nerd Font)     |
 
-Hyprland reloads `hyprland.lua` on save. Check it first with
-`Hyprland --verify-config -c ~/.config/hypr/hyprland.lua`. Reload waybar with `killall -SIGUSR2 waybar`.
+**Monitors** are set for this desktop (DP-2 left, DP-3 right; workspaces 1-5 and 6-10 pinned to
+them). On another machine, edit the MONITORS block in `hyprland.lua`; `hyprctl monitors` lists the
+output names.
+
+**Changing `hyprland.lua`**: Hyprland reloads it as soon as it's saved, so a mistake shows up
+right away (a red error bar; `hyprctl configerrors` lists the problems). To check a bigger change
+first, edit a copy, run `Hyprland --verify-config -c <copy>`, then copy it over the real file.
+hypridle, hyprpaper and waybar don't reload by themselves: restart hypridle or hyprpaper (or log
+out and in), and reload waybar with `killall -SIGUSR2 waybar`.
 
 ### Keys
 
-`SUPER` is the main modifier.
+`SUPER` is the main modifier. Caps Lock is an extra Ctrl (`kb_options = "ctrl:nocaps"`).
 
 | Keys                               | What it does                                       |
 |------------------------------------|----------------------------------------------------|
-| `SUPER+Return` / `SUPER+SHIFT+Return` | ghostty / ghostty with tmux                      |
+| `SUPER+Return` / `SUPER+SHIFT+Return` | ghostty / ghostty with tmux                     |
 | `SUPER+D`                          | launcher (walker)                                  |
 | `SUPER+E`                          | yazi in ghostty                                    |
 | `SUPER+W`                          | close window                                       |
@@ -33,13 +41,15 @@ Hyprland reloads `hyprland.lua` on save. Check it first with
 | `SUPER+H/J/K/L`                    | focus left / down / up / right                     |
 | `SUPER+SHIFT+H/J/K/L`              | move window left / down / up / right               |
 | `SUPER+1..0` / `SUPER+SHIFT+1..0`  | go to / move window to workspace 1-10              |
-| `SUPER+[` / `SUPER+]`              | previous / next workspace on this monitor          |
+| `SUPER+[` / `SUPER+]`, `SUPER+scroll` | previous / next workspace on this monitor (waybar scroll does the same) |
 | `SUPER+S` / `SUPER+SHIFT+S`        | show scratchpad / move window to scratchpad        |
-| `SUPER+Space`, then `f` / `b` / `c` | Firefox Dev / Brave incognito / Chromium incognito |
+| `SUPER+left drag` / `SUPER+right drag` | move / resize a window                         |
+| `SUPER+Space`, then `f` / `b` / `c` | Firefox Dev / Brave incognito / Chromium incognito (`Esc` cancels; needs `--extras`) |
 | `SUPER+M`                          | exit Hyprland                                      |
 | `ALT+CTRL+Q`                       | lock screen                                        |
 | `ALT+CTRL+S`                       | screenshot of a selected area to the clipboard     |
 | `ALT+SHIFT+M` / `.` / `,`          | mute / volume up / volume down                     |
+| 3-finger swipe (touchpad)          | switch workspace                                   |
 
 ## After installation
 

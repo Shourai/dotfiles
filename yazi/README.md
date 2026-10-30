@@ -19,7 +19,7 @@ that setting here.
 | Key      | What it does                                                      |
 |----------|-------------------------------------------------------------------|
 | `A`      | create a directory (default: bulk create)                         |
-| `Ctrl-x` | drag and drop the selected files with dragon-drop (Linux only)    |
+| `Ctrl-x` | drag and drop the selected files with dragon-drop (Arch only; not installed elsewhere) |
 
 Press `~` or `F1` in yazi for all keys.
 
@@ -36,7 +36,6 @@ None are used right now. If you add one, `yazi/flavors/` and `yazi/plugins/` sta
 
 ## Preview helpers
 
-Installed from `packages/`: ffmpeg (video), 7zip (archives), jq (JSON), poppler (PDF),
-imagemagick (HEIC, AVIF, JXL), resvg (SVG), exiftool and mediainfo (the "Show EXIF" and
-"Show media info" openers under `O`). fd, ripgrep, fzf and zoxide power search and jumping.
-Image previews also work inside tmux (see `tmux/README.md`).
+The tools behind previews and the "Show EXIF" / "Show media info" openers (`O`) are in the
+package lists, marked with "yazi" in `packages/`. Image previews also work inside tmux
+(see `tmux/README.md`).

@@ -7,7 +7,7 @@ config-version = 2
 
 start-at-login = true
 
-# Apply changes on save
+# Apply changes on save (starts working after one manual reload: alt-shift-; then esc)
 auto-reload-config = true
 
 after-startup-command = []

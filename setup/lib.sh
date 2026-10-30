@@ -44,7 +44,7 @@ usage() {
   cat <<EOF
 Usage: $(basename "$0") [--extras] [--defaults] [--keyremap] [--dry-run]
 
-  --extras     also install the optional packages (packages/extras-*.txt)
+  --extras     Arch: also install the optional packages (packages/extras-*.txt)
   --defaults   macOS: also apply the system settings in macos/defaults.sh
   --keyremap   macOS: also install the key remap for non-US keyboards (see macos/README.md)
   --dry-run    print what would change without changing anything
