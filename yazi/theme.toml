@@ -1,5 +1,6 @@
 #:schema https://yazi-rs.github.io/schemas/theme.json
 
-# Flavor installed by `ya pkg install` from package.toml
-[flavor]
-dark = "catppuccin-macchiato"
+# No flavor: yazi's built-in dark theme uses the terminal's 16 colours, so it follows
+# ghostty's One Half Dark (the One Dark theme shared across these dotfiles).
+# To change a single colour, copy that setting from
+# https://github.com/sxyazi/yazi/blob/main/yazi-config/preset/theme-dark.toml

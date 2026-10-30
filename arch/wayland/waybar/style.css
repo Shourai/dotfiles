@@ -1,16 +1,16 @@
 /* waybar styles. Apply changes: killall -SIGUSR2 waybar */
 
 /* -----------------------------------------------------
- * Colours (Everforest)
+ * Colours: One Dark (same palette as onedark.nvim)
  * ----------------------------------------------------- */
-@define-color textcolor      #FFFFFF;
-@define-color background     #272e33;
-@define-color background-alt #414b50;
-@define-color foreground     #d3c6aa;
-@define-color foreground-alt #272e33;
-@define-color red            #e67e80;
-@define-color blue           #7fbbb3;
-@define-color cyan           #83c092;
+@define-color textcolor      #abb2bf;
+@define-color background     #282c34;
+@define-color background-alt #393f4a;
+@define-color foreground     #abb2bf;
+@define-color foreground-alt #282c34;
+@define-color red            #e86671;
+@define-color blue           #61afef;
+@define-color cyan           #56b6c2;
 
 /* -----------------------------------------------------
  * General

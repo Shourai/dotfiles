@@ -11,7 +11,7 @@ that setting here.
 |----------------|-----------------------------------------------------------------------|
 | `yazi.toml`    | wider preview pane (`ratio`), larger image previews                   |
 | `keymap.toml`  | my keys, in `prepend_keymap` so they win over the defaults            |
-| `theme.toml`   | selects the flavor                                                    |
+| `theme.toml`   | no flavor: colours follow the terminal theme (One Dark)               |
 | `package.toml` | flavors and plugins for `ya pkg` (written by `ya pkg add`)            |
 
 ## My keys
@@ -25,7 +25,8 @@ Press `~` or `F1` in yazi for all keys.
 
 ## Flavors and plugins
 
-`yazi/flavors/` and `yazi/plugins/` are not in the repo; `ya pkg` installs them from `package.toml`.
+None are used right now. If you add one, `yazi/flavors/` and `yazi/plugins/` stay out of the repo;
+`ya pkg` installs them from `package.toml`.
 
 | Task                          | Command                                         |
 |-------------------------------|-------------------------------------------------|

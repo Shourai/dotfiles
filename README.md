@@ -42,7 +42,7 @@ The repo must live at `~/Documents/github/dotfiles`; the scripts and some config
 |-------------------|-------------------------------------------------------------------------------|
 | `setup/arch.sh`   | Arch: `pacman -Syu`, installs yay, then the pacman and AUR package lists      |
 | `setup/macos.sh`  | macOS: Homebrew formulae and casks, the key remap, `--defaults`               |
-| `setup/link.sh`   | Symlinks the configs into `~/.config`, installs yazi's flavor (`ya pkg`)      |
+| `setup/link.sh`   | Symlinks the configs into `~/.config`, installs yazi packages (`ya pkg`)      |
 | `setup/zsh.sh`    | Sets `ZDOTDIR` in `/etc/zshenv`, makes zsh the login shell, clones plugins    |
 
 Every script can also be run on its own and is safe to rerun. Shared helpers are in `setup/lib.sh`.
@@ -63,6 +63,20 @@ Every script can also be run on its own and is safe to rerun. Shared helpers are
 **Add a config**: put it in the repo, add a `link` line to `setup/link.sh`, then run `setup/link.sh`.
 If something already exists at the target, it is moved to `<name>.bak-<date>` first.
 Links to configs that were removed from the repo are cleaned up automatically.
+
+## Theme
+
+One Dark everywhere, using the palette of nvim's `onedark.nvim` (`dark` style).
+
+| Tool              | Where it's set                                                             |
+|-------------------|----------------------------------------------------------------------------|
+| ghostty           | `theme = One Half Dark` in `ghostty/config.ghostty` (same background and accents) |
+| yazi, lazygit, fzf, eza, pure prompt | no theme of their own: they use the terminal's colours  |
+| bat, delta        | `BAT_THEME="OneHalfDark"` in `zsh/.zshrc`                                  |
+| tmux              | `od_*` colours in `tmux/tmux.conf`                                         |
+| waybar            | `@define-color` lines in `arch/wayland/waybar/style.css`                   |
+| Hyprland borders  | `col` in `arch/wayland/hypr/hyprland.lua`                                  |
+| nvim              | `onedark.nvim` in the separate nvim repo                                   |
 
 ## Layout
 

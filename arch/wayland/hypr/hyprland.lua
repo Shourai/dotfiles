@@ -75,9 +75,10 @@ hl.config({
 
     border_size      = 1,
 
+    -- One Dark: blue -> purple when focused, grey otherwise
     col              = {
-      active_border   = { colors = { "rgba(33ccffee)", "rgba(00ff99ee)" }, angle = 45 },
-      inactive_border = "rgba(595959aa)",
+      active_border   = { colors = { "rgba(61afefee)", "rgba(c678ddee)" }, angle = 45 },
+      inactive_border = "rgba(5c6370aa)",
     },
 
     resize_on_border = false,
