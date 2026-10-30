@@ -1,4 +1,4 @@
-# Homebrew formulae on macOS and Ubuntu (Arch gets these from pacman.txt, under other names).
+# Homebrew formulae on macOS and Ubuntu (Arch gets these from pacman.txt or aur.txt, under other names).
 
 node                 # provides npm (Mason tools in nvim)
 shellcheck

@@ -1,6 +1,5 @@
 # macOS-only Homebrew formulae.
 
-1password-cli
 coreutils
 gnu-sed
 iproute2mac

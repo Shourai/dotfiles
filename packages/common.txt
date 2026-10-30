@@ -1,4 +1,4 @@
-# Packages with the same name on pacman (Arch) and Homebrew (macOS).
+# Packages with the same name on pacman (Arch) and Homebrew (macOS and Ubuntu).
 # One package per line; text after '#' is ignored.
 
 bash
@@ -10,6 +10,7 @@ fd
 fzf
 lazygit
 neovim
+opentofu             # `tofu fmt` formats Terraform files in nvim
 python
 ripgrep
 rsync

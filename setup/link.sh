@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# Symlink the configs in this repo into ~/.config (and a few other places),
+# Symlink the configs in this repo into ~/.config, pick the per-OS ghostty settings,
 # then install the yazi packages those configs need.
-# Safe to rerun; run it again after adding a new config below.
+# Safe to rerun; run it again after adding a new config below. Anything in the way of a
+# link is moved to <name>.bak-<date>, never deleted.
 #
 #   setup/link.sh [--dry-run]
 
@@ -38,12 +39,15 @@ if is_macos; then
   link "$DOTFILES/ghostty/macos.ghostty" "$DOTFILES/ghostty/os.ghostty"  # per-OS ghostty settings
 fi
 
-# Clean up links to configs that were removed from the repo
+# Clean up links to configs that were removed from the repo (top level of ~/.config only)
 prune_links "$HOME/.config"
-prune_links "$HOME/.local/share"
 
 # yazi flavors and plugins listed in yazi/package.toml (not stored in the repo)
 if has ya; then
   info "Installing yazi packages"
-  run ya pkg install
+  try "ya pkg install" ya pkg install
+else
+  warn "yazi's ya not found; run setup/link.sh again after installing packages"
 fi
+
+report_failures

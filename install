@@ -1,16 +1,10 @@
 #!/usr/bin/env bash
-# Bootstrap a fresh Arch Linux, Ubuntu or macOS machine, or bring an existing one up to date.
-# Safe to rerun.
+# Set up a fresh Arch Linux, Ubuntu or macOS machine, or update an existing one:
+# installs git, clones (or pulls) this repo and the nvim repo, then runs setup/<os>.sh,
+# setup/link.sh and setup/zsh.sh. Safe to rerun. Flags and details: README.md.
 #
 #   curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/main/install | bash -s -- [flags]
 #   ~/Documents/github/dotfiles/install [flags]
-#
-#   --extras     also install the optional packages (packages/extras-*.txt)
-#   --defaults   also apply macOS system settings (macos/defaults.sh)
-#   --dry-run    print what would change without changing anything
-#
-# Steps: install git -> clone dotfiles and nvim -> packages -> links -> zsh.
-# Each step is also its own script in setup/ and can be run on its own.
 
 set -euo pipefail
 
@@ -19,19 +13,41 @@ NVIM_CONFIG="$HOME/Documents/github/nvim"
 
 # This file runs before the repo is cloned, so it can't use setup/lib.sh yet
 info() { printf '\033[1;34m==>\033[0m %s\n' "$*"; }
+warn() { printf '  \033[33m!\033[0m %s\n' "$*" >&2; }
 die()  { printf '\033[1;31merror:\033[0m %s\n' "$*" >&2; exit 1; }
 run()  { if [ "${DRY_RUN:-0}" = 1 ]; then printf '  \033[2m[dry-run]\033[0m %s\n' "$*"; else "$@"; fi; }
 
-# Clone one of my GitHub repos, unless it is already there
+usage() {
+  cat <<'EOF'
+Usage: install [--extras] [--defaults] [--keyremap] [--dry-run]
+
+  --extras     also install the optional packages (packages/extras-*.txt)
+  --defaults   macOS: also apply the system settings in macos/defaults.sh
+  --keyremap   macOS: also install the key remap for non-US keyboards
+  --dry-run    print what would change without changing anything
+               (needs the repos to be cloned already)
+EOF
+}
+
+# Clone one of my GitHub repos, or fast-forward it if it's already there
 clone() {
   local name="$1" dir="$2"
   if [ -d "$dir/.git" ]; then
-    echo "  $dir already exists"
+    run git -C "$dir" pull --ff-only --quiet ||
+      warn "could not update $dir (local changes or no network); using it as it is"
   else
     run git clone --quiet "https://github.com/Shourai/$name.git" "$dir"
     # Cloned over https (no SSH key needed yet); push over SSH from now on
     run git -C "$dir" remote set-url origin "git@github.com:Shourai/$name.git"
   fi
+}
+
+# Install Homebrew; download the installer first so a failed download stops here
+install_brew() {
+  local script
+  script="$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" ||
+    die "could not download the Homebrew installer"
+  NONINTERACTIVE=1 /bin/bash -c "$script"
 }
 
 # Wrapped in main so bash reads the whole file before running it (needed for curl | bash)
@@ -41,9 +57,9 @@ main() {
   for arg in "$@"; do
     case "$arg" in
       --dry-run) DRY_RUN=1 ;;
-      --extras|--defaults) ;;
-      -h|--help) sed -n '2,13p' "$0" 2>/dev/null | sed 's/^# \{0,1\}//'; exit 0 ;;
-      *) die "unknown option: $arg (see --help)" ;;
+      --extras|--defaults|--keyremap) ;;
+      -h|--help) usage; exit 0 ;;
+      *) usage >&2; die "unknown option: $arg" ;;
     esac
   done
 
@@ -60,16 +76,18 @@ main() {
   # Ask for the password once and keep sudo alive until this script exits
   if [ "$DRY_RUN" = 0 ]; then
     sudo -v
-    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+    ( while true; do sudo -n true; sleep 60; done ) >/dev/null 2>&1 &
+    keepalive=$!
+    trap 'kill "$keepalive" 2>/dev/null' EXIT
   fi
 
   info "Installing git"
   if [ "$os" = macos ]; then
     # Homebrew installs the Xcode command line tools, which include git
-    if ! command -v brew >/dev/null 2>&1; then
-      run env NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    fi
-    [ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+    command -v brew >/dev/null 2>&1 || run install_brew
+    for brew in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+      if [ -x "$brew" ]; then eval "$("$brew" shellenv)"; break; fi
+    done
     run brew install git
   elif [ "$os" = arch ]; then
     run sudo pacman -Syu --needed --noconfirm git
@@ -78,18 +96,23 @@ main() {
     run sudo apt-get install -y -q git
   fi
 
-  info "Cloning repositories"
+  info "Getting the repositories"
   clone dotfiles "$DOTFILES"
   clone nvim "$NVIM_CONFIG"
 
-  # The setup scripts come from the clone; in a dry run on a fresh machine there is none yet
-  [ -d "$DOTFILES/setup" ] || die "$DOTFILES/setup not found (dry run on a fresh machine?)"
+  [ -d "$DOTFILES/setup" ] ||
+    die "$DOTFILES/setup not found: a dry run on a fresh machine (nothing cloned yet), or an old checkout that couldn't be updated"
 
-  bash "$DOTFILES/setup/$os.sh" "$@"
-  bash "$DOTFILES/setup/link.sh" "$@"
-  bash "$DOTFILES/setup/zsh.sh" "$@"
+  # Run every step even if one fails, so links and zsh are set up regardless
+  failed=""
+  for step in "$os" link zsh; do
+    bash "$DOTFILES/setup/$step.sh" "$@" || failed="$failed setup/$step.sh"
+  done
 
-  info "Done! Reboot (or log out and back in) for everything to take effect."
+  if [ -n "$failed" ]; then
+    die "finished with errors in:$failed (see the messages above; it's safe to rerun)"
+  fi
+  info "Done! Log out and back in (or reboot) for everything to take effect."
 }
 
 main "$@"
