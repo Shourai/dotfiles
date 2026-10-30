@@ -38,3 +38,8 @@ noto-fonts-emoji
 ttf-dejavu
 ttf-liberation
 ttf-opensans
+
+# yazi: archives, 'Show EXIF', 'Show media info' (names differ on Homebrew)
+7zip
+mediainfo
+perl-image-exiftool

@@ -1,4 +1,5 @@
+#:schema https://yazi-rs.github.io/schemas/theme.json
+
+# Flavor installed by `ya pkg install` from package.toml
 [flavor]
-use = "catppuccin-macchiato"
-# For upcoming Yazi 0.4 (nightly version):
 dark = "catppuccin-macchiato"

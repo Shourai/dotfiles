@@ -42,7 +42,7 @@ The repo must live at `~/Documents/github/dotfiles`; the scripts and some config
 |-------------------|-------------------------------------------------------------------------------|
 | `setup/arch.sh`   | Arch: `pacman -Syu`, installs yay, then the pacman and AUR package lists      |
 | `setup/macos.sh`  | macOS: Homebrew formulae and casks, the key remap, `--defaults`               |
-| `setup/link.sh`   | Symlinks the configs into `~/.config`                                         |
+| `setup/link.sh`   | Symlinks the configs into `~/.config`, installs yazi's flavor (`ya pkg`)      |
 | `setup/zsh.sh`    | Sets `ZDOTDIR` in `/etc/zshenv`, makes zsh the login shell, clones plugins    |
 
 Every script can also be run on its own and is safe to rerun. Shared helpers are in `setup/lib.sh`.
@@ -75,7 +75,7 @@ dotfiles
  ├─ tmux/tmux.conf   -> ~/.config/tmux/tmux.conf (tpm installs itself on first start)
  ├─ git/             -> ~/.config/git (see git/README.md)
  ├─ lazygit/config.yml -> ~/.config/lazygit/config.yml
- ├─ yazi/            -> ~/.config/yazi
+ ├─ yazi/            -> ~/.config/yazi (see yazi/README.md)
  ├─ ghostty/         -> ~/.config/ghostty
  ├─ arch/            Arch only: Hyprland, waybar, fontconfig, fonts, post-install notes
  └─ macos/           macOS only: AeroSpace, key remap, defaults.sh, notes

@@ -1,0 +1,41 @@
+# yazi
+
+Linked to `~/.config/yazi` by `setup/link.sh`, which then runs `ya pkg install`.
+
+The config files contain **only what differs from yazi's defaults**, so new yazi versions bring
+their new defaults along instead of breaking an old copy. To see or change a default, look it up in
+[yazi's preset files](https://github.com/sxyazi/yazi/tree/main/yazi-config/preset) and copy just
+that setting here.
+
+| File           | Contains                                                              |
+|----------------|-----------------------------------------------------------------------|
+| `yazi.toml`    | wider preview pane (`ratio`), larger image previews                   |
+| `keymap.toml`  | my keys, in `prepend_keymap` so they win over the defaults            |
+| `theme.toml`   | selects the flavor                                                    |
+| `package.toml` | flavors and plugins for `ya pkg` (written by `ya pkg add`)            |
+
+## My keys
+
+| Key      | What it does                                                      |
+|----------|-------------------------------------------------------------------|
+| `A`      | create a directory (default: bulk create)                         |
+| `Ctrl-x` | drag and drop the selected files with dragon-drop (Linux only)    |
+
+Press `~` or `F1` in yazi for all keys.
+
+## Flavors and plugins
+
+`yazi/flavors/` and `yazi/plugins/` are not in the repo; `ya pkg` installs them from `package.toml`.
+
+| Task                          | Command                                         |
+|-------------------------------|-------------------------------------------------|
+| install what's listed         | `ya pkg install` (also done by `setup/link.sh`) |
+| add a flavor or plugin        | `ya pkg add yazi-rs/flavors:<name>`             |
+| update all to latest          | `ya pkg upgrade`                                |
+
+## Preview helpers
+
+Installed from `packages/`: ffmpeg (video), 7zip (archives), jq (JSON), poppler (PDF),
+imagemagick (HEIC, AVIF, JXL), resvg (SVG), exiftool and mediainfo (the "Show EXIF" and
+"Show media info" openers under `O`). fd, ripgrep, fzf and zoxide power search and jumping.
+Image previews also work inside tmux (see `tmux/README.md`).

@@ -158,6 +158,10 @@ emacs/org-roam.db
 # tmux
 tmux/plugins
 
+# yazi: installed by `ya pkg install` from yazi/package.toml
+yazi/flavors/
+yazi/plugins/
+
 # zsh: old location of history and completion cache (now in ~/.local/state and ~/.cache)
 .zcompdump
 zsh/history

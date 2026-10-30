@@ -20,3 +20,10 @@ zoxide
 zsh
 zsh-autosuggestions
 zsh-syntax-highlighting
+
+# yazi previews (video, JSON, PDF, HEIC/AVIF, SVG)
+ffmpeg
+imagemagick
+jq
+poppler
+resvg

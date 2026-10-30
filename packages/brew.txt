@@ -7,3 +7,8 @@ iproute2mac
 node                 # provides npm
 openconnect
 shellcheck
+
+# yazi: archives, 'Show EXIF', 'Show media info' (names differ on pacman)
+exiftool
+media-info
+sevenzip

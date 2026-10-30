@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Symlink the configs in this repo into ~/.config (and a few other places).
+# Symlink the configs in this repo into ~/.config (and a few other places),
+# then install the yazi packages those configs need.
 # Safe to rerun; run it again after adding a new config below.
 #
 #   setup/link.sh [--dry-run]
@@ -35,3 +36,9 @@ fi
 # Clean up links to configs that were removed from the repo
 prune_links "$HOME/.config"
 prune_links "$HOME/.local/share"
+
+# yazi flavors and plugins listed in yazi/package.toml (not stored in the repo)
+if has ya; then
+  info "Installing yazi packages"
+  run ya pkg install
+fi
