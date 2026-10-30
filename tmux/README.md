@@ -31,7 +31,9 @@ Prefix is the default `Ctrl-b`. Reload the config with `<prefix> r` (safe to rep
 
 ## Notes
 
-- **Shift+Enter / Shift+Space** are sent as plain Enter / Space on purpose; see the comment in `tmux.conf`.
+- **Shift+Enter** and other modified keys reach programs that ask for them (`extended-keys on`,
+  CSI-u format), e.g. Shift+Enter inserts a newline in Claude Code and Pi; a plain shell gets
+  ordinary keys. These are the settings Claude Code's and Pi's docs recommend for tmux.
 - **Image previews** (yazi) work inside tmux because `allow-passthrough` is on.
 - **Closing the last window** of a session switches to another session (`detach-on-destroy off`).
 - **Colours**: One Dark, set as `od_*` variables near the top of the colours section; a window with
