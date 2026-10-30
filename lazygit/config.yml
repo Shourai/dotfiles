@@ -1,0 +1,10 @@
+# lazygit config, linked to ~/.config/lazygit/config.yml
+# Defaults: `lazygit --config`. Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+
+git:
+  # Render diffs with delta (settings from the [delta] section in git/config).
+  # Press | in lazygit to switch between delta and the built-in diff view.
+  diffRenderers:
+    - type: stdinFilter
+      colorArg: always
+      command: delta --dark --paging=never

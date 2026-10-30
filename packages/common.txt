@@ -8,6 +8,7 @@ erdtree
 eza
 fd
 fzf
+git-delta            # git pager, see git/config
 lazygit
 neovim
 python

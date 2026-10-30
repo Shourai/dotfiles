@@ -1,3 +1,58 @@
+# Global git config, linked to ~/.config/git/config. See README.md in this folder.
+
+# ----------------------------------------
+# - Branches & remotes                   -
+# ----------------------------------------
+
+[init]
+  defaultBranch = main
+
+[pull]
+  ff = only                # refuse to pull when branches have diverged; decide by hand
+
+[push]
+  autoSetupRemote = true   # first push of a new branch needs no -u
+
+[fetch]
+  prune = true             # delete local refs to branches removed on the remote
+
+[branch]
+  sort = -committerdate    # most recently used branches first
+
+# ----------------------------------------
+# - Diffs & merges                       -
+# ----------------------------------------
+
+[diff]
+  algorithm = histogram
+  colorMoved = default     # moved lines in a different colour
+
+[merge]
+  conflictStyle = zdiff3   # conflict markers also show the original text
+
+[rerere]
+  enabled = true           # remember conflict resolutions and reuse them
+
+# ----------------------------------------
+# - Pager: delta                         -
+# ----------------------------------------
+
+[core]
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true          # n / N to jump between files
+  dark = true
+  line-numbers = true
+  side-by-side = true
+
+# ----------------------------------------
+# - Aliases                              -
+# ----------------------------------------
+
 [alias]
   a = add
   aa = add --all
@@ -8,8 +63,7 @@
   ca = commit -v -a
   cam = commit -a -m
   cb = checkout -b
-  cm = checkout master
-  cd = checkout develop
+  cm = !git checkout \"$(git default-branch)\"
   cmsg = commit -m
   co = checkout
   d = diff
@@ -17,7 +71,7 @@
   f = fetch
   l = pull
   m = merge
-  mom = merge origin/master
+  mom = !git merge \"origin/$(git default-branch)\"
   p = push
   pv = push -v
   r = remote
@@ -28,8 +82,16 @@
   st = status
   lg = log --graph --date=relative --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ad)%Creset' -20
 
-[includeIf "gitdir:~/Documents/github/**"]
-    path = ~/.config/git/gitconfig_personal
+  # Name of the default branch: origin's HEAD, else main if it exists, else master
+  default-branch = "!b=$(git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null) && echo \"${b#origin/}\" || { git show-ref -q --verify refs/heads/main && echo main || echo master; }"
 
+# ----------------------------------------
+# - Identity per folder                  -
+# ----------------------------------------
+
+[includeIf "gitdir:~/Documents/github/**"]
+  path = ~/.config/git/gitconfig_personal
+
+# Local only, not in the repo (see README.md)
 [includeIf "gitdir:~/Documents/gitlab/**"]
-    path = ~/.config/git/gitconfig_work
+  path = ~/.config/git/gitconfig_work

@@ -11,12 +11,13 @@ parse_flags "$@"
 info "Linking dotfiles"
 
 # Shared
-link "$DOTFILES/zsh"            "$HOME/.config/zsh"
-link "$DOTFILES/git"            "$HOME/.config/git"
-link "$DOTFILES/yazi"           "$HOME/.config/yazi"
-link "$DOTFILES/ghostty"        "$HOME/.config/ghostty"
-link "$DOTFILES/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"  # file only: tpm puts plugins next to it
-link "$NVIM_CONFIG"             "$HOME/.config/nvim"            # separate repo
+link "$DOTFILES/zsh"                "$HOME/.config/zsh"
+link "$DOTFILES/git"                "$HOME/.config/git"
+link "$DOTFILES/yazi"               "$HOME/.config/yazi"
+link "$DOTFILES/ghostty"            "$HOME/.config/ghostty"
+link "$DOTFILES/lazygit/config.yml" "$HOME/.config/lazygit/config.yml"  # file only: other lazygit files stay out of the repo
+link "$DOTFILES/tmux/tmux.conf"     "$HOME/.config/tmux/tmux.conf"      # file only: tpm puts plugins next to it
+link "$NVIM_CONFIG"                 "$HOME/.config/nvim"                # separate repo
 
 # Arch Linux
 if is_arch; then

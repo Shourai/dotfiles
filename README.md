@@ -73,7 +73,8 @@ dotfiles
  ├─ packages/        package lists per package manager
  ├─ zsh/             -> ~/.config/zsh (dotted files, see zsh/README.md)
  ├─ tmux/tmux.conf   -> ~/.config/tmux/tmux.conf (tpm installs itself on first start)
- ├─ git/             -> ~/.config/git
+ ├─ git/             -> ~/.config/git (see git/README.md)
+ ├─ lazygit/config.yml -> ~/.config/lazygit/config.yml
  ├─ yazi/            -> ~/.config/yazi
  ├─ ghostty/         -> ~/.config/ghostty
  ├─ arch/            Arch only: Hyprland, waybar, fontconfig, fonts, post-install notes
