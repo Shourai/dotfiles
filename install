@@ -11,6 +11,10 @@ set -euo pipefail
 DOTFILES="$HOME/Documents/github/dotfiles"
 NVIM_CONFIG="$HOME/Documents/github/nvim"
 
+# Homebrew asks [y/n] before installs that pull in dependencies when run in a terminal
+# (brew install git on macOS); don't stop for it. setup/lib.sh sets it for the setup scripts.
+export HOMEBREW_NO_ASK=1
+
 # This file runs before the repo is cloned, so it can't use setup/lib.sh yet
 info() { printf '\033[1;34m==>\033[0m %s\n' "$*"; }
 warn() { printf '  \033[33m!\033[0m %s\n' "$*" >&2; }

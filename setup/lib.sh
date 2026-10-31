@@ -9,6 +9,10 @@ DOTFILES="$HOME/Documents/github/dotfiles"
 NVIM_CONFIG="$HOME/Documents/github/nvim"
 PACKAGES="$DOTFILES/packages"
 
+# Homebrew asks [y/n] before installs that pull in dependencies when run in a terminal;
+# these scripts must not stop for prompts (like apt -y). Your own brew commands still ask.
+export HOMEBREW_NO_ASK=1
+
 # Flags, set by parse_flags (`install` passes its own arguments on to each script)
 DRY_RUN=0
 EXTRAS=0
