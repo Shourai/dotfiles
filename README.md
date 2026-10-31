@@ -12,7 +12,8 @@ hide Ubuntu's in the shell), [macOS](macos/README.md).
 - A user with `sudo`, an internet connection and `curl` (Ubuntu: `sudo apt install curl`).
 - **Arch**: install with `archinstall`, with no desktop profile and no display manager. Hyprland
   starts on a TTY1 login (`zsh/.zprofile`); a login screen would bypass that.
-- **Ubuntu**: 26.04 LTS or newer, standard GNOME desktop.
+- **Ubuntu**: 26.04 LTS or newer, standard GNOME desktop, or headless (Ubuntu Server, used over
+  SSH: the desktop parts are skipped, see [Ubuntu](ubuntu/README.md)).
 - **macOS**: nothing; `install` installs Homebrew, which installs the Xcode command line tools.
 - The repos must be at `~/Documents/github/dotfiles` and `~/Documents/github/nvim`: scripts and
   some configs (e.g. `arch/wayland/hypr/hyprpaper.conf`) hard-code these paths.
@@ -77,10 +78,11 @@ and add it to the list for next time.
 | `brew-macos.txt`  | Homebrew (macOS)                                                |
 | `cask.txt`        | Homebrew casks (macOS apps and fonts)                           |
 | `apt.txt`         | apt (Ubuntu)                                                    |
-| `snap.txt`        | Snap (Ubuntu)                                                   |
+| `apt-desktop.txt` | apt (Ubuntu), only with a desktop (gnome-shell installed)       |
+| `snap.txt`        | Snap (Ubuntu), only with a desktop                              |
 | `extras-pacman.txt`, `extras-aur.txt` | Arch, only with `--extras`                  |
 
-yazi's preview helpers are in each OS's own list (`pacman.txt`, `brew-macos.txt`, `apt.txt`).
+yazi's preview helpers are in each OS's own list (`pacman.txt`, `brew-macos.txt`, `apt-desktop.txt`).
 
 **Add a config**: put it in the repo, add a `link` line to `setup/link.sh`, run `setup/link.sh`.
 Anything already at the target is moved to `<name>.bak-<date>`, never deleted.

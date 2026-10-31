@@ -1,5 +1,6 @@
-# Ubuntu (apt): base system, desktop integration, yazi's preview helpers.
-# CLI tools come from Homebrew, ghostty from snap.txt; see ubuntu/README.md.
+# Ubuntu (apt): base system, on every Ubuntu machine (desktop and headless).
+# Desktop-only packages are in apt-desktop.txt. CLI tools come from Homebrew, ghostty from
+# snap.txt; see ubuntu/README.md.
 
 # Needed by Homebrew itself (and by nvim-treesitter to compile parsers)
 build-essential
@@ -16,19 +17,3 @@ unzip
 
 # JSON on the command line; yazi uses it for JSON previews too
 jq
-
-# Ubuntu Sans Mono for ghostty (see ghostty/ubuntu.ghostty); preinstalled on the desktop
-fonts-ubuntu
-
-# Clipboard on Wayland (yazi, and nvim's clipboard outside SSH)
-wl-clipboard
-
-# yazi previews. From apt, not Homebrew: Homebrew's builds bring their own GLib, D-Bus and GnuPG
-# (see ubuntu/README.md).
-7zip
-ffmpeg
-imagemagick
-libimage-exiftool-perl
-mediainfo
-poppler-utils
-resvg

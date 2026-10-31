@@ -2,13 +2,17 @@
 
 Ubuntu 26.04 LTS with GNOME; the desktop configs in `arch/` aren't used.
 
+Headless (e.g. Ubuntu Server used over SSH) works too: without `gnome-shell` installed,
+`setup/ubuntu.sh` skips `apt-desktop.txt`, the Snaps and the keyboard shortcuts.
+
 ## Where things come from
 
 | What                                                          | From                                    | List                          |
 |---------------------------------------------------------------|-----------------------------------------|-------------------------------|
-| base system, fallback `zsh`, Ubuntu font, `wl-clipboard`, yazi's preview helpers | apt                  | `packages/apt.txt`            |
+| base system, fallback `zsh`, `unzip`, `jq`                    | apt                                     | `packages/apt.txt`            |
+| desktop only: Ubuntu font, `wl-clipboard`, yazi's preview helpers | apt                                 | `packages/apt-desktop.txt`    |
 | CLI tools (same versions as on macOS), incl. the login shell `zsh` | Homebrew (`/home/linuxbrew/.linuxbrew`) | `common.txt`, `brew.txt` |
-| ghostty                                                       | Snap (apt only has 1.3)                 | `snap.txt`                    |
+| desktop only: ghostty                                         | Snap (apt only has 1.3)                 | `snap.txt`                    |
 | Bitwarden, for its SSH agent                                  | Snap, install it by hand (App Center); Homebrew's `bw` has no agent | -   |
 
 ## Watch out

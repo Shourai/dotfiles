@@ -1,0 +1,18 @@
+# Ubuntu (apt): only installed on a desktop (gnome-shell installed), after apt.txt.
+# Headless machines (servers, VMs used over SSH) skip this list; see ubuntu/README.md.
+
+# Ubuntu Sans Mono for ghostty (see ghostty/ubuntu.ghostty); preinstalled on the desktop
+fonts-ubuntu
+
+# Clipboard on Wayland (yazi, and nvim's clipboard outside SSH)
+wl-clipboard
+
+# yazi previews. From apt, not Homebrew: Homebrew's builds bring their own GLib, D-Bus and GnuPG
+# (see ubuntu/README.md).
+7zip
+ffmpeg
+imagemagick
+libimage-exiftool-perl
+mediainfo
+poppler-utils
+resvg

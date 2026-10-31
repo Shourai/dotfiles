@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Install Ubuntu packages: apt (packages/apt.txt), Snaps (snap.txt) and Homebrew (common.txt + brew.txt).
 # Also runs apt upgrade and brew upgrade, and sets the GNOME shortcuts (ubuntu/shortcuts.sh).
+# On a headless machine (no gnome-shell) it skips the desktop parts: apt-desktop.txt,
+# the Snaps and the shortcuts.
 # Safe to rerun; already installed packages are skipped.
 #
 #   setup/ubuntu.sh [--dry-run]
@@ -12,6 +14,15 @@ parse_flags "$@"
 is_ubuntu || die "this script is for Ubuntu"
 
 BREW_ZSH=/home/linuxbrew/.linuxbrew/bin/zsh
+
+# A desktop is installed if GNOME is (not a metapackage like ubuntu-desktop-minimal:
+# apt removes those when you uninstall one of their dependencies)
+if dpkg-query -W -f='${Status}' gnome-shell 2>/dev/null | grep -q 'ok installed'; then
+  desktop=1
+else
+  desktop=0
+  info "No desktop (gnome-shell isn't installed): skipping apt-desktop.txt, Snaps and GNOME shortcuts"
+fi
 
 # Written for 26.04 LTS
 version="$(. /etc/os-release && echo "$VERSION_ID")"
@@ -27,18 +38,22 @@ try "apt update" "${apt[@]}" update
 try "apt upgrade" "${apt[@]}" upgrade
 
 info "Installing apt packages"
+lists=("$PACKAGES/apt.txt")
+[ "$desktop" = 1 ] && lists+=("$PACKAGES/apt-desktop.txt")
 # shellcheck disable=SC2046  # word splitting is intended: one package per word
-try "apt packages (packages/apt.txt)" "${apt[@]}" install $(read_list "$PACKAGES/apt.txt")
+try "apt packages (packages/apt*.txt)" "${apt[@]}" install $(read_list "${lists[@]}")
 
-info "Installing Snaps"
-# (not piped into the loop: the loop must run in this shell so try() can record failures)
-while read -r snap; do
-  # shellcheck disable=SC2086  # "<name> <options>" splits into arguments
-  try "snap install $snap" sudo snap install $snap
-done < <(read_list "$PACKAGES/snap.txt")
-# An older ghostty from apt would come first on PATH (/usr/bin before /snap/bin)
-if [ -x /usr/bin/ghostty ]; then
-  warn "ghostty from apt (1.3) is installed too and would be used instead of the Snap: sudo apt remove ghostty"
+if [ "$desktop" = 1 ]; then
+  info "Installing Snaps"
+  # (not piped into the loop: the loop must run in this shell so try() can record failures)
+  while read -r snap; do
+    # shellcheck disable=SC2086  # "<name> <options>" splits into arguments
+    try "snap install $snap" sudo snap install $snap
+  done < <(read_list "$PACKAGES/snap.txt")
+  # An older ghostty from apt would come first on PATH (/usr/bin before /snap/bin)
+  if [ -x /usr/bin/ghostty ]; then
+    warn "ghostty from apt (1.3) is installed too and would be used instead of the Snap: sudo apt remove ghostty"
+  fi
 fi
 
 # Homebrew (needs build-essential, curl, file, git and procps from apt)
@@ -75,11 +90,13 @@ if [ "$login_shell" = "$BREW_ZSH" ] && [ "$DRY_RUN" = 0 ] && ! "$BREW_ZSH" -c 'e
 fi
 
 # GNOME keyboard shortcuts (ghostty + tmux on Ctrl+Alt+T etc.); needs the GNOME session
-if [ -n "${DBUS_SESSION_BUS_ADDRESS:-}" ] && [ -x /usr/bin/gsettings ]; then
-  info "Setting GNOME keyboard shortcuts"
-  try "ubuntu/shortcuts.sh" bash "$DOTFILES/ubuntu/shortcuts.sh"
-else
-  warn "no GNOME session: run ubuntu/shortcuts.sh from a terminal on the desktop to set the shortcuts"
+if [ "$desktop" = 1 ]; then
+  if [ -n "${DBUS_SESSION_BUS_ADDRESS:-}" ] && [ -x /usr/bin/gsettings ]; then
+    info "Setting GNOME keyboard shortcuts"
+    try "ubuntu/shortcuts.sh" bash "$DOTFILES/ubuntu/shortcuts.sh"
+  else
+    warn "no GNOME session: run ubuntu/shortcuts.sh from a terminal on the desktop to set the shortcuts"
+  fi
 fi
 
 info "Cleaning up apt cache"
