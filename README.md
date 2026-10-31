@@ -89,9 +89,9 @@ install it by hand and add it to the list for next time.
 | `pacman.txt`      | pacman (Arch)                                                       |
 | `aur.txt`         | yay (Arch)                                                          |
 | `brew.txt`        | Homebrew on macOS and Ubuntu                                        |
-| `brew-macos.txt`  | Homebrew on macOS                                                   |
+| `brew-macos.txt`  | Homebrew on macOS (incl. yazi's preview helpers)                     |
 | `cask.txt`        | Homebrew casks (macOS apps and fonts)                               |
-| `apt.txt`         | apt (Ubuntu): only the base system and the Ubuntu font              |
+| `apt.txt`         | apt (Ubuntu): base system, Ubuntu font, clipboard, yazi's preview helpers |
 | `snap.txt`        | Snaps (Ubuntu): ghostty, because apt only has 1.3                   |
 | `extras-pacman.txt`, `extras-aur.txt` | Arch, only with `--extras`                      |
 
@@ -118,8 +118,9 @@ Things that are specific to one machine, and what to change on another:
 
 ## Ubuntu
 
-apt provides only the base system; Homebrew (`/home/linuxbrew/.linuxbrew`) provides every CLI tool
-from `common.txt` and `brew.txt`, so the versions match macOS.
+apt provides the base system, the clipboard tool and yazi's preview helpers (`apt.txt`); Homebrew
+(`/home/linuxbrew/.linuxbrew`) provides your CLI tools from `common.txt` and `brew.txt`, so their
+versions match macOS; ghostty comes from a Snap.
 
 - **Login shell** is Homebrew's zsh. `setup/zsh.sh` only switches to it if it starts, and
   `setup/ubuntu.sh` switches back to apt's `/usr/bin/zsh` if a `brew upgrade` breaks it. A
@@ -132,30 +133,25 @@ from `common.txt` and `brew.txt`, so the versions match macOS.
 - **Desktop** stays GNOME; the configs in `arch/` are Arch only.
 - **Homebrew comes first on `PATH`** in the shell, so its copies hide Ubuntu's own tools of the
   same name (see below).
-
-### Ubuntu commands hidden by Homebrew
-
-Homebrew installs about 170 packages on Ubuntu (the lists plus their dependencies); 131 of their
-commands also exist in Ubuntu, and in the shell (and tmux, nvim, yazi, scripts started from it)
-Homebrew's copy wins. GNOME, desktop apps and `sudo` (Ubuntu's `secure_path`) aren't affected.
-Most are the same tools in a newer version. These talk to the desktop or system stores, so call
-Ubuntu's version by its full path, e.g. `/usr/bin/gsettings`:
-
-| Commands                                              | From Homebrew's    | Problem with Homebrew's version                       |
-|-------------------------------------------------------|--------------------|-------------------------------------------------------|
-| `gsettings`, `gio`, `gdbus`, `gapplication`, `glib-compile-schemas` | `glib` | no access to GNOME's settings (writes to `~/.config/glib-2.0/settings/keyfile`), no GVfs; `xdg-open` (used by yazi to open files) runs `gio` |
-| `dbus-launch`, `dbus-run-session`, `dbus-daemon`, `dbus-update-activation-environment`, `dbus-send` | `dbus` | start or talk to a D-Bus with Homebrew's config, not the session's |
-| `gpg`, `gpg-agent`, `gpgconf`, `dirmngr`, `gpgsm`     | `gnupg`            | other version than Ubuntu's agent, sharing `~/.gnupg` |
-| `fc-cache`, `fc-list`, `fc-match`                     | `fontconfig`       | Homebrew's font config; refresh fonts for apps with `/usr/bin/fc-cache` |
-| `p11-kit`, `trust`                                    | `p11-kit`          | Homebrew's certificate store, not the system's        |
-| `python3`, `perl` (and `cpan`, `perldoc`)              | `python@3.15`, `perl` | newest version, but without Ubuntu's modules (e.g. Python's `gi`); scripts that need them should start with `#!/usr/bin/python3` or `#!/usr/bin/perl` |
-
-Homebrew also adds `pulseaudio`/`pactl` (Ubuntu uses PipeWire; don't start `pulseaudio`) and
-`*-config` build helpers such as `pcre2-config`, which can make software compiled from the shell
-use Homebrew's libraries. `ubuntu/shortcuts.sh` already uses `/usr/bin/gsettings`.
 - **SSH agent**: Bitwarden, installed by hand as a Snap (App Center; Homebrew only has the
   command-line `bw`, without SSH agent). Turn on Settings, "Enable SSH agent", then check in a new
   terminal with `ssh-add -L`. Until Bitwarden is running, GNOME's own agent is used.
+
+### Ubuntu commands hidden by Homebrew
+
+Homebrew installs 74 packages on Ubuntu (the lists plus their dependencies). 57 of their
+commands also exist in Ubuntu, and in the shell (and tmux, nvim, yazi, scripts started from it)
+Homebrew's copy wins; GNOME, desktop apps and `sudo` (Ubuntu's `secure_path`) aren't affected.
+All are the same tools in a newer version: `bash`, `openssl`, `perl`, `python3`, `rsync`, `xz`,
+`zstd`, `zsh`. Only `python3` and `perl` need care: they lack Ubuntu's modules (e.g. Python's
+`gi`), so scripts that need those should start with `#!/usr/bin/python3` or `#!/usr/bin/perl`.
+
+yazi's preview helpers (ffmpeg, poppler, ImageMagick, ...) come from apt for this reason: from
+Homebrew they pulled in about 100 more packages, including Homebrew's own GLib, D-Bus and GnuPG,
+whose `gsettings`, `dbus-*` and `gpg` hid Ubuntu's (`gsettings` then can't change GNOME's
+settings). apt's versions are older but enough for yazi; `poppler-utils` and `jq` get Canonical
+security fixes, the others (universe) only community fixes unless Ubuntu Pro is enabled.
+If a new Homebrew package ever brings GLib back, use `/usr/bin/gsettings` (as `ubuntu/shortcuts.sh` does).
 
 ## Troubleshooting
 

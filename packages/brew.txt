@@ -3,8 +3,3 @@
 node                 # provides npm (Mason tools in nvim)
 shellcheck
 tree-sitter-cli      # the tree-sitter command; nvim-treesitter builds its parsers with it
-
-# yazi: archives, 'Show EXIF', 'Show media info'
-exiftool
-media-info
-sevenzip

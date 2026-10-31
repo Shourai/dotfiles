@@ -1,5 +1,6 @@
 # Packages with the same name on pacman (Arch) and Homebrew (macOS and Ubuntu).
 # One package per line; text after '#' is ignored.
+# yazi's preview helpers are in each OS's own list (pacman.txt, brew-macos.txt, apt.txt).
 
 bash
 bat
@@ -20,10 +21,3 @@ zoxide
 zsh
 zsh-autosuggestions
 zsh-syntax-highlighting
-
-# yazi previews (video, JSON, PDF, HEIC/AVIF, SVG)
-ffmpeg
-imagemagick
-jq
-poppler
-resvg

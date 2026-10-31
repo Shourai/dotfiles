@@ -18,8 +18,8 @@ shortcuts=(
   "ghostty-tmux-ctrl-alt-t|<Control><Alt>t|$ghostty -e $tmux"
 )
 
-# Ubuntu's own gsettings: Homebrew's (pulled in with GLib by e.g. poppler, and first on PATH)
-# has no dconf support and silently writes to a file GNOME never reads
+# Ubuntu's own gsettings: if a Homebrew package pulls in GLib, Homebrew's gsettings comes first
+# on PATH, has no dconf support and silently writes to a file GNOME never reads
 gsettings=/usr/bin/gsettings
 
 media=org.gnome.settings-daemon.plugins.media-keys

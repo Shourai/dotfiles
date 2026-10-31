@@ -42,7 +42,12 @@ ttf-dejavu
 ttf-liberation
 ttf-opensans
 
-# yazi: archives, 'Show EXIF', 'Show media info' (names differ on Homebrew)
+# yazi previews: video, PDF, images, SVG, JSON, archives, 'Show EXIF', 'Show media info'
 7zip
+ffmpeg
+imagemagick
+jq
 mediainfo
 perl-image-exiftool
+poppler
+resvg

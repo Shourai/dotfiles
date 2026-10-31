@@ -1,6 +1,6 @@
 # Ubuntu packages (apt), for Ubuntu 26.04 LTS with GNOME.
-# Only what Homebrew can't or shouldn't provide on Linux; all CLI tools come from
-# Homebrew (common.txt + brew.txt), like on macOS; ghostty from snap.txt. See setup/ubuntu.sh.
+# The base system, desktop integration and yazi's preview helpers; all other CLI tools come
+# from Homebrew (common.txt + brew.txt), like on macOS; ghostty from snap.txt. See setup/ubuntu.sh.
 
 # Needed by Homebrew itself (and by nvim-treesitter to compile parsers)
 build-essential
@@ -14,3 +14,19 @@ zsh
 
 # Ubuntu Sans Mono for ghostty (see ghostty/ubuntu.ghostty); preinstalled on the desktop
 fonts-ubuntu
+
+# Clipboard on Wayland (yazi, and nvim's clipboard outside SSH)
+wl-clipboard
+
+# yazi previews. From apt, not Homebrew: Homebrew's builds pull in ~100 extra packages,
+# incl. its own GLib, D-Bus and GnuPG, which hide Ubuntu's (see README, Ubuntu section).
+# Older than Homebrew's but enough for yazi; poppler-utils and jq get Canonical security
+# fixes (main), the others only community fixes (universe) unless Ubuntu Pro is enabled.
+7zip
+ffmpeg
+imagemagick
+jq
+libimage-exiftool-perl
+mediainfo
+poppler-utils
+resvg

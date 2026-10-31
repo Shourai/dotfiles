@@ -4,3 +4,13 @@ coreutils
 gnu-sed
 iproute2mac
 openconnect
+
+# yazi previews (Ubuntu takes these from apt.txt, Arch from pacman.txt)
+exiftool
+ffmpeg
+imagemagick
+jq
+media-info
+poppler
+resvg
+sevenzip
