@@ -25,33 +25,21 @@ export LESSHISTFILE=-
 # eza
 export EZA_COLORS='xx=37'
 
-# SSH agent: Bitwarden if it's running, otherwise 1Password if it's installed (its socket is
-# used even before 1Password has started, so shells opened earlier work once it runs).
-# With neither, the system's agent is left alone (on Ubuntu: GNOME's, $XDG_RUNTIME_DIR/gcr/ssh).
-# Skipped inside an SSH session so a forwarded agent keeps working.
-# Socket paths: bitwarden.com/help/ssh-agent and 1Password's SSH docs (its agent doesn't work
-# in the Snap or Flatpak version of 1Password).
+# SSH agent: Bitwarden if it's running (macOS app, or the Snap on Ubuntu), otherwise 1Password
+# if it's installed, otherwise the system's agent (GNOME's on Ubuntu).
+# Not inside SSH sessions, so a forwarded agent keeps working.
 if [[ -z "$SSH_CONNECTION" ]]; then
-  for sock in \
-    "$HOME/.bitwarden-ssh-agent.sock" \
-    "$HOME/snap/bitwarden/current/.bitwarden-ssh-agent.sock" \
-    "$HOME/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock" \
-    "$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"
-  do
-    if [[ -S "$sock" ]]; then
-      export SSH_AUTH_SOCK="$sock"
-      break
-    fi
+  for sock in "$HOME/.bitwarden-ssh-agent.sock" "$HOME/snap/bitwarden/current/.bitwarden-ssh-agent.sock"; do
+    [[ -S "$sock" ]] && { export SSH_AUTH_SOCK="$sock"; break; }
   done
-  unset sock
-
   if [[ "$SSH_AUTH_SOCK" != *bitwarden* ]]; then
     if [[ "$OSTYPE" == darwin* ]]; then
-      onepassword="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t"
+      sock="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
     else
-      onepassword="$HOME/.1password"
+      sock="$HOME/.1password/agent.sock"
     fi
-    [[ -d "$onepassword" ]] && export SSH_AUTH_SOCK="$onepassword/agent.sock"
-    unset onepassword
+    # 1Password's socket is used as soon as it's installed, even before it has started
+    [[ -d "${sock:h}" ]] && export SSH_AUTH_SOCK="$sock"
   fi
+  unset sock
 fi

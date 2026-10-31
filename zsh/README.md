@@ -26,9 +26,8 @@ Keep `.zshenv` small and quiet: it also runs for every zsh script.
 
 ## Behaviour worth knowing
 
-- **SSH agent** (`.zshenv`): Bitwarden's socket if Bitwarden is running (any install: .deb,
-  AppImage, Snap, Flatpak, Mac App Store), otherwise 1Password's if 1Password is installed (even
-  before it has started). With neither, the system's agent is used: GNOME's on Ubuntu
+- **SSH agent** (`.zshenv`): Bitwarden's socket if Bitwarden is running (the macOS app, or the
+  Snap on Ubuntu), otherwise 1Password's if 1Password is installed (even before it has started). With neither, the system's agent is used: GNOME's on Ubuntu
   (`$XDG_RUNTIME_DIR/gcr/ssh`), launchd's on macOS. Never changed inside an SSH session, so a
   forwarded agent keeps working. Check which one is in use with `echo $SSH_AUTH_SOCK; ssh-add -l`.
 - **ghostty integration** (`.zshrc`): loaded by hand because the system zshenv's `ZDOTDIR` stops

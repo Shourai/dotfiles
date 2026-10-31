@@ -21,8 +21,7 @@ clones next to this one. Its own README covers it.
   to SSH. The shell uses Bitwarden's or 1Password's SSH agent when one of them is there (see
   `zsh/README.md`); without either, the system's agent (GNOME's on Ubuntu). Setup installs
   1Password only on macOS and on Arch with `--extras`, and Bitwarden nowhere: install the one you
-  use yourself and turn on its SSH agent in its settings. On Ubuntu, 1Password's SSH agent only
-  works with the `.deb` from 1password.com, not the Snap; Bitwarden works in any version.
+  use yourself and turn on its SSH agent in its settings.
 
 ## Install
 
@@ -129,10 +128,9 @@ from `common.txt` and `brew.txt`, so the versions match macOS.
 - **Shortcuts**: Ctrl+Alt+T and Super+Shift+Return open ghostty with tmux, Super+Return opens
   ghostty, as on Arch; everything else stays GNOME's default (see `ubuntu/README.md`).
 - **Desktop** stays GNOME; the configs in `arch/` are Arch only.
-- **SSH agent**: Bitwarden, installed by hand (not by setup): install it from the App Center,
-  turn on Settings, "Enable SSH agent", then open a new terminal and check with `ssh-add -L`.
-  The shell finds Bitwarden's socket in any install (see `zsh/README.md`); until Bitwarden is
-  running, GNOME's own agent is used.
+- **SSH agent**: Bitwarden, installed by hand as a Snap (App Center; Homebrew only has the
+  command-line `bw`, without SSH agent). Turn on Settings, "Enable SSH agent", then check in a new
+  terminal with `ssh-add -L`. Until Bitwarden is running, GNOME's own agent is used.
 
 ## Troubleshooting
 
