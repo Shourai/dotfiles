@@ -16,6 +16,7 @@ ripgrep
 rsync
 tmux
 tree-sitter-cli      # the tree-sitter command; nvim-treesitter builds its parsers with it
+uv                   # Python projects: venvs, Python versions, tools
 yazi
 zoxide
 zsh
