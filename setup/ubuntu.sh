@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Install Ubuntu packages: the base system from apt (packages/apt.txt), and all CLI tools
 # from Homebrew (packages/common.txt + brew.txt), the same lists macOS uses.
-# Also upgrades the system (apt upgrade) and everything in Homebrew (brew upgrade).
+# Also upgrades the system (apt upgrade) and everything in Homebrew (brew upgrade), and sets
+# the GNOME keyboard shortcuts (ubuntu/shortcuts.sh).
 # Safe to rerun; already installed packages are skipped.
 #
 #   setup/ubuntu.sh [--dry-run]
@@ -55,6 +56,14 @@ login_shell="$(getent passwd "$(id -un)" | cut -d: -f7)"
 if [ "$login_shell" = "$BREW_ZSH" ] && [ "$DRY_RUN" = 0 ] && ! "$BREW_ZSH" -c 'exit 0' 2>/dev/null; then
   warn "Homebrew's zsh doesn't start; switching the login shell back to /usr/bin/zsh"
   try "chsh to /usr/bin/zsh" sudo chsh -s /usr/bin/zsh "$(id -un)"
+fi
+
+# GNOME keyboard shortcuts (ghostty + tmux on Ctrl+Alt+T etc.); needs the GNOME session
+if [ -n "${DBUS_SESSION_BUS_ADDRESS:-}" ] && has gsettings; then
+  info "Setting GNOME keyboard shortcuts"
+  try "ubuntu/shortcuts.sh" bash "$DOTFILES/ubuntu/shortcuts.sh"
+else
+  warn "no GNOME session: run ubuntu/shortcuts.sh from a terminal on the desktop to set the shortcuts"
 fi
 
 info "Cleaning up apt cache"

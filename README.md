@@ -54,7 +54,7 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/main/install | bas
 | Script            | What it does                                                                         |
 |-------------------|--------------------------------------------------------------------------------------|
 | `setup/arch.sh`   | `pacman -Syu`, installs yay, the pacman and AUR lists, clears the pacman cache        |
-| `setup/ubuntu.sh` | `apt upgrade`, the apt list, Homebrew with the shared lists, `brew upgrade`           |
+| `setup/ubuntu.sh` | `apt upgrade`, the apt list, Homebrew with the shared lists, `brew upgrade`, GNOME shortcuts |
 | `setup/macos.sh`  | Homebrew formulae and casks, `brew upgrade`; key remap and `defaults.sh` with flags   |
 | `setup/link.sh`   | Symlinks the configs into `~/.config`, picks the per-OS ghostty file, `ya pkg install` |
 | `setup/zsh.sh`    | Sets `ZDOTDIR` in the system zshenv, makes zsh the login shell, clones the zsh plugins |
@@ -100,7 +100,7 @@ links to single files in subfolders (e.g. `~/.config/tmux/tmux.conf`) must be re
 
 **Change keys or settings**: each folder's README lists its keys and where they're set:
 [zsh](zsh/README.md), [tmux](tmux/README.md), [git](git/README.md), [yazi](yazi/README.md),
-[Arch desktop](arch/README.md), [macOS](macos/README.md).
+[Arch desktop](arch/README.md), [Ubuntu](ubuntu/README.md), [macOS](macos/README.md).
 
 ## Per machine
 
@@ -123,8 +123,9 @@ from `common.txt` and `brew.txt`, so the versions match macOS.
   `setup/ubuntu.sh` switches back to apt's `/usr/bin/zsh` if a `brew upgrade` breaks it. A
   `brew upgrade` you run by hand isn't checked; if you then can't log in, see Troubleshooting.
 - **Terminal**: ghostty comes from apt (Homebrew has it only for macOS); Ubuntu's own terminal,
-  Ptyxis, stays as a fallback. To open ghostty with Ctrl+Alt+T, set that shortcut in GNOME
-  Settings, Keyboard, as a custom shortcut running `ghostty`.
+  Ptyxis, stays as a fallback (open it from the app grid).
+- **Shortcuts**: Ctrl+Alt+T and Super+Shift+Return open ghostty with tmux, Super+Return opens
+  ghostty, as on Arch; everything else stays GNOME's default (see `ubuntu/README.md`).
 - **Desktop** stays GNOME; the configs in `arch/` are Arch only.
 
 ## Troubleshooting
@@ -184,6 +185,7 @@ dotfiles
  ├─ yazi/              -> ~/.config/yazi (see yazi/README.md)
  ├─ ghostty/           -> ~/.config/ghostty: config.ghostty + arch/ubuntu/macos.ghostty via os.ghostty
  ├─ arch/              Arch only: Hyprland, hypridle, hyprlock, hyprpaper, waybar (see arch/README.md)
+ ├─ ubuntu/            Ubuntu only: GNOME keyboard shortcuts (see ubuntu/README.md)
  └─ macos/             macOS only: AeroSpace, key remap, defaults.sh (see macos/README.md)
 ```
 
