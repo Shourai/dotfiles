@@ -59,7 +59,7 @@ if [ "$login_shell" = "$BREW_ZSH" ] && [ "$DRY_RUN" = 0 ] && ! "$BREW_ZSH" -c 'e
 fi
 
 # GNOME keyboard shortcuts (ghostty + tmux on Ctrl+Alt+T etc.); needs the GNOME session
-if [ -n "${DBUS_SESSION_BUS_ADDRESS:-}" ] && has gsettings; then
+if [ -n "${DBUS_SESSION_BUS_ADDRESS:-}" ] && [ -x /usr/bin/gsettings ]; then
   info "Setting GNOME keyboard shortcuts"
   try "ubuntu/shortcuts.sh" bash "$DOTFILES/ubuntu/shortcuts.sh"
 else

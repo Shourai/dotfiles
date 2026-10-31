@@ -128,6 +128,9 @@ from `common.txt` and `brew.txt`, so the versions match macOS.
 - **Shortcuts**: Ctrl+Alt+T and Super+Shift+Return open ghostty with tmux, Super+Return opens
   ghostty, as on Arch; everything else stays GNOME's default (see `ubuntu/README.md`).
 - **Desktop** stays GNOME; the configs in `arch/` are Arch only.
+- **Homebrew comes first on `PATH`**, so some Homebrew dependencies hide Ubuntu's own tools of the
+  same name. E.g. `gsettings` is then Homebrew's, which can't change GNOME settings (it writes to
+  `~/.config/glib-2.0/settings/keyfile` instead); use `/usr/bin/gsettings` for GNOME.
 - **SSH agent**: Bitwarden, installed by hand as a Snap (App Center; Homebrew only has the
   command-line `bw`, without SSH agent). Turn on Settings, "Enable SSH agent", then check in a new
   terminal with `ssh-add -L`. Until Bitwarden is running, GNOME's own agent is used.
