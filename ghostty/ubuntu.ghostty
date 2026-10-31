@@ -1,11 +1,11 @@
-# Ubuntu-only ghostty settings (GNOME desktop), loaded from config.ghostty (via os.ghostty);
-# they override the shared settings
+# Ubuntu-only ghostty settings (GNOME desktop), loaded from config.ghostty (via os.ghostty)
 
 # Ubuntu's own monospace font (fonts-ubuntu, preinstalled on the desktop).
 # Icons come from ghostty's built-in Nerd Font symbols, so no icon font is needed.
 font-family = "Ubuntu Sans Mono"
 
-# Title bar stays on: GNOME doesn't tile, so it's how windows are moved and closed
+# Title bar stays on (GNOME doesn't tile), in the theme's colours instead of GNOME's grey
+window-theme = ghostty
 
-# No transparency on Ubuntu (config.ghostty sets 0.7 for the other systems)
+# No transparency
 background-opacity = 1

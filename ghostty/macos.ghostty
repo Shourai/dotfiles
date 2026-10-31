@@ -5,3 +5,12 @@ font-family = "Liga SFMono Nerd Font"
 
 # Left Option acts as Alt (for tmux and shell keys); right Option still types special characters
 macos-option-as-alt = left
+
+# AeroSpace starts each window as its own app (open -n); quit it when its window closes
+quit-after-last-window-closed = true
+
+# Blur the desktop behind the transparent background, so text stays readable
+background-blur = true
+
+# Copy selected text right away (ghostty 1.4 turned this off by default on macOS)
+copy-on-select = true

@@ -153,6 +153,7 @@ read_list() {
 }
 
 # Symlink $1 (in the repo) to $2 (in $HOME). Safe to rerun:
+#   - same folder (e.g. ghostty/os.ghostty) -> relative link, so it survives moving the repo
 #   - already correct           -> nothing to do
 #   - link into this repo       -> replaced (e.g. an old path)
 #   - anything else in the way  -> moved to <name>.bak-<date> first, nothing is deleted
@@ -161,7 +162,10 @@ link() {
 
   [ -e "$src" ] || { warn "skipping $dst: $src does not exist"; return 0; }
 
-  if [ -L "$dst" ] && [ "$(readlink "$dst")" = "$src" ]; then
+  local target="$src"
+  [ "$(dirname "$src")" = "$(dirname "$dst")" ] && target="$(basename "$src")"
+
+  if [ -L "$dst" ] && [ "$(readlink "$dst")" = "$target" ]; then
     ok "$dst"
     return 0
   fi
@@ -183,8 +187,8 @@ link() {
   fi
 
   run mkdir -p "$(dirname "$dst")"
-  run ln -s "$src" "$dst"
-  did "link $dst -> $src"
+  run ln -s "$target" "$dst"
+  did "link $dst -> $target"
 }
 
 # Move $1 aside to <name>.bak-<date>

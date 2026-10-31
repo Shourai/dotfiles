@@ -1,10 +1,19 @@
 # ghostty config, shared by Linux and macOS. Linked via ~/.config/ghostty.
 # All options: `ghostty +show-config --default --docs`.
-# Reload: ctrl+shift+, (Linux) or Ghostty menu > Reload Configuration (macOS)
+# Reload: ctrl+shift+, (Linux) or cmd+shift+, (macOS)
 
 theme = One Half Dark
 background-opacity = 0.7
 font-size = 14
+
+# Spread leftover pixels around all edges instead of only bottom-right
+window-padding-balance = true
+
+# Tiling (Hyprland, AeroSpace) resizes windows all the time; no size popup
+resize-overlay = never
+
+# No "Copied to clipboard" toast (Linux) for every tmux/nvim copy
+app-notifications = no-clipboard-copy
 
 # Over SSH: install ghostty's terminfo on the server on first connect,
 # or fall back to TERM=xterm-256color if that fails.
