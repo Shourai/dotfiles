@@ -128,9 +128,29 @@ from `common.txt` and `brew.txt`, so the versions match macOS.
 - **Shortcuts**: Ctrl+Alt+T and Super+Shift+Return open ghostty with tmux, Super+Return opens
   ghostty, as on Arch; everything else stays GNOME's default (see `ubuntu/README.md`).
 - **Desktop** stays GNOME; the configs in `arch/` are Arch only.
-- **Homebrew comes first on `PATH`**, so some Homebrew dependencies hide Ubuntu's own tools of the
-  same name. E.g. `gsettings` is then Homebrew's, which can't change GNOME settings (it writes to
-  `~/.config/glib-2.0/settings/keyfile` instead); use `/usr/bin/gsettings` for GNOME.
+- **Homebrew comes first on `PATH`** in the shell, so its copies hide Ubuntu's own tools of the
+  same name (see below).
+
+### Ubuntu commands hidden by Homebrew
+
+Homebrew installs about 170 packages on Ubuntu (the lists plus their dependencies); 131 of their
+commands also exist in Ubuntu, and in the shell (and tmux, nvim, yazi, scripts started from it)
+Homebrew's copy wins. GNOME, desktop apps and `sudo` (Ubuntu's `secure_path`) aren't affected.
+Most are the same tools in a newer version. These talk to the desktop or system stores, so call
+Ubuntu's version by its full path, e.g. `/usr/bin/gsettings`:
+
+| Commands                                              | From Homebrew's    | Problem with Homebrew's version                       |
+|-------------------------------------------------------|--------------------|-------------------------------------------------------|
+| `gsettings`, `gio`, `gdbus`, `gapplication`, `glib-compile-schemas` | `glib` | no access to GNOME's settings (writes to `~/.config/glib-2.0/settings/keyfile`), no GVfs; `xdg-open` (used by yazi to open files) runs `gio` |
+| `dbus-launch`, `dbus-run-session`, `dbus-daemon`, `dbus-update-activation-environment`, `dbus-send` | `dbus` | start or talk to a D-Bus with Homebrew's config, not the session's |
+| `gpg`, `gpg-agent`, `gpgconf`, `dirmngr`, `gpgsm`     | `gnupg`            | other version than Ubuntu's agent, sharing `~/.gnupg` |
+| `fc-cache`, `fc-list`, `fc-match`                     | `fontconfig`       | Homebrew's font config; refresh fonts for apps with `/usr/bin/fc-cache` |
+| `p11-kit`, `trust`                                    | `p11-kit`          | Homebrew's certificate store, not the system's        |
+| `python3`, `perl` (and `cpan`, `perldoc`)              | `python@3.15`, `perl` | newest version, but without Ubuntu's modules (e.g. Python's `gi`); scripts that need them should start with `#!/usr/bin/python3` or `#!/usr/bin/perl` |
+
+Homebrew also adds `pulseaudio`/`pactl` (Ubuntu uses PipeWire; don't start `pulseaudio`) and
+`*-config` build helpers such as `pcre2-config`, which can make software compiled from the shell
+use Homebrew's libraries. `ubuntu/shortcuts.sh` already uses `/usr/bin/gsettings`.
 - **SSH agent**: Bitwarden, installed by hand as a Snap (App Center; Homebrew only has the
   command-line `bw`, without SSH agent). Turn on Settings, "Enable SSH agent", then check in a new
   terminal with `ssh-add -L`. Until Bitwarden is running, GNOME's own agent is used.
