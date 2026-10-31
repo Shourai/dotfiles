@@ -11,6 +11,12 @@ procps
 # Fallback shell; the login shell is Homebrew's zsh (ubuntu/README.md)
 zsh
 
+# Mason (nvim) unpacks some tools with unzip; Ubuntu Server doesn't always have it
+unzip
+
+# JSON on the command line; yazi uses it for JSON previews too
+jq
+
 # Ubuntu Sans Mono for ghostty (see ghostty/ubuntu.ghostty); preinstalled on the desktop
 fonts-ubuntu
 
@@ -22,7 +28,6 @@ wl-clipboard
 7zip
 ffmpeg
 imagemagick
-jq
 libimage-exiftool-perl
 mediainfo
 poppler-utils
