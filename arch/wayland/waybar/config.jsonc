@@ -26,7 +26,7 @@
     // Shows the active Hyprland submap, e.g. after SUPER+Space
     "hyprland/submap": {
         "format": "󰘔  {} ",
-        "max-length": 8,
+        "max-length": 20,
         "tooltip": true
     },
 
@@ -34,7 +34,7 @@
         "scroll-step": 5,
         "max-volume": 150,
         "format": "{icon}  {volume}%",
-        "format-bluetooth": "{volume}% {icon}",
+        "format-bluetooth": "{icon}  {volume}%",
         "format-muted": "",
         "format-icons": {
             "headphones": "",
