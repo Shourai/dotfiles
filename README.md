@@ -19,8 +19,10 @@ clones next to this one. Its own README covers it.
   some configs (e.g. the wallpaper path in `arch/wayland/hypr/hyprpaper.conf`) assume these paths.
 - To push changes, an SSH key for GitHub: `install` clones over https, then switches the remotes
   to SSH. The shell uses Bitwarden's or 1Password's SSH agent when one of them is there (see
-  `zsh/README.md`). Setup installs 1Password only on macOS and on Arch with `--extras`, and
-  Bitwarden nowhere: install the one you use yourself and enable its SSH agent.
+  `zsh/README.md`); without either, the system's agent (GNOME's on Ubuntu). Setup installs
+  1Password only on macOS and on Arch with `--extras`, and Bitwarden nowhere: install the one you
+  use yourself and turn on its SSH agent in its settings. On Ubuntu, 1Password's SSH agent only
+  works with the `.deb` from 1password.com, not the Snap; Bitwarden works in any version.
 
 ## Install
 
