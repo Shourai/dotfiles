@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
-# Install Ubuntu packages: the base system from apt (packages/apt.txt), and all CLI tools
-# from Homebrew (packages/common.txt + brew.txt), the same lists macOS uses.
-# Also upgrades the system (apt upgrade) and everything in Homebrew (brew upgrade), and sets
-# the GNOME keyboard shortcuts (ubuntu/shortcuts.sh).
+# Install Ubuntu packages: apt (packages/apt.txt), Snaps (snap.txt) and Homebrew (common.txt + brew.txt).
+# Also runs apt upgrade and brew upgrade, and sets the GNOME shortcuts (ubuntu/shortcuts.sh).
 # Safe to rerun; already installed packages are skipped.
 #
 #   setup/ubuntu.sh [--dry-run]

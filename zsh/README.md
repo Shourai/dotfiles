@@ -1,10 +1,8 @@
 # zsh
 
-Linked to `~/.config/zsh` by `setup/link.sh`. `setup/zsh.sh` sets `ZDOTDIR="$HOME/.config/zsh"`
-in the system-wide zshenv (`/etc/zsh/zshenv`, or `/etc/zshenv` on macOS and for Homebrew's zsh),
-so zsh reads its config from here and `$HOME` needs no zsh files.
-
-The config files start with a dot, so use `ll` (or `ls -a`) to see them.
+Linked to `~/.config/zsh` by `setup/link.sh`. `setup/zsh.sh` sets `ZDOTDIR` to it in the system
+zshenv (`/etc/zsh/zshenv`; `/etc/zshenv` on macOS and for Homebrew's zsh), so `$HOME` has no zsh
+files. The files start with a dot: list them with `ll`.
 
 | File        | Loaded by                           | Contains                                                  |
 |-------------|-------------------------------------|-----------------------------------------------------------|
@@ -13,27 +11,32 @@ The config files start with a dot, so use `ll` (or `ls -a`) to see them.
 | `.zshrc`    | interactive shells, after the above | history, ghostty integration, options, PATH (Homebrew), completion, prompt, fzf, zoxide, plugins |
 | `aliases`   | sourced from `.zshrc`               | aliases                                                   |
 
-Keep `.zshenv` small and quiet: it also runs for every zsh script.
+Keep `.zshenv` small and silent: it runs for every zsh script too.
 
-## Where things live
+| What                       | Where                                                   |
+|----------------------------|---------------------------------------------------------|
+| History                    | `~/.local/state/zsh/history`                            |
+| Completion cache           | `~/.cache/zsh/zcompdump` (full check once a day)        |
+| pure prompt, zsh-ssh       | `~/.local/share/zsh/plugins/`, cloned and updated by `setup/zsh.sh` |
+| autosuggestions, syntax highlighting | the package manager (`packages/common.txt`)   |
 
-| What                       | Where                                   |
-|----------------------------|-----------------------------------------|
-| History                    | `~/.local/state/zsh/history` (machines set up before this layout: `setup/zsh.sh` moves it there; if both exist it only warns, see Troubleshooting in the main README) |
-| Completion cache           | `~/.cache/zsh/zcompdump` (full check once a day, otherwise cached) |
-| pure prompt, zsh-ssh       | `~/.local/share/zsh/plugins/` (cloned and updated by `setup/zsh.sh`) |
-| autosuggestions, syntax highlighting | package manager (`packages/common.txt`) |
+## SSH agent
+
+`.zshenv` picks the first that's there:
+
+1. Bitwarden's socket (the macOS app, or the Snap on Ubuntu), while Bitwarden runs;
+2. 1Password's, once 1Password is installed (even before it has started);
+3. whatever the session set: GNOME's agent on Ubuntu, launchd's on macOS.
+
+It isn't changed inside an SSH session, so a forwarded agent keeps working. Check with
+`echo $SSH_AUTH_SOCK; ssh-add -l`.
 
 ## Behaviour worth knowing
 
-- **SSH agent** (`.zshenv`): Bitwarden's socket if Bitwarden is running (the macOS app, or the
-  Snap on Ubuntu), otherwise 1Password's if 1Password is installed (even before it has started). With neither, the system's agent is used: GNOME's on Ubuntu
-  (`$XDG_RUNTIME_DIR/gcr/ssh`), launchd's on macOS. Never changed inside an SSH session, so a
-  forwarded agent keeps working. Check which one is in use with `echo $SSH_AUTH_SOCK; ssh-add -l`.
-- **ghostty integration** (`.zshrc`): loaded by hand because the system zshenv's `ZDOTDIR` stops
-  ghostty from loading it; only outside tmux. It provides the cursor shape, window title and the
-  SSH terminfo/env handling set in `ghostty/config.ghostty`.
-- **Homebrew** is put on `PATH` when installed (`/opt/homebrew`, `/usr/local`, `/home/linuxbrew`).
+- **ghostty integration** is sourced in `.zshrc`, because the `ZDOTDIR` setting stops ghostty from
+  loading it; not inside tmux. It gives the cursor shape, window title and the SSH terminfo
+  handling set in `ghostty/config.ghostty`.
+- **PATH**: `~/.local/bin`, then Homebrew (if installed), then the system.
 
 ## Aliases and functions
 

@@ -5,16 +5,16 @@
 | `aerospace.toml`                | AeroSpace tiling window manager, linked to `~/.config/aerospace/aerospace.toml` |
 | `com.local.KeyRemapping.plist`  | key remap for non-US Mac keyboards; installed only with `--keyremap`   |
 | `defaults.sh`                   | system settings; applied only with `--defaults`                        |
-| `com.googlecode.iterm2.plist`   | iTerm2 settings, kept as a backup only (ghostty is the terminal)       |
+| `com.googlecode.iterm2.plist`   | iTerm2 settings, a backup only (ghostty is the terminal)               |
 
 ## AeroSpace
 
-Linked by `setup/link.sh`; there must be no `~/.aerospace.toml` as well (AeroSpace reports two
-configs as an error). On first start, macOS asks to give AeroSpace Accessibility permission.
-The config reloads on save, but only after one manual reload (`alt-shift-;`, then `esc`).
+- On first start, give AeroSpace Accessibility permission when macOS asks.
+- There must be no `~/.aerospace.toml`: AeroSpace reports two configs as an error.
+- The config reloads on save, but only after one manual reload (`alt-shift-;`, then `esc`).
+- AeroSpace takes `alt-h/j/k/l`, so the `Alt-h/j/k/l` resize keys of tmux and nvim don't work here.
 
-`alt` is the main modifier. Because AeroSpace takes `alt-h/j/k/l`, the `Alt-h/j/k/l` resize keys
-of tmux and nvim don't work on macOS.
+`alt` is the main modifier.
 
 | Keys                               | What it does                                       |
 |------------------------------------|----------------------------------------------------|
@@ -29,17 +29,15 @@ of tmux and nvim don't work on macOS.
 | `alt-space`, then `f` / `c` / `o`  | Firefox Dev / Chrome Dev / Obsidian (`esc` cancels) |
 | `alt-shift-;`, then ...            | service mode: `esc` reload config, `r` reset layout, `f` float/tile, `backspace` close other windows, `alt-shift-h/j/k/l` join with neighbour, `up`/`down` volume, `shift-down` volume to 0 |
 
-Autodesk Fusion and Bambu Studio open as floating windows (`[[on-window-detected]]` rules; check
-an app's id with `aerospace list-apps`).
+Autodesk Fusion and Bambu Studio open floating (`[[on-window-detected]]`; `aerospace list-apps`
+shows an app's id).
 
 ## Key remap (`--keyremap`)
 
-For a Mac keyboard that isn't in US layout. **On a US keyboard it breaks `\`**, so it's only
-installed with `install --keyremap` (or `setup/macos.sh --keyremap`).
-See also: https://github.com/amarsyla/hidutil-key-remapping-generator
-
-`setup/macos.sh` copies the plist to `~/Library/LaunchAgents/`; launchd applies it at every login.
-Apply it right away with `launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.local.KeyRemapping.plist`.
+For a Mac keyboard that isn't in US layout. **On a US keyboard it breaks `\`.** `setup/macos.sh`
+copies the plist to `~/Library/LaunchAgents/`; it applies from the next login. To apply it now:
+`launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.local.KeyRemapping.plist`.
+Keycodes: [hidutil key remapping generator](https://github.com/amarsyla/hidutil-key-remapping-generator).
 
 | From                   | Keycode     | To                     | Keycode     |
 |------------------------|-------------|------------------------|-------------|
@@ -47,7 +45,7 @@ Apply it right away with `launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgent
 | grave_accent_and_tilde | 0x700000035 | backslash (\)          | 0x700000031 |
 | non_us_backslash (§/±) | 0x700000064 | grave_accent_and_tilde | 0x700000035 |
 
-To undo:
+Undo:
 
 ```sh
 launchctl bootout gui/$(id -u)/com.local.KeyRemapping
@@ -57,21 +55,16 @@ hidutil property --set '{"UserKeyMapping":[]}'
 
 ## System settings (`--defaults`)
 
-Read `defaults.sh` before using it. Besides Finder, trackpad and keyboard preferences it:
+Read `defaults.sh` first. Besides Finder, trackpad and keyboard preferences it:
 
-- **empties the Dock** (removes all app icons), again on every run;
+- **empties the Dock** of all app icons, on every run;
 - moves the Dock to the right, autohides it and shrinks the icons;
 - asks for the password immediately after sleep or the screensaver;
-- sets a very fast key repeat (faster than System Settings allows);
+- sets a key repeat faster than System Settings allows;
 - points iTerm2 at this folder for its settings, if iTerm2 is installed.
 
-Dock, Finder and menu bar changes apply right away; trackpad and keyboard changes after logging
-out and back in. To undo a setting, change it back in System Settings, or remove the key with
-`defaults delete <domain> <key>`.
+Dock, Finder and menu bar changes apply right away, trackpad and keyboard ones after logging out
+and in. Undo a setting in System Settings, or with `defaults delete <domain> <key>`.
 
-### Finding a `defaults write` key
-
-1. `defaults read > a`
-2. Change the setting in System Settings.
-3. `defaults read > b`
-4. `diff a b`
+To find the key for a setting: `defaults read > a`, change it in System Settings,
+`defaults read > b`, `diff a b`.

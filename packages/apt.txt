@@ -1,6 +1,5 @@
-# Ubuntu packages (apt), for Ubuntu 26.04 LTS with GNOME.
-# The base system, desktop integration and yazi's preview helpers; all other CLI tools come
-# from Homebrew (common.txt + brew.txt), like on macOS; ghostty from snap.txt. See setup/ubuntu.sh.
+# Ubuntu (apt): base system, desktop integration, yazi's preview helpers.
+# CLI tools come from Homebrew, ghostty from snap.txt; see ubuntu/README.md.
 
 # Needed by Homebrew itself (and by nvim-treesitter to compile parsers)
 build-essential
@@ -9,7 +8,7 @@ file
 git
 procps
 
-# Fallback shell (the login shell is Homebrew's zsh; see the Ubuntu section in README.md)
+# Fallback shell; the login shell is Homebrew's zsh (ubuntu/README.md)
 zsh
 
 # Ubuntu Sans Mono for ghostty (see ghostty/ubuntu.ghostty); preinstalled on the desktop
@@ -18,10 +17,8 @@ fonts-ubuntu
 # Clipboard on Wayland (yazi, and nvim's clipboard outside SSH)
 wl-clipboard
 
-# yazi previews. From apt, not Homebrew: Homebrew's builds pull in ~100 extra packages,
-# incl. its own GLib, D-Bus and GnuPG, which hide Ubuntu's (see README, Ubuntu section).
-# Older than Homebrew's but enough for yazi; poppler-utils and jq get Canonical security
-# fixes (main), the others only community fixes (universe) unless Ubuntu Pro is enabled.
+# yazi previews. From apt, not Homebrew: Homebrew's builds bring their own GLib, D-Bus and GnuPG
+# (see ubuntu/README.md).
 7zip
 ffmpeg
 imagemagick

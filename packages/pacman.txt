@@ -1,6 +1,6 @@
 # Arch-only packages from the official repositories (pacman).
 
-# Terminal
+# Terminal and Neovim tools
 ghostty
 npm
 openssh

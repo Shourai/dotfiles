@@ -1,7 +1,6 @@
 # Ubuntu-only ghostty settings (GNOME desktop), loaded from config.ghostty (via os.ghostty)
 
-# Ubuntu's own monospace font (fonts-ubuntu, preinstalled on the desktop).
-# Icons come from ghostty's built-in Nerd Font symbols, so no icon font is needed.
+# fonts-ubuntu (apt.txt, preinstalled); icons are built into ghostty
 font-family = "Ubuntu Sans Mono"
 
 # Title bar stays on (GNOME doesn't tile), in the theme's colours instead of GNOME's grey

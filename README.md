@@ -1,66 +1,51 @@
 # dotfiles
 
 Configuration for Arch Linux (Hyprland), Ubuntu 26.04 (GNOME) and macOS (AeroSpace).
-One command takes a clean install to a working setup; running it again updates the repos,
-the packages, the links and the zsh plugins.
+`install` sets up a clean machine; run it again to update. The Neovim config is a separate repo,
+[nvim](https://github.com/Shourai/nvim), which `install` clones too.
 
-The Neovim config is a separate repo, [nvim](https://github.com/Shourai/nvim), which `install`
-clones next to this one. Its own README covers it.
+OS specifics: [Arch](arch/README.md), [Ubuntu](ubuntu/README.md) (read it: Homebrew's tools
+hide Ubuntu's in the shell), [macOS](macos/README.md).
 
 ## Prerequisites
 
-- A normal user with `sudo` rights, an internet connection and `curl`
-  (Ubuntu: `sudo apt install curl`; Arch and macOS have it).
-- **Arch**: install with `archinstall` and pick no desktop profile and no display manager.
-  Hyprland starts when you log in on TTY1 (see `zsh/.zprofile`); a login screen would bypass that.
-- **Ubuntu**: 26.04 LTS or newer, standard desktop (GNOME).
-- **macOS**: nothing extra; `install` installs Homebrew, which installs the Xcode command line tools.
-- The repos must live at `~/Documents/github/dotfiles` and `~/Documents/github/nvim`; scripts and
-  some configs (e.g. the wallpaper path in `arch/wayland/hypr/hyprpaper.conf`) assume these paths.
-- To push changes, an SSH key for GitHub: `install` clones over https, then switches the remotes
-  to SSH. The shell uses Bitwarden's or 1Password's SSH agent when one of them is there (see
-  `zsh/README.md`); without either, the system's agent (GNOME's on Ubuntu). Setup installs
-  1Password only on macOS and on Arch with `--extras`, and Bitwarden nowhere: install the one you
-  use yourself and turn on its SSH agent in its settings.
+- A user with `sudo`, an internet connection and `curl` (Ubuntu: `sudo apt install curl`).
+- **Arch**: install with `archinstall`, with no desktop profile and no display manager. Hyprland
+  starts on a TTY1 login (`zsh/.zprofile`); a login screen would bypass that.
+- **Ubuntu**: 26.04 LTS or newer, standard GNOME desktop.
+- **macOS**: nothing; `install` installs Homebrew, which installs the Xcode command line tools.
+- The repos must be at `~/Documents/github/dotfiles` and `~/Documents/github/nvim`: scripts and
+  some configs (e.g. `arch/wayland/hypr/hyprpaper.conf`) hard-code these paths.
+- To push: an SSH key on GitHub (`install` clones over https, then switches the remotes to SSH).
+  The shell uses Bitwarden's or 1Password's SSH agent if you install one and turn its agent on;
+  see [zsh](zsh/README.md#ssh-agent).
 
 ## Install
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/main/install | bash
+curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/main/install | bash -s -- --extras   # with flags
 ```
 
-With flags:
+| Flag         | Effect                                                                         |
+|--------------|--------------------------------------------------------------------------------|
+| `--extras`   | Arch: also install `packages/extras-*.txt` (browsers, syncthing, 1Password, ...) |
+| `--defaults` | macOS: also apply `macos/defaults.sh` (read it first: it empties the Dock)     |
+| `--keyremap` | macOS: also install the key remap for non-US Mac keyboards (breaks `\` on US ones) |
+| `--dry-run`  | print what would change, change nothing (needs the repos cloned already)       |
 
-```sh
-curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/main/install | bash -s -- --extras
-```
+`install` installs git, clones both repos (or `git pull --ff-only`s them; on local changes it warns
+and uses them as they are), then runs the scripts below. Every script takes the same flags and can
+be run on its own. A failing script doesn't stop the others; `install` lists the failures at the end.
+Safe to rerun. Log out and back in afterwards.
 
-| Flag         | What it does                                                                        |
-|--------------|-------------------------------------------------------------------------------------|
-| `--extras`   | Arch: also install `packages/extras-*.txt` (browsers, syncthing, 1Password, ...)    |
-| `--defaults` | macOS: also apply the system settings in `macos/defaults.sh` (read it first)        |
-| `--keyremap` | macOS: also install the key remap for non-US Mac keyboards (see `macos/README.md`)  |
-| `--dry-run`  | Print what would change without changing anything (needs the repos cloned already)  |
-
-`install --help` lists the same flags. Every script in `setup/` takes the flags it needs too.
-
-### What `install` does
-
-1. Installs git (Homebrew first on macOS, apt on Ubuntu, pacman on Arch).
-2. Clones this repo and the nvim repo to `~/Documents/github/`, or fast-forwards them if they're
-   already there (`git pull --ff-only`; local changes that conflict are left alone, with a warning).
-3. Runs the script for this OS, then `setup/link.sh`, then `setup/zsh.sh`. If one fails, the others
-   still run, and `install` lists what failed at the end. It's safe to rerun.
-
-| Script            | What it does                                                                         |
-|-------------------|--------------------------------------------------------------------------------------|
-| `setup/arch.sh`   | `pacman -Syu`, installs yay, the pacman and AUR lists, clears the pacman cache        |
-| `setup/ubuntu.sh` | `apt upgrade`, the apt list, Homebrew with the shared lists, `brew upgrade`, GNOME shortcuts |
-| `setup/macos.sh`  | Homebrew formulae and casks, `brew upgrade`; key remap and `defaults.sh` with flags   |
-| `setup/link.sh`   | Symlinks the configs into `~/.config`, picks the per-OS ghostty file, `ya pkg install` |
-| `setup/zsh.sh`    | Sets `ZDOTDIR` in the system zshenv, makes zsh the login shell, clones the zsh plugins |
-
-Shared helpers are in `setup/lib.sh`.
+| Script            | What it does                                                                  |
+|-------------------|-------------------------------------------------------------------------------|
+| `setup/arch.sh`   | `pacman -Syu`, yay, the pacman and AUR lists, clears the pacman cache          |
+| `setup/ubuntu.sh` | `apt upgrade`, the apt list, Snaps, Homebrew with the shared lists, `brew upgrade`, GNOME shortcuts |
+| `setup/macos.sh`  | Homebrew formulae and casks, `brew upgrade`; key remap and `defaults.sh` with flags |
+| `setup/link.sh`   | links the configs into `~/.config`, picks the per-OS ghostty file, `ya pkg install` |
+| `setup/zsh.sh`    | `ZDOTDIR` in the system zshenv, zsh as login shell, clones or updates the zsh plugins |
 
 ## Update
 
@@ -68,8 +53,8 @@ Shared helpers are in `setup/lib.sh`.
 ~/Documents/github/dotfiles/install
 ```
 
-This pulls both repos and upgrades all packages (pacman/apt/Homebrew), relinks and updates the
-zsh plugins. Plugins managed inside the tools themselves are updated there:
+Pulls both repos, upgrades all packages, relinks and updates the zsh plugins. Plugins that the
+tools manage themselves:
 
 | What                 | How                                                     |
 |----------------------|---------------------------------------------------------|
@@ -79,79 +64,43 @@ zsh plugins. Plugins managed inside the tools themselves are updated there:
 
 ## Common tasks
 
-**Add a package**: add a line to the right list in `packages/`, then run `install` (or just the
-script for your OS). Note that this also upgrades everything else; to add only one package now,
-install it by hand and add it to the list for next time.
+**Add a package**: add a line to the right list in `packages/` and run `install` (or
+`setup/<os>.sh`). Both also upgrade everything else; to get one package now, install it by hand
+and add it to the list for next time.
 
-| List              | Installed with                                                      |
-|-------------------|---------------------------------------------------------------------|
-| `common.txt`      | pacman on Arch and Homebrew on macOS/Ubuntu (same name on both)      |
-| `pacman.txt`      | pacman (Arch)                                                       |
-| `aur.txt`         | yay (Arch)                                                          |
-| `brew.txt`        | Homebrew on macOS and Ubuntu                                        |
-| `brew-macos.txt`  | Homebrew on macOS (incl. yazi's preview helpers)                     |
-| `cask.txt`        | Homebrew casks (macOS apps and fonts)                               |
-| `apt.txt`         | apt (Ubuntu): base system, Ubuntu font, clipboard, yazi's preview helpers |
-| `snap.txt`        | Snaps (Ubuntu): ghostty, because apt only has 1.3                   |
-| `extras-pacman.txt`, `extras-aur.txt` | Arch, only with `--extras`                      |
+| List              | Installed with                                                  |
+|-------------------|-----------------------------------------------------------------|
+| `common.txt`      | pacman on Arch, Homebrew on macOS and Ubuntu (same name on both) |
+| `pacman.txt`      | pacman (Arch)                                                   |
+| `aur.txt`         | yay (Arch)                                                      |
+| `brew.txt`        | Homebrew (macOS and Ubuntu)                                     |
+| `brew-macos.txt`  | Homebrew (macOS)                                                |
+| `cask.txt`        | Homebrew casks (macOS apps and fonts)                           |
+| `apt.txt`         | apt (Ubuntu)                                                    |
+| `snap.txt`        | Snap (Ubuntu)                                                   |
+| `extras-pacman.txt`, `extras-aur.txt` | Arch, only with `--extras`                  |
+
+yazi's preview helpers are in each OS's own list (`pacman.txt`, `brew-macos.txt`, `apt.txt`).
 
 **Add a config**: put it in the repo, add a `link` line to `setup/link.sh`, run `setup/link.sh`.
 Anything already at the target is moved to `<name>.bak-<date>`, never deleted.
-Broken links directly in `~/.config` that point into this repo are removed by `setup/link.sh`;
-links to single files in subfolders (e.g. `~/.config/tmux/tmux.conf`) must be removed by hand.
 
-**Change keys or settings**: each folder's README lists its keys and where they're set:
-[zsh](zsh/README.md), [tmux](tmux/README.md), [git](git/README.md), [yazi](yazi/README.md),
-[Arch desktop](arch/README.md), [Ubuntu](ubuntu/README.md), [macOS](macos/README.md).
+**Remove a config**: delete it and its `link` line, run `setup/link.sh`: it removes broken links
+directly in `~/.config` that point into the repo. Remove deeper links (e.g.
+`~/.config/tmux/tmux.conf`) by hand.
+
+**Change keys or settings**: see the folder's README: [zsh](zsh/README.md),
+[tmux](tmux/README.md), [git](git/README.md), [yazi](yazi/README.md), [Arch](arch/README.md),
+[Ubuntu](ubuntu/README.md), [macOS](macos/README.md).
 
 ## Per machine
 
-Things that are specific to one machine, and what to change on another:
-
-| What                       | Where                                                                    |
-|----------------------------|--------------------------------------------------------------------------|
-| Monitors and workspace pinning (Arch) | MONITORS block in `arch/wayland/hypr/hyprland.lua`; `hyprctl monitors` lists the outputs |
-| Workspace pinning (macOS)  | `[workspace-to-monitor-force-assignment]` in `macos/aerospace.toml`      |
-| Work git identity          | create `~/.config/git/gitconfig_work` by hand (see `git/README.md`)      |
-| Key remap (macOS)          | only with `--keyremap`, for non-US Mac keyboards                         |
-| Optional packages (Arch)   | only with `--extras`; the browser keys in Hyprland need them             |
-
-## Ubuntu
-
-apt provides the base system, the clipboard tool and yazi's preview helpers (`apt.txt`); Homebrew
-(`/home/linuxbrew/.linuxbrew`) provides your CLI tools from `common.txt` and `brew.txt`, so their
-versions match macOS; ghostty comes from a Snap.
-
-- **Login shell** is Homebrew's zsh. `setup/zsh.sh` only switches to it if it starts, and
-  `setup/ubuntu.sh` switches back to apt's `/usr/bin/zsh` if a `brew upgrade` breaks it. A
-  `brew upgrade` you run by hand isn't checked; if you then can't log in, see Troubleshooting.
-- **Terminal**: ghostty comes from the Snap (`packages/snap.txt`): apt only has 1.3 and Homebrew has
-  it only for macOS. If the apt version is still installed, remove it (`sudo apt remove ghostty`),
-  otherwise it comes first on `PATH`. Ubuntu's own terminal, Ptyxis, stays as a fallback.
-- **Shortcuts**: Ctrl+Alt+T and Super+Shift+Return open ghostty with tmux, Super+Return opens
-  ghostty, as on Arch; everything else stays GNOME's default (see `ubuntu/README.md`).
-- **Desktop** stays GNOME; the configs in `arch/` are Arch only.
-- **Homebrew comes first on `PATH`** in the shell, so its copies hide Ubuntu's own tools of the
-  same name (see below).
-- **SSH agent**: Bitwarden, installed by hand as a Snap (App Center; Homebrew only has the
-  command-line `bw`, without SSH agent). Turn on Settings, "Enable SSH agent", then check in a new
-  terminal with `ssh-add -L`. Until Bitwarden is running, GNOME's own agent is used.
-
-### Ubuntu commands hidden by Homebrew
-
-Homebrew installs 74 packages on Ubuntu (the lists plus their dependencies). 57 of their
-commands also exist in Ubuntu, and in the shell (and tmux, nvim, yazi, scripts started from it)
-Homebrew's copy wins; GNOME, desktop apps and `sudo` (Ubuntu's `secure_path`) aren't affected.
-All are the same tools in a newer version: `bash`, `openssl`, `perl`, `python3`, `rsync`, `xz`,
-`zstd`, `zsh`. Only `python3` and `perl` need care: they lack Ubuntu's modules (e.g. Python's
-`gi`), so scripts that need those should start with `#!/usr/bin/python3` or `#!/usr/bin/perl`.
-
-yazi's preview helpers (ffmpeg, poppler, ImageMagick, ...) come from apt for this reason: from
-Homebrew they pulled in about 100 more packages, including Homebrew's own GLib, D-Bus and GnuPG,
-whose `gsettings`, `dbus-*` and `gpg` hid Ubuntu's (`gsettings` then can't change GNOME's
-settings). apt's versions are older but enough for yazi; `poppler-utils` and `jq` get Canonical
-security fixes, the others (universe) only community fixes unless Ubuntu Pro is enabled.
-If a new Homebrew package ever brings GLib back, use `/usr/bin/gsettings` (as `ubuntu/shortcuts.sh` does).
+| What                                | Where                                                          |
+|-------------------------------------|----------------------------------------------------------------|
+| Monitors and workspaces (Arch)      | MONITORS block in `arch/wayland/hypr/hyprland.lua`; `hyprctl monitors` lists the outputs |
+| Workspaces per monitor (macOS)      | `[workspace-to-monitor-force-assignment]` in `macos/aerospace.toml` |
+| Work git identity                   | create `~/.config/git/gitconfig_work` by hand ([git](git/README.md)) |
+| Optional parts                      | the flags above: `--extras` (Arch; the browser keys need it), `--keyremap`, `--defaults` (macOS) |
 
 ## Troubleshooting
 
@@ -159,61 +108,56 @@ If a new Homebrew package ever brings GLib back, use `/usr/bin/gsettings` (as `u
 |-------------------------------------------|------------------------------------------------------------------------|
 | `install` lists failed steps              | read the messages above the list, fix the cause, run `install` again    |
 | A link replaced something you needed      | it's next to it as `<name>.bak-<date>`: remove the link, rename the backup back |
-| Plain zsh prompt (no pure), no SSH host completion | the plugins aren't cloned yet: run `setup/zsh.sh`              |
-| `setup/zsh.sh` warns about two zsh histories | a shell opened before the move still writes to `dotfiles/zsh/history`: run `exec zsh` in old shells, keep the history you want at `~/.local/state/zsh/history`, delete the other (it's gitignored) |
-| zsh ignores the config (no prompt, aliases) | `ZDOTDIR` must be set in `/etc/zsh/zshenv` (Arch, apt's zsh) or `/etc/zshenv` (macOS, Homebrew's zsh): run `setup/zsh.sh` |
-| Can't log in on Ubuntu after a `brew upgrade` | boot into recovery mode (root shell), run `chsh -s /usr/bin/zsh <user>` |
-| Hyprland shows a red config error         | `hyprctl configerrors`; see `arch/README.md` for checking changes first |
-| ghostty settings missing (font, Alt key)  | `ghostty/os.ghostty` is created by `setup/link.sh`; run it again        |
-| Undo `--keyremap` or `--defaults` (macOS) | see `macos/README.md`                                                   |
-
-To see what a script would do without changing anything, run it with `--dry-run`.
+| Plain prompt (no pure), no SSH host completion | the zsh plugins aren't cloned yet: run `setup/zsh.sh`              |
+| zsh ignores its config (no prompt, aliases) | `ZDOTDIR` must be set in `/etc/zsh/zshenv` (Arch, apt's zsh) or `/etc/zshenv` (macOS, Homebrew's zsh): run `setup/zsh.sh` |
+| `setup/zsh.sh` warns about two zsh histories | a shell started before the move still writes to `dotfiles/zsh/history`: run `exec zsh` in open shells, merge what you want to keep into `~/.local/state/zsh/history`, delete `dotfiles/zsh/history` (gitignored) |
+| Can't log in on Ubuntu after a `brew upgrade` | Homebrew's zsh broke: boot into recovery mode, root shell, `chsh -s /usr/bin/zsh <user>` (if the disk is read-only, first `mount -o remount,rw /`) |
+| ghostty settings missing (font, Alt key)  | `ghostty/os.ghostty` is missing: run `setup/link.sh`                    |
+| Hyprland shows a red config error         | `hyprctl configerrors` ([Arch](arch/README.md))                         |
+| Undo `--keyremap` or `--defaults`         | see [macOS](macos/README.md)                                            |
 
 ## Uninstall
 
-1. Remove the links in `~/.config` that point into this repo, and rename any `<name>.bak-<date>`
-   backups back.
+1. Remove the links in `~/.config` that point into the repos; rename any `<name>.bak-<date>` back.
 2. Delete the `export ZDOTDIR=...` line from `/etc/zsh/zshenv` and, on macOS or with Homebrew's
    zsh, from `/etc/zshenv`.
 3. Pick another login shell, e.g. `chsh -s /bin/bash`.
-4. macOS: undo `--keyremap` / `--defaults` as described in `macos/README.md`.
+4. macOS: undo `--keyremap` / `--defaults` ([macOS](macos/README.md)).
 
-Packages stay installed; remove them with your package manager if you want.
+Packages stay installed.
 
 ## Theme
 
-One Dark everywhere, using the palette of nvim's `onedark.nvim` (`dark` style).
+One Dark everywhere (the palette of nvim's `onedark.nvim`, `dark` style).
 
 | Tool              | Where it's set                                                             |
 |-------------------|----------------------------------------------------------------------------|
-| ghostty           | `theme = One Half Dark` in `ghostty/config.ghostty` (same background and accents) |
-| yazi, lazygit, fzf | no theme of their own: they use the terminal's colours                    |
-| pure prompt, eza, autosuggestions | a few fixed colours in `zsh/.zshrc` / `zsh/.zshenv` (`147`, `xx=37`, `#808080`) |
-| bat               | `BAT_THEME="OneHalfDark"` in `zsh/.zshrc`                                  |
-| tmux              | `od_*` colours in `tmux/tmux.conf`                                         |
-| waybar            | `@define-color` lines in `arch/wayland/waybar/style.css`                   |
-| Hyprland borders  | `col` in `arch/wayland/hypr/hyprland.lua`                                  |
-| hyprlock          | its own white/grey text colours in `arch/wayland/hypr/hyprlock.conf`       |
-| nvim              | `onedark.nvim` in the nvim repo                                            |
+| ghostty           | `theme = One Half Dark` in `ghostty/config.ghostty`                         |
+| yazi, lazygit, fzf | nowhere: they use the terminal's colours                                  |
+| pure, eza, autosuggestions | fixed colours in `zsh/.zshrc` and `zsh/.zshenv` (`147`, `xx=37`, `#808080`) |
+| bat               | `BAT_THEME` in `zsh/.zshrc`                                                 |
+| tmux              | `od_*` variables in `tmux/tmux.conf`                                        |
+| waybar            | `@define-color` lines in `arch/wayland/waybar/style.css`                    |
+| Hyprland borders  | `col` in `arch/wayland/hypr/hyprland.lua`                                   |
+| hyprlock          | its own white/grey colours in `arch/wayland/hypr/hyprlock.conf`             |
+| nvim              | `onedark.nvim` in the nvim repo                                             |
 
 ## Layout
 
 ```
 dotfiles
- ├─ install            bootstrap and update script (see above)
- ├─ setup/             arch.sh, ubuntu.sh, macos.sh, link.sh, zsh.sh, lib.sh
- ├─ packages/          package lists per package manager
- ├─ zsh/               -> ~/.config/zsh (see zsh/README.md)
- ├─ tmux/tmux.conf     -> ~/.config/tmux/tmux.conf (see tmux/README.md)
- ├─ git/               -> ~/.config/git (see git/README.md)
+ ├─ install            set up or update (see above)
+ ├─ setup/             the scripts run by install; shared helpers in lib.sh
+ ├─ packages/          package lists
+ ├─ zsh/               -> ~/.config/zsh
+ ├─ tmux/tmux.conf     -> ~/.config/tmux/tmux.conf
+ ├─ git/               -> ~/.config/git
  ├─ lazygit/config.yml -> ~/.config/lazygit/config.yml (no custom settings yet)
- ├─ yazi/              -> ~/.config/yazi (see yazi/README.md)
- ├─ ghostty/           -> ~/.config/ghostty: config.ghostty + arch/ubuntu/macos.ghostty via os.ghostty
- ├─ arch/              Arch only: Hyprland, hypridle, hyprlock, hyprpaper, waybar (see arch/README.md)
- ├─ ubuntu/            Ubuntu only: GNOME keyboard shortcuts (see ubuntu/README.md)
- └─ macos/             macOS only: AeroSpace, key remap, defaults.sh (see macos/README.md)
+ ├─ yazi/              -> ~/.config/yazi
+ ├─ ghostty/           -> ~/.config/ghostty (os.ghostty links to the arch/ubuntu/macos file)
+ ├─ arch/              Hyprland, hypridle, hyprlock, hyprpaper, waybar
+ ├─ ubuntu/            GNOME keyboard shortcuts
+ └─ macos/             AeroSpace, key remap, defaults.sh
 ```
 
-## Other tools
-
-Not installed by setup; install by hand when needed: gping, jless, mtr, netop, pandoc, sshs, termshark.
+Not installed by setup, install by hand when needed: gping, jless, mtr, netop, pandoc, sshs, termshark.

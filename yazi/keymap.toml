@@ -6,5 +6,5 @@
 [mgr]
 prepend_keymap = [
 	{ on = "A",     run = "create --dir", desc = "Create a directory" },
-	{ on = "<C-x>", run = "shell -- dragon-drop --all-compact --and-exit --icon-only --on-top %s", desc = "Drag and drop selected files (dragon-drop, Linux)" },
+	{ on = "<C-x>", run = "shell -- dragon-drop --all-compact --and-exit --icon-only --on-top %s", desc = "Drag and drop selected files (dragon-drop, Arch)" },
 ]
