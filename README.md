@@ -91,7 +91,8 @@ install it by hand and add it to the list for next time.
 | `brew.txt`        | Homebrew on macOS and Ubuntu                                        |
 | `brew-macos.txt`  | Homebrew on macOS                                                   |
 | `cask.txt`        | Homebrew casks (macOS apps and fonts)                               |
-| `apt.txt`         | apt (Ubuntu): only the base system, ghostty and the Ubuntu font     |
+| `apt.txt`         | apt (Ubuntu): only the base system and the Ubuntu font              |
+| `snap.txt`        | Snaps (Ubuntu): ghostty, because apt only has 1.3                   |
 | `extras-pacman.txt`, `extras-aur.txt` | Arch, only with `--extras`                      |
 
 **Add a config**: put it in the repo, add a `link` line to `setup/link.sh`, run `setup/link.sh`.
@@ -123,8 +124,9 @@ from `common.txt` and `brew.txt`, so the versions match macOS.
 - **Login shell** is Homebrew's zsh. `setup/zsh.sh` only switches to it if it starts, and
   `setup/ubuntu.sh` switches back to apt's `/usr/bin/zsh` if a `brew upgrade` breaks it. A
   `brew upgrade` you run by hand isn't checked; if you then can't log in, see Troubleshooting.
-- **Terminal**: ghostty comes from apt (Homebrew has it only for macOS); Ubuntu's own terminal,
-  Ptyxis, stays as a fallback (open it from the app grid).
+- **Terminal**: ghostty comes from the Snap (`packages/snap.txt`): apt only has 1.3 and Homebrew has
+  it only for macOS. If the apt version is still installed, remove it (`sudo apt remove ghostty`),
+  otherwise it comes first on `PATH`. Ubuntu's own terminal, Ptyxis, stays as a fallback.
 - **Shortcuts**: Ctrl+Alt+T and Super+Shift+Return open ghostty with tmux, Super+Return opens
   ghostty, as on Arch; everything else stays GNOME's default (see `ubuntu/README.md`).
 - **Desktop** stays GNOME; the configs in `arch/` are Arch only.

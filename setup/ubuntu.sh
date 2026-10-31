@@ -15,10 +15,10 @@ is_ubuntu || die "this script is for Ubuntu"
 
 BREW_ZSH=/home/linuxbrew/.linuxbrew/bin/zsh
 
-# Written for 26.04 LTS (e.g. ghostty is only in apt from 26.04 on)
+# Written for 26.04 LTS
 version="$(. /etc/os-release && echo "$VERSION_ID")"
 if [ "$(printf '%s\n26.04\n' "$version" | sort -V | head -1)" != "26.04" ]; then
-  warn "Ubuntu $version is older than 26.04; some apt packages (e.g. ghostty) may be missing"
+  warn "Ubuntu $version is older than 26.04; some packages may be missing or too old"
 fi
 
 # Never stop for configuration prompts; keep local changes to system config files
@@ -31,6 +31,17 @@ try "apt upgrade" "${apt[@]}" upgrade
 info "Installing apt packages"
 # shellcheck disable=SC2046  # word splitting is intended: one package per word
 try "apt packages (packages/apt.txt)" "${apt[@]}" install $(read_list "$PACKAGES/apt.txt")
+
+info "Installing Snaps"
+# (not piped into the loop: the loop must run in this shell so try() can record failures)
+while read -r snap; do
+  # shellcheck disable=SC2086  # "<name> <options>" splits into arguments
+  try "snap install $snap" sudo snap install $snap
+done < <(read_list "$PACKAGES/snap.txt")
+# An older ghostty from apt would come first on PATH (/usr/bin before /snap/bin)
+if [ -x /usr/bin/ghostty ]; then
+  warn "ghostty from apt (1.3) is installed too and would be used instead of the Snap: sudo apt remove ghostty"
+fi
 
 # Homebrew (needs build-essential, curl, file, git and procps from apt)
 if has brew; then

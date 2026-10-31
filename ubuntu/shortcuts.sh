@@ -7,7 +7,7 @@ set -euo pipefail
 
 # Full paths: GNOME starts shortcut commands without the shell's PATH, and on Ubuntu
 # tmux comes from Homebrew
-ghostty="$(command -v ghostty || echo /usr/bin/ghostty)"
+ghostty=/snap/bin/ghostty   # see packages/snap.txt
 tmux=/home/linuxbrew/.linuxbrew/bin/tmux
 [ -x "$tmux" ] || tmux="$(command -v tmux || echo tmux)"
 
