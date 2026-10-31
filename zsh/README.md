@@ -37,6 +37,8 @@ It isn't changed inside an SSH session, so a forwarded agent keeps working. Chec
   loading it; not inside tmux. It gives the cursor shape, window title and the SSH terminfo
   handling set in `ghostty/config.ghostty`.
 - **PATH**: `~/.local/bin`, then Homebrew (if installed), then the system.
+- **Missing tools** (fzf, zoxide, eza, bat, nvim, the plugins) are skipped without errors; the
+  aliases fall back to `ls`, `cat` and `vi`, and `gf`/`gb`/`ghist` need fzf.
 
 ## Aliases and functions
 
@@ -55,3 +57,4 @@ It isn't changed inside an SSH session, so a forwarded agent keeps working. Chec
 | `pkg-clean`               | Arch: fuzzy-pick installed packages to remove         |
 | `wgup`, `wgdown`          | `wg-quick up/down` (needs wireguard-tools, not installed by setup) |
 | `Ctrl-T` / `Alt-C` / `Ctrl-R` | fzf: file, directory, history                     |
+| `Home`, `End`, `Delete`  | start and end of line, delete character               |

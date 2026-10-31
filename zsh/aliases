@@ -1,45 +1,55 @@
-##############################
-# Aliases
-##############################
+# Sourced from .zshrc, after PATH (Homebrew) is set up.
+# Guarded where the tool might be missing and there's a sensible fallback (ls, cat, vi).
 
-# Eza
-if command -v eza &>/dev/null
-then
-  alias ls='eza --icons=auto --group-directories-first'
-  alias l='eza --long --icons=auto --group-directories-first'
-  alias ll='eza --long --all --icons=auto --group-directories-first --git'
-  alias lll='eza --long --all --header --group --icons=auto --group-directories-first --git'
-  alias lt='eza --tree --level=2 --icons=auto'
+# --- LISTING (eza) ---
+
+if (( $+commands[eza] )); then
+  alias ls='eza --icons=auto --group-directories-first'                                  # plain
+  alias l='eza --long --icons=auto --group-directories-first'                            # long
+  alias ll='eza --long --all --icons=auto --group-directories-first --git'               # + hidden, git status
+  alias lll='eza --long --all --header --group --icons=auto --group-directories-first --git'  # + header, group
+  alias lt='eza --tree --level=2 --icons=auto'                                           # tree, 2 levels
 fi
 
-# bat
-if command -v bat &>/dev/null
-then
-  alias cat='bat --paging=never'
-fi
+# --- VIEWING (bat) ---
 
-# cd
+(( $+commands[bat] )) && alias cat='bat --paging=never'
+
+# --- NAVIGATION ---
+
 alias ..='cd ../'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias cd..='cd ../'
 alias /='cd /'
 alias ~='cd ~'
-alias cp='cp -iv'
-alias mkdir='mkdir -pv'
-alias vi='nvim'
-alias vim='nvim'
-alias zshrc='$EDITOR $ZDOTDIR/.zshrc'
 
-# Wireguard
+# --- SAFER DEFAULTS ---
+
+alias cp='cp -iv'        # ask before overwriting, show what's copied
+alias mkdir='mkdir -pv'  # create parents, show what's created
+
+# --- EDITOR ---
+
+if (( $+commands[nvim] )); then
+  alias vi='nvim'
+  alias vim='nvim'
+fi
+alias zshrc='$EDITOR $ZDOTDIR/.zshrc'  # edit this config
+
+# --- WIREGUARD ---
+
 alias wgup='wg-quick up'
 alias wgdown='wg-quick down'
 
-# Git
+# --- GIT ---
+
 alias g='git'
 alias lg='lazygit'
 
-# Arch: pick explicitly installed packages to remove
+# --- ARCH ---
+
+# Pick explicitly installed packages to remove
 if [[ -n "$IS_ARCH" ]]; then
   alias pkg-clean="pacman -Qetq | fzf -m --preview 'pacman -Qi {}' | xargs -o -r sudo pacman -Runs"
 fi
