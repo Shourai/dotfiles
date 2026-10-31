@@ -129,6 +129,10 @@ from `common.txt` and `brew.txt`, so the versions match macOS.
 - **Shortcuts**: Ctrl+Alt+T and Super+Shift+Return open ghostty with tmux, Super+Return opens
   ghostty, as on Arch; everything else stays GNOME's default (see `ubuntu/README.md`).
 - **Desktop** stays GNOME; the configs in `arch/` are Arch only.
+- **SSH agent**: Bitwarden, installed by hand (not by setup): install it from the App Center,
+  turn on Settings, "Enable SSH agent", then open a new terminal and check with `ssh-add -L`.
+  The shell finds Bitwarden's socket in any install (see `zsh/README.md`); until Bitwarden is
+  running, GNOME's own agent is used.
 
 ## Troubleshooting
 
