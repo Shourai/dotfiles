@@ -53,6 +53,7 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("hypridle")
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
   hl.exec_cmd("elephant") -- data provider for walker
+  hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme prefer-dark") -- dark GTK apps
 end)
 
 
@@ -241,8 +242,8 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Audio
 hl.bind("ALT + SHIFT + M", hl.dsp.exec_cmd("pactl set-sink-mute @DEFAULT_SINK@ toggle"))
-hl.bind("ALT + SHIFT + period", hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ +5%"))
-hl.bind("ALT + SHIFT + comma", hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ -5%"))
+hl.bind("ALT + SHIFT + period", hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ +5%"), { repeating = true })
+hl.bind("ALT + SHIFT + comma", hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ -5%"), { repeating = true })
 
 -- Lock screen, and screenshot of a selected area to the clipboard
 hl.bind("ALT + CTRL + Q", hl.dsp.exec_cmd("hyprlock"))
