@@ -29,7 +29,7 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/main/install | bas
 
 | Flag         | Effect                                                                         |
 |--------------|--------------------------------------------------------------------------------|
-| `--extras`   | Arch: also install `packages/extras-*.txt` (browsers, syncthing, 1Password, ...) |
+| `--extras`   | Arch: also install `packages/extras-*.txt` (browsers, 1Password, ...) |
 | `--defaults` | macOS: also apply `macos/defaults.sh` (read it first: it empties the Dock)     |
 | `--keyremap` | macOS: also install the key remap for non-US Mac keyboards (breaks `\` on US ones) |
 | `--dry-run`  | print what would change, change nothing (needs the repos cloned already)       |

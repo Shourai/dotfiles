@@ -3,4 +3,3 @@
 chromium
 firefox-developer-edition
 man-db
-syncthing
