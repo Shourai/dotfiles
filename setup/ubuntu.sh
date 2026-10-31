@@ -55,7 +55,8 @@ try "brew update" brew update
 try "brew upgrade" brew upgrade
 
 # yazi's preview helpers now come from apt; Homebrew copies from an older setup would hide them
-old="$(brew list --formula -1 2>/dev/null | grep -x -E 'exiftool|ffmpeg|imagemagick|jq|media-info|poppler|resvg|sevenzip' | xargs)"
+# (|| true: grep exits 1 when nothing matches, which is the normal case)
+old="$(brew list --formula -1 2>/dev/null | grep -x -E 'exiftool|ffmpeg|imagemagick|jq|media-info|poppler|resvg|sevenzip' | xargs || true)"
 if [ -n "$old" ]; then
   warn "Homebrew still has yazi helpers that now come from apt: brew uninstall $old && brew autoremove"
 fi
