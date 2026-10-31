@@ -70,12 +70,13 @@ bindkey -e
 
 # Home, End, Delete: the emacs keymap has no bindings for them, so they typed "~".
 # Sequences sent by ghostty (normal and application mode), tmux and the Linux console.
-for key widget in '^[[H' beginning-of-line '^[OH' beginning-of-line '^[[1~' beginning-of-line \
-                  '^[[F' end-of-line       '^[OF' end-of-line       '^[[4~' end-of-line \
-                  '^[[3~' delete-char; do
-  bindkey "$key" "$widget"
-done
-unset key widget
+bindkey '^[[H'  beginning-of-line
+bindkey '^[OH'  beginning-of-line
+bindkey '^[[1~' beginning-of-line
+bindkey '^[[F'  end-of-line
+bindkey '^[OF'  end-of-line
+bindkey '^[[4~' end-of-line
+bindkey '^[[3~' delete-char
 
 # --- COMPLETION ---
 
@@ -150,7 +151,7 @@ if (( $+commands[fzf] )); then
   # gf: fuzzy-pick a git-tracked file and open it
   gf() { local file; file=$(git ls-files | fzf --prompt "Git Files> ") && [[ -n "$file" ]] && ${EDITOR:-nvim} "$file"; }
   # gb: fuzzy-pick a branch and check it out (remotes/origin/x becomes x)
-  gb() { local branch; branch=$(git branch -a --color=always | grep -v "/HEAD" | fzf --ansi --prompt "Branches> ") && branch=${${branch##* }#remotes/origin/} && [[ -n "$branch" ]] && git checkout "$branch"; }
+  gb() { local branch; branch=$(git branch -a --color=always | grep -v "/HEAD" | fzf --ansi --prompt "Branches> ") && branch=${branch##* } && branch=${branch#remotes/origin/} && [[ -n "$branch" ]] && git checkout "$branch"; }
   # ghist: fuzzy-pick a commit and show it
   ghist() { local commit; commit=$(git log --oneline --color=always | fzf --ansi --prompt "History> ") && commit=${commit%% *} && [[ -n "$commit" ]] && git show "$commit"; }
 fi
@@ -171,11 +172,11 @@ export BAT_THEME="OneHalfDark"  # matches ghostty
 [[ -r "$ZSH_PLUGINS/zsh-ssh/zsh-ssh.zsh" ]] && source "$ZSH_PLUGINS/zsh-ssh/zsh-ssh.zsh"
 
 # Autosuggestions, then syntax highlighting (must be sourced last), from the package manager:
-# Homebrew's share dir (macOS, Ubuntu), else Arch's. Each file is checked on its own.
+# Homebrew's share dir (macOS, Ubuntu), else Arch's. Each plugin is checked on its own.
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#808080'
-_plugin_dirs=(${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/share} ${IS_ARCH:+/usr/share/zsh/plugins})
 for _plugin in zsh-autosuggestions zsh-syntax-highlighting; do
-  _plugin_file=( $^_plugin_dirs/$_plugin/$_plugin.zsh(N-.) )
-  (( $#_plugin_file )) && source "$_plugin_file[1]"
+  for _dir in ${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/share} ${IS_ARCH:+/usr/share/zsh/plugins}; do
+    [[ -r "$_dir/$_plugin/$_plugin.zsh" ]] && { source "$_dir/$_plugin/$_plugin.zsh"; break; }
+  done
 done
-unset _plugin _plugin_dirs _plugin_file
+unset _plugin _dir
