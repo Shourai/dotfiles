@@ -78,6 +78,13 @@ bindkey '^[OF'  end-of-line
 bindkey '^[[4~' end-of-line
 bindkey '^[[3~' delete-char
 
+# Load the edit-command-line function
+autoload -U edit-command-line
+zle -N edit-command-line
+
+# Bind the function to a keyboard shortcut (Ctrl+X, Ctrl+E)
+bindkey '^X^E' edit-command-line
+
 # --- COMPLETION ---
 
 # LS_COLORS for eza and completion lists. Skipped when inherited (tmux panes, nested shells),
