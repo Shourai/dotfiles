@@ -1,0 +1,10 @@
+[Desktop Entry]
+# Starts ghostty at login without a window, so the shortcuts (shortcuts.sh) open windows in it
+# at once: the Snap takes seconds to start the first time after boot.
+# Linked to ~/.config/autostart/ghostty.desktop by setup/link.sh.
+Type=Application
+Name=Ghostty (background)
+Exec=/snap/bin/ghostty --gtk-single-instance=true --initial-window=false
+TryExec=/snap/bin/ghostty
+NoDisplay=true
+X-GNOME-Autostart-enabled=true

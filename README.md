@@ -158,7 +158,7 @@ dotfiles
  ├─ yazi/              -> ~/.config/yazi
  ├─ ghostty/           -> ~/.config/ghostty (os.ghostty links to the arch/ubuntu/macos file)
  ├─ arch/              Hyprland, hypridle, hyprlock, hyprpaper, waybar
- ├─ ubuntu/            GNOME keyboard shortcuts
+ ├─ ubuntu/            GNOME keyboard shortcuts, ghostty autostart
  └─ macos/             AeroSpace, key remap, defaults.sh
 ```
 

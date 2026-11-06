@@ -31,6 +31,11 @@ Headless (e.g. Ubuntu Server used over SSH) works too: without `gnome-shell` ins
   [main README](../README.md#troubleshooting).
 - **ghostty from apt** comes first on `PATH` if it's still installed: `sudo apt remove ghostty`
   (`setup/ubuntu.sh` warns about it). Ubuntu's own terminal, Ptyxis, stays as a fallback.
+- **ghostty runs in the background.** The Snap takes seconds to start the first time after a boot,
+  so `ghostty-autostart.desktop` (linked to `~/.config/autostart/`) starts it at login without a
+  window, and it keeps running when you close the last window (`quit-after-last-window-closed` in
+  `ghostty/ubuntu.ghostty`). The shortcuts open their windows in it. Snap updates of ghostty may
+  wait until it stops: log out and back in. To stop it for good, remove the autostart link.
 - **SSH agent**: in Bitwarden, turn on Settings, "Enable SSH agent", then check in a new terminal
   with `ssh-add -L`. Until Bitwarden runs, GNOME's agent is used.
 

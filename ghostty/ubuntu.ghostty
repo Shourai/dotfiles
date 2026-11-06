@@ -8,3 +8,7 @@ window-theme = ghostty
 
 # No transparency
 background-opacity = 1
+
+# Keep running after the last window closes: ghostty starts at login without a window
+# (ubuntu/ghostty-autostart.desktop) and the shortcuts open windows in it, so they're instant
+quit-after-last-window-closed = false

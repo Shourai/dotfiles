@@ -31,6 +31,7 @@ fi
 # Ubuntu: GNOME desktop
 if is_ubuntu; then
   link "$DOTFILES/ghostty/ubuntu.ghostty" "$DOTFILES/ghostty/os.ghostty"  # per-OS ghostty settings
+  link "$DOTFILES/ubuntu/ghostty-autostart.desktop" "$HOME/.config/autostart/ghostty.desktop"  # ghostty starts at login
 fi
 
 # macOS
