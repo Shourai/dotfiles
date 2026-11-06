@@ -33,6 +33,16 @@ Work identity, `~/.config/git/gitconfig_work`:
 | `merge.conflictStyle zdiff3`| conflict markers also show the original text (between `\|\|\|\|\|\|\|` and `=======`) |
 | `rerere.enabled`            | a conflict resolved once is resolved the same way next time         |
 
+## Diffs (delta)
+
+`git diff`, `log -p`, `show` and `add -p` go through [delta](https://github.com/dandavison/delta)
+(`packages/common.txt`): syntax highlighting, changed words marked, line numbers. lazygit uses it
+too (`lazygit/config.yml`).
+
+- In the pager, `n` / `N` jump to the next / previous file.
+- Colours follow `BAT_THEME` (`zsh/.zshrc`); delta's settings are under `[delta]` in `config`.
+- Where delta isn't installed, git uses `less` and plain colours instead.
+
 ## Aliases
 
 Most are short forms (`st`, `d`, `ds`, `co`, `cb`, `p`, `l` = pull, ...); see `config`.

@@ -137,7 +137,7 @@ One Dark everywhere (the palette of nvim's `onedark.nvim`, `dark` style).
 | ghostty           | `theme = One Half Dark` in `ghostty/config.ghostty`                         |
 | yazi, lazygit, fzf | nowhere: they use the terminal's colours                                  |
 | pure, eza, autosuggestions | fixed colours in `zsh/.zshrc` and `zsh/.zshenv` (`147`, `xx=37`, `#808080`) |
-| bat               | `BAT_THEME` in `zsh/.zshrc`                                                 |
+| bat, delta        | `BAT_THEME` in `zsh/.zshrc`                                                 |
 | tmux              | `od_*` variables in `tmux/tmux.conf`                                        |
 | waybar            | `@define-color` lines in `arch/wayland/waybar/style.css`                    |
 | Hyprland borders  | `col` in `arch/wayland/hypr/hyprland.lua`                                   |
@@ -154,7 +154,7 @@ dotfiles
  ├─ zsh/               -> ~/.config/zsh
  ├─ tmux/tmux.conf     -> ~/.config/tmux/tmux.conf
  ├─ git/               -> ~/.config/git
- ├─ lazygit/config.yml -> ~/.config/lazygit/config.yml (no custom settings yet)
+ ├─ lazygit/config.yml -> ~/.config/lazygit/config.yml (diffs through delta)
  ├─ yazi/              -> ~/.config/yazi
  ├─ ghostty/           -> ~/.config/ghostty (os.ghostty links to the arch/ubuntu/macos file)
  ├─ arch/              Hyprland, hypridle, hyprlock, hyprpaper, waybar

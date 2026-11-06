@@ -30,6 +30,19 @@
 [merge]
   conflictStyle = zdiff3   # conflict markers also show the original text
 
+# delta (packages/common.txt) shows diffs, log -p, show and add -p with syntax highlighting;
+# where it isn't installed, git falls back to less / plain output
+[core]
+  pager = command -v delta >/dev/null && exec delta || exec less
+
+[interactive]
+  diffFilter = command -v delta >/dev/null && exec delta --color-only || exec cat
+
+[delta]
+  navigate = true          # n / N jump to the next / previous file
+  line-numbers = true
+  # Colours: BAT_THEME (zsh/.zshrc)
+
 [rerere]
   enabled = true           # remember conflict resolutions and reuse them
 

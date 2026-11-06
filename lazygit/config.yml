@@ -1,2 +1,8 @@
-# lazygit config, linked to ~/.config/lazygit/config.yml (no custom settings yet).
+# lazygit config, linked to ~/.config/lazygit/config.yml.
 # Defaults: `lazygit --config`. Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+
+git:
+  # Diffs through delta, with its settings from git/config (line numbers, BAT_THEME colours);
+  # {{colorScheme}} is dark or light, from the terminal. Without delta: git's own colours.
+  diffRenderers:
+    - command: command -v delta >/dev/null && exec delta --{{colorScheme}} --paging=never || exec cat

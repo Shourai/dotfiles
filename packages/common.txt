@@ -5,10 +5,11 @@
 bash
 bat
 btop
-erdtree
+dust                 # disk usage per folder (du)
 eza
 fd
 fzf
+git-delta            # the delta command: git diffs with syntax highlighting (git/config, lazygit)
 lazygit
 neovim
 python
