@@ -43,21 +43,24 @@
   dark = true
   true-color = auto
 
-  # Line numbers
+  # Colours: One Dark (README.md, Theme). The line backgrounds are dark so syntax colours
+  # stay readable on them; the changed words (emph) are a step brighter.
+
+  # Line numbers: unchanged lines dim, removed red, added green
   line-numbers = true
-  line-numbers-left-style = "#7f849c"
-  line-numbers-right-style = "#7f849c"
-  line-numbers-minus-style = "#f38ba8"
-  line-numbers-plus-style = "#a6e3a1"
-  line-numbers-zero-style = "#cdd6f4"
+  line-numbers-left-style = "#4b5263"
+  line-numbers-right-style = "#4b5263"
+  line-numbers-minus-style = "#e06c75"
+  line-numbers-plus-style = "#98c379"
+  line-numbers-zero-style = "#4b5263"
 
   # Added lines
-  plus-style = "syntax #365d49"
-  plus-emph-style = "syntax #47775b"
+  plus-style = "syntax #2b4235"
+  plus-emph-style = "syntax #3b5e48"
 
   # Deleted lines
-  minus-style = "syntax #713746"
-  minus-emph-style = "syntax #894456"
+  minus-style = "syntax #4a2a31"
+  minus-emph-style = "syntax #6b3540"
 
 [rerere]
   enabled = true           # remember conflict resolutions and reuse them
