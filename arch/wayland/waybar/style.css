@@ -17,8 +17,8 @@
  * ----------------------------------------------------- */
 
 * {
-  /* Text: SF Compact, narrower than SF Pro (same as hyprlock). Icons: Symbols Nerd Font (ttf-nerd-fonts-symbols) */
-  font-family: "SF Compact", "Symbols Nerd Font", sans-serif;
+  /* Text: SF Compact Display, narrower than SF Pro (same as hyprlock's clock). Icons: Symbols Nerd Font (ttf-nerd-fonts-symbols) */
+  font-family: "SF Compact Display", "Symbols Nerd Font", sans-serif;
   font-size: 15px;
 }
 
