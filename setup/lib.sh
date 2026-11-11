@@ -120,11 +120,14 @@ run() {
 try() {
   local step="$1"
   shift
-  if ! run "$@"; then
-    warn "failed: $step (continuing)"
-    FAILED="$FAILED
-  - $step"
-  fi
+  run "$@" || fail "$step"
+}
+
+# Record a step that failed without stopping the script (used by try)
+fail() {
+  warn "failed: $1 (continuing)"
+  FAILED="$FAILED
+  - $1"
 }
 
 # Call at the end of a script: list failed steps and exit non-zero if there were any
@@ -225,46 +228,42 @@ prune_links() {
 clone_or_pull() {
   local url="$1" dir="$2"
   if [ -d "$dir/.git" ]; then
-    try "update $dir" git -C "$dir" pull --ff-only --quiet
-    did "update $dir"
+    if run git -C "$dir" pull --ff-only --quiet; then did "update $dir"; else fail "update $dir"; fi
   else
-    try "clone $url" git clone --quiet "$url" "$dir"
-    did "clone $url"
+    if run git clone --quiet "$url" "$dir"; then did "clone $url"; else fail "clone $url"; fi
   fi
 }
 
 # Apple's SF Pro, SF Compact, SF Mono and New York fonts (Linux; macOS has them), from Apple's
 # downloads into ~/.local/share/fonts/apple. Not from a package: Ubuntu has none, and the AUR ones
 # break whenever Apple replaces a download under the same URL.
-# Skipped if that folder exists; delete it to update. Needs 7z (7zip, in pacman.txt and apt-desktop.txt).
+# Each download gets its own folder (apple/SF-Pro, ...) and is skipped if that folder exists, so
+# adding one to the list downloads only that one; delete a folder to update it.
+# Needs 7z (7zip, in pacman.txt and apt-desktop.txt).
 install_apple_fonts() {
   local dir="$HOME/.local/share/fonts/apple" tmp name
 
-  if [ -d "$dir" ]; then
-    ok "Apple fonts are installed ($dir)"
-    return 0
-  fi
-  has 7z || { warn "7z not found: install 7zip"; return 1; }
-
-  tmp="$(mktemp -d)"
   for name in SF-Pro SF-Compact SF-Mono NY; do
-    # Each .dmg holds a .pkg, whose Payload holds Library/Fonts/
+    if [ -d "$dir/$name" ]; then
+      ok "$name is installed ($dir/$name)"
+      continue
+    fi
+    has 7z || { warn "7z not found: install 7zip"; return 1; }
+
+    # The .dmg holds a .pkg, whose Payload holds Library/Fonts/
+    tmp="$(mktemp -d)"
     if ! { curl -fsSL -o "$tmp/$name.dmg" "https://devimages-cdn.apple.com/design/resources/download/$name.dmg" &&
-      7z e -y -bso0 -r -o"$tmp/$name" "$tmp/$name.dmg" '*.pkg' &&
-      7z e -y -bso0 -r -o"$tmp/$name" "$tmp/$name"/*.pkg Payload &&
-      7z x -y -bso0 -o"$tmp/$name" "$tmp/$name/Payload" &&
-      7z x -y -bso0 -o"$tmp/$name" "$tmp/$name/Payload~"; }; then
-      rm -rf "$tmp"
+      7z e -y -bso0 -r -o"$tmp" "$tmp/$name.dmg" '*.pkg' &&
+      7z e -y -bso0 -r -o"$tmp" "$tmp"/*.pkg Payload &&
+      7z x -y -bso0 -o"$tmp" "$tmp/Payload" &&
+      7z x -y -bso0 -o"$tmp" "$tmp/Payload~" &&
+      mkdir -p "$dir/$name" && cp "$tmp"/Library/Fonts/* "$dir/$name/" && fc-cache -f "$dir/$name"; }; then
+      rm -rf "$tmp" "${dir:?}/$name"
       return 1
     fi
+    rm -rf "$tmp"
+    did "install $name in $dir/$name"
   done
-
-  if ! { mkdir -p "$dir" && cp "$tmp"/*/Library/Fonts/* "$dir/" && fc-cache -f "$dir"; }; then
-    rm -rf "$tmp" "$dir"
-    return 1
-  fi
-  rm -rf "$tmp"
-  did "install Apple fonts in $dir"
 }
 
 # SF Mono with ligatures and Nerd Font icons, for ghostty (Linux; macOS gets it from a Homebrew cask),
