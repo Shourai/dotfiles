@@ -233,7 +233,7 @@ clone_or_pull() {
   fi
 }
 
-# Apple's SF Pro, SF Mono and New York fonts (Linux; macOS has them), straight from Apple's
+# Apple's SF Pro, SF Compact, SF Mono and New York fonts (Linux; macOS has them), from Apple's
 # downloads into ~/.local/share/fonts/apple. Not from a package: Ubuntu has none, and the AUR ones
 # break whenever Apple replaces a download under the same URL.
 # Skipped if that folder exists; delete it to update. Needs 7z (7zip, in pacman.txt and apt-desktop.txt).
@@ -247,7 +247,7 @@ install_apple_fonts() {
   has 7z || { warn "7z not found: install 7zip"; return 1; }
 
   tmp="$(mktemp -d)"
-  for name in SF-Pro SF-Mono NY; do
+  for name in SF-Pro SF-Compact SF-Mono NY; do
     # Each .dmg holds a .pkg, whose Payload holds Library/Fonts/
     if ! { curl -fsSL -o "$tmp/$name.dmg" "https://devimages-cdn.apple.com/design/resources/download/$name.dmg" &&
       7z e -y -bso0 -r -o"$tmp/$name" "$tmp/$name.dmg" '*.pkg' &&
