@@ -11,7 +11,7 @@ Hyprland starts on every TTY1 login (`zsh/.zprofile`).
 |-----------------------|------------------------------------------------------|-------------------------------------|
 | `hypr/hyprland.lua`   | monitors, autostart, look, input, keys, window rules | on save (see below)                 |
 | `hypr/hypridle.conf`  | lock after 5 min, screen off after 5.5 min           | restart hypridle, or log out and in |
-| `hypr/hyprlock.conf`  | lock screen (font: SF Compact)                       | next lock                           |
+| `hypr/hyprlock.conf`  | lock screen (font: SF Compact Display)               | next lock                           |
 | `hypr/hyprpaper.conf` | wallpaper (`hypr/wallpaper.png`)                     | restart hyprpaper, or log out and in |
 | `waybar/config.jsonc` | bar: workspaces, window title, submap, volume, clock | `killall -SIGUSR2 waybar`           |
 | `waybar/style.css`    | bar fonts and colours (SF Compact Display, Symbols Nerd Font) | `killall -SIGUSR2 waybar`           |
