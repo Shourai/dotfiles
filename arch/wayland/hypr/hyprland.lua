@@ -54,7 +54,7 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
   hl.exec_cmd("elephant") -- data provider for walker
   hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme prefer-dark") -- dark GTK apps
-  hl.exec_cmd("gsettings set org.gnome.desktop.interface font-name 'SF Pro 11'") -- GTK apps' UI font
+  hl.exec_cmd("gsettings set org.gnome.desktop.interface font-name 'SF Pro Text 11'") -- GTK apps' UI font
   hl.exec_cmd("gsettings set org.gnome.desktop.interface monospace-font-name 'SF Mono 11'")
 end)
 

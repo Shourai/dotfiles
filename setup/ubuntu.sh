@@ -98,7 +98,7 @@ if [ "$desktop" = 1 ]; then
     info "Setting GNOME keyboard shortcuts"
     try "ubuntu/shortcuts.sh" bash "$DOTFILES/ubuntu/shortcuts.sh"
     info "Setting GNOME fonts"
-    try "GNOME font" /usr/bin/gsettings set org.gnome.desktop.interface font-name 'SF Pro 11'
+    try "GNOME font" /usr/bin/gsettings set org.gnome.desktop.interface font-name 'SF Pro Text 11'
     try "GNOME monospace font" /usr/bin/gsettings set org.gnome.desktop.interface monospace-font-name 'SF Mono 11'
   else
     warn "no GNOME session: run ubuntu/shortcuts.sh from a terminal on the desktop to set the shortcuts"
