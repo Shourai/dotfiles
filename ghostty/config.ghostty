@@ -4,6 +4,10 @@
 
 theme = One Half Dark
 background-opacity = 0.7
+
+# SF Mono with ligatures and Nerd Font icons, same on every machine.
+# macOS: Homebrew cask (packages/cask.txt); Linux: install_liga_sfmono in setup/lib.sh
+font-family = "Liga SFMono Nerd Font"
 font-size = 14
 
 # Spread leftover pixels around all edges instead of only bottom-right
@@ -20,6 +24,6 @@ app-notifications = no-clipboard-copy
 # The shell integration that does this is loaded from zsh/.zshrc (outside tmux only).
 shell-integration-features = ssh-terminfo,ssh-env
 
-# Per-OS settings (font, keyboard, window): os.ghostty is a link to arch.ghostty,
+# Per-OS settings (keyboard, window): os.ghostty is a link to arch.ghostty,
 # ubuntu.ghostty or macos.ghostty, created by setup/link.sh. Loaded last, so it can override the above.
 config-file = ?os.ghostty

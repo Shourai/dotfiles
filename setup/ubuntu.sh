@@ -57,6 +57,7 @@ if [ "$desktop" = 1 ]; then
 
   info "Installing Apple's SF fonts"
   try "Apple fonts" install_apple_fonts
+  try "Liga SFMono Nerd Font" install_liga_sfmono
 fi
 
 # Homebrew (needs build-essential, curl, file, git and procps from apt)
@@ -100,6 +101,7 @@ if [ "$desktop" = 1 ]; then
     info "Setting GNOME fonts"
     try "GNOME font" /usr/bin/gsettings set org.gnome.desktop.interface font-name 'SF Pro Text 11'
     try "GNOME monospace font" /usr/bin/gsettings set org.gnome.desktop.interface monospace-font-name 'SF Mono 11'
+    try "GNOME document font" /usr/bin/gsettings set org.gnome.desktop.interface document-font-name 'SF Pro Text 12'
   else
     warn "no GNOME session: run ubuntu/shortcuts.sh from a terminal on the desktop to set the shortcuts"
   fi

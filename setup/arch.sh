@@ -45,6 +45,7 @@ fi
 
 info "Installing Apple's SF fonts"
 try "Apple fonts" install_apple_fonts
+try "Liga SFMono Nerd Font" install_liga_sfmono
 
 info "Cleaning up pacman cache"
 try "pacman cache cleanup" sudo pacman -Sc --noconfirm

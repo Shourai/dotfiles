@@ -17,9 +17,9 @@
  * ----------------------------------------------------- */
 
 * {
-  /* Text: SF Compact Display, narrower than SF Pro (same as hyprlock). Icons: Symbols Nerd Font (ttf-nerd-fonts-symbols) */
-  font-family: "SF Compact Display", "Symbols Nerd Font", sans-serif;
-  font-size: 15px;
+  /* Text: SF Pro Text 11pt, same as the GTK apps. Icons: Symbols Nerd Font (ttf-nerd-fonts-symbols) */
+  font-family: "SF Pro Text", "Symbols Nerd Font", sans-serif;
+  font-size: 11pt;
 }
 
 window#waybar {
@@ -99,6 +99,7 @@ window#waybar.empty #window {
 #pulseaudio,
 #clock {
   color: @textcolor;
+  font-feature-settings: "tnum"; /* equal-width digits: the clock and volume don't change width */
 }
 
 #pulseaudio {

@@ -56,6 +56,7 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme prefer-dark") -- dark GTK apps
   hl.exec_cmd("gsettings set org.gnome.desktop.interface font-name 'SF Pro Text 11'") -- GTK apps' UI font
   hl.exec_cmd("gsettings set org.gnome.desktop.interface monospace-font-name 'SF Mono 11'")
+  hl.exec_cmd("gsettings set org.gnome.desktop.interface document-font-name 'SF Pro Text 12'")
 end)
 
 

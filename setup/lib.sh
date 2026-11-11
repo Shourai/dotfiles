@@ -267,4 +267,34 @@ install_apple_fonts() {
   did "install Apple fonts in $dir"
 }
 
+# SF Mono with ligatures and Nerd Font icons, for ghostty (Linux; macOS gets it from a Homebrew cask),
+# from the same GitHub repo as that cask into ~/.local/share/fonts/liga-sfmono.
+# Skipped if that folder exists; delete it to update.
+install_liga_sfmono() {
+  local dir="$HOME/.local/share/fonts/liga-sfmono" tmp weight style
+  local url=https://raw.githubusercontent.com/shaunsingh/SFMono-Nerd-Font-Ligaturized/main
+
+  if [ -d "$dir" ]; then
+    ok "Liga SFMono Nerd Font is installed ($dir)"
+    return 0
+  fi
+
+  tmp="$(mktemp -d)"
+  for weight in Light Regular Medium Semibold Bold Heavy; do
+    for style in "" Italic; do
+      if ! curl -fsSL -o "$tmp/LigaSFMonoNerdFont-$weight$style.otf" "$url/LigaSFMonoNerdFont-$weight$style.otf"; then
+        rm -rf "$tmp"
+        return 1
+      fi
+    done
+  done
+
+  if ! { mkdir -p "$dir" && cp "$tmp"/*.otf "$dir/" && fc-cache -f "$dir"; }; then
+    rm -rf "$tmp" "$dir"
+    return 1
+  fi
+  rm -rf "$tmp"
+  did "install Liga SFMono Nerd Font in $dir"
+}
+
 load_brew
