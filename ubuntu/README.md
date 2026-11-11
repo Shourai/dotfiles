@@ -34,8 +34,10 @@ Headless (e.g. Ubuntu Server used over SSH) works too: without `gnome-shell` ins
 - **ghostty runs in the background.** The Snap takes seconds to start the first time after a boot,
   so `ghostty-autostart.desktop` (linked to `~/.config/autostart/`) starts it at login without a
   window, and it keeps running when you close the last window (`quit-after-last-window-closed` in
-  `ghostty/ubuntu.ghostty`). The shortcuts open their windows in it. Snap updates of ghostty may
-  wait until it stops: log out and back in. To stop it for good, remove the autostart link.
+  `ghostty/ubuntu.ghostty`). The shortcuts open their windows in it over D-Bus (`ghostty-window`),
+  not through `/snap/bin/ghostty`, whose wrapper adds 0.3-0.8 s to every shortcut. If it isn't
+  running, D-Bus starts it (`ghostty-dbus.service`). Snap updates of ghostty may wait until it
+  stops: log out and back in. To stop it for good, remove the autostart and D-Bus links.
 - **SSH agent**: in Bitwarden, turn on Settings, "Enable SSH agent", then check in a new terminal
   with `ssh-add -L`. Until Bitwarden runs, GNOME's agent is used.
 

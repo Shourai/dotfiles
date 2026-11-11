@@ -7,20 +7,18 @@ set -euo pipefail
 
 # Full paths: GNOME starts shortcut commands without the shell's PATH, and on Ubuntu
 # tmux comes from Homebrew
-ghostty=/snap/bin/ghostty   # see packages/snap.txt
 tmux=/home/linuxbrew/.linuxbrew/bin/tmux
 [ -x "$tmux" ] || tmux="$(command -v tmux || echo tmux)"
 
-# Windows open in the ghostty started at login (ghostty-autostart.desktop), which is instant.
-# If that one isn't running, Super+Return starts it; the tmux shortcuts start a separate ghostty
-# instead (-e always does), which is slow right after a boot.
-ghostty_tmux="sh -c '$ghostty +new-window -e $tmux || exec $ghostty -e $tmux'"
+# Windows open in the ghostty started at login (ghostty-autostart.desktop), asked over D-Bus by
+# ghostty-window, which skips the slow /snap/bin/ghostty. If ghostty isn't running, D-Bus starts it.
+ghostty_window="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/ghostty-window"
 
 # name | keys | command
 shortcuts=(
-  "ghostty|<Super>Return|$ghostty --gtk-single-instance=true"
-  "ghostty-tmux|<Super><Shift>Return|$ghostty_tmux"
-  "ghostty-tmux-ctrl-alt-t|<Control><Alt>t|$ghostty_tmux"
+  "ghostty|<Super>Return|$ghostty_window"
+  "ghostty-tmux|<Super><Shift>Return|$ghostty_window $tmux"
+  "ghostty-tmux-ctrl-alt-t|<Control><Alt>t|$ghostty_window $tmux"
 )
 
 # Ubuntu's own gsettings: if a Homebrew package pulls in GLib, Homebrew's gsettings comes first

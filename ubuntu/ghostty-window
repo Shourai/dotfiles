@@ -1,0 +1,18 @@
+#!/bin/sh
+# Opens a window in the ghostty that runs in the background (ghostty-autostart.desktop), over
+# D-Bus. The GNOME shortcuts (shortcuts.sh) use this instead of /snap/bin/ghostty: its `snap run`
+# wrapper plus a second ghostty that only forwards the request made each shortcut 0.3-0.8 s slower.
+# If ghostty isn't running, D-Bus starts it (ghostty-dbus.service).
+#
+#   ghostty-window [command [args...]]     e.g. ghostty-window tmux
+
+[ $# -gt 0 ] && set -- -e "$@"
+set -- --working-directory=home "$@"
+
+# The same request `ghostty +new-window` sends: action new-window-command with ghostty's
+# command-line arguments as a string array. `--` keeps busctl from reading them as its own options.
+busctl --user call -- com.mitchellh.ghostty /com/mitchellh/ghostty \
+  org.gtk.Actions Activate 'sava{sv}' new-window-command 1 as $# "$@" 0 >/dev/null && exit 0
+
+# D-Bus failed: start ghostty the slow way (with a command, that's a separate ghostty)
+exec /snap/bin/ghostty --gtk-single-instance=true "$@"
