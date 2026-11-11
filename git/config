@@ -39,9 +39,25 @@
   diffFilter = command -v delta >/dev/null && exec delta --color-only || exec cat
 
 [delta]
-  navigate = true          # n / N jump to the next / previous file
+  navigate = true
+  dark = true
+  true-color = auto
+
+  # Line numbers
   line-numbers = true
-  # Colours: BAT_THEME (zsh/.zshrc)
+  line-numbers-left-style = "#7f849c"
+  line-numbers-right-style = "#7f849c"
+  line-numbers-minus-style = "#f38ba8"
+  line-numbers-plus-style = "#a6e3a1"
+  line-numbers-zero-style = "#cdd6f4"
+
+  # Added lines
+  plus-style = "syntax #365d49"
+  plus-emph-style = "syntax #47775b"
+
+  # Deleted lines
+  minus-style = "syntax #713746"
+  minus-emph-style = "syntax #894456"
 
 [rerere]
   enabled = true           # remember conflict resolutions and reuse them
