@@ -16,6 +16,7 @@ info "Linking dotfiles"
 link "$DOTFILES/zsh"                "$HOME/.config/zsh"
 link "$DOTFILES/git"                "$HOME/.config/git"
 link "$DOTFILES/yazi"               "$HOME/.config/yazi"
+link "$DOTFILES/bat"                "$HOME/.config/bat"
 link "$DOTFILES/ghostty"            "$HOME/.config/ghostty"
 link "$DOTFILES/lazygit/config.yml" "$HOME/.config/lazygit/config.yml"  # file only: other lazygit files stay out of the repo
 link "$DOTFILES/tmux/tmux.conf"     "$HOME/.config/tmux/tmux.conf"      # file only: tpm puts plugins next to it
@@ -43,6 +44,14 @@ fi
 
 # Clean up links to configs that were removed from the repo (top level of ~/.config only)
 prune_links "$HOME/.config"
+
+# bat and delta read themes from bat's cache, not from bat/themes directly
+if has bat; then
+  info "Building bat's theme cache"
+  try "bat cache" bat cache --build
+else
+  warn "bat not found; run setup/link.sh again after installing packages"
+fi
 
 # yazi flavors and plugins listed in yazi/package.toml (not stored in the repo)
 if has ya; then

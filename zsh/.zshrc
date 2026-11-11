@@ -170,7 +170,7 @@ fi
 
 # --- BAT ---
 
-export BAT_THEME="OneHalfDark"  # matches ghostty
+export BAT_THEME="OneHalfDark-readable"  # matches ghostty; bat/themes, brighter comments for delta
 
 # --- PLUGINS ---
 

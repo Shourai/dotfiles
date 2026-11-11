@@ -40,7 +40,9 @@ Work identity, `~/.config/git/gitconfig_work`:
 too (`lazygit/config.yml`).
 
 - In the pager, `n` / `N` jump to the next / previous file.
-- Colours follow `BAT_THEME` (`zsh/.zshrc`); delta's settings are under `[delta]` in `config`.
+- Colours follow `BAT_THEME` (`zsh/.zshrc`), a copy of OneHalfDark with readable comments in
+  `bat/themes/`. delta finds it through bat's cache: after changing the theme, run `bat cache --build`.
+  delta's own settings are under `[delta]` in `config`.
 - Where delta isn't installed, git uses `less` and plain colours instead.
 
 ## Aliases
