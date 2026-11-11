@@ -9,3 +9,9 @@ ratio = [ 1, 3, 4 ]  # parent : current : preview (default 1 : 4 : 3)
 [preview]
 max_width  = 1200    # sharper image previews (default 600 x 900)
 max_height = 1800
+
+[tasks]
+# Large 10-bit AVIF photos (e.g. 6024x4022) need ~370 MiB per pixel-cache copy in
+# ImageMagick's Q16-HDRI build; the default 512 MiB cap makes `magick` fail with
+# "cache resources exhausted", so the preview stays blank. (default 536870912)
+image_alloc = 1073741824  # 1 GiB
