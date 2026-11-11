@@ -31,10 +31,9 @@ mpv
 seahorse
 zathura-pdf-mupdf
 
-# Fonts
-inter-font                # hyprlock, waybar
+# Fonts. Apple's SF fonts aren't packages: setup/arch.sh downloads them (install_apple_fonts)
 ttf-nerd-fonts-symbols    # icons in waybar (ghostty has them built in)
-noto-fonts                # incl. Noto Sans Mono for ghostty
+noto-fonts                # fallback for what the SF fonts don't cover
 noto-fonts-cjk
 noto-fonts-emoji
 ttf-dejavu

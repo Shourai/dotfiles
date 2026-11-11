@@ -10,7 +10,8 @@ Headless (e.g. Ubuntu Server used over SSH) works too: without `gnome-shell` ins
 | What                                                          | From                                    | List                          |
 |---------------------------------------------------------------|-----------------------------------------|-------------------------------|
 | base system, fallback `zsh`, `unzip`, `jq`                    | apt                                     | `packages/apt.txt`            |
-| desktop only: Ubuntu font, `wl-clipboard`, yazi's preview helpers | apt                                 | `packages/apt-desktop.txt`    |
+| desktop only: `wl-clipboard`, yazi's preview helpers, `7zip` | apt                                     | `packages/apt-desktop.txt`    |
+| desktop only: Apple's SF fonts (into `~/.local/share/fonts/apple`; delete it to update) | Apple's downloads (`install_apple_fonts` in `setup/lib.sh`) | - |
 | CLI tools (same versions as on macOS), incl. the login shell `zsh` | Homebrew (`/home/linuxbrew/.linuxbrew`) | `common.txt`, `brew.txt` |
 | desktop only: ghostty                                         | Snap (apt only has 1.3)                 | `snap.txt`                    |
 | Bitwarden, for its SSH agent                                  | Snap, install it by hand (App Center); Homebrew's `bw` has no agent | -   |

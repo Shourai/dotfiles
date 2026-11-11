@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Install Ubuntu packages: apt (packages/apt.txt), Snaps (snap.txt) and Homebrew (common.txt + brew.txt).
-# Also runs apt upgrade and brew upgrade, and sets the GNOME shortcuts (ubuntu/shortcuts.sh).
-# On a headless machine (no gnome-shell) it skips the desktop parts: apt-desktop.txt,
-# the Snaps and the shortcuts.
+# Also runs apt upgrade and brew upgrade, installs Apple's SF fonts and sets the GNOME shortcuts
+# (ubuntu/shortcuts.sh) and fonts. On a headless machine (no gnome-shell) it skips the desktop
+# parts: apt-desktop.txt, the Snaps, the fonts and the shortcuts.
 # Safe to rerun; already installed packages are skipped.
 #
 #   setup/ubuntu.sh [--dry-run]
@@ -54,6 +54,9 @@ if [ "$desktop" = 1 ]; then
   if [ -x /usr/bin/ghostty ]; then
     warn "ghostty from apt (1.3) is installed too and would be used instead of the Snap: sudo apt remove ghostty"
   fi
+
+  info "Installing Apple's SF fonts"
+  try "Apple fonts" install_apple_fonts
 fi
 
 # Homebrew (needs build-essential, curl, file, git and procps from apt)
@@ -94,6 +97,9 @@ if [ "$desktop" = 1 ]; then
   if [ -n "${DBUS_SESSION_BUS_ADDRESS:-}" ] && [ -x /usr/bin/gsettings ]; then
     info "Setting GNOME keyboard shortcuts"
     try "ubuntu/shortcuts.sh" bash "$DOTFILES/ubuntu/shortcuts.sh"
+    info "Setting GNOME fonts"
+    try "GNOME font" /usr/bin/gsettings set org.gnome.desktop.interface font-name 'SF Pro 11'
+    try "GNOME monospace font" /usr/bin/gsettings set org.gnome.desktop.interface monospace-font-name 'SF Mono 11'
   else
     warn "no GNOME session: run ubuntu/shortcuts.sh from a terminal on the desktop to set the shortcuts"
   fi

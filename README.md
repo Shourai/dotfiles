@@ -42,10 +42,10 @@ Safe to rerun. Log out and back in afterwards.
 
 | Script            | What it does                                                                  |
 |-------------------|-------------------------------------------------------------------------------|
-| `setup/arch.sh`   | `pacman -Syu`, yay, the pacman and AUR lists, clears the pacman cache          |
-| `setup/ubuntu.sh` | `apt upgrade`, the apt list, Snaps, Homebrew with the shared lists, `brew upgrade`, GNOME shortcuts |
+| `setup/arch.sh`   | `pacman -Syu`, yay, the pacman and AUR lists, Apple's SF fonts, clears the pacman cache |
+| `setup/ubuntu.sh` | `apt upgrade`, the apt list, Snaps, Homebrew with the shared lists, `brew upgrade`, Apple's SF fonts, GNOME shortcuts and fonts |
 | `setup/macos.sh`  | Homebrew formulae and casks, `brew upgrade`; key remap and `defaults.sh` with flags |
-| `setup/link.sh`   | links the configs into `~/.config`, picks the per-OS ghostty file, `ya pkg install` |
+| `setup/link.sh`   | links the configs into `~/.config` (fontconfig on Linux only), picks the per-OS ghostty file, `ya pkg install` |
 | `setup/zsh.sh`    | `ZDOTDIR` in the system zshenv, zsh as login shell, clones or updates the zsh plugins |
 
 ## Update

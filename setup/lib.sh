@@ -233,4 +233,38 @@ clone_or_pull() {
   fi
 }
 
+# Apple's SF Pro, SF Mono and New York fonts (Linux; macOS has them), straight from Apple's
+# downloads into ~/.local/share/fonts/apple. Not from a package: Ubuntu has none, and the AUR ones
+# break whenever Apple replaces a download under the same URL.
+# Skipped if that folder exists; delete it to update. Needs 7z (7zip, in pacman.txt and apt-desktop.txt).
+install_apple_fonts() {
+  local dir="$HOME/.local/share/fonts/apple" tmp name
+
+  if [ -d "$dir" ]; then
+    ok "Apple fonts are installed ($dir)"
+    return 0
+  fi
+  has 7z || { warn "7z not found: install 7zip"; return 1; }
+
+  tmp="$(mktemp -d)"
+  for name in SF-Pro SF-Mono NY; do
+    # Each .dmg holds a .pkg, whose Payload holds Library/Fonts/
+    if ! { curl -fsSL -o "$tmp/$name.dmg" "https://devimages-cdn.apple.com/design/resources/download/$name.dmg" &&
+      7z e -y -bso0 -r -o"$tmp/$name" "$tmp/$name.dmg" '*.pkg' &&
+      7z e -y -bso0 -r -o"$tmp/$name" "$tmp/$name"/*.pkg Payload &&
+      7z x -y -bso0 -o"$tmp/$name" "$tmp/$name/Payload" &&
+      7z x -y -bso0 -o"$tmp/$name" "$tmp/$name/Payload~"; }; then
+      rm -rf "$tmp"
+      return 1
+    fi
+  done
+
+  if ! { mkdir -p "$dir" && cp "$tmp"/*/Library/Fonts/* "$dir/" && fc-cache -f "$dir"; }; then
+    rm -rf "$tmp" "$dir"
+    return 1
+  fi
+  rm -rf "$tmp"
+  did "install Apple fonts in $dir"
+}
+
 load_brew

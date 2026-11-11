@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Install Arch Linux packages from packages/*.txt (pacman + AUR via yay).
-# Also upgrades the whole system (pacman -Syu) and clears the package cache.
+# Also upgrades the whole system (pacman -Syu), installs Apple's SF fonts and clears the package cache.
 # Safe to rerun; already installed packages are skipped.
 #
 #   setup/arch.sh [--extras] [--dry-run]
@@ -42,6 +42,9 @@ fi
   info "Installing AUR packages"
   try "AUR packages ($lists_aur)" yay -S --needed --noconfirm $(read_list $lists_aur)
 }
+
+info "Installing Apple's SF fonts"
+try "Apple fonts" install_apple_fonts
 
 info "Cleaning up pacman cache"
 try "pacman cache cleanup" sudo pacman -Sc --noconfirm

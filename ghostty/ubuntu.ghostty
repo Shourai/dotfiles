@@ -1,7 +1,7 @@
 # Ubuntu-only ghostty settings (GNOME desktop), loaded from config.ghostty (via os.ghostty)
 
-# fonts-ubuntu (apt.txt, preinstalled); icons are built into ghostty
-font-family = "Ubuntu Sans Mono"
+# Apple's SF Mono, downloaded by setup/ubuntu.sh (install_apple_fonts); icons are built into ghostty
+font-family = "SF Mono"
 
 # Title bar stays on (GNOME doesn't tile), in the theme's colours instead of GNOME's grey
 window-theme = ghostty

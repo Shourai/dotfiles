@@ -1,7 +1,7 @@
 # Arch-only ghostty settings (Hyprland desktop), loaded from config.ghostty (via os.ghostty)
 
-# noto-fonts (pacman.txt); icons are built into ghostty
-font-family = "Noto Sans Mono"
+# Apple's SF Mono, downloaded by setup/arch.sh (install_apple_fonts); icons are built into ghostty
+font-family = "SF Mono"
 
 # No GTK header bar; Hyprland tiles the windows
 gtk-titlebar = false

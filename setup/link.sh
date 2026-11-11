@@ -22,6 +22,11 @@ link "$DOTFILES/lazygit/config.yml" "$HOME/.config/lazygit/config.yml"  # file o
 link "$DOTFILES/tmux/tmux.conf"     "$HOME/.config/tmux/tmux.conf"      # file only: tpm puts plugins next to it
 link "$NVIM_CONFIG"                 "$HOME/.config/nvim"                # separate repo
 
+# Linux: default fonts (macOS doesn't use fontconfig)
+if is_linux; then
+  link "$DOTFILES/fontconfig" "$HOME/.config/fontconfig"
+fi
+
 # Arch Linux: Hyprland desktop
 if is_arch; then
   link "$DOTFILES/arch/wayland/hypr"     "$HOME/.config/hypr"
