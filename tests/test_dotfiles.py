@@ -253,7 +253,7 @@ load_brew() { printf 'unexpected Homebrew initialization\n' >&2; exit 99; }
     def test_screenshot_preserves_clipboard_on_failure(self):
         command = re.search(
             r'hl.bind\("ALT \+ CTRL \+ S", hl.dsp.exec_cmd\(\[\[(.*?)\]\]\)\)',
-            (REPO / "arch/wayland/hypr/hyprland.lua").read_text(), re.S,
+            (REPO / "arch/hypr/hyprland.lua").read_text(), re.S,
         ).group(1)
         bin_dir = self.home / "bin"
         bin_dir.mkdir()

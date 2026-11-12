@@ -17,7 +17,7 @@ hide Ubuntu's in the shell), [macOS](macos/README.md).
 - **macOS**: install [SF Mono manually for Ghostty](macos/README.md#fonts). `install` installs
   Homebrew, which installs the Xcode command line tools.
 - The repos must be at `~/Documents/github/dotfiles` and `~/Documents/github/nvim`: scripts and
-  some configs (e.g. `arch/wayland/hypr/hyprpaper.conf`) hard-code these paths.
+  some configs (e.g. `arch/hypr/hyprpaper.conf`) hard-code these paths.
 - To push: an SSH key on GitHub (`install` clones over https, then switches the remotes to SSH).
   The shell uses Bitwarden's or 1Password's SSH agent if you install one and turn its agent on;
   see [zsh](zsh/README.md#ssh-agent).
@@ -108,7 +108,7 @@ directly in `~/.config` that point into the repo. Remove deeper links (e.g.
 
 | What                                | Where                                                          |
 |-------------------------------------|----------------------------------------------------------------|
-| Monitors and workspaces (Arch)      | MONITORS block in `arch/wayland/hypr/hyprland.lua`; `hyprctl monitors` lists the outputs |
+| Monitors and workspaces (Arch)      | MONITORS block in `arch/hypr/hyprland.lua`; `hyprctl monitors` lists the outputs |
 | Workspaces per monitor (macOS)      | `[workspace-to-monitor-force-assignment]` in `macos/aerospace.toml` |
 | Work git identity                   | create `~/.config/git/gitconfig_work` by hand ([git](git/README.md)) |
 | Keyboard remap (macOS)              | `--keyremap` (a separate remap-only run) |
@@ -159,9 +159,9 @@ One Dark everywhere (the palette of nvim's `onedark.nvim`, `dark` style).
 | pure, eza, autosuggestions | fixed colours in `zsh/.zshrc` and `zsh/.zshenv` (`147`, `xx=37`, `#808080`) |
 | bat, delta        | `BAT_THEME` in `zsh/.zshrc`: OneHalfDark with brighter comments, `bat/themes/` |
 | tmux              | `od_*` variables in `tmux/tmux.conf`                                        |
-| waybar            | `@define-color` lines in `arch/wayland/waybar/style.css`                    |
-| Hyprland borders  | `col` in `arch/wayland/hypr/hyprland.lua`                                   |
-| hyprlock          | its own white/grey colours in `arch/wayland/hypr/hyprlock.conf`             |
+| waybar            | `@define-color` lines in `arch/waybar/style.css`                    |
+| Hyprland borders  | `col` in `arch/hypr/hyprland.lua`                                   |
+| hyprlock          | its own white/grey colours in `arch/hypr/hyprlock.conf`             |
 | nvim              | `onedark.nvim` in the nvim repo                                             |
 
 ## Layout

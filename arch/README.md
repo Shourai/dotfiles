@@ -5,7 +5,7 @@ Hyprland starts on every TTY1 login (`zsh/.zprofile`).
 
 ## Desktop
 
-`setup/link.sh` links `wayland/hypr`, `wayland/waybar` and `wayland/fuzzel` into `~/.config`.
+`setup/link.sh` links `hypr`, `waybar` and `fuzzel` into `~/.config`.
 
 | File                  | What it does                                         | Apply changes                       |
 |-----------------------|------------------------------------------------------|-------------------------------------|
@@ -51,7 +51,7 @@ another machine, edit the MONITORS block in `hyprland.lua`; `hyprctl monitors` l
 ## Optional idle suspend
 
 Automatic suspend is disabled. To enable it after 30 minutes of inactivity, add this listener to
-`wayland/hypr/hypridle.conf`, then restart hypridle (or log out and back in):
+`hypr/hypridle.conf`, then restart hypridle (or log out and back in):
 
 ```ini
 listener {

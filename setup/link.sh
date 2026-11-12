@@ -29,9 +29,9 @@ fi
 
 # Arch Linux: Hyprland desktop
 if is_arch; then
-  link "$DOTFILES/arch/wayland/hypr"     "$HOME/.config/hypr"
-  link "$DOTFILES/arch/wayland/waybar"   "$HOME/.config/waybar"
-  link "$DOTFILES/arch/wayland/fuzzel"   "$HOME/.config/fuzzel"
+  link "$DOTFILES/arch/hypr"             "$HOME/.config/hypr"
+  link "$DOTFILES/arch/waybar"           "$HOME/.config/waybar"
+  link "$DOTFILES/arch/fuzzel"           "$HOME/.config/fuzzel"
   link "$DOTFILES/ghostty/arch.ghostty"  "$DOTFILES/ghostty/os.ghostty"  # per-OS ghostty settings
 fi
 
