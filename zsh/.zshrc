@@ -45,13 +45,22 @@ setopt NO_BEEP             # no beep on ZLE errors
 # --- PATH ---
 
 # No duplicates (nested shells inside tmux inherit PATH)
-typeset -U path PATH
+typeset -U path PATH fpath
 
 # Homebrew: Apple Silicon, Intel Mac, Linux (Ubuntu). Also adds its completions to fpath.
 for brew in /opt/homebrew/bin/brew /usr/local/bin/brew /home/linuxbrew/.linuxbrew/bin/brew; do
-  [[ -x "$brew" ]] && { eval "$("$brew" shellenv)"; break; }
+  [[ -x "$brew" ]] || continue
+  _brew_prefix=${brew%/bin/brew}
+  if [[ "$HOMEBREW_PREFIX" == "$_brew_prefix" ]]; then
+    # Environment is inherited; zsh's completion path is not.
+    path=("$_brew_prefix/bin" "$_brew_prefix/sbin" $path)
+    fpath=("$_brew_prefix/share/zsh/site-functions" $fpath)
+  else
+    eval "$("$brew" shellenv)"
+  fi
+  break
 done
-unset brew
+unset brew _brew_prefix
 
 # User scripts first
 path=("$HOME/.local/bin" $path)

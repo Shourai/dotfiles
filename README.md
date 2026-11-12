@@ -125,6 +125,7 @@ Run the isolated regression checks (Python 3, Bash and git; writes stay in tempo
 
 ```sh
 python3 -m unittest discover -s tests
+zsh -f tests/zsh.zsh
 ```
 
 Shell scripts can also be checked with `shellcheck -x -P SCRIPTDIR install setup/*.sh ubuntu/shortcuts.sh ubuntu/ghostty-window`.

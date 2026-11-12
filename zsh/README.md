@@ -36,7 +36,9 @@ It isn't changed inside an SSH session, so a forwarded agent keeps working. Chec
 - **ghostty integration** is sourced in `.zshrc`, because the `ZDOTDIR` setting stops ghostty from
   loading it; not inside tmux. It gives the cursor shape, window title and the SSH terminfo
   handling set in `ghostty/config.ghostty`.
-- **PATH**: `~/.local/bin`, then Homebrew (if installed), then the system.
+- **PATH**: `~/.local/bin`, then Homebrew (if installed), then the system. Nested shells reuse
+  Homebrew's exported environment instead of running `brew shellenv` again; its completion path
+  is restored before `compinit`.
 - **Missing tools** (fzf, zoxide, eza, bat, nvim, the plugins) are skipped without errors; the
   aliases fall back to `ls`, `cat` and `vi`, and `gf`/`gb`/`ghist` need fzf.
 
