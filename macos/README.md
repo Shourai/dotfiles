@@ -5,6 +5,17 @@
 | `aerospace.toml`                | AeroSpace tiling window manager, linked to `~/.config/aerospace/aerospace.toml` |
 | `com.local.KeyRemapping.plist`  | key remap for non-US Mac keyboards; installed only with `--keyremap`   |
 
+## Optional apps
+
+These casks are not installed by setup. Pick the ones you need with `brew install --cask <name>`:
+
+| Cask                | Use                                                        |
+|---------------------|------------------------------------------------------------|
+| `1password`         | password manager and optional SSH agent ([zsh](../zsh/README.md#ssh-agent)) |
+| `1password-cli`     | the `op` command                                           |
+| `google-chrome@dev` | Chrome Dev; required for AeroSpace's `alt-space`, then `c` shortcut |
+| `iina`              | media player                                               |
+
 ## Fonts
 
 Ghostty uses Apple's unpatched **SF Mono** and supplies Nerd Font symbols itself.
