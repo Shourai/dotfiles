@@ -14,7 +14,8 @@ hide Ubuntu's in the shell), [macOS](macos/README.md).
   starts on a TTY1 login (`zsh/.zprofile`); a login screen would bypass that.
 - **Ubuntu**: 26.04 LTS or newer, standard GNOME desktop, or headless (Ubuntu Server, used over
   SSH: the desktop parts are skipped, see [Ubuntu](ubuntu/README.md)).
-- **macOS**: nothing; `install` installs Homebrew, which installs the Xcode command line tools.
+- **macOS**: install [SF Mono manually for Ghostty](macos/README.md#fonts). `install` installs
+  Homebrew, which installs the Xcode command line tools.
 - The repos must be at `~/Documents/github/dotfiles` and `~/Documents/github/nvim`: scripts and
   some configs (e.g. `arch/wayland/hypr/hyprpaper.conf`) hard-code these paths.
 - To push: an SSH key on GitHub (`install` clones over https, then switches the remotes to SSH).

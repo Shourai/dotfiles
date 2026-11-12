@@ -5,9 +5,9 @@
 theme = One Half Dark
 background-opacity = 0.7
 
-# SF Mono with ligatures and Nerd Font icons, same on every machine.
-# macOS: Homebrew cask (packages/cask.txt); Linux: install_liga_sfmono in setup/lib.sh
-font-family = "Liga SFMono Nerd Font"
+# Apple's unpatched SF Mono; Ghostty supplies Nerd Font symbols.
+# macOS: install manually (macos/README.md); Linux: install_apple_fonts in setup/lib.sh
+font-family = "SF Mono"
 font-size = 14
 
 # Spread leftover pixels around all edges instead of only bottom-right

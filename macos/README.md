@@ -7,6 +7,21 @@
 | `defaults.sh`                   | system settings; applied only with `--defaults`                        |
 | `com.googlecode.iterm2.plist`   | iTerm2 settings, a backup only (ghostty is the terminal)               |
 
+## Fonts
+
+Ghostty uses Apple's unpatched **SF Mono** and supplies Nerd Font symbols itself.
+Review Apple's license and install SF Mono from [Apple's font page](https://developer.apple.com/fonts/)
+through its installer. The copy bundled inside Terminal.app may not be discoverable by Ghostty.
+`setup/macos.sh` does not install or update SF Mono; use Apple's current download to update it manually.
+Existing patched fonts are not uninstalled by setup.
+
+Check font discovery and the face Ghostty uses after reloading and opening a fresh terminal:
+
+```sh
+ghostty +list-fonts --family="SF Mono"
+ghostty +show-face --string="A"
+```
+
 ## AeroSpace
 
 - On first start, give AeroSpace Accessibility permission when macOS asks.

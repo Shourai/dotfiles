@@ -57,7 +57,6 @@ if [ "$desktop" = 1 ]; then
 
   info "Installing Apple's SF fonts"
   try "Apple fonts" install_apple_fonts
-  try "Liga SFMono Nerd Font" install_liga_sfmono
 fi
 
 # Homebrew (needs build-essential, curl, file, git and procps from apt)
