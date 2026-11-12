@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Install macOS packages from packages/*.txt with Homebrew; optionally the key remap
-# (--keyremap).
+# Install macOS packages from packages/*.txt with Homebrew.
+# With --keyremap, install only the key remap and skip packages.
 # Also upgrades everything Homebrew manages (brew upgrade) and clears its cache.
 # Safe to rerun; already installed packages are skipped.
 #
@@ -11,6 +11,15 @@ source "$(dirname "$0")/lib.sh"
 parse_flags "$@"
 
 is_macos || die "this script is for macOS"
+
+# Key remap for non-US Mac keyboards; on a US keyboard it breaks \ (see macos/README.md).
+if [ "$KEYREMAP" = 1 ]; then
+  info "Installing key remap"
+  run mkdir -p "$HOME/Library/LaunchAgents"
+  run cp "$DOTFILES/macos/com.local.KeyRemapping.plist" "$HOME/Library/LaunchAgents/"
+  did "install $HOME/Library/LaunchAgents/com.local.KeyRemapping.plist (active from next login)"
+  exit 0
+fi
 
 # Homebrew (normally already installed by `install`)
 if ! has brew; then
@@ -36,13 +45,5 @@ lists_brew=("$PACKAGES/common.txt" "$PACKAGES/brew.txt" "$PACKAGES/brew-macos.tx
 }
 
 try "brew cleanup" brew cleanup --prune=all
-
-# Key remap for non-US Mac keyboards; on a US keyboard it breaks \ (see macos/README.md)
-if [ "$KEYREMAP" = 1 ]; then
-  info "Installing key remap"
-  run mkdir -p "$HOME/Library/LaunchAgents"
-  run cp "$DOTFILES/macos/com.local.KeyRemapping.plist" "$HOME/Library/LaunchAgents/"
-  did "install $HOME/Library/LaunchAgents/com.local.KeyRemapping.plist (active from next login)"
-fi
 
 report_failures

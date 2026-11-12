@@ -58,8 +58,20 @@ shows an app's id).
 
 ## Key remap (`--keyremap`)
 
-For a Mac keyboard that isn't in US layout. **On a US keyboard it breaks `\`.** `setup/macos.sh`
-copies the plist to `~/Library/LaunchAgents/`; it applies from the next login. To apply it now:
+For a Mac keyboard that isn't in US layout. **On a US keyboard it breaks `\`.**
+
+```sh
+~/Documents/github/dotfiles/install --keyremap
+# Or, from the repo:
+setup/macos.sh --keyremap
+```
+
+Both commands only copy the plist to `~/Library/LaunchAgents/`. They do not update packages or
+repositories, run sudo, relink configs or change the login shell. `--dry-run` previews the copy.
+The top-level command needs this repo already cloned, and `--keyremap` cannot be combined with
+`--extras`.
+
+The remap applies from the next login. To apply it now:
 `launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.local.KeyRemapping.plist`.
 Keycodes: [hidutil key remapping generator](https://github.com/amarsyla/hidutil-key-remapping-generator).
 

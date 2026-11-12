@@ -29,6 +29,8 @@ class DotfilesTests(unittest.TestCase):
         tree = self.home / "Documents/github/dotfiles"
         shutil.copytree(REPO / "setup", tree / "setup")
         shutil.copytree(REPO / "packages", tree / "packages")
+        (tree / "macos").mkdir()
+        shutil.copy2(REPO / "macos/com.local.KeyRemapping.plist", tree / "macos")
         with (tree / "setup/lib.sh").open("a") as lib:
             lib.write("\n" + mocks + "\n")
         return subprocess.run(
@@ -79,6 +81,83 @@ run() { printf '%s\n' "$@" >> "$HOME/actions"; }
         args = (self.home / "actions").read_text().splitlines()
         for package in ("bat", "fzf", "shellcheck", "coreutils", "ghostty"):
             self.assertIn(package, args)
+
+    def test_keyremap_only_copies_launch_agent(self):
+        result = self.setup_script("macos.sh", r'''
+is_macos() { return 0; }
+load_brew() { printf 'unexpected Homebrew initialization\n' >&2; exit 99; }
+has() { printf 'unexpected tool check\n' >&2; exit 99; }
+''', "--keyremap")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        tree = self.home / "Documents/github/dotfiles"
+        agent = self.home / "Library/LaunchAgents/com.local.KeyRemapping.plist"
+        expected = (REPO / "macos/com.local.KeyRemapping.plist").read_bytes()
+        self.assertEqual(agent.read_bytes(), expected)
+
+        bin_dir = self.home / "bin"
+        bin_dir.mkdir()
+        (bin_dir / "uname").write_text('#!/bin/sh\nprintf "Darwin\\n"\n')
+        for tool in ("sudo", "brew", "git", "curl"):
+            (bin_dir / tool).write_text('#!/bin/sh\nprintf "unexpected command: %s\\n" "$0" >&2\nexit 99\n')
+        for tool in bin_dir.iterdir():
+            tool.chmod(0o755)
+        self.env["PATH"] = str(bin_dir) + os.pathsep + self.env["PATH"]
+        for entrypoint in (REPO / "install", tree / "setup/macos.sh"):
+            with self.subTest(entrypoint=entrypoint):
+                agent.unlink()
+                result = subprocess.run(
+                    ["bash", str(entrypoint), "--keyremap"], env=self.env,
+                    text=True, capture_output=True,
+                )
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(agent.read_bytes(), expected)
+                shutil.rmtree(agent.parent)
+                result = subprocess.run(
+                    ["bash", str(entrypoint), "--keyremap", "--dry-run"], env=self.env,
+                    text=True, capture_output=True,
+                )
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertFalse(agent.parent.exists())
+                self.assertIn("[dry-run]", result.stdout)
+                result = subprocess.run(
+                    ["bash", str(entrypoint), "--keyremap", "--extras"], env=self.env,
+                    text=True, capture_output=True,
+                )
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("cannot be combined", result.stderr)
+                self.assertFalse(agent.parent.exists())
+                agent.parent.mkdir(parents=True)
+                agent.write_bytes(expected)
+        self.assertFalse((self.home / ".config").exists())
+        self.assertFalse((self.home / "Documents/github/nvim").exists())
+
+    def test_keyremap_requires_existing_checkout(self):
+        bin_dir = self.home / "bin"
+        bin_dir.mkdir()
+        uname = bin_dir / "uname"
+        uname.write_text('#!/bin/sh\nprintf "Darwin\\n"\n')
+        uname.chmod(0o755)
+        for tool in ("sudo", "brew", "git", "curl"):
+            blocker = bin_dir / tool
+            blocker.write_text('#!/bin/sh\nexit 99\n')
+            blocker.chmod(0o755)
+        self.env["PATH"] = str(bin_dir) + os.pathsep + self.env["PATH"]
+        result = subprocess.run(
+            ["bash", str(REPO / "install"), "--keyremap"], env=self.env,
+            text=True, capture_output=True,
+        )
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("existing checkout", result.stderr)
+        self.assertFalse((self.home / "Library").exists())
+        self.assertFalse((self.home / "Documents").exists())
+
+    def test_other_setup_scripts_reject_keyremap(self):
+        result = self.setup_script("link.sh", r'''
+load_brew() { printf 'unexpected Homebrew initialization\n' >&2; exit 99; }
+''', "--keyremap")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("only supported", result.stderr)
+        self.assertFalse((self.home / ".config").exists())
 
     def test_zdotdir_is_idempotent_and_refuses_conflicts(self):
         function = re.search(

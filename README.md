@@ -32,21 +32,33 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/main/install | bas
 | Flag         | Effect                                                                         |
 |--------------|--------------------------------------------------------------------------------|
 | `--extras`   | Arch: also install `packages/extras-*.txt` (browsers, 1Password, ...) |
-| `--keyremap` | macOS: also install the key remap for non-US Mac keyboards (breaks `\` on US ones) |
+| `--keyremap` | macOS: **only** install the non-US keyboard remap; needs this repo cloned already (breaks `\` on US ones) |
 | `--dry-run`  | print what would change, change nothing (needs the repos cloned already)       |
 
 `install` installs git, clones both repos (or `git pull --ff-only`s them; on local changes it warns
-and uses them as they are), then runs the scripts below. Every script takes the same flags and can
-be run on its own. A failing script doesn't stop the others; `install` lists the failures at the end.
+and uses them as they are), then runs the scripts below. Scripts can be run on their own and share
+the flags above, except `--keyremap`, which is only supported by `install` and `setup/macos.sh`.
+A failing script doesn't stop the others; `install` lists the failures at the end.
 Safe to rerun. Log out and back in afterwards.
 
 | Script            | What it does                                                                  |
 |-------------------|-------------------------------------------------------------------------------|
 | `setup/arch.sh`   | `pacman -Syu`, yay, the pacman and AUR lists, Apple's SF fonts, clears the pacman cache |
 | `setup/ubuntu.sh` | `apt upgrade`, the apt list, Snaps, Homebrew with the shared lists, `brew upgrade`, Apple's SF fonts, GNOME shortcuts and fonts |
-| `setup/macos.sh`  | Homebrew formulae and casks, `brew upgrade`; key remap with `--keyremap` |
+| `setup/macos.sh`  | Homebrew formulae and casks, `brew upgrade`; with `--keyremap`, only the key remap instead |
 | `setup/link.sh`   | links the configs into `~/.config` (fontconfig on Linux only), picks the per-OS ghostty file, `ya pkg install` |
 | `setup/zsh.sh`    | `ZDOTDIR` in the system zshenv, zsh as login shell, clones or updates the zsh plugins |
+
+To install only the macOS keyboard remap from an existing checkout:
+
+```sh
+~/Documents/github/dotfiles/install --keyremap
+# Preview only:
+~/Documents/github/dotfiles/install --keyremap --dry-run
+```
+
+This skips Homebrew, repository updates, sudo, config linking and zsh setup. It cannot be combined
+with `--extras`; the remap becomes active at the next login. See [macOS](macos/README.md).
 
 ## Update
 
@@ -103,7 +115,7 @@ directly in `~/.config` that point into the repo. Remove deeper links (e.g.
 | Monitors and workspaces (Arch)      | MONITORS block in `arch/wayland/hypr/hyprland.lua`; `hyprctl monitors` lists the outputs |
 | Workspaces per monitor (macOS)      | `[workspace-to-monitor-force-assignment]` in `macos/aerospace.toml` |
 | Work git identity                   | create `~/.config/git/gitconfig_work` by hand ([git](git/README.md)) |
-| Optional parts                      | the flags above: `--extras` (Arch; the browser keys need it), `--keyremap` (macOS) |
+| Optional parts                      | `--extras` (Arch; the browser keys need it), `--keyremap` (macOS; a separate remap-only run) |
 
 ## Troubleshooting
 

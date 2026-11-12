@@ -48,7 +48,7 @@ usage() {
 Usage: $(basename "$0") [--extras] [--keyremap] [--dry-run]
 
   --extras     Arch: also install the optional packages (packages/extras-*.txt)
-  --keyremap   macOS: also install the key remap for non-US keyboards (see macos/README.md)
+  --keyremap   setup/macos.sh only: install just the non-US key remap
   --dry-run    print what would change without changing anything
 EOF
 }
@@ -64,6 +64,12 @@ parse_flags() {
     esac
     shift
   done
+  if [ "$KEYREMAP" = 1 ]; then
+    [ "${0##*/}" = macos.sh ] || die "--keyremap is only supported by install and setup/macos.sh"
+    [ "$EXTRAS" = 0 ] || die "--keyremap cannot be combined with --extras"
+  else
+    load_brew
+  fi
 }
 
 # ----------------------------------------
@@ -268,5 +274,3 @@ install_apple_fonts() {
     did "install $name in $dir/$name"
   done
 }
-
-load_brew
