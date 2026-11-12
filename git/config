@@ -52,7 +52,7 @@
   line-numbers-right-style = "#4b5263"
   line-numbers-minus-style = "#e06c75"
   line-numbers-plus-style = "#98c379"
-  line-numbers-zero-style = "#4b5263"
+  line-numbers-zero-style = "#7f848e"
 
   # Added lines
   plus-style = "syntax #2b4235"
