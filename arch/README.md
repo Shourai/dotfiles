@@ -47,6 +47,18 @@ another machine, edit the MONITORS block in `hyprland.lua`; `hyprctl monitors` l
 | `ALT+SHIFT+M` / `.` / `,`          | mute / volume up / volume down                     |
 | 3-finger swipe (touchpad)          | switch workspace                                   |
 
+## Optional idle suspend
+
+Automatic suspend is disabled. To enable it after 30 minutes of inactivity, add this listener to
+`wayland/hypr/hypridle.conf`, then restart hypridle (or log out and back in):
+
+```ini
+listener {
+    timeout = 1800
+    on-timeout = systemctl suspend
+}
+```
+
 ## After installation
 
 Manual system tweaks, not done by `install`:
