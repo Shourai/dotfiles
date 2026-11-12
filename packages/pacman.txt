@@ -38,9 +38,6 @@ ttf-nerd-fonts-symbols    # icons in waybar (ghostty has them built in)
 noto-fonts                # fallback for what the SF fonts don't cover
 noto-fonts-cjk
 noto-fonts-emoji
-ttf-dejavu
-ttf-liberation
-ttf-opensans
 
 # yazi previews: video, PDF, images, SVG, JSON, archives, 'Show EXIF', 'Show media info'
 7zip
