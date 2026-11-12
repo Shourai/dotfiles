@@ -142,6 +142,12 @@ if (( $+commands[fzf] )); then
   # Check for fzf-tab and load it if available
   if [[ -r "$ZSH_PLUGINS/fzf-tab/fzf-tab.plugin.zsh" ]]; then
     zstyle ':completion:*' menu no
+    zstyle ':completion:*:descriptions' format '[%d]'
+    zstyle ':fzf-tab:*' fzf-flags --layout=reverse --border=none --info=inline
+    zstyle ':fzf-tab:*' switch-group '<' '>'
+    zstyle ':fzf-tab:complete:cd:*' fzf-preview \
+      'eza --tree --level=2 --color=always --icons=always -- "$realpath"'
+    zstyle ':fzf-tab:complete:cd:*' fzf-min-height 12
     source "$ZSH_PLUGINS/fzf-tab/fzf-tab.plugin.zsh"
   fi
 
