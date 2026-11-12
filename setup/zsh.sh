@@ -30,13 +30,15 @@ fi
 # Which file depends on how zsh was built: macOS and Homebrew's zsh read /etc/zshenv,
 # zsh from pacman or apt reads /etc/zsh/zshenv.
 set_zdotdir() {
-  local file="$1"
-  if grep -qs '^export ZDOTDIR=' "$file"; then
+  # shellcheck disable=SC2016  # $HOME must stay literal in the file
+  local file="$1" expected='export ZDOTDIR="$HOME/.config/zsh"'
+  if grep -Fqx "$expected" "$file" 2>/dev/null; then
     ok "ZDOTDIR already set in $file"
+  elif grep -Eq '^[[:space:]]*(export[[:space:]]+)?ZDOTDIR=' "$file" 2>/dev/null; then
+    die "conflicting ZDOTDIR in $file; review it before continuing"
   else
     run sudo mkdir -p "$(dirname "$file")"
-    # shellcheck disable=SC2016  # $HOME must stay literal in the file
-    append_root "$file" 'export ZDOTDIR="$HOME/.config/zsh"'
+    append_root "$file" "$expected"
     did "set ZDOTDIR in $file"
   fi
 }

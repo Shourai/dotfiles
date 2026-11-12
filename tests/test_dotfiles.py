@@ -2,6 +2,7 @@
 
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import tempfile
@@ -78,6 +79,27 @@ run() { printf '%s\n' "$@" >> "$HOME/actions"; }
         args = (self.home / "actions").read_text().splitlines()
         for package in ("bat", "fzf", "shellcheck", "coreutils", "ghostty"):
             self.assertIn(package, args)
+
+    def test_zdotdir_is_idempotent_and_refuses_conflicts(self):
+        function = re.search(
+            r"(?ms)^set_zdotdir\(\) \{.*?^\}",
+            (REPO / "setup/zsh.sh").read_text(),
+        ).group()
+        script = 'source setup/lib.sh\nrun() { shift; "$@"; }\n' + function
+        script += '\nset_zdotdir "$HOME/zshenv"\n'
+        target = self.home / "zshenv"
+        expected = 'export ZDOTDIR="$HOME/.config/zsh"\n'
+        for _ in range(2):
+            result = self.bash(script)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(target.read_text(), expected)
+        for conflict in ('export ZDOTDIR="$HOME/.old-zsh"\n', '  ZDOTDIR=/other\n'):
+            with self.subTest(conflict=conflict):
+                target.write_text(conflict)
+                result = self.bash(script)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("conflicting ZDOTDIR", result.stderr)
+                self.assertEqual(target.read_text(), conflict)
 
     def test_backup_collisions_preserve_files_and_broken_links(self):
         result = self.bash(r'''
