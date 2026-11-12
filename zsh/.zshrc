@@ -177,7 +177,14 @@ if (( $+commands[fzf] )); then
   unset _fzf_preview_cmd
 
   # gf: fuzzy-pick a git-tracked file and open it
-  gf() { local file; file=$(git ls-files | fzf --prompt "Git Files> ") && [[ -n "$file" ]] && ${EDITOR:-nvim} "$file"; }
+  gf() {
+    local file
+    # NUL delimiters preserve filenames without Git's display quoting.
+    IFS= read -r -d '' file < <(
+      git ls-files -z | fzf --read0 --print0 --prompt "Git Files> "
+    ) || return
+    "${EDITOR:-nvim}" -- "$file"
+  }
   # gb: fuzzy-pick a branch and check it out (remotes/origin/x becomes x)
   gb() { local branch; branch=$(git branch -a --color=always | grep -v "/HEAD" | fzf --ansi --prompt "Branches> ") && branch=${branch##* } && branch=${branch#remotes/origin/} && [[ -n "$branch" ]] && git checkout "$branch"; }
   # ghist: fuzzy-pick a commit and show it

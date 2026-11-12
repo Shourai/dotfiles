@@ -50,3 +50,43 @@ eval "$path_code"
 [[ "$HOMEBREW_PREFIX" == "$tmp/linux" ]]
 [[ $(wc -l < "$TEST_BREW_CALLS") -eq 3 ]]
 print 'Homebrew initialization checks passed.'
+
+path=($original_path)
+fpath=($original_fpath)
+export GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_NOSYSTEM=1
+mkdir -p "$tmp/git"
+cd "$tmp/git"
+git init -q -b main
+
+# The picker mock preserves its delimiter and selects an exact requested input record.
+fzf() {
+  [[ "${TEST_FZF_CANCEL:-0}" == 1 ]] && return 130
+  python3 -c '
+import os, sys
+delimiter = b"\0" if "--read0" in sys.argv else b"\n"
+records = sys.stdin.buffer.read().split(delimiter)
+wanted = os.fsencode(os.environ["TEST_FZF_SELECT"])
+if wanted not in records:
+    sys.exit(1)
+sys.stdout.buffer.write(wanted + delimiter)
+' "$@"
+}
+test_editor() { printf '%s\0' "$@" > "$tmp/editor-args"; }
+EDITOR=test_editor
+eval "$(awk '/^  gf\(\)/{copy=1} /^  # gb:/{copy=0} copy' "$repo/zsh/.zshrc")"
+for name in 'café notes.txt' '-option.txt' $'line\nbreak\n'; do
+  touch -- "$name"
+  git add -- "$name"
+  export TEST_FZF_SELECT="$name"
+  gf
+  cmp "$tmp/editor-args" <(printf '%s\0' -- "$name")
+done
+rm "$tmp/editor-args"
+export TEST_FZF_CANCEL=1
+if gf; then
+  print -u2 'gf unexpectedly succeeded after cancellation'
+  exit 1
+fi
+[[ ! -e "$tmp/editor-args" ]]
+unset TEST_FZF_CANCEL
+print 'Git file-picker checks passed.'
