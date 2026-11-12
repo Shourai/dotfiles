@@ -89,5 +89,6 @@ done
 run mkdir -p "$PLUGINS"
 clone_or_pull https://github.com/sindresorhus/pure.git "$PLUGINS/pure"
 clone_or_pull https://github.com/sunlei/zsh-ssh.git    "$PLUGINS/zsh-ssh"
+clone_or_pull https://github.com/Aloxaf/fzf-tab.git    "$PLUGINS/fzf-tab"
 
 report_failures

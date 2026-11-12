@@ -139,6 +139,12 @@ if (( $+commands[fzf] )); then
   # Key bindings (Ctrl-T, Alt-C, Ctrl-R) and ** completion
   source <(fzf --zsh)
 
+  # Check for fzf-tab and load it if available
+  if [[ -r "$ZSH_PLUGINS/fzf-tab/fzf-tab.plugin.zsh" ]]; then
+    zstyle ':completion:*' menu no
+    source "$ZSH_PLUGINS/fzf-tab/fzf-tab.plugin.zsh"
+  fi
+
   # fd lists files faster than find, includes hidden files, skips .git
   if (( $+commands[fd] )); then
     export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
