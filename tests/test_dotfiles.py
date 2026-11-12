@@ -101,16 +101,6 @@ run() {
         calls = (self.home / "actions").read_text().splitlines()
         self.assertFalse(any(" install build-essential " in call for call in calls))
 
-    def test_ubuntu_warns_about_existing_snap_without_uninstalling(self):
-        result = self.ubuntu_script(True, r'''
-has() { [ "$1" = brew ] || [ "$1" = snap ]; }
-snap() { [ "$*" = 'list ghostty' ]; }
-''')
-        self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertIn("Ghostty Snap is still installed", result.stderr)
-        calls = (self.home / "actions").read_text().splitlines()
-        self.assertFalse(any(call.startswith("sudo snap") for call in calls))
-
     def test_ubuntu_shortcuts_launch_native_ghostty_directly(self):
         code = re.search(
             r"(?ms)^ghostty=.*?^\)", (REPO / "ubuntu/shortcuts.sh").read_text(),
@@ -122,37 +112,6 @@ snap() { [ "$*" = 'list ghostty' ]; }
             "ghostty-tmux|<Super><Shift>Return|/usr/bin/ghostty --working-directory=home -e /test/tmux",
             "ghostty-tmux-ctrl-alt-t|<Control><Alt>t|/usr/bin/ghostty --working-directory=home -e /test/tmux",
         ])
-
-    def test_link_cleanup_removes_only_broken_repo_launch_links(self):
-        tree = self.home / "Documents/github/dotfiles"
-        targets = (
-            (self.home / ".config/autostart/ghostty.desktop", tree / "ubuntu/ghostty-autostart.desktop"),
-            (self.home / ".local/share/dbus-1/services/com.mitchellh.ghostty.service", tree / "ubuntu/ghostty-dbus.service"),
-        )
-        for link, source in targets:
-            link.parent.mkdir(parents=True)
-            link.symlink_to(source)
-            (link.parent / "user-file").write_text("keep")
-            (link.parent / "user-link").symlink_to("missing-user-target")
-        result = self.setup_script("link.sh", r'''
-is_ubuntu() { return 0; }
-is_arch() { return 1; }
-is_macos() { return 1; }
-is_linux() { return 0; }
-load_brew() { return 0; }
-has() { return 1; }
-''', "--dry-run")
-        self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertTrue(all(link.is_symlink() for link, _ in targets))
-        result = subprocess.run(
-            ["bash", str(tree / "setup/link.sh")], env=self.env,
-            text=True, capture_output=True,
-        )
-        self.assertEqual(result.returncode, 0, result.stderr)
-        for link, _ in targets:
-            self.assertFalse(link.is_symlink())
-            self.assertEqual((link.parent / "user-file").read_text(), "keep")
-            self.assertTrue((link.parent / "user-link").is_symlink())
 
     def test_failed_arch_upgrade_stops_dependent_operations(self):
         result = self.setup_script("arch.sh", r'''

@@ -53,11 +53,6 @@ lists=("$PACKAGES/apt.txt")
 try "apt packages (packages/apt*.txt)" "${apt[@]}" install $(read_list "${lists[@]}")
 
 if [ "$desktop" = 1 ]; then
-  # Do not uninstall a user's Snap or its data automatically.
-  if has snap && snap list ghostty >/dev/null 2>&1; then
-    warn "Ghostty Snap is still installed: quit it, save any Snap-specific data, then remove it with sudo snap remove ghostty and log out and back in"
-  fi
-
   info "Installing Apple's SF fonts"
   try "Apple fonts" install_apple_fonts
 fi

@@ -37,9 +37,6 @@ fi
 # Ubuntu: GNOME desktop
 if is_ubuntu; then
   link "$DOTFILES/ghostty/ubuntu.ghostty" "$DOTFILES/ghostty/os.ghostty"  # per-OS ghostty settings
-  # Remove broken repo links left by the retired Ghostty launch helpers, not user files.
-  prune_links "$HOME/.config/autostart"
-  prune_links "$HOME/.local/share/dbus-1/services"
 fi
 
 # macOS

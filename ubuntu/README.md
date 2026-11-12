@@ -21,14 +21,8 @@ Headless (e.g. Ubuntu Server used over SSH) works too: without `gnome-shell` ins
 `setup/ubuntu.sh` adds `ppa:mkasberg/ghostty-ubuntu` before installing the desktop packages.
 This is an unofficial community PPA; Ghostty updates through normal apt upgrades.
 
-The shortcuts launch `/usr/bin/ghostty` directly, without custom wrappers, login autostart or
-custom D-Bus service files. Ghostty starts on demand and uses its normal Linux exit-on-last-window
-behavior. The tmux shortcuts use `-e`, which launches a separate Ghostty process.
-
-If migrating from the Snap, quit the old Ghostty, save any Snap-specific data you need, then run
-`sudo snap remove ghostty` and log out and back in. Setup warns about the old Snap but does not
-uninstall it automatically. `setup/link.sh` removes broken links to the retired launch helpers;
-unrelated user files are left alone.
+The shortcuts launch `/usr/bin/ghostty` directly. The tmux shortcuts use `-e`, which launches a
+separate Ghostty process.
 
 ## Watch out
 
