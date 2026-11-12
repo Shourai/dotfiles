@@ -72,13 +72,6 @@ defaults write com.apple.loginwindow TALLogoutSavesState -bool false
 # Disable Text input in status bar
 defaults write com.apple.TextInputMenu visible -bool false
 
-# iTerm2 (not installed by setup; settings kept as a backup): if it's installed,
-# load its settings from this folder
-if [ -d /Applications/iTerm.app ]; then
-  defaults write com.googlecode.iterm2 PrefsCustomFolder "$HOME/Documents/github/dotfiles/macos"
-  defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
-fi
-
 # Disable the sound effects on boot
 # sudo nvram SystemAudioVolume=%00
 

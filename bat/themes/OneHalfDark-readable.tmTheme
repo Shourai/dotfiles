@@ -13,7 +13,7 @@
 
 	A dark Sublime Text color scheme based on Atom's One. See
 	github.com/sonph/onehalf for installation instructions, a light color
-	scheme, and versions for other editors/terminals such as Vim or iTerm.
+	scheme, and versions for other editors such as (Neo)Vim.
 
 	Red: #e06c75
 	Green: #98c379
@@ -44,7 +44,7 @@
 	<key>author</key>
 	<string>Son A. Pham &lt;sp@sonpham.me&gt;</string>
 	<key>comment</key>
-	<string>A dark iTerm color scheme based on Atom&apos;s One. See github.com&#x2f;sonph&#x2f;onehalf for installation instructions, a light color scheme, and versions for other editors&#x2f;terminals such as (Neo)Vim and Sublime Text.</string>
+	<string>A dark Sublime Text color scheme based on Atom&apos;s One. See github.com&#x2f;sonph&#x2f;onehalf for installation instructions, a light color scheme, and versions for other editors&#x2f;terminals such as (Neo)Vim and Sublime Text.</string>
 	<key>settings</key>
 	<array>
 		<dict>
