@@ -86,7 +86,8 @@ and add it to the list for next time.
 yazi's preview helpers are in each OS's own list (`pacman.txt`, `brew-macos.txt`, `apt-desktop.txt`).
 
 **Add a config**: put it in the repo, add a `link` line to `setup/link.sh`, run `setup/link.sh`.
-Anything already at the target is moved to `<name>.bak-<date>`, never deleted.
+Anything already at the target is moved to `<name>.bak-<date>`, never deleted. A numeric suffix
+is added if that backup name already exists.
 
 **Remove a config**: delete it and its `link` line, run `setup/link.sh`: it removes broken links
 directly in `~/.config` that point into the repo. Remove deeper links (e.g.
@@ -118,6 +119,16 @@ directly in `~/.config` that point into the repo. Remove deeper links (e.g.
 | ghostty settings missing (Alt key, window) | `ghostty/os.ghostty` is missing: run `setup/link.sh`                    |
 | Hyprland shows a red config error         | `hyprctl configerrors` ([Arch](arch/README.md))                         |
 | Undo `--keyremap` or `--defaults`         | see [macOS](macos/README.md)                                            |
+
+## Validation
+
+Run the isolated regression checks (Python 3, Bash and git; writes stay in temporary directories):
+
+```sh
+python3 -m unittest discover -s tests
+```
+
+Shell scripts can also be checked with `shellcheck -x -P SCRIPTDIR install setup/*.sh ubuntu/shortcuts.sh ubuntu/ghostty-window`.
 
 ## Uninstall
 

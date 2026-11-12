@@ -1,5 +1,8 @@
 # Files that tools or setup create inside this repo's (linked) folders.
 
+# Python regression-test bytecode
+tests/__pycache__/
+
 # macOS Finder metadata
 .DS_Store
 ._*

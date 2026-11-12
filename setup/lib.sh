@@ -198,10 +198,16 @@ link() {
   did "link $dst -> $target"
 }
 
-# Move $1 aside to <name>.bak-<date>
+# Move $1 aside to <name>.bak-<date>, with a suffix if that backup already exists
 backup() {
-  local path="$1" bak
-  bak="$path.bak-$(date +%Y%m%d-%H%M%S)"
+  local path="$1" base bak n=0
+  base="$path.bak-$(date +%Y%m%d-%H%M%S)"
+  bak="$base"
+  # Preserve earlier backups when timestamps collide, including broken symlinks.
+  while [ -e "$bak" ] || [ -L "$bak" ]; do
+    n=$((n + 1))
+    bak="$base-$n"
+  done
   warn "moving existing $path to $bak"
   run mv "$path" "$bak"
 }
