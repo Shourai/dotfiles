@@ -12,7 +12,10 @@ parse_flags "$@"
 is_arch || die "this script is for Arch Linux"
 
 info "Updating system"
-try "pacman -Syu" sudo pacman -Syu --needed --noconfirm base-devel git
+# Package installation depends on a successful full system upgrade.
+if ! run sudo pacman -Syu --needed --noconfirm base-devel git; then
+  die "system upgrade failed; refusing to install against potentially newer package databases"
+fi
 
 # AUR helper, built in a temp folder that's removed even if the build fails
 if has yay; then
