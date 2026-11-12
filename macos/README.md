@@ -4,7 +4,6 @@
 |---------------------------------|------------------------------------------------------------------------|
 | `aerospace.toml`                | AeroSpace tiling window manager, linked to `~/.config/aerospace/aerospace.toml` |
 | `com.local.KeyRemapping.plist`  | key remap for non-US Mac keyboards; installed only with `--keyremap`   |
-| `defaults.sh`                   | system settings; applied only with `--defaults`                        |
 
 ## Fonts
 
@@ -66,18 +65,3 @@ launchctl bootout gui/$(id -u)/com.local.KeyRemapping
 rm ~/Library/LaunchAgents/com.local.KeyRemapping.plist
 hidutil property --set '{"UserKeyMapping":[]}'
 ```
-
-## System settings (`--defaults`)
-
-Read `defaults.sh` first. Besides Finder, trackpad and keyboard preferences it:
-
-- **empties the Dock** of all app icons, on every run;
-- moves the Dock to the right, autohides it and shrinks the icons;
-- asks for the password immediately after sleep or the screensaver;
-- sets a key repeat faster than System Settings allows.
-
-Dock, Finder and menu bar changes apply right away, trackpad and keyboard ones after logging out
-and in. Undo a setting in System Settings, or with `defaults delete <domain> <key>`.
-
-To find the key for a setting: `defaults read > a`, change it in System Settings,
-`defaults read > b`, `diff a b`.

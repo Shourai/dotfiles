@@ -32,7 +32,6 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/main/install | bas
 | Flag         | Effect                                                                         |
 |--------------|--------------------------------------------------------------------------------|
 | `--extras`   | Arch: also install `packages/extras-*.txt` (browsers, 1Password, ...) |
-| `--defaults` | macOS: also apply `macos/defaults.sh` (read it first: it empties the Dock)     |
 | `--keyremap` | macOS: also install the key remap for non-US Mac keyboards (breaks `\` on US ones) |
 | `--dry-run`  | print what would change, change nothing (needs the repos cloned already)       |
 
@@ -45,7 +44,7 @@ Safe to rerun. Log out and back in afterwards.
 |-------------------|-------------------------------------------------------------------------------|
 | `setup/arch.sh`   | `pacman -Syu`, yay, the pacman and AUR lists, Apple's SF fonts, clears the pacman cache |
 | `setup/ubuntu.sh` | `apt upgrade`, the apt list, Snaps, Homebrew with the shared lists, `brew upgrade`, Apple's SF fonts, GNOME shortcuts and fonts |
-| `setup/macos.sh`  | Homebrew formulae and casks, `brew upgrade`; key remap and `defaults.sh` with flags |
+| `setup/macos.sh`  | Homebrew formulae and casks, `brew upgrade`; key remap with `--keyremap` |
 | `setup/link.sh`   | links the configs into `~/.config` (fontconfig on Linux only), picks the per-OS ghostty file, `ya pkg install` |
 | `setup/zsh.sh`    | `ZDOTDIR` in the system zshenv, zsh as login shell, clones or updates the zsh plugins |
 
@@ -104,7 +103,7 @@ directly in `~/.config` that point into the repo. Remove deeper links (e.g.
 | Monitors and workspaces (Arch)      | MONITORS block in `arch/wayland/hypr/hyprland.lua`; `hyprctl monitors` lists the outputs |
 | Workspaces per monitor (macOS)      | `[workspace-to-monitor-force-assignment]` in `macos/aerospace.toml` |
 | Work git identity                   | create `~/.config/git/gitconfig_work` by hand ([git](git/README.md)) |
-| Optional parts                      | the flags above: `--extras` (Arch; the browser keys need it), `--keyremap`, `--defaults` (macOS) |
+| Optional parts                      | the flags above: `--extras` (Arch; the browser keys need it), `--keyremap` (macOS) |
 
 ## Troubleshooting
 
@@ -118,7 +117,7 @@ directly in `~/.config` that point into the repo. Remove deeper links (e.g.
 | Can't log in on Ubuntu after a `brew upgrade` | Homebrew's zsh broke: boot into recovery mode, root shell, `chsh -s /usr/bin/zsh <user>` (if the disk is read-only, first `mount -o remount,rw /`) |
 | ghostty settings missing (Alt key, window) | `ghostty/os.ghostty` is missing: run `setup/link.sh`                    |
 | Hyprland shows a red config error         | `hyprctl configerrors` ([Arch](arch/README.md))                         |
-| Undo `--keyremap` or `--defaults`         | see [macOS](macos/README.md)                                            |
+| Undo `--keyremap`                         | see [macOS](macos/README.md)                                            |
 
 ## Validation
 
@@ -136,7 +135,7 @@ Shell scripts can also be checked with `shellcheck -x -P SCRIPTDIR install setup
 2. Delete the `export ZDOTDIR=...` line from `/etc/zsh/zshenv` and, on macOS or with Homebrew's
    zsh, from `/etc/zshenv`.
 3. Pick another login shell, e.g. `chsh -s /bin/bash`.
-4. macOS: undo `--keyremap` / `--defaults` ([macOS](macos/README.md)).
+4. macOS: undo `--keyremap` ([macOS](macos/README.md)).
 
 Packages stay installed.
 
@@ -172,7 +171,7 @@ dotfiles
  ├─ ghostty/           -> ~/.config/ghostty (os.ghostty links to the arch/ubuntu/macos file)
  ├─ arch/              Hyprland, hypridle, hyprlock, hyprpaper, waybar
  ├─ ubuntu/            GNOME keyboard shortcuts, ghostty autostart
- └─ macos/             AeroSpace, key remap, defaults.sh
+ └─ macos/             AeroSpace, key remap
 ```
 
 Not installed by setup, install by hand when needed: gping, jless, mtr, netop, pandoc, sshs, termshark.

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Install macOS packages from packages/*.txt with Homebrew; optionally the key remap
-# (--keyremap) and the system settings (--defaults).
+# (--keyremap).
 # Also upgrades everything Homebrew manages (brew upgrade) and clears its cache.
 # Safe to rerun; already installed packages are skipped.
 #
-#   setup/macos.sh [--defaults] [--keyremap] [--dry-run]
+#   setup/macos.sh [--keyremap] [--dry-run]
 
 set -euo pipefail
 source "$(dirname "$0")/lib.sh"
@@ -43,11 +43,6 @@ if [ "$KEYREMAP" = 1 ]; then
   run mkdir -p "$HOME/Library/LaunchAgents"
   run cp "$DOTFILES/macos/com.local.KeyRemapping.plist" "$HOME/Library/LaunchAgents/"
   did "install $HOME/Library/LaunchAgents/com.local.KeyRemapping.plist (active from next login)"
-fi
-
-if [ "$DEFAULTS" = 1 ]; then
-  info "Applying macOS defaults"
-  try "macos/defaults.sh" bash "$DOTFILES/macos/defaults.sh"
 fi
 
 report_failures

@@ -16,7 +16,6 @@ export HOMEBREW_NO_ASK=1
 # Flags, set by parse_flags (`install` passes its own arguments on to each script)
 DRY_RUN=0
 EXTRAS=0
-DEFAULTS=0
 KEYREMAP=0
 
 # Steps that failed but didn't stop the script; see try() and report_failures()
@@ -46,10 +45,9 @@ did() {
 
 usage() {
   cat <<EOF
-Usage: $(basename "$0") [--extras] [--defaults] [--keyremap] [--dry-run]
+Usage: $(basename "$0") [--extras] [--keyremap] [--dry-run]
 
   --extras     Arch: also install the optional packages (packages/extras-*.txt)
-  --defaults   macOS: also apply the system settings in macos/defaults.sh
   --keyremap   macOS: also install the key remap for non-US keyboards (see macos/README.md)
   --dry-run    print what would change without changing anything
 EOF
@@ -59,7 +57,6 @@ parse_flags() {
   while [ $# -gt 0 ]; do
     case "$1" in
       --extras)   EXTRAS=1 ;;
-      --defaults) DEFAULTS=1 ;;
       --keyremap) KEYREMAP=1 ;;
       --dry-run)  DRY_RUN=1 ;;
       -h|--help)  usage; exit 0 ;;

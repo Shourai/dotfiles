@@ -23,10 +23,9 @@ run()  { if [ "${DRY_RUN:-0}" = 1 ]; then printf '  \033[2m[dry-run]\033[0m %s\n
 
 usage() {
   cat <<'EOF'
-Usage: install [--extras] [--defaults] [--keyremap] [--dry-run]
+Usage: install [--extras] [--keyremap] [--dry-run]
 
   --extras     Arch: also install the optional packages (packages/extras-*.txt)
-  --defaults   macOS: also apply the system settings in macos/defaults.sh
   --keyremap   macOS: also install the key remap for non-US keyboards
   --dry-run    print what would change without changing anything
                (needs the repos to be cloned already)
@@ -61,7 +60,7 @@ main() {
   for arg in "$@"; do
     case "$arg" in
       --dry-run) DRY_RUN=1 ;;
-      --extras|--defaults|--keyremap) ;;
+      --extras|--keyremap) ;;
       -h|--help) usage; exit 0 ;;
       *) usage >&2; die "unknown option: $arg" ;;
     esac
