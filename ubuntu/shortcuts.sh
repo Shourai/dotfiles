@@ -10,15 +10,14 @@ set -euo pipefail
 tmux=/home/linuxbrew/.linuxbrew/bin/tmux
 [ -x "$tmux" ] || tmux="$(command -v tmux || echo tmux)"
 
-# Windows open in the ghostty started at login (ghostty-autostart.desktop), asked over D-Bus by
-# ghostty-window, which skips the slow /snap/bin/ghostty. If ghostty isn't running, D-Bus starts it.
-ghostty_window="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/ghostty-window"
+# Native Ghostty from the PPA; launch directly without wrappers or login autostart.
+ghostty=/usr/bin/ghostty
 
 # name | keys | command
 shortcuts=(
-  "ghostty|<Super>Return|$ghostty_window"
-  "ghostty-tmux|<Super><Shift>Return|$ghostty_window $tmux"
-  "ghostty-tmux-ctrl-alt-t|<Control><Alt>t|$ghostty_window $tmux"
+  "ghostty|<Super>Return|$ghostty --working-directory=home"
+  "ghostty-tmux|<Super><Shift>Return|$ghostty --working-directory=home -e $tmux"
+  "ghostty-tmux-ctrl-alt-t|<Control><Alt>t|$ghostty --working-directory=home -e $tmux"
 )
 
 # Ubuntu's own gsettings: if a Homebrew package pulls in GLib, Homebrew's gsettings comes first

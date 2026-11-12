@@ -1,6 +1,6 @@
 # Ubuntu (apt): base system, on every Ubuntu machine (desktop and headless).
-# Desktop-only packages are in apt-desktop.txt. CLI tools come from Homebrew, ghostty from
-# snap.txt; see ubuntu/README.md.
+# Desktop-only packages, including Ghostty from its PPA, are in apt-desktop.txt.
+# CLI tools come from Homebrew; see ubuntu/README.md.
 
 # Needed by Homebrew itself (and by nvim-treesitter to compile parsers)
 build-essential

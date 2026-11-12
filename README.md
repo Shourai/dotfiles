@@ -42,7 +42,7 @@ Safe to rerun. Log out and back in afterwards.
 | Script            | What it does                                                                  |
 |-------------------|-------------------------------------------------------------------------------|
 | `setup/arch.sh`   | `pacman -Syu`, yay, the pacman and AUR lists, Apple's SF fonts, clears the pacman cache |
-| `setup/ubuntu.sh` | `apt upgrade`, the apt list, Snaps, Homebrew with the shared lists, `brew upgrade`, Apple's SF fonts, GNOME shortcuts and fonts |
+| `setup/ubuntu.sh` | `apt upgrade`, the apt lists (Ghostty PPA on desktops), Homebrew with the shared lists, `brew upgrade`, Apple's SF fonts, GNOME shortcuts and fonts |
 | `setup/macos.sh`  | Homebrew formulae and casks, `brew upgrade`; with `--keyremap`, only the key remap instead |
 | `setup/link.sh`   | links the configs into `~/.config` (fontconfig on Linux only), picks the per-OS ghostty file, `ya pkg install` |
 | `setup/zsh.sh`    | `ZDOTDIR` in the system zshenv, zsh as login shell, clones or updates the zsh plugins |
@@ -89,7 +89,6 @@ and add it to the list for next time.
 | `cask.txt`        | Homebrew casks (macOS apps and fonts)                           |
 | `apt.txt`         | apt (Ubuntu)                                                    |
 | `apt-desktop.txt` | apt (Ubuntu), only with a desktop (gnome-shell installed)       |
-| `snap.txt`        | Snap (Ubuntu), only with a desktop                              |
 
 yazi's preview helpers are in each OS's own list (`pacman.txt`, `brew-macos.txt`, `apt-desktop.txt`).
 
@@ -137,7 +136,7 @@ python3 -m unittest discover -s tests
 zsh -f tests/zsh.zsh
 ```
 
-Shell scripts can also be checked with `shellcheck -x -P SCRIPTDIR install setup/*.sh ubuntu/shortcuts.sh ubuntu/ghostty-window`.
+Shell scripts can also be checked with `shellcheck -x -P SCRIPTDIR install setup/*.sh ubuntu/shortcuts.sh`.
 
 ## Uninstall
 
@@ -180,7 +179,7 @@ dotfiles
  ├─ bat/               -> ~/.config/bat (custom theme; setup/link.sh runs bat cache --build)
  ├─ ghostty/           -> ~/.config/ghostty (os.ghostty links to the arch/ubuntu/macos file)
  ├─ arch/              Hyprland, hypridle, hyprlock, hyprpaper, waybar
- ├─ ubuntu/            GNOME keyboard shortcuts, ghostty autostart
+ ├─ ubuntu/            GNOME keyboard shortcuts
  └─ macos/             AeroSpace, key remap
 ```
 

@@ -1,6 +1,10 @@
 # Ubuntu (apt): only installed on a desktop (gnome-shell installed), after apt.txt.
 # Headless machines (servers, VMs used over SSH) skip this list; see ubuntu/README.md.
 
+# Ghostty from ppa:mkasberg/ghostty-ubuntu; setup/ubuntu.sh adds the PPA before this list.
+software-properties-common
+ghostty
+
 # Clipboard on Wayland (yazi, and nvim's clipboard outside SSH)
 wl-clipboard
 

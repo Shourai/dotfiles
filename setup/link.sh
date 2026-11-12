@@ -37,8 +37,9 @@ fi
 # Ubuntu: GNOME desktop
 if is_ubuntu; then
   link "$DOTFILES/ghostty/ubuntu.ghostty" "$DOTFILES/ghostty/os.ghostty"  # per-OS ghostty settings
-  link "$DOTFILES/ubuntu/ghostty-autostart.desktop" "$HOME/.config/autostart/ghostty.desktop"  # ghostty starts at login
-  link "$DOTFILES/ubuntu/ghostty-dbus.service" "$HOME/.local/share/dbus-1/services/com.mitchellh.ghostty.service"  # ... or when a shortcut needs it
+  # Remove broken repo links left by the retired Ghostty launch helpers, not user files.
+  prune_links "$HOME/.config/autostart"
+  prune_links "$HOME/.local/share/dbus-1/services"
 fi
 
 # macOS

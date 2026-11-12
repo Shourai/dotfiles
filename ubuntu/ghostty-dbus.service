@@ -1,7 +1,0 @@
-# Lets D-Bus start ghostty when ghostty-window asks for a window and ghostty isn't running
-# (e.g. after you quit it), so the window still opens in the shared background ghostty.
-# The Snap ships this file but snapd doesn't install it. Same command as ghostty-autostart.desktop.
-# Linked to ~/.local/share/dbus-1/services/com.mitchellh.ghostty.service by setup/link.sh.
-[D-BUS Service]
-Name=com.mitchellh.ghostty
-Exec=/snap/bin/ghostty --gtk-single-instance=true --initial-window=false

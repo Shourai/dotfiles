@@ -38,6 +38,122 @@ class DotfilesTests(unittest.TestCase):
             text=True, capture_output=True,
         )
 
+    def ubuntu_script(self, desktop, overrides="", *flags):
+        self.env["DBUS_SESSION_BUS_ADDRESS"] = ""
+        mocks = r'''
+is_ubuntu() { return 0; }
+load_brew() { return 0; }
+has() { [ "$1" = brew ]; }
+brew() { return 0; }
+run() { printf '%s\n' "$*" >> "$HOME/actions"; }
+'''
+        mocks += "\ndpkg-query() { " + ("printf 'install ok installed\\n';" if desktop else "return 1;") + " }\n"
+        return self.setup_script("ubuntu.sh", mocks + overrides, *flags)
+
+    def test_ubuntu_desktop_adds_ppa_before_installing_ghostty(self):
+        result = self.ubuntu_script(True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        calls = (self.home / "actions").read_text().splitlines()
+        ppa = "sudo /usr/bin/add-apt-repository -y --no-update ppa:mkasberg/ghostty-ubuntu"
+        refresh = next(call for call in calls if "APT::Update::Error-Mode=any update" in call)
+        upgrade = next(call for call in calls if call.endswith(" upgrade"))
+        install = next(call for call in calls if " install build-essential " in call)
+        self.assertLess(calls.index(ppa), calls.index(refresh))
+        self.assertLess(calls.index(refresh), calls.index(upgrade))
+        self.assertLess(calls.index(upgrade), calls.index(install))
+        for package in ("ghostty", "software-properties-common", "7zip", "wl-clipboard"):
+            self.assertIn(package, install.split())
+        self.assertFalse(any(call.startswith("sudo snap") for call in calls))
+
+    def test_ubuntu_headless_skips_ppa_and_desktop_packages(self):
+        result = self.ubuntu_script(False)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        calls = (self.home / "actions").read_text().splitlines()
+        args = " ".join(calls).split()
+        for package in ("ghostty", "software-properties-common", "7zip", "wl-clipboard"):
+            self.assertNotIn(package, args)
+        self.assertNotIn("ppa:mkasberg/ghostty-ubuntu", args)
+        self.assertIn("build-essential", args)
+        self.assertIn("jq", args)
+
+    def test_failed_ghostty_ppa_addition_stops_package_installation(self):
+        result = self.ubuntu_script(True, r'''
+run() {
+  printf '%s\n' "$*" >> "$HOME/actions"
+  [ "${2:-}" != /usr/bin/add-apt-repository ]
+}
+''')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("could not add the Ghostty PPA", result.stderr)
+        calls = (self.home / "actions").read_text().splitlines()
+        self.assertEqual(len(calls), 3)
+        self.assertFalse(any(" install build-essential " in call for call in calls))
+
+    def test_failed_ghostty_ppa_refresh_stops_package_installation(self):
+        result = self.ubuntu_script(True, r'''
+run() {
+  printf '%s\n' "$*" >> "$HOME/actions"
+  case "$*" in *APT::Update::Error-Mode=any*) return 1 ;; esac
+}
+''')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("could not refresh the Ghostty PPA", result.stderr)
+        calls = (self.home / "actions").read_text().splitlines()
+        self.assertFalse(any(" install build-essential " in call for call in calls))
+
+    def test_ubuntu_warns_about_existing_snap_without_uninstalling(self):
+        result = self.ubuntu_script(True, r'''
+has() { [ "$1" = brew ] || [ "$1" = snap ]; }
+snap() { [ "$*" = 'list ghostty' ]; }
+''')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("Ghostty Snap is still installed", result.stderr)
+        calls = (self.home / "actions").read_text().splitlines()
+        self.assertFalse(any(call.startswith("sudo snap") for call in calls))
+
+    def test_ubuntu_shortcuts_launch_native_ghostty_directly(self):
+        code = re.search(
+            r"(?ms)^ghostty=.*?^\)", (REPO / "ubuntu/shortcuts.sh").read_text(),
+        ).group()
+        result = self.bash('tmux=/test/tmux\n' + code + '\nprintf "%s\\n" "${shortcuts[@]}"\n')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(result.stdout.splitlines(), [
+            "ghostty|<Super>Return|/usr/bin/ghostty --working-directory=home",
+            "ghostty-tmux|<Super><Shift>Return|/usr/bin/ghostty --working-directory=home -e /test/tmux",
+            "ghostty-tmux-ctrl-alt-t|<Control><Alt>t|/usr/bin/ghostty --working-directory=home -e /test/tmux",
+        ])
+
+    def test_link_cleanup_removes_only_broken_repo_launch_links(self):
+        tree = self.home / "Documents/github/dotfiles"
+        targets = (
+            (self.home / ".config/autostart/ghostty.desktop", tree / "ubuntu/ghostty-autostart.desktop"),
+            (self.home / ".local/share/dbus-1/services/com.mitchellh.ghostty.service", tree / "ubuntu/ghostty-dbus.service"),
+        )
+        for link, source in targets:
+            link.parent.mkdir(parents=True)
+            link.symlink_to(source)
+            (link.parent / "user-file").write_text("keep")
+            (link.parent / "user-link").symlink_to("missing-user-target")
+        result = self.setup_script("link.sh", r'''
+is_ubuntu() { return 0; }
+is_arch() { return 1; }
+is_macos() { return 1; }
+is_linux() { return 0; }
+load_brew() { return 0; }
+has() { return 1; }
+''', "--dry-run")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertTrue(all(link.is_symlink() for link, _ in targets))
+        result = subprocess.run(
+            ["bash", str(tree / "setup/link.sh")], env=self.env,
+            text=True, capture_output=True,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        for link, _ in targets:
+            self.assertFalse(link.is_symlink())
+            self.assertEqual((link.parent / "user-file").read_text(), "keep")
+            self.assertTrue((link.parent / "user-link").is_symlink())
+
     def test_failed_arch_upgrade_stops_dependent_operations(self):
         result = self.setup_script("arch.sh", r'''
 is_arch() { return 0; }

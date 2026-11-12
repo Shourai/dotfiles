@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Install Ubuntu packages: apt (packages/apt.txt), Snaps (snap.txt) and Homebrew (common.txt + brew.txt).
+# Install Ubuntu packages: apt (packages/apt*.txt) and Homebrew (common.txt + brew.txt).
 # Also runs apt upgrade and brew upgrade, installs Apple's SF fonts and sets the GNOME shortcuts
 # (ubuntu/shortcuts.sh) and fonts. On a headless machine (no gnome-shell) it skips the desktop
-# parts: apt-desktop.txt, the Snaps, the fonts and the shortcuts.
+# parts: apt-desktop.txt, the Ghostty PPA, the fonts and the shortcuts.
 # Safe to rerun; already installed packages are skipped.
 #
 #   setup/ubuntu.sh [--dry-run]
@@ -21,7 +21,7 @@ if dpkg-query -W -f='${Status}' gnome-shell 2>/dev/null | grep -q 'ok installed'
   desktop=1
 else
   desktop=0
-  info "No desktop (gnome-shell isn't installed): skipping apt-desktop.txt, Snaps and GNOME shortcuts"
+  info "No desktop (gnome-shell isn't installed): skipping apt-desktop.txt, Ghostty PPA and GNOME shortcuts"
 fi
 
 # Written for 26.04 LTS
@@ -35,6 +35,15 @@ apt=(sudo env DEBIAN_FRONTEND=noninteractive apt-get -y -q -o Dpkg::Options::=--
 
 info "Updating system"
 try "apt update" "${apt[@]}" update
+
+if [ "$desktop" = 1 ]; then
+  info "Setting up the Ghostty PPA"
+  # Bootstrap the repository tool before installing the list that includes Ghostty.
+  run "${apt[@]}" install software-properties-common || die "could not install the PPA repository tool"
+  run sudo /usr/bin/add-apt-repository -y --no-update ppa:mkasberg/ghostty-ubuntu || die "could not add the Ghostty PPA"
+  run "${apt[@]}" -o APT::Update::Error-Mode=any update || die "could not refresh the Ghostty PPA; refusing to fall back to older packages"
+fi
+
 try "apt upgrade" "${apt[@]}" upgrade
 
 info "Installing apt packages"
@@ -44,15 +53,9 @@ lists=("$PACKAGES/apt.txt")
 try "apt packages (packages/apt*.txt)" "${apt[@]}" install $(read_list "${lists[@]}")
 
 if [ "$desktop" = 1 ]; then
-  info "Installing Snaps"
-  # (not piped into the loop: the loop must run in this shell so try() can record failures)
-  while read -r snap; do
-    # shellcheck disable=SC2086  # "<name> <options>" splits into arguments
-    try "snap install $snap" sudo snap install $snap
-  done < <(read_list "$PACKAGES/snap.txt")
-  # An older ghostty from apt would come first on PATH (/usr/bin before /snap/bin)
-  if [ -x /usr/bin/ghostty ]; then
-    warn "ghostty from apt (1.3) is installed too and would be used instead of the Snap: sudo apt remove ghostty"
+  # Do not uninstall a user's Snap or its data automatically.
+  if has snap && snap list ghostty >/dev/null 2>&1; then
+    warn "Ghostty Snap is still installed: quit it, save any Snap-specific data, then remove it with sudo snap remove ghostty and log out and back in"
   fi
 
   info "Installing Apple's SF fonts"
