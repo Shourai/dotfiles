@@ -31,22 +31,22 @@ else
   try "build yay" sh -c 'git clone --quiet https://aur.archlinux.org/yay.git "$1/yay" && makepkg -sir --noconfirm --dir "$1/yay"' _ "$tmp"
 fi
 
-lists_pacman="$PACKAGES/common.txt $PACKAGES/pacman.txt"
-lists_aur="$PACKAGES/aur.txt"
+lists_pacman=("$PACKAGES/common.txt" "$PACKAGES/pacman.txt")
+lists_aur=("$PACKAGES/aur.txt")
 if [ "$EXTRAS" = 1 ]; then
-  lists_pacman="$lists_pacman $PACKAGES/extras-pacman.txt"
-  lists_aur="$lists_aur $PACKAGES/extras-aur.txt"
+  lists_pacman+=("$PACKAGES/extras-pacman.txt")
+  lists_aur+=("$PACKAGES/extras-aur.txt")
 fi
 
 # One call per list: pacman installs a list all-or-nothing, so a failure here means
 # nothing from that list was installed; the message names the list
-# shellcheck disable=SC2046,SC2086  # word splitting is intended: one package per word
+# shellcheck disable=SC2046  # only package names are intentionally split, not list filenames
 {
   info "Installing pacman packages"
-  try "pacman packages ($lists_pacman)" sudo pacman -S --needed --noconfirm $(read_list $lists_pacman)
+  try "pacman packages (${lists_pacman[*]})" sudo pacman -S --needed --noconfirm $(read_list "${lists_pacman[@]}")
 
   info "Installing AUR packages"
-  try "AUR packages ($lists_aur)" yay -S --needed --noconfirm $(read_list $lists_aur)
+  try "AUR packages (${lists_aur[*]})" yay -S --needed --noconfirm $(read_list "${lists_aur[@]}")
 }
 
 info "Installing Apple's SF fonts"

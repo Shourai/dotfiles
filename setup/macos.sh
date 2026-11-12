@@ -23,12 +23,12 @@ try "brew analytics off" brew analytics off
 try "brew update" brew update
 try "brew upgrade" brew upgrade
 
-lists_brew="$PACKAGES/common.txt $PACKAGES/brew.txt $PACKAGES/brew-macos.txt"
+lists_brew=("$PACKAGES/common.txt" "$PACKAGES/brew.txt" "$PACKAGES/brew-macos.txt")
 
-# shellcheck disable=SC2046,SC2086  # word splitting is intended: one package per word
+# shellcheck disable=SC2046  # only package names are intentionally split, not list filenames
 {
   info "Installing formulae"
-  try "brew formulae" brew install $(read_list $lists_brew)
+  try "brew formulae" brew install $(read_list "${lists_brew[@]}")
 
   # --adopt: take over apps that were installed by hand (e.g. from a .dmg) instead of failing
   info "Installing casks"

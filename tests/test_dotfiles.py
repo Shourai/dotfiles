@@ -57,6 +57,28 @@ mktemp() { printf 'unexpected mktemp\n' >&2; return 1; }
         self.assertNotIn("unexpected mktemp", result.stderr)
         self.assertIn("<temporary-directory>", result.stdout)
 
+    def test_arch_package_list_paths_with_spaces(self):
+        result = self.setup_script("arch.sh", r'''
+is_arch() { return 0; }
+has() { return 0; }
+run() { printf '%s\n' "$@" >> "$HOME/actions"; }
+''', "--extras")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        args = (self.home / "actions").read_text().splitlines()
+        for package in ("bat", "fzf", "hyprland", "chromium", "brave-bin"):
+            self.assertIn(package, args)
+
+    def test_macos_package_list_paths_with_spaces(self):
+        result = self.setup_script("macos.sh", r'''
+is_macos() { return 0; }
+has() { return 0; }
+run() { printf '%s\n' "$@" >> "$HOME/actions"; }
+''')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        args = (self.home / "actions").read_text().splitlines()
+        for package in ("bat", "fzf", "shellcheck", "coreutils", "ghostty"):
+            self.assertIn(package, args)
+
     def test_backup_collisions_preserve_files_and_broken_links(self):
         result = self.bash(r'''
 set -euo pipefail
