@@ -15,7 +15,6 @@ export HOMEBREW_NO_ASK=1
 
 # Flags, set by parse_flags (`install` passes its own arguments on to each script)
 DRY_RUN=0
-EXTRAS=0
 KEYREMAP=0
 
 # Steps that failed but didn't stop the script; see try() and report_failures()
@@ -45,9 +44,8 @@ did() {
 
 usage() {
   cat <<EOF
-Usage: $(basename "$0") [--extras] [--keyremap] [--dry-run]
+Usage: $(basename "$0") [--keyremap] [--dry-run]
 
-  --extras     Arch: also install the optional packages (packages/extras-*.txt)
   --keyremap   setup/macos.sh only: install just the non-US key remap
   --dry-run    print what would change without changing anything
 EOF
@@ -56,7 +54,6 @@ EOF
 parse_flags() {
   while [ $# -gt 0 ]; do
     case "$1" in
-      --extras)   EXTRAS=1 ;;
       --keyremap) KEYREMAP=1 ;;
       --dry-run)  DRY_RUN=1 ;;
       -h|--help)  usage; exit 0 ;;
@@ -66,7 +63,6 @@ parse_flags() {
   done
   if [ "$KEYREMAP" = 1 ]; then
     [ "${0##*/}" = macos.sh ] || die "--keyremap is only supported by install and setup/macos.sh"
-    [ "$EXTRAS" = 0 ] || die "--keyremap cannot be combined with --extras"
   else
     load_brew
   fi

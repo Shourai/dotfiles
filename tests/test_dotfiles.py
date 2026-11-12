@@ -65,11 +65,13 @@ mktemp() { printf 'unexpected mktemp\n' >&2; return 1; }
 is_arch() { return 0; }
 has() { return 0; }
 run() { printf '%s\n' "$@" >> "$HOME/actions"; }
-''', "--extras")
+''')
         self.assertEqual(result.returncode, 0, result.stderr)
         args = (self.home / "actions").read_text().splitlines()
-        for package in ("bat", "fzf", "hyprland", "chromium", "brave-bin"):
+        for package in ("bat", "fzf", "hyprland", "firefox-developer-edition", "man-db"):
             self.assertIn(package, args)
+        for package in ("chromium", "brave-bin", "1password", "buku"):
+            self.assertNotIn(package, args)
 
     def test_macos_package_list_paths_with_spaces(self):
         result = self.setup_script("macos.sh", r'''
@@ -119,13 +121,6 @@ has() { printf 'unexpected tool check\n' >&2; exit 99; }
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assertFalse(agent.parent.exists())
                 self.assertIn("[dry-run]", result.stdout)
-                result = subprocess.run(
-                    ["bash", str(entrypoint), "--keyremap", "--extras"], env=self.env,
-                    text=True, capture_output=True,
-                )
-                self.assertNotEqual(result.returncode, 0)
-                self.assertIn("cannot be combined", result.stderr)
-                self.assertFalse(agent.parent.exists())
                 agent.parent.mkdir(parents=True)
                 agent.write_bytes(expected)
         self.assertFalse((self.home / ".config").exists())

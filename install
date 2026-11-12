@@ -23,9 +23,8 @@ run()  { if [ "${DRY_RUN:-0}" = 1 ]; then printf '  \033[2m[dry-run]\033[0m %s\n
 
 usage() {
   cat <<'EOF'
-Usage: install [--extras] [--keyremap] [--dry-run]
+Usage: install [--keyremap] [--dry-run]
 
-  --extras     Arch: also install the optional packages (packages/extras-*.txt)
   --keyremap   macOS: only install the key remap for non-US keyboards
                (needs this repo cloned already)
   --dry-run    print what would change without changing anything
@@ -58,12 +57,10 @@ install_brew() {
 main() {
   # Flags are checked here and passed on to the setup scripts
   DRY_RUN=0
-  EXTRAS=0
   KEYREMAP=0
   for arg in "$@"; do
     case "$arg" in
       --dry-run) DRY_RUN=1 ;;
-      --extras) EXTRAS=1 ;;
       --keyremap) KEYREMAP=1 ;;
       -h|--help) usage; exit 0 ;;
       *) usage >&2; die "unknown option: $arg" ;;
@@ -83,7 +80,6 @@ main() {
   # Remap-only mode must bypass sudo, package upgrades and repository updates.
   if [ "$KEYREMAP" = 1 ]; then
     [ "$os" = macos ] || die "--keyremap is only supported on macOS"
-    [ "$EXTRAS" = 0 ] || die "--keyremap cannot be combined with --extras"
     [ -f "$DOTFILES/setup/macos.sh" ] || die "--keyremap needs an existing checkout at $DOTFILES"
     exec bash "$DOTFILES/setup/macos.sh" "$@"
   fi

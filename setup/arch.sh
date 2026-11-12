@@ -3,7 +3,7 @@
 # Also upgrades the whole system (pacman -Syu), installs Apple's SF fonts and clears the package cache.
 # Safe to rerun; already installed packages are skipped.
 #
-#   setup/arch.sh [--extras] [--dry-run]
+#   setup/arch.sh [--dry-run]
 
 set -euo pipefail
 source "$(dirname "$0")/lib.sh"
@@ -33,11 +33,6 @@ fi
 
 lists_pacman=("$PACKAGES/common.txt" "$PACKAGES/pacman.txt")
 lists_aur=("$PACKAGES/aur.txt")
-if [ "$EXTRAS" = 1 ]; then
-  lists_pacman+=("$PACKAGES/extras-pacman.txt")
-  lists_aur+=("$PACKAGES/extras-aur.txt")
-fi
-
 # One call per list: pacman installs a list all-or-nothing, so a failure here means
 # nothing from that list was installed; the message names the list
 # shellcheck disable=SC2046  # only package names are intentionally split, not list filenames

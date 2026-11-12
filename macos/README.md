@@ -68,8 +68,7 @@ setup/macos.sh --keyremap
 
 Both commands only copy the plist to `~/Library/LaunchAgents/`. They do not update packages or
 repositories, run sudo, relink configs or change the login shell. `--dry-run` previews the copy.
-The top-level command needs this repo already cloned, and `--keyremap` cannot be combined with
-`--extras`.
+The top-level command needs this repo already cloned.
 
 The remap applies from the next login. To apply it now:
 `launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.local.KeyRemapping.plist`.

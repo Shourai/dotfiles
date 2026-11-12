@@ -26,12 +26,10 @@ hide Ubuntu's in the shell), [macOS](macos/README.md).
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/main/install | bash
-curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/main/install | bash -s -- --extras   # with flags
 ```
 
 | Flag         | Effect                                                                         |
 |--------------|--------------------------------------------------------------------------------|
-| `--extras`   | Arch: also install `packages/extras-*.txt` (browsers, 1Password, ...) |
 | `--keyremap` | macOS: **only** install the non-US keyboard remap; needs this repo cloned already (breaks `\` on US ones) |
 | `--dry-run`  | print what would change, change nothing (needs the repos cloned already)       |
 
@@ -57,8 +55,8 @@ To install only the macOS keyboard remap from an existing checkout:
 ~/Documents/github/dotfiles/install --keyremap --dry-run
 ```
 
-This skips Homebrew, repository updates, sudo, config linking and zsh setup. It cannot be combined
-with `--extras`; the remap becomes active at the next login. See [macOS](macos/README.md).
+This skips Homebrew, repository updates, sudo, config linking and zsh setup. The remap becomes
+active at the next login. See [macOS](macos/README.md).
 
 ## Update
 
@@ -92,7 +90,6 @@ and add it to the list for next time.
 | `apt.txt`         | apt (Ubuntu)                                                    |
 | `apt-desktop.txt` | apt (Ubuntu), only with a desktop (gnome-shell installed)       |
 | `snap.txt`        | Snap (Ubuntu), only with a desktop                              |
-| `extras-pacman.txt`, `extras-aur.txt` | Arch, only with `--extras`                  |
 
 yazi's preview helpers are in each OS's own list (`pacman.txt`, `brew-macos.txt`, `apt-desktop.txt`).
 
@@ -115,7 +112,7 @@ directly in `~/.config` that point into the repo. Remove deeper links (e.g.
 | Monitors and workspaces (Arch)      | MONITORS block in `arch/wayland/hypr/hyprland.lua`; `hyprctl monitors` lists the outputs |
 | Workspaces per monitor (macOS)      | `[workspace-to-monitor-force-assignment]` in `macos/aerospace.toml` |
 | Work git identity                   | create `~/.config/git/gitconfig_work` by hand ([git](git/README.md)) |
-| Optional parts                      | `--extras` (Arch; the browser keys need it), `--keyremap` (macOS; a separate remap-only run) |
+| Keyboard remap (macOS)              | `--keyremap` (a separate remap-only run) |
 
 ## Troubleshooting
 

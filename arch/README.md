@@ -40,7 +40,7 @@ another machine, edit the MONITORS block in `hyprland.lua`; `hyprctl monitors` l
 | `SUPER+[` / `SUPER+]`, `SUPER+scroll` | previous / next open workspace on this monitor (scrolling on waybar's workspaces too) |
 | `SUPER+S` / `SUPER+SHIFT+S`        | show scratchpad / move window to scratchpad        |
 | `SUPER+left drag` / `SUPER+right drag` | move / resize a window                         |
-| `SUPER+Space`, then `f` / `b` / `c` | Firefox Dev / Brave incognito / Chromium incognito (`Esc` cancels; needs `--extras`) |
+| `SUPER+Space`, then `f` / `b` / `c` | Firefox Dev / Brave incognito / Chromium incognito (`Esc` cancels) |
 | `SUPER+M`                          | exit Hyprland                                      |
 | `ALT+CTRL+Q`                       | lock screen                                        |
 | `ALT+CTRL+S`                       | screenshot of a selected area to the clipboard     |

@@ -2,6 +2,7 @@
 
 # Terminal and Neovim tools
 ghostty
+man-db
 npm
 openssh
 unzip
@@ -27,6 +28,7 @@ pipewire
 pipewire-pulse
 
 # Apps
+firefox-developer-edition
 mpv
 seahorse
 zathura-pdf-mupdf
