@@ -22,8 +22,11 @@ if has yay; then
   ok "yay is installed"
 else
   info "Installing yay"
-  tmp="$(mktemp -d)"
-  trap 'rm -rf "$tmp"' EXIT
+  tmp="<temporary-directory>"
+  if [ "$DRY_RUN" = 0 ]; then
+    tmp="$(mktemp -d)"
+    trap 'rm -rf "$tmp"' EXIT
+  fi
   # shellcheck disable=SC2016  # $1 is expanded by the inner sh
   try "build yay" sh -c 'git clone --quiet https://aur.archlinux.org/yay.git "$1/yay" && makepkg -sir --noconfirm --dir "$1/yay"' _ "$tmp"
 fi

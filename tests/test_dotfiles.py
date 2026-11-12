@@ -47,6 +47,16 @@ run() { printf '%s\n' "$*" >> "$HOME/actions"; return 1; }
             ["sudo pacman -Syu --needed --noconfirm base-devel git"],
         )
 
+    def test_arch_dry_run_does_not_create_yay_directory(self):
+        result = self.setup_script("arch.sh", r'''
+is_arch() { return 0; }
+has() { [ "$1" != yay ]; }
+mktemp() { printf 'unexpected mktemp\n' >&2; return 1; }
+''', "--dry-run")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertNotIn("unexpected mktemp", result.stderr)
+        self.assertIn("<temporary-directory>", result.stdout)
+
     def test_backup_collisions_preserve_files_and_broken_links(self):
         result = self.bash(r'''
 set -euo pipefail
