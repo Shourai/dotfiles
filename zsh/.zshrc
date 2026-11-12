@@ -120,7 +120,7 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 # Completion scripts, then retry with ignored matches
 zstyle ':completion:*' completer _complete _ignored
 # File colours match LS_COLORS
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # --- PROMPT ---
 
@@ -147,7 +147,7 @@ if (( $+commands[fzf] )); then
     zstyle ':fzf-tab:*' switch-group '<' '>'
     zstyle ':fzf-tab:complete:cd:*' fzf-preview \
       'eza --tree --level=2 --color=always --icons=always -- "$realpath"'
-    zstyle ':fzf-tab:complete:cd:*' fzf-min-height 12
+    zstyle ':fzf-tab:complete:cd:*' fzf-min-height 30
     source "$ZSH_PLUGINS/fzf-tab/fzf-tab.plugin.zsh"
   fi
 
