@@ -5,7 +5,7 @@ Hyprland starts on every TTY1 login (`zsh/.zprofile`).
 
 ## Desktop
 
-`setup/link.sh` links `wayland/hypr` to `~/.config/hypr` and `wayland/waybar` to `~/.config/waybar`.
+`setup/link.sh` links `wayland/hypr`, `wayland/waybar` and `wayland/fuzzel` into `~/.config`.
 
 | File                  | What it does                                         | Apply changes                       |
 |-----------------------|------------------------------------------------------|-------------------------------------|
@@ -15,6 +15,7 @@ Hyprland starts on every TTY1 login (`zsh/.zprofile`).
 | `hypr/hyprpaper.conf` | wallpaper (`hypr/wallpaper.png`)                     | restart hyprpaper, or log out and in |
 | `waybar/config.jsonc` | bar: workspaces, window title, submap, volume, clock | `killall -SIGUSR2 waybar`           |
 | `waybar/style.css`    | bar fonts and colours (SF Pro Text, Symbols Nerd Font) | `killall -SIGUSR2 waybar`          |
+| `fuzzel/fuzzel.ini`   | launcher font and colours (SF Pro Text, One Dark)    | next time it opens                  |
 
 **Monitors**: set for this desktop (DP-2 left with workspaces 1-5, DP-3 right with 6-10). On
 another machine, edit the MONITORS block in `hyprland.lua`; `hyprctl monitors` lists the outputs.
@@ -30,7 +31,7 @@ another machine, edit the MONITORS block in `hyprland.lua`; `hyprctl monitors` l
 | Keys                               | What it does                                       |
 |------------------------------------|----------------------------------------------------|
 | `SUPER+Return` / `SUPER+SHIFT+Return` | ghostty / ghostty with tmux                     |
-| `SUPER+D`                          | launcher (walker)                                  |
+| `SUPER+D`                          | launcher (fuzzel)                                  |
 | `SUPER+E`                          | yazi in ghostty                                    |
 | `SUPER+W`                          | close window                                       |
 | `SUPER+V` / `SUPER+P` / `SUPER+T`  | float / pseudo-tile / toggle split direction       |

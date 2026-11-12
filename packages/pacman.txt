@@ -15,7 +15,7 @@ hyprpaper
 hyprpolkitagent
 polkit
 waybar
-libqalculate         # calculator for walker (elephant-calc)
+fuzzel               # launcher (SUPER+D)
 
 # Screenshots & clipboard
 grim
