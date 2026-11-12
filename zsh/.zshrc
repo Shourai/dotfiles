@@ -186,7 +186,19 @@ if (( $+commands[fzf] )); then
     "${EDITOR:-nvim}" -- "$file"
   }
   # gb: fuzzy-pick a branch and check it out (remotes/origin/x becomes x)
-  gb() { local branch; branch=$(git branch -a --color=always | grep -v "/HEAD" | fzf --ansi --prompt "Branches> ") && branch=${branch##* } && branch=${branch#remotes/origin/} && [[ -n "$branch" ]] && git checkout "$branch"; }
+  gb() {
+    local branch
+    # List real refs; omit symbolic aliases such as origin/HEAD.
+    branch=$(
+      git for-each-ref \
+        --format='%(if)%(symref)%(then)%(else)%(refname)%(end)' \
+        refs/heads refs/remotes |
+        sed '/^$/d; s#^refs/heads/##; s#^refs/remotes/#remotes/#' |
+        fzf --prompt "Branches> "
+    ) || return
+    branch=${branch#remotes/origin/}
+    [[ -n "$branch" ]] && git checkout "$branch"
+  }
   # ghist: fuzzy-pick a commit and show it
   ghist() { local commit; commit=$(git log --oneline --color=always | fzf --ansi --prompt "History> ") && commit=${commit%% *} && [[ -n "$commit" ]] && git show "$commit"; }
 fi

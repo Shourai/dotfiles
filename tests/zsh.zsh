@@ -59,12 +59,16 @@ cd "$tmp/git"
 git init -q -b main
 
 # The picker mock preserves its delimiter and selects an exact requested input record.
+export TEST_FZF_INPUT="$tmp/fzf-input"
 fzf() {
   [[ "${TEST_FZF_CANCEL:-0}" == 1 ]] && return 130
   python3 -c '
 import os, sys
 delimiter = b"\0" if "--read0" in sys.argv else b"\n"
-records = sys.stdin.buffer.read().split(delimiter)
+data = sys.stdin.buffer.read()
+with open(os.environ["TEST_FZF_INPUT"], "wb") as capture:
+    capture.write(data)
+records = data.split(delimiter)
 wanted = os.fsencode(os.environ["TEST_FZF_SELECT"])
 if wanted not in records:
     sys.exit(1)
@@ -90,3 +94,28 @@ fi
 [[ ! -e "$tmp/editor-args" ]]
 unset TEST_FZF_CANCEL
 print 'Git file-picker checks passed.'
+
+git -c user.name=Test -c user.email=test@example.invalid commit -qm fixture
+git branch feature/HEAD-parser
+git remote add origin https://example.invalid/repo.git
+git update-ref refs/remotes/origin/main HEAD
+git update-ref refs/remotes/origin/topic HEAD
+git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main
+git checkout -q --detach
+eval "$(awk '/^  gb\(\)/{copy=1} /^  # ghist:/{copy=0} copy' "$repo/zsh/.zshrc")"
+export TEST_FZF_SELECT=feature/HEAD-parser
+gb
+[[ $(git symbolic-ref --short HEAD) == feature/HEAD-parser ]]
+! grep -Fxq 'remotes/origin/HEAD' "$TEST_FZF_INPUT"
+! grep -Fq 'HEAD detached' "$TEST_FZF_INPUT"
+export TEST_FZF_SELECT=remotes/origin/topic
+gb
+[[ $(git symbolic-ref --short HEAD) == topic ]]
+[[ $(git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}') == origin/topic ]]
+export TEST_FZF_CANCEL=1
+if gb; then
+  print -u2 'gb unexpectedly succeeded after cancellation'
+  exit 1
+fi
+[[ $(git symbolic-ref --short HEAD) == topic ]]
+print 'Git branch-picker checks passed.'
