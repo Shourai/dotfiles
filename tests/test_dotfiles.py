@@ -101,6 +101,40 @@ run() { printf '%s\n' "$@" >> "$HOME/actions"; }
                 self.assertIn("conflicting ZDOTDIR", result.stderr)
                 self.assertEqual(target.read_text(), conflict)
 
+    def test_screenshot_preserves_clipboard_on_failure(self):
+        command = re.search(
+            r'hl.bind\("ALT \+ CTRL \+ S", hl.dsp.exec_cmd\(\[\[(.*?)\]\]\)\)',
+            (REPO / "arch/wayland/hypr/hyprland.lua").read_text(), re.S,
+        ).group(1)
+        bin_dir = self.home / "bin"
+        bin_dir.mkdir()
+        writer = bin_dir / "wl-copy"
+        writer.write_text('#!/bin/sh\ncat > "$HOME/clipboard"\n')
+        writer.chmod(0o755)
+        self.env["PATH"] = str(bin_dir) + os.pathsep + self.env["PATH"]
+        mocks = r'''
+slurp() { printf '0,0 10x10\n'; }
+mktemp() { command mktemp "$HOME/image.XXXXXX"; }
+grim() { printf 'PNG fixture' > "$3"; }
+'''
+        cases = (
+            ("cancel", 'slurp() { return 1; }', 0, "previous"),
+            ("capture failure", 'grim() { printf partial > "$3"; return 1; }', 1, "previous"),
+            ("allocation failure", 'mktemp() { return 1; }', 1, "previous"),
+            ("success", "", 0, "PNG fixture"),
+        )
+        for name, override, status, expected in cases:
+            with self.subTest(case=name):
+                clipboard = self.home / "clipboard"
+                clipboard.write_text("previous")
+                result = subprocess.run(
+                    ["sh", "-c", mocks + override + "\n" + command],
+                    env=self.env, text=True, capture_output=True,
+                )
+                self.assertEqual(result.returncode, status, result.stderr)
+                self.assertEqual(clipboard.read_text(), expected)
+                self.assertEqual(list(self.home.glob("image.*")), [])
+
     def test_backup_collisions_preserve_files_and_broken_links(self):
         result = self.bash(r'''
 set -euo pipefail

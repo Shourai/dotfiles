@@ -250,7 +250,12 @@ hl.bind("ALT + SHIFT + comma", hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_S
 
 -- Lock screen, and screenshot of a selected area to the clipboard
 hl.bind("ALT + CTRL + Q", hl.dsp.exec_cmd("hyprlock"))
-hl.bind("ALT + CTRL + S", hl.dsp.exec_cmd("grim -g \"$(slurp -d)\" - | wl-copy"))
+hl.bind("ALT + CTRL + S", hl.dsp.exec_cmd([[
+  region=$(slurp -d) || exit 0
+  image=$(mktemp) || exit 1
+  trap 'rm -f "$image"' EXIT
+  grim -g "$region" "$image" && wl-copy < "$image"
+]]))
 
 -- mainMod + Space, then a letter: open a browser
 hl.bind(mainMod .. " + space", hl.dsp.submap("appsubmap"))
