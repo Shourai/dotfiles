@@ -76,6 +76,7 @@ is_macos()  { [ "$(uname)" = "Darwin" ]; }
 is_linux()  { [ "$(uname)" = "Linux" ]; }
 is_arch()   { [ -f /etc/arch-release ]; }
 is_ubuntu() { grep -qx 'ID=ubuntu' /etc/os-release 2>/dev/null; }
+ubuntu_version() { (. /etc/os-release && echo "$VERSION_ID"); }  # e.g. 26.04
 has()       { command -v "$1" >/dev/null 2>&1; }
 
 # Put Homebrew on PATH if it's installed (Apple Silicon, Intel Mac, Linux).

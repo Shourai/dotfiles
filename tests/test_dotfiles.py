@@ -42,6 +42,7 @@ class DotfilesTests(unittest.TestCase):
         self.env["DBUS_SESSION_BUS_ADDRESS"] = ""
         mocks = r'''
 is_ubuntu() { return 0; }
+ubuntu_version() { echo 26.04; }
 load_brew() { return 0; }
 has() { [ "$1" = brew ]; }
 brew() { return 0; }

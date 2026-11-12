@@ -25,7 +25,7 @@ else
 fi
 
 # Written for 26.04 LTS
-version="$(. /etc/os-release && echo "$VERSION_ID")"
+version="$(ubuntu_version)"
 if [ "$(printf '%s\n26.04\n' "$version" | sort -V | head -1)" != "26.04" ]; then
   warn "Ubuntu $version is older than 26.04; some packages may be missing or too old"
 fi
