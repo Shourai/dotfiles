@@ -60,3 +60,4 @@ It isn't changed inside an SSH session, so a forwarded agent keeps working. Chec
 | `wgup`, `wgdown`          | `wg-quick up/down` (needs wireguard-tools, not installed by setup) |
 | `Ctrl-T` / `Alt-C` / `Ctrl-R` | fzf: file, directory, history                     |
 | `Home`, `End`, `Delete`  | start and end of line, delete character               |
+| `Ctrl-X`, then `Ctrl-E` | edit the current command in `$EDITOR`; save and exit to return to the shell |
