@@ -35,4 +35,4 @@ Prefix is the default `Ctrl-b`. Reload the config with `<prefix> r`.
   inserts a newline in Claude Code; a plain shell gets ordinary keys.
 - yazi's image previews work inside tmux (`allow-passthrough on`).
 - Closing a session's last window switches to another session (`detach-on-destroy off`).
-- A window with new output shows in yellow in the status bar. Colours: the `od_*` variables.
+- A window with new output shows in yellow in the status bar.

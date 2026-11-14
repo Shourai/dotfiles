@@ -24,7 +24,8 @@ Keep `.zshenv` small and silent: it runs for every zsh script too.
 
 `.zshenv` picks the first that's there:
 
-1. Bitwarden's socket (the macOS app, or the Snap on Ubuntu), while Bitwarden runs;
+1. Bitwarden's socket (the macOS app, or the Snap on Ubuntu), while Bitwarden runs with its agent
+   on (Settings, "Enable SSH agent");
 2. 1Password's, once 1Password is installed (even before it has started);
 3. whatever the session set: GNOME's agent on Ubuntu, launchd's on macOS.
 

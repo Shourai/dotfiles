@@ -30,7 +30,7 @@ curl -fsSL https://raw.githubusercontent.com/Shourai/dotfiles/main/install | bas
 
 | Flag         | Effect                                                                         |
 |--------------|--------------------------------------------------------------------------------|
-| `--keyremap` | macOS: **only** install the non-US keyboard remap; needs this repo cloned already (breaks `\` on US ones) |
+| `--keyremap` | macOS: **only** install the key remap for non-US keyboards (it breaks `\` on a US one); needs this repo cloned already. See [macOS](macos/README.md#key-remap---keyremap) |
 | `--dry-run`  | print what would change, change nothing (needs the repos cloned already)       |
 
 `install` installs git, clones both repos (or `git pull --ff-only`s them; on local changes it warns
@@ -46,17 +46,6 @@ Safe to rerun. Log out and back in afterwards.
 | `setup/macos.sh`  | Homebrew formulae and casks, `brew upgrade`; with `--keyremap`, only the key remap instead |
 | `setup/link.sh`   | links the configs into `~/.config` (fontconfig on Linux only), picks the per-OS ghostty file, `ya pkg install` |
 | `setup/zsh.sh`    | `ZDOTDIR` in the system zshenv, zsh as login shell, clones or updates the zsh plugins |
-
-To install only the macOS keyboard remap from an existing checkout:
-
-```sh
-~/Documents/github/dotfiles/install --keyremap
-# Preview only:
-~/Documents/github/dotfiles/install --keyremap --dry-run
-```
-
-This skips Homebrew, repository updates, sudo, config linking and zsh setup. The remap becomes
-active at the next login. See [macOS](macos/README.md).
 
 ## Update
 
@@ -90,8 +79,6 @@ and add it to the list for next time.
 | `apt.txt`         | apt (Ubuntu)                                                    |
 | `apt-desktop.txt` | apt (Ubuntu), only with a desktop (gnome-shell installed)       |
 
-yazi's preview helpers are in each OS's own list (`pacman.txt`, `brew-macos.txt`, `apt-desktop.txt`).
-
 **Add a config**: put it in the repo, add a `link` line to `setup/link.sh`, run `setup/link.sh`.
 Anything already at the target is moved to `<name>.bak-<date>`, never deleted. A numeric suffix
 is added if that backup name already exists.
@@ -108,7 +95,7 @@ directly in `~/.config` that point into the repo. Remove deeper links (e.g.
 
 | What                                | Where                                                          |
 |-------------------------------------|----------------------------------------------------------------|
-| Monitors and workspaces (Arch)      | MONITORS block in `arch/hypr/hyprland.lua`; `hyprctl monitors` lists the outputs |
+| Monitors and workspaces (Arch)      | [Arch](arch/README.md#desktop)                                 |
 | Workspaces per monitor (macOS)      | `[workspace-to-monitor-force-assignment]` in `macos/aerospace.toml` |
 | Work git identity                   | create `~/.config/git/gitconfig_work` by hand ([git](git/README.md)) |
 | Keyboard remap (macOS)              | `--keyremap` (a separate remap-only run) |

@@ -13,16 +13,8 @@ Headless (e.g. Ubuntu Server used over SSH) works too: without `gnome-shell` ins
 | desktop only: `wl-clipboard`, yazi's preview helpers, `7zip` | apt                                     | `packages/apt-desktop.txt`    |
 | desktop only: Apple's SF fonts (into `~/.local/share/fonts/apple`; delete it to update) | Apple's downloads (`install_apple_fonts` in `setup/lib.sh`) | - |
 | CLI tools (same versions as on macOS), incl. the login shell `zsh` | Homebrew (`/home/linuxbrew/.linuxbrew`) | `common.txt`, `brew.txt` |
-| desktop only: ghostty                                         | apt ([Ghostty PPA](https://github.com/mkasberg/ghostty-ubuntu)) | `packages/apt-desktop.txt` |
+| desktop only: ghostty                                         | apt ([Ghostty PPA](https://github.com/mkasberg/ghostty-ubuntu), unofficial; updates with apt) | `packages/apt-desktop.txt` |
 | Bitwarden, for its SSH agent                                  | Snap, install it by hand (App Center); Homebrew's `bw` has no agent | -   |
-
-## Ghostty
-
-`setup/ubuntu.sh` adds `ppa:mkasberg/ghostty-ubuntu` before installing the desktop packages.
-This is an unofficial community PPA; Ghostty updates through normal apt upgrades.
-
-The shortcuts launch `/usr/bin/ghostty` directly. The tmux shortcuts use `-e`, which launches a
-separate Ghostty process.
 
 ## Watch out
 
@@ -38,8 +30,6 @@ separate Ghostty process.
   `setup/ubuntu.sh` switches back to `/usr/bin/zsh` if a `brew upgrade` broke it. A `brew upgrade`
   you run by hand isn't checked; if you can't log in afterwards, see Troubleshooting in the
   [main README](../README.md#troubleshooting).
-- **SSH agent**: in Bitwarden, turn on Settings, "Enable SSH agent", then check in a new terminal
-  with `ssh-add -L`. Until Bitwarden runs, GNOME's agent is used.
 
 ## Keyboard shortcuts
 

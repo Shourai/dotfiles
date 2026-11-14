@@ -32,5 +32,5 @@ not the whole file (a full copy would hide the defaults of newer yazi versions).
 
 `yazi/flavors/` and `yazi/plugins/` are gitignored; `package.toml` is what's committed.
 
-Preview helpers (also behind the "Show EXIF" / "Show media info" openers, `O`) are in the package
-lists, under "yazi".
+Preview helpers (also used by the "Show EXIF" / "Show media info" openers, `O`) are in each OS's
+own list: `pacman.txt`, `brew-macos.txt`, `apt-desktop.txt`.

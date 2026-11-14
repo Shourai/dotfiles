@@ -11,9 +11,8 @@ config, so there is no `~/.gitconfig`.
 
 ## Identity per folder
 
-There is no global name or email: repos in `~/Documents/github/` get `gitconfig_personal`, repos in
-`~/Documents/gitlab/` get `gitconfig_work`. Anywhere else git refuses to commit until you set an
-identity in that repo (`user.useConfigOnly`), so nothing is committed under a guessed name.
+Outside those two folders git refuses to commit until the repo has its own identity
+(`user.useConfigOnly`).
 
 Work identity, `~/.config/git/gitconfig_work`:
 

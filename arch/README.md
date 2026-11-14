@@ -1,7 +1,6 @@
 # Arch Linux
 
-Install: see Prerequisites in the [main README](../README.md#prerequisites). After `install`,
-Hyprland starts on every TTY1 login (`zsh/.zprofile`).
+Install: see Prerequisites in the [main README](../README.md#prerequisites).
 
 ## Desktop
 
