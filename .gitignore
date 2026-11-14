@@ -19,8 +19,3 @@ git/gitconfig_work
 # yazi: installed by `ya pkg install` from yazi/package.toml
 yazi/flavors/
 yazi/plugins/
-
-# zsh: history and completion cache live in ~/.local/state and ~/.cache now.
-# Kept as a safety net: shell history can contain secrets.
-zsh/history
-zsh/.zcompdump

@@ -108,7 +108,6 @@ directly in `~/.config` that point into the repo. Remove deeper links (e.g.
 | A link replaced something you needed      | it's next to it as `<name>.bak-<date>`: remove the link, rename the backup back |
 | Plain prompt (no pure), no SSH host completion | the zsh plugins aren't cloned yet: run `setup/zsh.sh`              |
 | zsh ignores its config (no prompt, aliases) | `ZDOTDIR` must be set in `/etc/zsh/zshenv` (Arch, apt's zsh) or `/etc/zshenv` (macOS, Homebrew's zsh): run `setup/zsh.sh` |
-| `setup/zsh.sh` warns about two zsh histories | a shell started before the move still writes to `dotfiles/zsh/history`: run `exec zsh` in open shells, merge what you want to keep into `~/.local/state/zsh/history`, delete `dotfiles/zsh/history` (gitignored) |
 | Can't log in on Ubuntu after a `brew upgrade` | Homebrew's zsh broke: boot into recovery mode, root shell, `chsh -s /usr/bin/zsh <user>` (if the disk is read-only, first `mount -o remount,rw /`) |
 | ghostty settings missing (Alt key, window) | `ghostty/os.ghostty` is missing: run `setup/link.sh`                    |
 | Hyprland shows a red config error         | `hyprctl configerrors` ([Arch](arch/README.md))                         |

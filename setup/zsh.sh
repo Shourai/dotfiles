@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Make zsh the login shell, point it at ~/.config/zsh and install its plugins.
-# Also moves files left in the repo by the old layout (history, plugin clones).
 # Safe to rerun; plugins are updated when they are already there.
 #
 #   setup/zsh.sh [--dry-run]
@@ -10,7 +9,6 @@ source "$(dirname "$0")/lib.sh"
 parse_flags "$@"
 
 PLUGINS="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins"
-STATE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh"
 BREW_ZSH=/home/linuxbrew/.linuxbrew/bin/zsh
 user="$(id -un)"
 
@@ -67,25 +65,6 @@ else
   run sudo chsh -s "$zsh_path" "$user"
   did "set login shell to $zsh_path"
 fi
-
-# One-time move from the old layout, where zsh wrote its history and cache into the repo
-# folder and plugins were cloned there too
-old="$DOTFILES/zsh"
-if [ -f "$old/history" ]; then
-  if [ -e "$STATE/history" ]; then
-    warn "two zsh histories: $old/history and $STATE/history; merge them by hand"
-  else
-    run mkdir -p "$STATE"
-    run mv "$old/history" "$STATE/history"
-    did "move zsh history to $STATE/history"
-  fi
-fi
-for leftover in "$old/.zcompdump" "$old/pure" "$old/zsh-ssh"; do
-  if [ -e "$leftover" ]; then
-    run rm -rf "$leftover"
-    did "remove old $leftover"
-  fi
-done
 
 # Plugins (sourced from zshrc)
 run mkdir -p "$PLUGINS"
