@@ -87,11 +87,8 @@ bindkey '^[OF'  end-of-line
 bindkey '^[[4~' end-of-line
 bindkey '^[[3~' delete-char
 
-# Load the edit-command-line function
 autoload -U edit-command-line
 zle -N edit-command-line
-
-# Bind the function to a keyboard shortcut (Ctrl+X, Ctrl+E)
 bindkey '^X^E' edit-command-line
 
 # --- COMPLETION ---
@@ -148,7 +145,6 @@ if (( $+commands[fzf] )); then
   # Key bindings (Ctrl-T, Alt-C, Ctrl-R) and ** completion
   source <(fzf --zsh)
 
-  # Check for fzf-tab and load it if available
   if [[ -r "$ZSH_PLUGINS/fzf-tab/fzf-tab.plugin.zsh" ]]; then
     zstyle ':completion:*' menu no
     zstyle ':completion:*:descriptions' format '[%d]'

@@ -10,7 +10,6 @@ set -euo pipefail
 tmux=/home/linuxbrew/.linuxbrew/bin/tmux
 [ -x "$tmux" ] || tmux="$(command -v tmux || echo tmux)"
 
-# Native Ghostty from the PPA; launch directly without wrappers or login autostart.
 ghostty=/usr/bin/ghostty
 
 # name | keys | command
