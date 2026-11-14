@@ -49,7 +49,7 @@ ghostty +show-face --string="A"
 | `alt-1..9` / `alt-shift-1..9`      | go to / move window to workspace (1-5 main monitor, 6-9 secondary) |
 | `alt-[` / `alt-]` / `alt-tab`      | previous / next / last workspace                   |
 | `alt-shift-tab`                    | move the window to the other monitor               |
-| `alt-slash` / `alt-comma`          | tiles / accordion layout                           |
+| `alt-slash` / `alt-comma`          | tiles / accordion layout (again: switch orientation) |
 | `alt-space`, then `f` / `c` / `o`  | Firefox Dev / Chrome Dev / Obsidian (`esc` cancels) |
 | `alt-shift-;`, then ...            | service mode: `esc` reload config, `r` reset layout, `f` float/tile, `backspace` close other windows, `alt-shift-h/j/k/l` join with neighbour, `up`/`down` volume, `shift-down` volume to 0 |
 

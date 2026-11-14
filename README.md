@@ -157,9 +157,10 @@ One Dark everywhere (the palette of nvim's `onedark.nvim`, `dark` style).
 | ghostty           | `theme = One Half Dark` in `ghostty/config.ghostty`                         |
 | yazi, lazygit, fzf | nowhere: they use the terminal's colours                                  |
 | pure, eza, autosuggestions | fixed colours in `zsh/.zshrc` and `zsh/.zshenv` (`147`, `xx=37`, `#808080`) |
-| bat, delta        | `BAT_THEME` in `zsh/.zshrc`: OneHalfDark with brighter comments, `bat/themes/` |
+| bat, delta        | `BAT_THEME` in `zsh/.zshrc` (OneHalfDark with brighter comments, `bat/themes/`); delta's line colours under `[delta]` in `git/config` |
 | tmux              | `od_*` variables in `tmux/tmux.conf`                                        |
 | waybar            | `@define-color` lines in `arch/waybar/style.css`                    |
+| fuzzel            | `[colors]` in `arch/fuzzel/fuzzel.ini`                              |
 | Hyprland borders  | `col` in `arch/hypr/hyprland.lua`                                   |
 | hyprlock          | its own white/grey colours in `arch/hypr/hyprlock.conf`             |
 | nvim              | `onedark.nvim` in the nvim repo                                             |
@@ -171,6 +172,7 @@ dotfiles
  ├─ install            set up or update (see above)
  ├─ setup/             the scripts run by install; shared helpers in lib.sh
  ├─ packages/          package lists
+ ├─ tests/             regression checks (see Validation)
  ├─ zsh/               -> ~/.config/zsh
  ├─ tmux/tmux.conf     -> ~/.config/tmux/tmux.conf
  ├─ git/               -> ~/.config/git
@@ -178,7 +180,8 @@ dotfiles
  ├─ yazi/              -> ~/.config/yazi
  ├─ bat/               -> ~/.config/bat (custom theme; setup/link.sh runs bat cache --build)
  ├─ ghostty/           -> ~/.config/ghostty (os.ghostty links to the arch/ubuntu/macos file)
- ├─ arch/              Hyprland, hypridle, hyprlock, hyprpaper, waybar
+ ├─ fontconfig/        -> ~/.config/fontconfig (Linux: Apple's SF fonts as the defaults)
+ ├─ arch/              Hyprland, hypridle, hyprlock, hyprpaper, waybar, fuzzel
  ├─ ubuntu/            GNOME keyboard shortcuts
  └─ macos/             AeroSpace, key remap
 ```

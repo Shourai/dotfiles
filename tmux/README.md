@@ -18,7 +18,7 @@ Prefix is the default `Ctrl-b`. Reload the config with `<prefix> r`.
 | `<prefix> u`                 | swap the current pane with a pane picked by number              |
 | `<prefix> S`                 | show / hide the status bar                                      |
 | copy mode `v` / `V` / `Ctrl-v` | start selection / select line / block selection              |
-| copy mode `y` / `Y`          | copy selection / copy line (to the system clipboard)            |
+| copy mode `y` / `Y` / mouse drag | copy selection / line / dragged text to the system clipboard; stays in copy mode |
 
 ## Plugins
 

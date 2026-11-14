@@ -17,7 +17,7 @@ Keep `.zshenv` small and silent: it runs for every zsh script too.
 |----------------------------|---------------------------------------------------------|
 | History                    | `~/.local/state/zsh/history`                            |
 | Completion cache           | `~/.cache/zsh/zcompdump` (full check once a day)        |
-| pure prompt, zsh-ssh       | `~/.local/share/zsh/plugins/`, cloned and updated by `setup/zsh.sh` |
+| pure prompt, zsh-ssh, fzf-tab | `~/.local/share/zsh/plugins/`, cloned and updated by `setup/zsh.sh` |
 | autosuggestions, syntax highlighting | the package manager (`packages/common.txt`)   |
 
 ## SSH agent
@@ -56,8 +56,9 @@ It isn't changed inside an SSH session, so a forwarded agent keeps working. Chec
 | `gf`                      | fuzzy-pick a git-tracked file and open it             |
 | `gb`                      | fuzzy-pick a branch and check it out                  |
 | `ghist`                   | fuzzy-pick a commit and show it                       |
-| `pkg-clean`               | Arch: fuzzy-pick installed packages to remove         |
+| `pkg-clean`               | Arch: fuzzy-pick explicitly installed packages and remove them with their unused dependencies |
 | `wgup`, `wgdown`          | `wg-quick up/down` (needs wireguard-tools, not installed by setup) |
 | `Ctrl-T` / `Alt-C` / `Ctrl-R` | fzf: file, directory, history                     |
+| `Tab`                     | completion menu in fzf (fzf-tab); `<` / `>` switch group |
 | `Home`, `End`, `Delete`  | start and end of line, delete character               |
 | `Ctrl-X`, then `Ctrl-E` | edit the current command in `$EDITOR`; save and exit to return to the shell |
