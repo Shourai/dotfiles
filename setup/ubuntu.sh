@@ -21,7 +21,7 @@ if dpkg-query -W -f='${Status}' gnome-shell 2>/dev/null | grep -q 'ok installed'
   desktop=1
 else
   desktop=0
-  info "No desktop (gnome-shell isn't installed): skipping apt-desktop.txt, Ghostty PPA and GNOME shortcuts"
+  info "No desktop (gnome-shell isn't installed): skipping apt-desktop.txt, the Ghostty PPA, fonts and GNOME shortcuts"
 fi
 
 # Written for 26.04 LTS

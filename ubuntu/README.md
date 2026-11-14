@@ -3,7 +3,7 @@
 Ubuntu 26.04 LTS with GNOME; the desktop configs in `arch/` aren't used.
 
 Headless (e.g. Ubuntu Server used over SSH) works too: without `gnome-shell` installed,
-`setup/ubuntu.sh` skips `apt-desktop.txt`, Ghostty PPA setup and the keyboard shortcuts.
+`setup/ubuntu.sh` skips `apt-desktop.txt`, the Ghostty PPA, the fonts and the keyboard shortcuts.
 
 ## Where things come from
 

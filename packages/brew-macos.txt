@@ -5,7 +5,7 @@ gnu-sed
 iproute2mac
 openconnect
 
-# yazi previews (Ubuntu takes these from apt.txt, Arch from pacman.txt)
+# yazi previews (Ubuntu: apt-desktop.txt, Arch: pacman.txt)
 exiftool
 ffmpeg
 imagemagick
