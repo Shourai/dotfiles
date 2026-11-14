@@ -18,11 +18,9 @@ These casks are not installed by setup. Pick the ones you need with `brew instal
 
 ## Fonts
 
-Ghostty uses Apple's unpatched **SF Mono** and supplies Nerd Font symbols itself.
-Review Apple's license and install SF Mono from [Apple's font page](https://developer.apple.com/fonts/)
-through its installer. The copy bundled inside Terminal.app may not be discoverable by Ghostty.
-`setup/macos.sh` does not install or update SF Mono; use Apple's current download to update it manually.
-Existing patched fonts are not uninstalled by setup.
+Ghostty uses Apple's unpatched **SF Mono** and draws Nerd Font symbols itself. Setup doesn't
+install it: install and update it from [Apple's font page](https://developer.apple.com/fonts/);
+the copy inside Terminal.app may not be found.
 
 Check font discovery and the face Ghostty uses after reloading and opening a fresh terminal:
 
@@ -66,9 +64,7 @@ For a Mac keyboard that isn't in US layout. **On a US keyboard it breaks `\`.**
 setup/macos.sh --keyremap
 ```
 
-Both commands only copy the plist to `~/Library/LaunchAgents/`. They do not update packages or
-repositories, run sudo, relink configs or change the login shell. `--dry-run` previews the copy.
-The top-level command needs this repo already cloned.
+Both only copy the plist to `~/Library/LaunchAgents/` (`--dry-run` previews it); nothing else runs.
 
 The remap applies from the next login. To apply it now:
 `launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.local.KeyRemapping.plist`.

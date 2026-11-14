@@ -45,7 +45,9 @@ Set by `shortcuts.sh`, which `setup/ubuntu.sh` runs. GNOME's own shortcuts stay,
 - In GNOME Settings they're under Keyboard, View and Customize Shortcuts, Custom Shortcuts, named
   `ghostty`, `ghostty-tmux` and `ghostty-tmux-ctrl-alt-t`.
 - To change one, edit the list at the top of `shortcuts.sh` and run it again.
-- To give Ctrl+Alt+T back to Ubuntu's terminal: in `shortcuts.sh`, remove the
-  `ghostty-tmux-ctrl-alt-t` entry and the `terminal "[]"` line (or the next `install` sets them
-  again), run it (it drops its shortcuts that are no longer listed), then run
-  `/usr/bin/gsettings reset org.gnome.settings-daemon.plugins.media-keys terminal`.
+
+To give Ctrl+Alt+T back to Ubuntu's terminal:
+
+1. In `shortcuts.sh`, remove the `ghostty-tmux-ctrl-alt-t` entry and the `terminal "[]"` line.
+2. Run `shortcuts.sh`; it drops shortcuts it no longer lists.
+3. `/usr/bin/gsettings reset org.gnome.settings-daemon.plugins.media-keys terminal`

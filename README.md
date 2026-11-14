@@ -66,7 +66,8 @@ tools manage themselves:
 
 **Add a package**: add a line to the right list in `packages/` and run `install` (or
 `setup/<os>.sh`). Both also upgrade everything else; to get one package now, install it by hand
-and add it to the list for next time.
+and add it to the list for next time. Install by hand when needed (not in any list): gping,
+jless, mtr, netop, pandoc, sshs, termshark.
 
 | List              | Installed with                                                  |
 |-------------------|-----------------------------------------------------------------|
@@ -80,8 +81,7 @@ and add it to the list for next time.
 | `apt-desktop.txt` | apt (Ubuntu), only with a desktop (gnome-shell installed)       |
 
 **Add a config**: put it in the repo, add a `link` line to `setup/link.sh`, run `setup/link.sh`.
-Anything already at the target is moved to `<name>.bak-<date>`, never deleted. A numeric suffix
-is added if that backup name already exists.
+Anything already at the target is moved to `<name>.bak-<date>`, never deleted.
 
 **Remove a config**: delete it and its `link` line, run `setup/link.sh`: it removes broken links
 directly in `~/.config` that point into the repo. Remove deeper links (e.g.
@@ -172,5 +172,3 @@ dotfiles
  ├─ ubuntu/            GNOME keyboard shortcuts
  └─ macos/             AeroSpace, key remap
 ```
-
-Not installed by setup, install by hand when needed: gping, jless, mtr, netop, pandoc, sshs, termshark.
