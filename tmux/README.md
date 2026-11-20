@@ -33,7 +33,7 @@ Prefix is the default `Ctrl-b`. Reload the config with `<prefix> r`.
 | Plugin                                                                 | Keys                       |
 |------------------------------------------------------------------------|----------------------------|
 | [tpm](https://github.com/tmux-plugins/tpm)                             | `<prefix> I` install, `<prefix> U` update, `<prefix> Alt-u` remove unlisted plugins |
-| [tmux-fzf-pane-switch](https://github.com/kristijan/tmux-fzf-pane-switch) | `<prefix> s`: fuzzy-find a pane across sessions (replaces the session list) |
+| [tmux-fzf-pane-switch](https://github.com/kristijan/tmux-fzf-pane-switch) | `<prefix> s`: fuzzy-find a session, window or pane, shown as a tree (replaces the session list; needs v3+) |
 | [tmux-suspend](https://github.com/MunifTanjim/tmux-suspend)            | `F12`: pass all keys to a nested tmux (e.g. over SSH) |
 | [tmux-mode-indicator](https://github.com/MunifTanjim/tmux-mode-indicator) | shows prefix / copy / suspend mode in the status bar |
 
