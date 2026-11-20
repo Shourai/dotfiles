@@ -217,6 +217,8 @@ export BAT_THEME="OneHalfDark-readable"  # matches ghostty; bat/themes, brighter
 
 # SSH host completion from ~/.ssh/config, cloned by setup/zsh.sh. After fzf and fzf-tab: it
 # wraps the Tab binding it finds, handles ssh hosts itself and passes the rest to fzf-tab.
+# Recently used hosts first, kept in $XDG_STATE_HOME/zsh-ssh/recent
+ZSH_SSH_SORT_RECENT=1
 [[ -r "$ZSH_PLUGINS/zsh-ssh/zsh-ssh.zsh" ]] && source "$ZSH_PLUGINS/zsh-ssh/zsh-ssh.zsh"
 
 # Autosuggestions, then syntax highlighting (must be sourced last), from the package manager:
