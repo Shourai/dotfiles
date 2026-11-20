@@ -146,9 +146,12 @@ if (( $+commands[fzf] )); then
   source <(fzf --zsh)
 
   if [[ -r "$ZSH_PLUGINS/fzf-tab/fzf-tab.plugin.zsh" ]]; then
-    zstyle ':completion:*' menu no
+    zstyle ':completion:*' menu yes
     zstyle ':completion:*:descriptions' format '[%d]'
+    zstyle ':completion:*:git-checkout:*' sort false
+
     zstyle ':fzf-tab:*' fzf-flags --layout=reverse --border=none --info=inline
+    zstyle ':fzf-tab:*' fzf-bindings 'tab:transform([[ $FZF_MATCH_COUNT -eq 1 ]] && echo accept || echo down)'
     zstyle ':fzf-tab:*' switch-group '<' '>'
     zstyle ':fzf-tab:complete:cd:*' fzf-preview \
       'eza --tree --level=2 --color=always --icons=always -- "$realpath"'
