@@ -10,6 +10,8 @@ Prefix is the default `Ctrl-b`. Reload the config with `<prefix> r`.
 | Keys                         | What it does                                                    |
 |------------------------------|-----------------------------------------------------------------|
 | `Ctrl-h/j/k/l`               | move between panes, and between Vim/Neovim splits (tmux.nvim)   |
+| `<prefix> Ctrl-l`            | clear the screen (plain `Ctrl-l` moves between panes)           |
+| `<prefix> G`                 | lazygit in a popup, in the current folder                       |
 | `Alt-h/j/k/l`                | resize pane by 1 (passed to Vim when it's in the pane); Linux only, AeroSpace takes these on macOS |
 | `Ctrl-Shift-Left/Right`      | previous / next window                                          |
 | `Alt-p` / `Alt-n`            | move the current window one place left / right                  |
@@ -48,3 +50,4 @@ become `_`), and creates it in that folder the first time.
 - yazi's image previews work inside tmux (`allow-passthrough on`).
 - Closing a session's last window switches to another session (`detach-on-destroy off`).
 - A window with new output shows in yellow in the status bar.
+- Shell windows are named after their folder, other programs after themselves (`nvim`, `lazygit`).
