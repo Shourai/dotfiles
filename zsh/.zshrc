@@ -1,5 +1,6 @@
 # Interactive shells only. Order matters: PATH before anything that looks up tools,
-# compinit before fzf and zsh-ssh, syntax highlighting last.
+# compinit before fzf, fzf-tab and zsh-ssh; fzf-tab before autosuggestions; syntax
+# highlighting last.
 
 # --- HISTORY ---
 
@@ -114,12 +115,12 @@ else
 fi
 unset zcompdump
 
-# Menu selection and coloured lists
+# Arrow-key menu and coloured lists; only used when fzf-tab isn't loaded
 zmodload zsh/complist
 
 setopt COMPLETE_IN_WORD    # complete from both ends of a word
 
-# Arrow-key selection menu
+# Arrow-key selection menu; fallback, the fzf-tab block below overrides it with "menu yes"
 zstyle ':completion:*' menu select
 # Exact, then case-insensitive, then partial-word, then substring matches
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
@@ -150,7 +151,8 @@ if (( $+commands[fzf] )); then
     zstyle ':completion:*:descriptions' format '[%d]'
     zstyle ':completion:*:git-checkout:*' sort false
 
-    zstyle ':fzf-tab:*' fzf-flags --layout=reverse --border=none --info=inline
+    # Same look as plain fzf (FZF_DEFAULT_OPTS below); fzf-tab sets its own height
+    zstyle ':fzf-tab:*' use-fzf-default-opts yes
     zstyle ':fzf-tab:*' fzf-bindings 'tab:transform([[ $FZF_MATCH_COUNT -eq 1 ]] && echo accept || echo down)'
     zstyle ':fzf-tab:*' switch-group '<' '>'
     zstyle ':fzf-tab:complete:cd:*' fzf-preview \
@@ -213,8 +215,8 @@ export BAT_THEME="OneHalfDark-readable"  # matches ghostty; bat/themes, brighter
 
 # --- PLUGINS ---
 
-# SSH host completion from ~/.ssh/config, cloned by setup/zsh.sh. After fzf: it wraps the Tab
-# binding it finds.
+# SSH host completion from ~/.ssh/config, cloned by setup/zsh.sh. After fzf and fzf-tab: it
+# wraps the Tab binding it finds, handles ssh hosts itself and passes the rest to fzf-tab.
 [[ -r "$ZSH_PLUGINS/zsh-ssh/zsh-ssh.zsh" ]] && source "$ZSH_PLUGINS/zsh-ssh/zsh-ssh.zsh"
 
 # Autosuggestions, then syntax highlighting (must be sourced last), from the package manager:
