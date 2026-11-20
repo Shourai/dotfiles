@@ -53,13 +53,13 @@ Safe to rerun. Log out and back in afterwards.
 ~/Documents/github/dotfiles/install
 ```
 
-Pulls both repos, upgrades all packages, relinks and updates the zsh plugins. Plugins that the
-tools manage themselves:
+Pulls both repos, upgrades all packages, relinks and updates the zsh and tmux plugins. Plugins
+that the tools manage themselves:
 
 | What                 | How                                                     |
 |----------------------|---------------------------------------------------------|
 | Neovim plugins       | `:Lazy sync`, `:MasonUpdate`, `:TSUpdate` (see the nvim README) |
-| tmux plugins         | `<prefix> U`                                            |
+| tmux plugins         | `<prefix> U` between `install` runs                     |
 | yazi flavors/plugins | `ya pkg upgrade`                                        |
 
 ## Common tasks

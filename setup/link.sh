@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Symlink the configs in this repo into ~/.config, pick the per-OS ghostty settings,
-# then install the yazi packages those configs need.
+# then install the yazi packages those configs need and update the tmux plugins.
 # Safe to rerun; run it again after adding a new config below. Anything in the way of a
 # link is moved to <name>.bak-<date>, never deleted.
 #
@@ -63,6 +63,15 @@ if has ya; then
   try "ya pkg install" ya pkg install
 else
   warn "yazi's ya not found; run setup/link.sh again after installing packages"
+fi
+
+# tmux plugins listed in tmux/tmux.conf; on a new machine tmux installs tpm and them on first start
+tpm="$HOME/.config/tmux/plugins/tpm"
+if [ -x "$tpm/bin/update_plugins" ]; then
+  info "Updating tmux plugins"
+  try "tmux plugins" "$tpm/bin/update_plugins" all
+else
+  ok "tmux plugins: installed on tmux's first start"
 fi
 
 report_failures
