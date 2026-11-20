@@ -13,6 +13,12 @@ Prefix is the default `Ctrl-b`. Reload the config with `<prefix> r`.
 | `Alt-h/j/k/l`                | resize pane by 1 (passed to Vim when it's in the pane); Linux only, AeroSpace takes these on macOS |
 | `Ctrl-Shift-Left/Right`      | previous / next window                                          |
 | `Alt-p` / `Alt-n`            | move the current window one place left / right                  |
+| `<prefix> f`                 | pick an open session or a zoxide folder (see Sessions below)    |
+| `<prefix> Tab`               | back to the previous session                                    |
+| `Ctrl-Shift-Up/Down`         | previous / next session                                         |
+| `<prefix> N`                 | new session with a name you type, in the current folder         |
+| `<prefix> X`                 | close the current session (asks first)                          |
+| `<prefix> $`                 | rename the current session (built in)                           |
 | `<prefix> "` / `%` / `c`     | split down / split right / new window, in the current folder    |
 | `<prefix> x`                 | close pane without asking                                       |
 | `<prefix> u`                 | swap the current pane with a pane picked by number              |
@@ -28,6 +34,12 @@ Prefix is the default `Ctrl-b`. Reload the config with `<prefix> r`.
 | [tmux-fzf-pane-switch](https://github.com/kristijan/tmux-fzf-pane-switch) | `<prefix> s`: fuzzy-find a pane across sessions (replaces the session list) |
 | [tmux-suspend](https://github.com/MunifTanjim/tmux-suspend)            | `F12`: pass all keys to a nested tmux (e.g. over SSH) |
 | [tmux-mode-indicator](https://github.com/MunifTanjim/tmux-mode-indicator) | shows prefix / copy / suspend mode in the status bar |
+
+## Sessions
+
+One session per project, each with its own windows. `<prefix> f` lists the open sessions, then
+the folders zoxide knows. Picking a folder switches to the session named after it (`.` and `:`
+become `_`), and creates it in that folder the first time.
 
 ## Behaviour worth knowing
 
