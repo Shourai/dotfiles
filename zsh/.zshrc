@@ -168,8 +168,9 @@ if (( $+commands[fzf] )); then
     export FZF_ALT_C_COMMAND="fd --type d --strip-cwd-prefix --hidden --follow --exclude .git"
   fi
 
-  # Compact layout
-  export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border=none --info=inline"
+  # Compact layout; borders and labels in One Dark blue / grey, like the tmux popups
+  # (tmux's <prefix> s picker reads this too)
+  export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border=none --info=inline --color=border:#61afef,label:#abb2bf"
 
   # Previews: eza tree for directories, bat for files; Ctrl-/ cycles the preview window
   _fzf_preview_cmd='if [ -d {} ]; then eza --tree --level=3 --color=always --icons=always {}; else bat --style=numbers --color=always --line-range :500 {}; fi'
