@@ -64,6 +64,8 @@ that the tools manage themselves:
 
 ## Common tasks
 
+**Search shell history**: `Ctrl-R` opens Atuin in zsh. See [history search and sync](zsh/README.md#history-search-and-sync) for optional import and encrypted sync.
+
 **Add a package**: add a line to the right list in `packages/` and run `install` (or
 `setup/<os>.sh`). Both also upgrade everything else; to get one package now, install it by hand
 and add it to the list for next time. Install by hand when needed (not in any list): gping,

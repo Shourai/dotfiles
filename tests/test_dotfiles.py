@@ -76,6 +76,8 @@ run() { printf '%s\n' "$*" >> "$HOME/actions"; }
         self.assertNotIn("ppa:mkasberg/ghostty-ubuntu", args)
         self.assertIn("build-essential", args)
         self.assertIn("jq", args)
+        formulae = next(call for call in calls if call.startswith("brew install "))
+        self.assertIn("atuin", formulae.split())
 
     def test_failed_ghostty_ppa_addition_stops_package_installation(self):
         result = self.ubuntu_script(True, r'''
@@ -144,7 +146,7 @@ run() { printf '%s\n' "$@" >> "$HOME/actions"; }
 ''')
         self.assertEqual(result.returncode, 0, result.stderr)
         args = (self.home / "actions").read_text().splitlines()
-        for package in ("bat", "fzf", "hyprland", "firefox-developer-edition", "man-db"):
+        for package in ("atuin", "bat", "fzf", "hyprland", "firefox-developer-edition", "man-db"):
             self.assertIn(package, args)
         for package in ("chromium", "brave-bin", "1password", "buku"):
             self.assertNotIn(package, args)
@@ -157,7 +159,7 @@ run() { printf '%s\n' "$@" >> "$HOME/actions"; }
 ''')
         self.assertEqual(result.returncode, 0, result.stderr)
         args = (self.home / "actions").read_text().splitlines()
-        for package in ("bat", "fzf", "shellcheck", "coreutils", "ghostty"):
+        for package in ("atuin", "bat", "fzf", "shellcheck", "coreutils", "ghostty"):
             self.assertIn(package, args)
 
     def test_keyremap_only_copies_launch_agent(self):

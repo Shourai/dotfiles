@@ -222,8 +222,19 @@ export BAT_THEME="OneHalfDark-readable"  # matches ghostty; bat/themes, brighter
 ZSH_SSH_SORT_RECENT=1
 [[ -r "$ZSH_PLUGINS/zsh-ssh/zsh-ssh.zsh" ]] && source "$ZSH_PLUGINS/zsh-ssh/zsh-ssh.zsh"
 
+# Atuin takes over Ctrl-R after fzf, but leaves Up and the other fzf bindings alone.
+if (( $+commands[atuin] )); then
+  # Like fzf, Enter recalls the command without running it. Packages handle updates.
+  export ATUIN_ENTER_ACCEPT=false ATUIN_UPDATE_CHECK=false
+  if _atuin_init=$(atuin init zsh --disable-up-arrow --disable-ai); then
+    eval "$_atuin_init"
+  fi
+  unset _atuin_init
+fi
+
 # Autosuggestions, then syntax highlighting (must be sourced last), from the package manager:
 # Homebrew's share dir (macOS, Ubuntu), else Arch's. Each plugin is checked on its own.
+ZSH_AUTOSUGGEST_STRATEGY=(history)  # keep suggestions local instead of using Atuin's database
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#808080'
 for _plugin in zsh-autosuggestions zsh-syntax-highlighting; do
   for _dir in ${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/share} ${IS_ARCH:+/usr/share/zsh/plugins}; do

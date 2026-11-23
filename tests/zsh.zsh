@@ -53,6 +53,39 @@ print 'Homebrew initialization checks passed.'
 
 path=($original_path)
 fpath=($original_fpath)
+
+# Run the actual startup file with stand-ins for the two history widgets.
+mkdir -p "$HOME/.local/bin"
+cat > "$HOME/.local/bin/fzf" <<'EOF'
+#!/bin/sh
+[ "$*" = '--zsh' ] || exit 1
+cat <<'ZSH'
+bindkey '^R' fzf-history-widget
+bindkey '^T' fzf-file-widget
+bindkey '\ec' fzf-cd-widget
+up_binding=$(bindkey '^[[A')
+ZSH
+EOF
+cat > "$HOME/.local/bin/atuin" <<'EOF'
+#!/bin/sh
+[ "$*" = 'init zsh --disable-up-arrow --disable-ai' ] || exit 1
+printf '%s\n' "bindkey '^R' atuin-search" 'ZSH_AUTOSUGGEST_STRATEGY=(atuin)'
+[ "$TEST_HISTORY_WIDGET" = atuin-search ]
+EOF
+chmod +x "$HOME/.local/bin/"{fzf,atuin}
+for widget in atuin-search fzf-history-widget; do
+  TEST_HISTORY_WIDGET=$widget ZDOTDIR="$repo/zsh" zsh -fic '
+    source "$ZDOTDIR/.zshenv"
+    source "$ZDOTDIR/.zshrc"
+    [[ $(bindkey "^R") == *" $TEST_HISTORY_WIDGET" &&
+       $(bindkey "^T") == *" fzf-file-widget" &&
+       $(bindkey "\ec") == *" fzf-cd-widget" &&
+       $(bindkey "^[[A") == "$up_binding" &&
+       $ZSH_AUTOSUGGEST_STRATEGY == history ]]
+  '
+done
+print 'Atuin and fzf keybinding checks passed.'
+
 export GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_NOSYSTEM=1
 mkdir -p "$tmp/git"
 cd "$tmp/git"

@@ -2,6 +2,7 @@
 # One package per line; text after '#' is ignored.
 # yazi's preview helpers are in each OS's own list (pacman.txt, brew-macos.txt, apt-desktop.txt).
 
+atuin                # shell history search; sync is opt-in (zsh/README.md)
 bash
 bat
 btop
