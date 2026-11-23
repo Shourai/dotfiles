@@ -54,6 +54,8 @@ tmux set-option -t 'session-name' @project-dir '/absolute/path/to/project'
 
 ## Behaviour worth knowing
 
+- Applications can copy through tmux, including over SSH (`set-clipboard on`), but cannot read
+  its newest paste buffer using OSC 52 (`get-clipboard off`). Passthrough remains on for images.
 - Programs that ask for modified keys get them (`extended-keys on`, CSI u), e.g. Shift+Enter
   inserts a newline in Claude Code; a plain shell gets ordinary keys.
 - yazi's image previews work inside tmux (`allow-passthrough on`).

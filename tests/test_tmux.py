@@ -107,3 +107,19 @@ class TmuxTests(unittest.TestCase):
         self.pick("session $0 api", "api")
         self.assertEqual(self.tmux("show-option", "-t", "api-3", "-qv", "@project-dir"), str(second))
         self.assertEqual(len(self.tmux("list-sessions").splitlines()), 4)
+
+    def test_osc52_copy_is_allowed_but_read_is_blocked(self):
+        program = '''
+import os, select, sys, tty
+tty.setraw(0)
+os.write(1, b"\\x1b]52;c;aGFybWxlc3M=\\x07")
+os.write(1, b"\\x1b]52;c;?\\x07")
+ready, _, _ = select.select([0], [], [], 0.3)
+with open(os.environ["HOME"] + "/reply", "wb") as output:
+    output.write(os.read(0, 1024) if ready else b"")
+'''
+        self.tmux("new-window", "-d", "-n", "osc", "python3", "-c", program)
+        reply = self.home / "reply"
+        self.wait_for(reply.exists)
+        self.assertEqual(reply.read_bytes(), b"")
+        self.assertEqual(self.tmux("show-buffer"), "harmless")
