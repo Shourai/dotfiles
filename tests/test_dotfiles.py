@@ -230,6 +230,43 @@ load_brew() { printf 'unexpected Homebrew initialization\n' >&2; exit 99; }
         self.assertIn("only supported", result.stderr)
         self.assertFalse((self.home / ".config").exists())
 
+    def test_tmux_plugin_install_retries_after_failure(self):
+        bin_dir = self.home / "bin"
+        bin_dir.mkdir()
+        tmux = bin_dir / "tmux"
+        tmux.write_text('#!/bin/sh\nprintf "tmux %s\\n" "$*" >> "$HOME/actions"\n')
+        tmux.chmod(0o755)
+        self.env["PATH"] = str(bin_dir) + os.pathsep + self.env["PATH"]
+        tpm = self.home / ".config/tmux/plugins/tpm"
+        (tpm / "bin").mkdir(parents=True)
+        for name, body in {
+            "install_plugins": '[ ! -f "$HOME/fail-install" ]',
+            "update_plugins": "true",
+        }.items():
+            command = tpm / "bin" / name
+            command.write_text(f'#!/bin/sh\nprintf "{name}\\n" >> "$HOME/actions"\n{body}\n')
+            command.chmod(0o755)
+        (self.home / "fail-install").touch()
+        mocks = '''
+load_brew() { :; }
+is_linux() { return 1; }
+is_macos() { return 1; }
+is_arch() { return 1; }
+is_ubuntu() { return 1; }
+has() { [ "$1" = tmux ]; }
+'''
+        result = self.setup_script("link.sh", mocks)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("tmux plugin installation", result.stderr)
+        (self.home / "fail-install").unlink()
+        shutil.rmtree(self.home / "Documents/github/dotfiles")
+        result = self.setup_script("link.sh", mocks)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        actions = (self.home / "actions").read_text().splitlines()
+        self.assertEqual(actions.count("install_plugins"), 2)
+        self.assertEqual(actions.count("update_plugins"), 2)
+        self.assertEqual(sum(line.startswith("tmux start-server") for line in actions), 4)
+
     def test_zdotdir_is_idempotent_and_refuses_conflicts(self):
         function = re.search(
             r"(?ms)^set_zdotdir\(\) \{.*?^\}",

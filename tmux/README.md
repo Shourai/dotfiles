@@ -1,7 +1,9 @@
 # tmux
 
 `tmux.conf` is linked to `~/.config/tmux/tmux.conf` by `setup/link.sh` (only the file: tpm keeps
-its plugins in `~/.config/tmux/plugins/`). On first start tmux installs tpm and the plugins itself.
+its plugins in `~/.config/tmux/plugins/`). `setup/link.sh` installs tpm and missing plugins, then
+updates them; tmux itself does not wait for a network connection. If installation fails, run
+`setup/link.sh` again. If the tpm directory is incomplete, move it aside before retrying.
 
 Prefix is the default `Ctrl-b`. Reload the config with `<prefix> r`.
 

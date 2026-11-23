@@ -67,13 +67,28 @@ else
   warn "yazi's ya not found; run setup/link.sh again after installing packages"
 fi
 
-# tmux plugins listed in tmux/tmux.conf; on a new machine tmux installs tpm and them on first start
+# Install missing tmux plugins before updating; retry failures on the next setup run.
 tpm="$HOME/.config/tmux/plugins/tpm"
-if [ -x "$tpm/bin/update_plugins" ]; then
-  info "Updating tmux plugins"
-  try "tmux plugins" "$tpm/bin/update_plugins" all
+if has tmux; then
+  if [ ! -e "$tpm" ]; then
+    info "Installing tmux plugin manager"
+    try "tmux plugin manager" git clone https://github.com/tmux-plugins/tpm "$tpm"
+  fi
+  if [ -x "$tpm/bin/install_plugins" ] || [ "$DRY_RUN" = 1 ]; then
+    # A running server may have started before tpm was installed.
+    # shellcheck disable=SC2016 # HOME is expanded by tmux's shell.
+    try "tmux plugin manager initialization" tmux start-server \; run-shell '"$HOME/.config/tmux/plugins/tpm/tpm"'
+    info "Installing missing tmux plugins"
+    try "tmux plugin installation" "$tpm/bin/install_plugins"
+    info "Updating tmux plugins"
+    try "tmux plugin updates" "$tpm/bin/update_plugins" all
+    # shellcheck disable=SC2016 # HOME is expanded by tmux's shell.
+    try "tmux plugin loading" tmux start-server \; run-shell '"$HOME/.config/tmux/plugins/tpm/tpm"'
+  elif [ -e "$tpm" ]; then
+    fail "tmux plugin manager is incomplete: $tpm"
+  fi
 else
-  ok "tmux plugins: installed on tmux's first start"
+  warn "tmux not found; run setup/link.sh again after installing it"
 fi
 
 report_failures

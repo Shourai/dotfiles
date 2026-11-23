@@ -44,7 +44,7 @@ Safe to rerun. Log out and back in afterwards.
 | `setup/arch.sh`   | `pacman -Syu`, yay, the pacman and AUR lists, Apple's SF fonts, clears the pacman cache |
 | `setup/ubuntu.sh` | `apt upgrade`, the apt lists (Ghostty PPA on desktops), Homebrew with the shared lists, `brew upgrade`, Apple's SF fonts, GNOME shortcuts and fonts |
 | `setup/macos.sh`  | Homebrew formulae and casks, `brew upgrade`; with `--keyremap`, only the key remap instead |
-| `setup/link.sh`   | links the configs into `~/.config` (fontconfig on Linux only), picks the per-OS ghostty file, `ya pkg install` |
+| `setup/link.sh`   | links configs into `~/.config`, picks the per-OS ghostty file, installs yazi packages and installs/updates tmux plugins |
 | `setup/zsh.sh`    | `ZDOTDIR` in the system zshenv, zsh as login shell, clones or updates the zsh plugins |
 
 ## Update
