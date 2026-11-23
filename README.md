@@ -168,6 +168,6 @@ dotfiles
  ├─ ghostty/           -> ~/.config/ghostty (os.ghostty links to the arch/ubuntu/macos file)
  ├─ fontconfig/        -> ~/.config/fontconfig (Linux: Apple's SF fonts as the defaults)
  ├─ arch/              Hyprland, hypridle, hyprlock, hyprpaper, waybar, fuzzel
- ├─ ubuntu/            GNOME keyboard shortcuts
+ ├─ ubuntu/            GNOME keyboard shortcuts, Homebrew on the desktop's PATH (environment.d)
  └─ macos/             AeroSpace, key remap
 ```

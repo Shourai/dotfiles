@@ -20,7 +20,10 @@ Headless (e.g. Ubuntu Server used over SSH) works too: without `gnome-shell` ins
 
 - **Homebrew's tools come before Ubuntu's in the shell** (and in tmux, nvim, yazi and scripts
   started from it; not in GNOME, desktop apps or `sudo`). So `bash`, `python3`, `perl`, `openssl`,
-  `rsync`, ... are Homebrew's. Homebrew's `python3` and `perl` lack Ubuntu's modules (e.g. `gi`):
+  `rsync`, ... are Homebrew's. GNOME and desktop apps (and so a tmux server started from a
+  shortcut) find Homebrew's tools after Ubuntu's: `environment.d/homebrew.conf`, linked to
+  `~/.config/environment.d/` by `setup/link.sh`, adds it at the end of their PATH from the next
+  login. Homebrew's `python3` and `perl` lack Ubuntu's modules (e.g. `gi`):
   scripts that need them should start with `#!/usr/bin/python3` or `#!/usr/bin/perl`.
 - **Keep GLib, D-Bus and GnuPG out of Homebrew**: their `gsettings`, `dbus-*` and `gpg` would hide
   Ubuntu's, and Homebrew's `gsettings` can't change GNOME settings. Before adding a formula, check

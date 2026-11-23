@@ -38,6 +38,8 @@ fi
 # Ubuntu: GNOME desktop
 if is_ubuntu; then
   link "$DOTFILES/ghostty/ubuntu.ghostty" "$DOTFILES/ghostty/os.ghostty"  # per-OS ghostty settings
+  # file only: other environment.d files stay out of the repo; takes effect at the next login
+  link "$DOTFILES/ubuntu/environment.d/homebrew.conf" "$HOME/.config/environment.d/homebrew.conf"
 fi
 
 # macOS
