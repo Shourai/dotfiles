@@ -41,9 +41,16 @@ Prefix is the default `Ctrl-b`. Reload the config with `<prefix> r`.
 
 ## Sessions
 
-One session per project, each with its own windows. `<prefix> f` lists the open sessions, then
-the folders zoxide knows. Picking a folder switches to the session named after it (`.` and `:`
-become `_`), and creates it in that folder the first time.
+One session per project, each with its own windows. `<prefix> f` lists open sessions and folders
+zoxide knows. A folder is matched by its full path; new sessions use its basename (`.` and `:`
+become `_`), with a numbered suffix if the name is taken. Existing sessions without a saved path
+are not assumed to belong to a folder. To associate one before picking that folder, run:
+
+```sh
+tmux set-option -t 'session-name' @project-dir '/absolute/path/to/project'
+```
+
+`<prefix> w` opens tmux's built-in session/window tree.
 
 ## Behaviour worth knowing
 
