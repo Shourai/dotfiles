@@ -43,6 +43,9 @@ class TmuxTests(unittest.TestCase):
         bin_dir = self.home / "bin"
         bin_dir.mkdir()
         (bin_dir / "tmux").symlink_to(TMUX)
+        ps = bin_dir / "ps"
+        ps.write_text('#!/bin/sh\nprintf called >> "$HOME/ps-calls"\nexit 1\n')
+        ps.chmod(0o755)
         for name, content in {
             "zoxide": '#!/bin/sh\ncat "$HOME/dirs"\n',
             "fzf": '#!/bin/sh\ncat > "$HOME/input"\n[ ! -f "$HOME/cancel" ] || exit 130\ncat "$HOME/choice"\n',
@@ -107,6 +110,22 @@ class TmuxTests(unittest.TestCase):
         self.pick("session $0 api", "api")
         self.assertEqual(self.tmux("show-option", "-t", "api-3", "-qv", "@project-dir"), str(second))
         self.assertEqual(len(self.tmux("list-sessions").splitlines()), 4)
+
+    @unittest.skipUnless(shutil.which("nvim"), "nvim is required")
+    def test_vim_navigation_and_shell_navigation_avoid_process_scan(self):
+        self.tmux("split-window", "-h")
+        self.tmux("select-pane", "-t", ":.1")
+        self.tmux("send-keys", "-t", ":.1", "nvim -u NONE", "Enter")
+        self.wait_for(lambda: self.tmux("display-message", "-p", "-t", ":.1", "#{pane_current_command}") == "nvim")
+        os.write(self.fd, b"\x0c")  # C-l is passed to Neovim without running ps.
+        time.sleep(0.2)
+        self.assertFalse((self.home / "ps-calls").exists())
+        self.assertEqual(self.tmux("display-message", "-p", "#{pane_index}"), "1")
+        self.tmux("send-keys", "-t", ":.1", "Escape", ":qa!", "Enter")
+        self.wait_for(lambda: self.tmux("display-message", "-p", "-t", ":.1", "#{pane_current_command}") != "nvim")
+        os.write(self.fd, b"\x0c")
+        self.wait_for(lambda: self.tmux("display-message", "-p", "#{pane_index}") == "2")
+        self.assertFalse((self.home / "ps-calls").exists())
 
     def test_osc52_copy_is_allowed_but_read_is_blocked(self):
         program = '''
