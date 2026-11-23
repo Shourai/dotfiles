@@ -123,3 +123,15 @@ with open(os.environ["HOME"] + "/reply", "wb") as output:
         self.wait_for(reply.exists)
         self.assertEqual(reply.read_bytes(), b"")
         self.assertEqual(self.tmux("show-buffer"), "harmless")
+
+    def test_swap_panes_exits_pane_display_mode(self):
+        self.tmux("split-window", "-h")
+        self.tmux("select-pane", "-t", ":.1")
+        before = self.tmux("list-panes", "-F", "#{pane_id}").splitlines()
+        os.write(self.fd, b"\x02u")
+        self.wait_for(lambda: "panes-mode" in self.tmux("list-panes", "-F", "#{pane_mode}"))
+        os.write(self.fd, b"2")
+        self.wait_for(lambda: self.tmux("list-panes", "-F", "#{pane_id}").splitlines() == before[::-1])
+        self.assertNotIn("panes-mode", self.tmux("list-panes", "-F", "#{pane_mode}"))
+        self.assertEqual(self.tmux("show-options", "-s", "-v", "get-clipboard"), "off")
+        self.assertEqual(self.tmux("show-options", "-s", "-v", "set-clipboard"), "on")
