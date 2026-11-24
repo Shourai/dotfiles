@@ -73,6 +73,16 @@ ZSH_PLUGINS="$XDG_DATA_HOME/zsh/plugins"
 
 source "$ZDOTDIR/aliases"
 
+# --- EDITOR ---
+
+# Check after setting PATH so Homebrew's Neovim is visible.
+if (( $+commands[nvim] )); then
+  export EDITOR="${EDITOR:-${VISUAL:-nvim}}"
+else
+  export EDITOR="${EDITOR:-${VISUAL:-vi}}"
+fi
+export VISUAL="${VISUAL:-$EDITOR}"
+
 # --- KEYBINDINGS ---
 
 # Emacs keymap. Needed explicitly: zsh picks vi mode when VISUAL contains "vi" (nvim).

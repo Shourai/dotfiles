@@ -6,7 +6,7 @@ files. The files start with a dot: list them with `ll`.
 
 | File        | Loaded by                           | Contains                                                  |
 |-------------|-------------------------------------|-----------------------------------------------------------|
-| `.zshenv`   | every zsh, scripts included         | `IS_ARCH` flag, XDG dirs, editor, SSH agent socket        |
+| `.zshenv`   | every zsh, scripts included         | `IS_ARCH` flag, XDG dirs, SSH agent socket                |
 | `.zprofile` | login shells, after `.zshenv`       | starts Hyprland when logging in on TTY1 (Arch)            |
 | `.zshrc`    | interactive shells, after the above | history, ghostty integration, options, PATH (Homebrew), completion, prompt, fzf, Atuin, zoxide, plugins |
 | `aliases`   | sourced from `.zshrc`               | aliases                                                   |
@@ -18,7 +18,7 @@ Keep `.zshenv` small and silent: it runs for every zsh script too.
 | Native zsh history         | `~/.local/state/zsh/history`                            |
 | Atuin history database     | `~/.atuin/data/history.db` on new installs; `atuin info` shows the active path |
 | Completion cache           | `~/.cache/zsh/zcompdump` (full check once a day)        |
-| pure prompt, zsh-ssh, fzf-tab | `~/.local/share/zsh/plugins/`, cloned and updated by `setup/zsh.sh` |
+| pure prompt, zsh-ssh, fzf-tab | `$XDG_DATA_HOME/zsh/plugins/` (`~/.local/share/zsh/plugins/` by default), managed by `setup/zsh.sh` |
 | autosuggestions, syntax highlighting | the package manager (`packages/common.txt`)   |
 
 ## SSH agent
@@ -41,6 +41,8 @@ It isn't changed inside an SSH session, so a forwarded agent keeps working. Chec
 - **PATH**: `~/.local/bin`, then Homebrew (if installed), then the system. Nested shells reuse
   Homebrew's exported environment instead of running `brew shellenv` again; its completion path
   is restored before `compinit`.
+- **Editor**: interactive shells preserve `EDITOR` and `VISUAL`. If neither is set, they use
+  `nvim` when available after PATH setup, otherwise `vi`.
 - **Missing tools** (fzf, zoxide, eza, bat, nvim, the plugins) are skipped without errors; the
   aliases fall back to `ls`, `cat` and `vi`.
 

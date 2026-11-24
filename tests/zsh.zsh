@@ -85,3 +85,14 @@ for widget in atuin-search fzf-history-widget; do
   '
 done
 print 'Atuin and fzf keybinding checks passed.'
+
+ZDOTDIR="$repo/zsh" XDG_DATA_HOME= zsh -fc '
+  source "$ZDOTDIR/.zshenv"
+  [[ $XDG_DATA_HOME == "$HOME/.local/share" ]]
+'
+ZDOTDIR="$repo/zsh" XDG_DATA_HOME="$HOME/custom data" EDITOR=emacs VISUAL=nano zsh -fic '
+  source "$ZDOTDIR/.zshenv"
+  source "$ZDOTDIR/.zshrc"
+  [[ $ZSH_PLUGINS == "$HOME/custom data/zsh/plugins" && $EDITOR == emacs && $VISUAL == nano ]]
+'
+print 'Plugin directory and editor environment checks passed.'
