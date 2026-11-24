@@ -96,3 +96,17 @@ ZDOTDIR="$repo/zsh" XDG_DATA_HOME="$HOME/custom data" EDITOR=emacs VISUAL=nano z
   [[ $ZSH_PLUGINS == "$HOME/custom data/zsh/plugins" && $EDITOR == emacs && $VISUAL == nano ]]
 '
 print 'Plugin directory and editor environment checks passed.'
+
+cat > "$HOME/.local/bin/start-hyprland" <<'EOF'
+#!/bin/sh
+printf '%s\n' 'Hyprland started'
+EOF
+chmod +x "$HOME/.local/bin/start-hyprland"
+(
+  export ZDOTDIR="$repo/zsh" PATH="$HOME/.local/bin:$PATH"
+  profile='TTY=$TEST_TTY; source "$ZDOTDIR/.zprofile"; print "Shell continued"'
+  [[ $(TEST_TTY=/dev/tty1 zsh -flc "$profile") == 'Shell continued' ]]
+  [[ $(TEST_TTY=/dev/pts/1 zsh -filc "$profile") == 'Shell continued' ]]
+  [[ $(TEST_TTY=/dev/tty1 zsh -filc "$profile") == 'Hyprland started' ]]
+)
+print 'Hyprland login checks passed.'

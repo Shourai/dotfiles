@@ -7,7 +7,7 @@ files. The files start with a dot: list them with `ll`.
 | File        | Loaded by                           | Contains                                                  |
 |-------------|-------------------------------------|-----------------------------------------------------------|
 | `.zshenv`   | every zsh, scripts included         | `IS_ARCH` flag, XDG dirs, SSH agent socket                |
-| `.zprofile` | login shells, after `.zshenv`       | starts Hyprland when logging in on TTY1 (Arch)            |
+| `.zprofile` | login shells, after `.zshenv`       | starts Hyprland only on interactive TTY1 logins (Arch)    |
 | `.zshrc`    | interactive shells, after the above | history, ghostty integration, options, PATH (Homebrew), completion, prompt, fzf, Atuin, zoxide, plugins |
 | `aliases`   | sourced from `.zshrc`               | aliases                                                   |
 
