@@ -42,7 +42,7 @@ It isn't changed inside an SSH session, so a forwarded agent keeps working. Chec
   Homebrew's exported environment instead of running `brew shellenv` again; its completion path
   is restored before `compinit`.
 - **Missing tools** (fzf, zoxide, eza, bat, nvim, the plugins) are skipped without errors; the
-  aliases fall back to `ls`, `cat` and `vi`, and `gf`/`gb`/`ghist` need fzf.
+  aliases fall back to `ls`, `cat` and `vi`.
 
 ## History search and sync
 
@@ -80,9 +80,6 @@ is missing or its init command fails, `Ctrl-R` stays with fzf (or zsh if fzf is 
 | `g`, `lg`                 | git, lazygit                                          |
 | `cp`, `mkdir`             | `cp -iv` (asks before overwriting), `mkdir -pv`       |
 | `..`, `...`, `....`       | go up one, two, three folders                         |
-| `gf`                      | fuzzy-pick a git-tracked file and open it             |
-| `gb`                      | fuzzy-pick a branch and check it out                  |
-| `ghist`                   | fuzzy-pick a commit and show it                       |
 | `pkg-clean`               | Arch: fuzzy-pick explicitly installed packages and remove them with their unused dependencies |
 | `wgup`, `wgdown`          | `wg-quick up/down` (needs wireguard-tools, not installed by setup) |
 | `Ctrl-T` / `Alt-C`         | fzf: file / directory                                 |

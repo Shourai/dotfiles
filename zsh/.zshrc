@@ -177,32 +177,6 @@ if (( $+commands[fzf] )); then
   export FZF_ALT_C_OPTS="--preview 'eza --tree --level=3 --color=always --icons=always {}'"
   export FZF_CTRL_T_OPTS="--preview '$_fzf_preview_cmd' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
   unset _fzf_preview_cmd
-
-  # gf: fuzzy-pick a git-tracked file and open it
-  gf() {
-    local file
-    # NUL delimiters preserve filenames without Git's display quoting.
-    IFS= read -r -d '' file < <(
-      git ls-files -z | fzf --read0 --print0 --prompt "Git Files> "
-    ) || return
-    "${EDITOR:-nvim}" -- "$file"
-  }
-  # gb: fuzzy-pick a branch and check it out (remotes/origin/x becomes x)
-  gb() {
-    local branch
-    # List real refs; omit symbolic aliases such as origin/HEAD.
-    branch=$(
-      git for-each-ref \
-        --format='%(if)%(symref)%(then)%(else)%(refname)%(end)' \
-        refs/heads refs/remotes |
-        sed '/^$/d; s#^refs/heads/##; s#^refs/remotes/#remotes/#' |
-        fzf --prompt "Branches> "
-    ) || return
-    branch=${branch#remotes/origin/}
-    [[ -n "$branch" ]] && git checkout "$branch"
-  }
-  # ghist: fuzzy-pick a commit and show it
-  ghist() { local commit; commit=$(git log --oneline --color=always | fzf --ansi --prompt "History> ") && commit=${commit%% *} && [[ -n "$commit" ]] && git show "$commit"; }
 fi
 
 # --- ZOXIDE ---

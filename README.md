@@ -117,7 +117,7 @@ directly in `~/.config` that point into the repo. Remove deeper links (e.g.
 
 ## Validation
 
-Run the isolated regression checks (Python 3, Bash and git; writes stay in temporary directories):
+Run the isolated regression checks (Python 3, Bash and Zsh; writes stay in temporary directories):
 
 ```sh
 python3 -m unittest discover -s tests
