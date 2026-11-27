@@ -15,6 +15,11 @@ fi
 
 (( $+commands[bat] )) && alias cat='bat --paging=never'
 
+# --- OPENING FILES ---
+
+# Open a file or URL with its default app (one at a time, unlike macOS open)
+(( $+commands[xdg-open] )) && alias open='xdg-open'
+
 # --- NAVIGATION ---
 
 alias ..='cd ../'
